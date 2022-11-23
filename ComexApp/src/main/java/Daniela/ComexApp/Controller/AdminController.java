@@ -6,6 +6,7 @@ import Daniela.ComexApp.Repository.ExportadoresRepository;
 import Daniela.ComexApp.Repository.ImportadoresRepository;
 import Daniela.ComexApp.Repository.MaritimasRepository;
 import Daniela.ComexApp.Repository.OperacionesRepository;
+import Daniela.ComexApp.Repository.UsuariosRepository;
 import Daniela.ComexApp.Repository.VentaLocalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,4 +38,7 @@ public class AdminController {
     
     @Autowired
     private VentaLocalRepository ventaLocalRepository;
+    
+    @Autowired
+    private UsuariosRepository usuariosRepository;
 }

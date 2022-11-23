@@ -1,21 +1,84 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Daniela.ComexApp.Frames;
+
+import java.awt.Image;
+import java.awt.Toolkit;
+
+import java.sql.SQLException;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
+import service.UsuariosServicio;
+
+import java.awt.event.KeyEvent;
+import service.Botones;
 
 /**
  *
- * @author foofi
+ * @author Daniela
  */
 public class InicioSesion extends javax.swing.JFrame {
 
+    public static String nombre = "", apellido = "";
+    
     /**
      * Creates new form InicioSesion
      */
     public InicioSesion() {
         initComponents();
+        
+        setSize(525, 625);
+        setLayout(null);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        
+        setTitle("Inicio de sesión - sistema ComexApp");
+  
+        // logo 
+        ImageIcon logo  = new ImageIcon("src/imagenes/logo12.png");
+        Icon iconoLogo = new ImageIcon(logo.getImage().getScaledInstance(jLabelLogo.getHeight(), 
+                jLabelLogo.getWidth(), Image.SCALE_DEFAULT));
+        jLabelLogo.setIcon(iconoLogo);
+        this.repaint();
+
     }
+    // icono
+    public Image getLogo(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/logo12.png"));
+        return retValue;   
+    }
+    
+    
+    Botones botones = new Botones();
+    
+    public void ingresarAlSistemaBotonYMouse(){
+        UsuariosServicio usuariosServ = new UsuariosServicio();
+        String usuario, contraseña;
+        Boolean validez;
+        
+        validez = usuariosServ.inicioDeSesion(textUsuario, textContraseña);
+       
+            if(validez.equals(true)){
+                JOptionPane.showMessageDialog(null, "Ingresando al sistema");
+                PaginaPrincipal principal = new PaginaPrincipal();
+                principal.setVisible(true);
+                this.dispose();
+            }else if (validez.equals(false)){
+                if(textUsuario.equals("") && textContraseña.equals("")){
+                    JOptionPane.showMessageDialog(null, "Los campos estan vacios");
+                } else if (!textUsuario.equals("") && !textContraseña.equals("")){
+                JOptionPane.showMessageDialog(null, "Usuario y contraseña no "
+                        + "encontrados en la base. \n\n " + "Por favor, vuelva "
+                        + "a intentarlo");
+                }  
+            }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,16 +90,32 @@ public class InicioSesion extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelBlanco = new javax.swing.JPanel();
+        jLabelLogo1 = new javax.swing.JLabel();
+        jLabelLogo = new javax.swing.JLabel();
         jLabelTitulo = new javax.swing.JLabel();
         jLabelSub = new javax.swing.JLabel();
         jLabelInicio = new javax.swing.JLabel();
         jPanelAzul = new javax.swing.JPanel();
+        jLabelUsuario = new javax.swing.JLabel();
+        textUsuario = new javax.swing.JTextField();
+        jLabelContraseña = new javax.swing.JLabel();
+        textContraseña = new javax.swing.JPasswordField();
+        jButtonIngresar = new javax.swing.JButton();
+        jLabelMensaje = new javax.swing.JLabel();
+        jButtonCrearCuenta = new javax.swing.JButton();
+        jButtonSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
+        setIconImages(getIconImages());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelBlanco.setBackground(new java.awt.Color(255, 255, 255));
         jPanelBlanco.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo12.png"))); // NOI18N
+        jPanelBlanco.add(jLabelLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 150, 120));
+        jPanelBlanco.add(jLabelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, 150, 120));
 
         jLabelTitulo.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabelTitulo.setForeground(new java.awt.Color(0, 0, 153));
@@ -53,25 +132,108 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabelInicio.setText("Inicio de sesión");
         jPanelBlanco.add(jLabelInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 220, 103));
 
-        getContentPane().add(jPanelBlanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 320));
+        getContentPane().add(jPanelBlanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 310));
 
         jPanelAzul.setBackground(new java.awt.Color(0, 0, 153));
+        jPanelAzul.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanelAzulLayout = new javax.swing.GroupLayout(jPanelAzul);
-        jPanelAzul.setLayout(jPanelAzulLayout);
-        jPanelAzulLayout.setHorizontalGroup(
-            jPanelAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanelAzulLayout.setVerticalGroup(
-            jPanelAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
-        );
+        jLabelUsuario.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabelUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelUsuario.setText("Usuario:");
+        jPanelAzul.add(jLabelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 170, 40));
 
-        getContentPane().add(jPanelAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 323, 500, -1));
+        textUsuario.setForeground(new java.awt.Color(0, 0, 153));
+        jPanelAzul.add(textUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 260, 40));
+
+        jLabelContraseña.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabelContraseña.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelContraseña.setText("Contraseña:");
+        jPanelAzul.add(jLabelContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 170, 40));
+
+        textContraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textContraseñaActionPerformed(evt);
+            }
+        });
+        textContraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textContraseñaKeyPressed(evt);
+            }
+        });
+        jPanelAzul.add(textContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 260, 40));
+
+        jButtonIngresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonIngresar.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonIngresar.setText("Ingresar");
+        jButtonIngresar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 153), new java.awt.Color(0, 0, 153), new java.awt.Color(0, 0, 153), new java.awt.Color(0, 0, 153)));
+        jButtonIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIngresarActionPerformed(evt);
+            }
+        });
+        jPanelAzul.add(jButtonIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 140, 50));
+
+        jLabelMensaje.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabelMensaje.setForeground(new java.awt.Color(255, 0, 51));
+        jPanelAzul.add(jLabelMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, -1, -1));
+
+        jButtonCrearCuenta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonCrearCuenta.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonCrearCuenta.setText("Crear cuenta");
+        jButtonCrearCuenta.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 153), new java.awt.Color(0, 0, 153), new java.awt.Color(0, 0, 153), new java.awt.Color(0, 0, 153)));
+        jButtonCrearCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCrearCuentaActionPerformed(evt);
+            }
+        });
+        jPanelAzul.add(jButtonCrearCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, 140, 30));
+
+        jButtonSalir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonSalir.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonSalir.setText("Salir");
+        jButtonSalir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 153), new java.awt.Color(0, 0, 153), new java.awt.Color(0, 0, 153), new java.awt.Color(0, 0, 153)));
+        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalirActionPerformed(evt);
+            }
+        });
+        jPanelAzul.add(jButtonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, 140, 25));
+
+        getContentPane().add(jPanelAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 313, 550, 340));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngresarActionPerformed
+        
+       ingresarAlSistemaBotonYMouse();
+       
+    }//GEN-LAST:event_jButtonIngresarActionPerformed
+
+    private void jButtonCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearCuentaActionPerformed
+     
+        RegistroUsuarios registrarUsuarios = new RegistroUsuarios();
+        registrarUsuarios.setVisible(true);
+        
+    }//GEN-LAST:event_jButtonCrearCuentaActionPerformed
+
+    private void textContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textContraseñaActionPerformed
+
+    }//GEN-LAST:event_textContraseñaActionPerformed
+
+    private void textContraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textContraseñaKeyPressed
+      
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+         ingresarAlSistemaBotonYMouse();
+        }
+        
+    }//GEN-LAST:event_textContraseñaKeyPressed
+
+    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+        
+        botones.botonSalirSistema();
+        
+    }//GEN-LAST:event_jButtonSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -109,10 +271,20 @@ public class InicioSesion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCrearCuenta;
+    private javax.swing.JButton jButtonIngresar;
+    private javax.swing.JButton jButtonSalir;
+    private javax.swing.JLabel jLabelContraseña;
     private javax.swing.JLabel jLabelInicio;
+    private javax.swing.JLabel jLabelLogo;
+    private javax.swing.JLabel jLabelLogo1;
+    private javax.swing.JLabel jLabelMensaje;
     private javax.swing.JLabel jLabelSub;
     private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JPanel jPanelAzul;
     private javax.swing.JPanel jPanelBlanco;
+    private javax.swing.JPasswordField textContraseña;
+    private javax.swing.JTextField textUsuario;
     // End of variables declaration//GEN-END:variables
 }
