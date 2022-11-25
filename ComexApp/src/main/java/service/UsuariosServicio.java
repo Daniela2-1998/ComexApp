@@ -35,6 +35,11 @@ public class UsuariosServicio implements UsuariosServImpl{
     InicioSesion inicioses = new InicioSesion();
     boolean validezInicio;
     
+    
+    public static String usuario = "", contraseña = "", 
+            nombre = "", apellido = "", rolCorrespondiente = "";
+   
+    
     // campo usuarios para creación, modificación, etc.
     JTextField textUsuario = new JTextField();
     JTextField textContraseña = new JTextField();
@@ -51,12 +56,13 @@ public class UsuariosServicio implements UsuariosServImpl{
     
     
     
-    //   METODOS
+    //                              METODOS
+    
+    // métodos sesion
   public boolean inicioDeSesion(JTextField textUsuario, JPasswordField textContraseña){
       UsuariosServicio usuariosServ = new UsuariosServicio();
       
       Boolean resultado;
-      String usuario, contraseña;
       
       usuario = textUsuario.getText().trim();
       contraseña = textContraseña.getText().trim();
@@ -92,8 +98,52 @@ public class UsuariosServicio implements UsuariosServImpl{
    }
 
   
+   // métodos obtención datos
+   public String obtenerRolUsuario(String usuario, String contraseña){
+       
+       String rol = "";
+       String rolCorrespondiente = null;
+       
+       String sql = "select rol from usuarios where usuario = '" + usuario 
+               + "' and contraseña = '" + contraseña + "'";
+       
+       try{
+           conec = cn.Conexion();
+           pst = conec.prepareStatement(sql);
+           rs = pst.executeQuery();
+           
+           if(rs.next()){
+               rol = rs.getString("rol");
+               
+               if(rol.equals("Administrador")){
+                   rolCorrespondiente = "Administrador";
+               } else if (rol.equals("Importador")){
+                   rolCorrespondiente = "Importador";
+               } else if (rol.equals("Exportador")){
+                   rolCorrespondiente = "Exportador";
+               } else if (rol.equals("Agente")){
+                   rolCorrespondiente = "Agente";
+               } else if (rol.equals("Logistica")){
+                   rolCorrespondiente = "Logistica";
+               } else if (rol.equals("Marketing")){
+                   rolCorrespondiente = "Marketing";
+               } else {
+                   JOptionPane.showMessageDialog(null, "El rol ingresado no es correcto");
+             }
+           }else {
+               JOptionPane.showMessageDialog(null, "No es posible recuperar el rol");
+           }
+
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "No se puede obtener el rol "
+                   + "correspondiente a " + usuario + "", "Error de obtención de rol", 0);
+           System.err.println("No se puede obtener el rol correspondiente " + e);
+       }
+       return rolCorrespondiente;
+   }
  
-  
+
+   
    public Usuarios agregarUsuario(Integer id, String usuario, String contraseña, String nombre, 
            String apellido, String rol, String mail, String telefono){
        
@@ -153,6 +203,7 @@ public class UsuariosServicio implements UsuariosServImpl{
                usuarios.setTelefono(telefono);
                usuarios.setRol(rol);
                
+               JOptionPane.showMessageDialog(null, "Creación de usuario éxitosa");
            }catch(SQLException e){
                JOptionPane.showMessageDialog(null, "No es posible registrar al usuario");
                System.err.println("No es posible registrar al usuario " + e);
@@ -196,13 +247,37 @@ public class UsuariosServicio implements UsuariosServImpl{
   */
 
    
-   
+   // SETTERS Y GETTERS
     public boolean isValidezInicio() {
         return validezInicio;
     }
 
     public void setValidezInicio(boolean validezInicio) {
         this.validezInicio = validezInicio;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public static String getRolCorrespondiente() {
+        return rolCorrespondiente;
+    }
+
+    public static void setRolCorrespondiente(String rolCorrespondiente) {
+        UsuariosServicio.rolCorrespondiente = rolCorrespondiente;
     }
    
 

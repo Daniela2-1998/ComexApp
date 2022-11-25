@@ -1,5 +1,6 @@
 package Daniela.ComexApp.Frames;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 
@@ -23,7 +24,6 @@ import service.Botones;
  */
 public class InicioSesion extends javax.swing.JFrame {
 
-    public static String nombre = "", apellido = "";
     
     /**
      * Creates new form InicioSesion
@@ -37,15 +37,15 @@ public class InicioSesion extends javax.swing.JFrame {
         setResizable(false);
         
         setTitle("Inicio de sesión - sistema ComexApp");
-  
+         
         // logo 
         ImageIcon logo  = new ImageIcon("src/imagenes/logo12.png");
         Icon iconoLogo = new ImageIcon(logo.getImage().getScaledInstance(jLabelLogo.getHeight(), 
                 jLabelLogo.getWidth(), Image.SCALE_DEFAULT));
         jLabelLogo.setIcon(iconoLogo);
         this.repaint();
-
     }
+
     // icono
     public Image getLogo(){
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/logo12.png"));
@@ -55,19 +55,22 @@ public class InicioSesion extends javax.swing.JFrame {
     
     Botones botones = new Botones();
     
+    
     public void ingresarAlSistemaBotonYMouse(){
         UsuariosServicio usuariosServ = new UsuariosServicio();
-        String usuario, contraseña;
         Boolean validez;
         
         validez = usuariosServ.inicioDeSesion(textUsuario, textContraseña);
        
             if(validez.equals(true)){
                 JOptionPane.showMessageDialog(null, "Ingresando al sistema");
+                LimpiarCamposCorrectos();
                 PaginaPrincipal principal = new PaginaPrincipal();
                 principal.setVisible(true);
                 this.dispose();
+                
             }else if (validez.equals(false)){
+                LimpiarCamposErroneos();
                 if(textUsuario.equals("") && textContraseña.equals("")){
                     JOptionPane.showMessageDialog(null, "Los campos estan vacios");
                 } else if (!textUsuario.equals("") && !textContraseña.equals("")){
@@ -78,7 +81,19 @@ public class InicioSesion extends javax.swing.JFrame {
             }
     }
     
+    public void LimpiarCamposCorrectos(){
+          textUsuario.setText("");
+          textContraseña.setText("");
+    }
     
+    public void LimpiarCamposErroneos(){
+        textUsuario.setBackground(Color.red);
+        textContraseña.setBackground(Color.red);
+        textUsuario.setText("");
+        textContraseña.setText("");
+        textUsuario.setBackground(Color.white);
+        textContraseña.setBackground(Color.white);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -142,6 +157,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabelUsuario.setText("Usuario:");
         jPanelAzul.add(jLabelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 170, 40));
 
+        textUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textUsuario.setForeground(new java.awt.Color(0, 0, 153));
         jPanelAzul.add(textUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 260, 40));
 
@@ -150,6 +166,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabelContraseña.setText("Contraseña:");
         jPanelAzul.add(jLabelContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 170, 40));
 
+        textContraseña.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textContraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textContraseñaActionPerformed(evt);
@@ -287,4 +304,6 @@ public class InicioSesion extends javax.swing.JFrame {
     private javax.swing.JPasswordField textContraseña;
     private javax.swing.JTextField textUsuario;
     // End of variables declaration//GEN-END:variables
+
+
 }

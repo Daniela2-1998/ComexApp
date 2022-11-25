@@ -1,10 +1,15 @@
 package Daniela.ComexApp.Frames;
+
+import javax.swing.JOptionPane;
+import service.UsuariosServicio;
+
 /**
  *
  * @author Daniela
  */
 public class PaginaPrincipal extends javax.swing.JFrame {
 
+       String usuario, contraseña, rol;
     /**
      * Creates new form PaginaPrincipal
      */
@@ -15,9 +20,28 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
+
         
+        usuario = usuariosServicio.getUsuario();
+        contraseña = usuariosServicio.getContraseña();
+        
+        
+        JOptionPane.showMessageDialog(null, usuario + contraseña);
+        
+        rol = usuariosServicio.obtenerRolUsuario(usuario, contraseña);
+        JOptionPane.showMessageDialog(null, rol);
     }
 
+    UsuariosServicio usuariosServicio = new UsuariosServicio();
+    InicioSesion inicioSesion = new InicioSesion();
+    
+    
+    
+    public void visibilidadAdministrador(){
+        
+        
+        jMenuAdministrar.setVisible(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,17 +51,196 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPanel3 = new javax.swing.JPanel();
+        jLabelTitulo = new javax.swing.JLabel();
+        jButtonImportadores = new javax.swing.JButton();
+        jButtonExportadores = new javax.swing.JButton();
+        jButtonIDespachantes = new javax.swing.JButton();
+        jButtonMaritimas = new javax.swing.JButton();
+        jButtonOperaciones = new javax.swing.JButton();
+        jButtonVentaLocal = new javax.swing.JButton();
+        jButtonMarketing = new javax.swing.JButton();
+        jButtonUsuarios = new javax.swing.JButton();
+        jButtonCerrarSesion = new javax.swing.JButton();
+        jLabelTitulo1 = new javax.swing.JLabel();
         jLabelWallpaper = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuInfo = new javax.swing.JMenu();
+        jMenuItemInformacion = new javax.swing.JMenuItem();
+        jMenuItemCambioContraseña = new javax.swing.JMenuItem();
+        jMenuItemCambioContraseña1 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuPreferencias = new javax.swing.JMenu();
+        jMenuItemFondo = new javax.swing.JMenuItem();
+        jMenuAdministrar = new javax.swing.JMenu();
+        jMenuItemDatosUsuarios = new javax.swing.JMenuItem();
+        jMenuItemControl = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+
+        jPopupMenu1.setPopupSize(new java.awt.Dimension(200, 200));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1300, 867));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondoNuevo.jpg"))); // NOI18N
+        jPanel3.setBackground(new java.awt.Color(0, 0, 153));
+        jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelTitulo.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        jLabelTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTitulo.setText("¡Bienvenido a ComexApp!");
+        jPanel3.add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 360, 60));
+
+        jButtonImportadores.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonImportadores.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonImportadores.setText("Importadores");
+        jPanel3.add(jButtonImportadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 210, 50));
+
+        jButtonExportadores.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonExportadores.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonExportadores.setText("Exportadores");
+        jPanel3.add(jButtonExportadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 210, 50));
+
+        jButtonIDespachantes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonIDespachantes.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonIDespachantes.setText("Despachantes");
+        jPanel3.add(jButtonIDespachantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 210, 50));
+
+        jButtonMaritimas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonMaritimas.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonMaritimas.setText("Marítimas");
+        jPanel3.add(jButtonMaritimas, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 210, 50));
+
+        jButtonOperaciones.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonOperaciones.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonOperaciones.setText("Operaciones");
+        jPanel3.add(jButtonOperaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 210, 50));
+
+        jButtonVentaLocal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonVentaLocal.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonVentaLocal.setText("Venta local");
+        jPanel3.add(jButtonVentaLocal, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 500, 210, 50));
+
+        jButtonMarketing.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonMarketing.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonMarketing.setText("Marketing");
+        jPanel3.add(jButtonMarketing, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 570, 210, 50));
+
+        jButtonUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonUsuarios.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonUsuarios.setText("Usuarios");
+        jPanel3.add(jButtonUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 640, 210, 50));
+
+        jButtonCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonCerrarSesion.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonCerrarSesion.setText("Cerrar sesión");
+        jPanel3.add(jButtonCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 740, 210, 20));
+
+        jLabelTitulo1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLabelTitulo1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTitulo1.setText("Por favor, elige la opción que desees");
+        jPanel3.add(jLabelTitulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 330, 30));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, -10, 390, 820));
+
+        jLabelWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo3.jpg"))); // NOI18N
         getContentPane().add(jLabelWallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(-21, -25, 1070, 860));
+
+        jMenuBar1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        jMenuBar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jMenuBar1.setMinimumSize(new java.awt.Dimension(343, 50));
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(343, 30));
+
+        jMenuInfo.setText("Información del usuario");
+        jMenuInfo.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jMenuInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenuInfo.setVerifyInputWhenFocusTarget(false);
+
+        jMenuItemInformacion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemInformacion.setText("Información de la cuenta");
+        jMenuItemInformacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemInformacionActionPerformed(evt);
+            }
+        });
+        jMenuInfo.add(jMenuItemInformacion);
+
+        jMenuItemCambioContraseña.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemCambioContraseña.setText("Cambiar contraseña");
+        jMenuItemCambioContraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCambioContraseñaActionPerformed(evt);
+            }
+        });
+        jMenuInfo.add(jMenuItemCambioContraseña);
+
+        jMenuItemCambioContraseña1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemCambioContraseña1.setText("Cambiar contraseña");
+        jMenuItemCambioContraseña1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCambioContraseña1ActionPerformed(evt);
+            }
+        });
+        jMenuInfo.add(jMenuItemCambioContraseña1);
+
+        jMenuItem1.setText("jMenuItem1");
+        jMenuInfo.add(jMenuItem1);
+
+        jMenuBar1.add(jMenuInfo);
+
+        jMenuPreferencias.setText("Preferencias");
+        jMenuPreferencias.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jMenuItemFondo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemFondo.setText("Cambiar fondo");
+        jMenuItemFondo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFondoActionPerformed(evt);
+            }
+        });
+        jMenuPreferencias.add(jMenuItemFondo);
+
+        jMenuBar1.add(jMenuPreferencias);
+
+        jMenuAdministrar.setText("Administrar sistema");
+        jMenuAdministrar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jMenuItemDatosUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemDatosUsuarios.setText("Ver datos de usuarios");
+        jMenuAdministrar.add(jMenuItemDatosUsuarios);
+
+        jMenuItemControl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemControl.setText("Controlar funcionamiento de áreas");
+        jMenuAdministrar.add(jMenuItemControl);
+
+        jMenuItem2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem2.setText("Ver sección especial de administrador");
+        jMenuAdministrar.add(jMenuItem2);
+
+        jMenuBar1.add(jMenuAdministrar);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItemCambioContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCambioContraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemCambioContraseñaActionPerformed
+
+    private void jMenuItemInformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInformacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemInformacionActionPerformed
+
+    private void jMenuItemFondoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFondoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemFondoActionPerformed
+
+    private void jMenuItemCambioContraseña1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCambioContraseña1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemCambioContraseña1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -75,6 +278,31 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCerrarSesion;
+    private javax.swing.JButton jButtonExportadores;
+    private javax.swing.JButton jButtonIDespachantes;
+    private javax.swing.JButton jButtonImportadores;
+    private javax.swing.JButton jButtonMaritimas;
+    private javax.swing.JButton jButtonMarketing;
+    private javax.swing.JButton jButtonOperaciones;
+    private javax.swing.JButton jButtonUsuarios;
+    private javax.swing.JButton jButtonVentaLocal;
+    private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JLabel jLabelTitulo1;
     private javax.swing.JLabel jLabelWallpaper;
+    private javax.swing.JMenu jMenuAdministrar;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuInfo;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItemCambioContraseña;
+    private javax.swing.JMenuItem jMenuItemCambioContraseña1;
+    private javax.swing.JMenuItem jMenuItemControl;
+    private javax.swing.JMenuItem jMenuItemDatosUsuarios;
+    private javax.swing.JMenuItem jMenuItemFondo;
+    private javax.swing.JMenuItem jMenuItemInformacion;
+    private javax.swing.JMenu jMenuPreferencias;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPopupMenu jPopupMenu1;
     // End of variables declaration//GEN-END:variables
 }

@@ -187,7 +187,6 @@ public class RegistroUsuarios extends javax.swing.JFrame {
        String usuario, contraseña, nombre, apellido, rol = null, mail, telefono;
        int id, rolStatus = 0;
        
-       
        id = Integer.parseInt(textID.getText().trim());
        usuario = textUsuario.getText().trim();
        contraseña = textContraseña.getText().trim();
