@@ -3,6 +3,8 @@ package service;
 import Daniela.ComexApp.Entity.Usuarios;
 import Daniela.ComexApp.Frames.InicioSesion;
 import Daniela.ComexApp.Frames.PaginaPrincipal;
+import Daniela.ComexApp.Repository.UsuariosRepository;
+
 
 import config.Conexion;
 import java.awt.Color;
@@ -11,17 +13,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+
 /**
  *
  * @author Daniela
  */
-public class UsuariosServicio implements UsuariosServImpl{
+public class InicioSesionService implements InicioSesionImp{
 
     // conexión
     Conexion cn = new Conexion();
@@ -32,7 +39,10 @@ public class UsuariosServicio implements UsuariosServImpl{
     
     // datos usuarios
     Usuarios usuarios = new Usuarios();
+    UsuariosService usuariosService = new UsuariosService();
+    UsuariosRepository usuariosRepository;
     InicioSesion inicioses = new InicioSesion();
+    
     boolean validezInicio;
     
     
@@ -60,7 +70,7 @@ public class UsuariosServicio implements UsuariosServImpl{
     
     // métodos sesion
   public boolean inicioDeSesion(JTextField textUsuario, JPasswordField textContraseña){
-      UsuariosServicio usuariosServ = new UsuariosServicio();
+      InicioSesion usuariosServ = new InicioSesion();
       
       Boolean resultado;
       
@@ -145,7 +155,7 @@ public class UsuariosServicio implements UsuariosServImpl{
 
    
    public Usuarios agregarUsuario(Integer id, String usuario, String contraseña, String nombre, 
-           String apellido, String rol, String mail, String telefono){
+           String apellido, String rol, String mail, String telefono, String status){
        
        int avanzar = 0;
        
@@ -174,7 +184,7 @@ public class UsuariosServicio implements UsuariosServImpl{
            avanzar++;
        }
       
-       String sql = "insert into usuarios values (?, ?, ?, ?, ?, ?, ?, ?)";
+       String sql = "insert into usuarios values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
          
        if(avanzar == 0){
            try{
@@ -189,19 +199,10 @@ public class UsuariosServicio implements UsuariosServImpl{
                pst.setString(6, rol);
                pst.setString(7, telefono);
                pst.setString(8, usuario);
-               
+               pst.setString(9, status);
                
                pst.executeUpdate();
                conec.close();
-               
-               usuarios.setId(id);
-               usuarios.setUsuario(usuario);
-               usuarios.setContraseña(contraseña);
-               usuarios.setNombre(nombre);
-               usuarios.setApellido(apellido);
-               usuarios.setMail(mail);
-               usuarios.setTelefono(telefono);
-               usuarios.setRol(rol);
                
                JOptionPane.showMessageDialog(null, "Creación de usuario éxitosa");
            }catch(SQLException e){
@@ -218,58 +219,32 @@ public class UsuariosServicio implements UsuariosServImpl{
    
    
    
- /*  // VER
-   public Usuarios listarUsuario(Usuarios usuario){
-       String sql = "insert into usuarios (usuario, contraseña, nombre, apellido, "
-               + "rol, mail, telefono) values (?, ?, ?, ?, ?, ?, ?)";
-       try{
-           conec = cn.Conexion();
-           pst = conec.prepareStatement(sql);
-           
-           pst.setString(1, usuario.getUsuario());
-           pst.setString(2, usuario.getContraseña());
-           pst.setString(3, usuario.getNombre());
-           pst.setString(4, usuario.getApellido());
-           pst.setString(5, usuario.getRol());
-           pst.setString(6, usuario.getMail());
-           pst.setString(7, usuario.getTelefono());
-           
-           pst.executeUpdate();
-           conec.close();
-           
-       }catch(SQLException e){
-           JOptionPane.showMessageDialog(null, "Error al listar usuario");
-           System.err.println("Error al listar usuario");
-       }
-       return usuario;
-   }
    
-  */
-
    
-   // SETTERS Y GETTERS
-    public boolean isValidezInicio() {
-        return validezInicio;
-    }
-
-    public void setValidezInicio(boolean validezInicio) {
-        this.validezInicio = validezInicio;
-    }
-
-    public String getUsuario() {
+   
+   
+    public static String getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public static void setUsuario(String usuario) {
+        InicioSesionService.usuario = usuario;
     }
 
-    public String getContraseña() {
+    public static String getContraseña() {
         return contraseña;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public static void setContraseña(String contraseña) {
+        InicioSesionService.contraseña = contraseña;
+    }
+
+    public static String getApellido() {
+        return apellido;
+    }
+
+    public static void setApellido(String apellido) {
+        InicioSesionService.apellido = apellido;
     }
 
     public static String getRolCorrespondiente() {
@@ -277,9 +252,11 @@ public class UsuariosServicio implements UsuariosServImpl{
     }
 
     public static void setRolCorrespondiente(String rolCorrespondiente) {
-        UsuariosServicio.rolCorrespondiente = rolCorrespondiente;
+        InicioSesionService.rolCorrespondiente = rolCorrespondiente;
     }
-   
 
+
+   
+  
 
 }

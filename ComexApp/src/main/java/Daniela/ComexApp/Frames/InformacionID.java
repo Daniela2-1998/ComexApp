@@ -1,6 +1,8 @@
 package Daniela.ComexApp.Frames;
 
 import config.Conexion;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,8 +28,18 @@ public class InformacionID extends javax.swing.JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         
+        setTitle("ID´s inscriptos - sistema ComexApp");
+        
         cargarTablaIDs();
     }
+    
+        // icono
+    public Image getLogo(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/loguito1.png"));
+        return retValue;   
+    }
+    
+    
         Conexion cn = new Conexion();
         Connection conec;
         PreparedStatement pst;
@@ -77,6 +89,7 @@ public class InformacionID extends javax.swing.JFrame {
         jTableID = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 153));

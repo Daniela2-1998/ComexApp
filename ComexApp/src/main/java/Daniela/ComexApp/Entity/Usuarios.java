@@ -37,9 +37,12 @@ public class Usuarios {
     @NotBlank
     private String contraseña;
 
-   
+    @NotBlank
+    private String status;
    
 
+    
+    
     public Integer getId() {
         return id;
     }
@@ -105,13 +108,21 @@ public class Usuarios {
         this.rol = rol;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     
     
     
     public Usuarios() {
     }
 
-    public Usuarios(Integer id, String nombre, String apellido, String mail, String telefono, String rol, String usuario, String contraseña) {
+    public Usuarios(Integer id, String nombre, String apellido, String mail, String telefono, String rol, String usuario, String contraseña, String status) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -120,12 +131,8 @@ public class Usuarios {
         this.rol = rol;
         this.usuario = usuario;
         this.contraseña = contraseña;
+        this.status = status;
     }
 
-  
-    
-    
-    
-    
     
 }

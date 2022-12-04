@@ -13,10 +13,10 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import service.UsuariosServicio;
 
 import java.awt.event.KeyEvent;
 import service.Botones;
+import service.InicioSesionService;
 
 /**
  *
@@ -48,7 +48,7 @@ public class InicioSesion extends javax.swing.JFrame {
 
     // icono
     public Image getLogo(){
-        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/logo12.png"));
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/loguito1.png"));
         return retValue;   
     }
     
@@ -57,10 +57,10 @@ public class InicioSesion extends javax.swing.JFrame {
     
     
     public void ingresarAlSistemaBotonYMouse(){
-        UsuariosServicio usuariosServ = new UsuariosServicio();
+        InicioSesionService inicioSesionService = new service.InicioSesionService();
         Boolean validez;
         
-        validez = usuariosServ.inicioDeSesion(textUsuario, textContraseña);
+        validez = inicioSesionService.inicioDeSesion(textUsuario, textContraseña);
        
             if(validez.equals(true)){
                 JOptionPane.showMessageDialog(null, "Ingresando al sistema");
@@ -121,7 +121,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jButtonSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setIconImage(getIconImage());
+        setIconImage(getLogo());
         setIconImages(getIconImages());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -167,6 +167,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jPanelAzul.add(jLabelContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 170, 40));
 
         textContraseña.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textContraseña.setForeground(new java.awt.Color(0, 0, 153));
         textContraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textContraseñaActionPerformed(evt);

@@ -39,6 +39,9 @@ public class Importadores {
     @NotBlank
     private String productos_pedidos;
 
+    @NotBlank
+    private String status;
+    
     @NotEmpty
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "operaciones_compraint",
@@ -119,13 +122,21 @@ public class Importadores {
         this.pais = pais;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     
     
     
     public Importadores() {
     }
 
-    public Importadores(Integer id, String empresa, String empleado, String pais, String CUIT, String mail, String numero_contacto, String productos_pedidos, List<Operaciones> operaciones) {
+    public Importadores(Integer id, String empresa, String empleado, String pais, String CUIT, String mail, String numero_contacto, String productos_pedidos, String status, List<Operaciones> operaciones) {
         this.id = id;
         this.empresa = empresa;
         this.empleado = empleado;
@@ -134,8 +145,11 @@ public class Importadores {
         this.mail = mail;
         this.numero_contacto = numero_contacto;
         this.productos_pedidos = productos_pedidos;
+        this.status = status;
         this.operaciones = operaciones;
     }
+
+   
 
     
 }

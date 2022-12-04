@@ -40,12 +40,16 @@ public class Exportadores {
     @NotBlank
     private String productos_pedidos;
 
+    @NotBlank
+    private String status;
     
     @NotEmpty
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "operaciones_expo",
             joinColumns = @JoinColumn(name = "id_operaciones"))
     List<Operaciones> operaciones;
+    
+    
     
     
     public Integer getId() {
@@ -103,15 +107,29 @@ public class Exportadores {
     public void setProductos_pedidos(String productos_pedidos) {
         this.productos_pedidos = productos_pedidos;
     }
-
-
-
+    
     public String getPais() {
         return pais;
     }
 
     public void setPais(String pais) {
         this.pais = pais;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public List<Operaciones> getOperaciones() {
+        return operaciones;
+    }
+
+    public void setOperaciones(List<Operaciones> operaciones) {
+        this.operaciones = operaciones;
     }
 
     
@@ -121,7 +139,7 @@ public class Exportadores {
     public Exportadores() {
     }
 
-    public Exportadores(Integer id, String empresa, String empleado, String pais, String CUIT, String mail, String numero_contacto, String productos_pedidos, List<Operaciones> operaciones) {
+    public Exportadores(Integer id, String empresa, String empleado, String pais, String CUIT, String mail, String numero_contacto, String productos_pedidos, String status, List<Operaciones> operaciones) {
         this.id = id;
         this.empresa = empresa;
         this.empleado = empleado;
@@ -130,8 +148,8 @@ public class Exportadores {
         this.mail = mail;
         this.numero_contacto = numero_contacto;
         this.productos_pedidos = productos_pedidos;
+        this.status = status;
         this.operaciones = operaciones;
     }
-
 
 }

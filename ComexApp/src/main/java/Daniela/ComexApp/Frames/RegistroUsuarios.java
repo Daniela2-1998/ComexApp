@@ -1,7 +1,12 @@
 package Daniela.ComexApp.Frames;
 
+import Daniela.ComexApp.Controller.UsuariosController;
 import Daniela.ComexApp.Entity.Usuarios;
-import service.UsuariosServicio;
+import Daniela.ComexApp.Repository.UsuariosRepository;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import service.InicioSesionService;
 
 /**
  *
@@ -19,12 +24,28 @@ public class RegistroUsuarios extends javax.swing.JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setLayout(null);
+        
+        setTitle("Registro de usuarios - sistema ComexApp");
     }
 
     
-    Usuarios usuario = new Usuarios();
-    UsuariosServicio usuarioDAO = new UsuariosServicio();
+    Usuarios usuarios = new Usuarios();
+    UsuariosRepository usuariosRepository;
+    // UsuariosController usuariosController = new UsuariosController();
+    InicioSesionService inicioSesionService = new InicioSesionService();
     
+    
+    public void LimpiarCamposRegistroUsuarios(){
+        textID.setText("");
+        textUsuario.setText("");
+        textContraseña.setText("");
+        textNombre.setText("");
+        textApellido.setText("");
+        textMail.setText("");
+        textTelefono.setText("");
+        cmbRol.setSelectedIndex(0);
+        cmbStatus.setSelectedIndex(0);
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,6 +75,8 @@ public class RegistroUsuarios extends javax.swing.JFrame {
         jButtonRegistrar = new javax.swing.JButton();
         jLabelID = new javax.swing.JLabel();
         textID = new javax.swing.JTextField();
+        jLabelStatus = new javax.swing.JLabel();
+        cmbStatus = new javax.swing.JComboBox<>();
         jButtonInfo = new javax.swing.JButton();
         jButtonVolverAtras = new javax.swing.JButton();
         jLabelWallpaper = new javax.swing.JLabel();
@@ -149,7 +172,20 @@ public class RegistroUsuarios extends javax.swing.JFrame {
         getContentPane().add(jLabelID, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 30, 50));
 
         textID.setForeground(new java.awt.Color(0, 0, 153));
+        textID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textIDActionPerformed(evt);
+            }
+        });
         getContentPane().add(textID, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, 80, 40));
+
+        jLabelStatus.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelStatus.setForeground(new java.awt.Color(0, 0, 153));
+        jLabelStatus.setText("Status:");
+        getContentPane().add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 70, 50));
+
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo", "Suspendido" }));
+        getContentPane().add(cmbStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, 120, 40));
 
         jButtonInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/signo4.png"))); // NOI18N
         jButtonInfo.setBorder(null);
@@ -184,9 +220,11 @@ public class RegistroUsuarios extends javax.swing.JFrame {
 
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
 
-       String usuario, contraseña, nombre, apellido, rol = null, mail, telefono;
-       int id, rolStatus = 0;
+       String usuario, contraseña, nombre, apellido, rol = null, mail, telefono, status = null;
+       int id, rolStatus = 0, statusNivel = 0;
        
+       String recepcion;
+      
        id = Integer.parseInt(textID.getText().trim());
        usuario = textUsuario.getText().trim();
        contraseña = textContraseña.getText().trim();
@@ -195,6 +233,7 @@ public class RegistroUsuarios extends javax.swing.JFrame {
        mail = textMail.getText().trim();
        telefono = textTelefono.getText().trim();
        rolStatus = cmbRol.getSelectedIndex() + 1;
+       statusNivel = cmbStatus.getSelectedIndex() + 1;
        
        if(rolStatus == 1){
            rol = "Administrador";
@@ -210,8 +249,23 @@ public class RegistroUsuarios extends javax.swing.JFrame {
            rol = "Marketing";
        }
        
-       usuarioDAO.agregarUsuario(id, usuario, contraseña, nombre, apellido, rol, mail, telefono);
-        
+       if(statusNivel == 1){
+           status = "Activo";
+       } else if (statusNivel == 2){
+           status = "Inactivo";
+       } else if (statusNivel == 3){
+           status = "Suspendido";
+       }
+     
+       recepcion = inicioSesionService.agregarUsuario(id, usuario, contraseña, nombre, apellido, rol, mail, telefono, status).toString();
+      
+       if(!recepcion.isEmpty()){
+           JOptionPane.showMessageDialog(null, "Se creó correctamente el usuario de " + usuario);
+           LimpiarCamposRegistroUsuarios();
+       } else if (recepcion.isEmpty()){
+           JOptionPane.showMessageDialog(null, "No es posible crear el usuario solicitado");
+       }
+
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
     private void jButtonInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInfoActionPerformed
@@ -223,11 +277,13 @@ public class RegistroUsuarios extends javax.swing.JFrame {
 
     private void jButtonVolverAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverAtrasActionPerformed
 
-        InicioSesion inicioSesion = new InicioSesion();
-        inicioSesion.setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_jButtonVolverAtrasActionPerformed
+
+    private void textIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,6 +322,7 @@ public class RegistroUsuarios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbRol;
+    private javax.swing.JComboBox<String> cmbStatus;
     private javax.swing.JButton jButtonInfo;
     private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JButton jButtonVolverAtras;
@@ -276,6 +333,7 @@ public class RegistroUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelMail;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelRol;
+    private javax.swing.JLabel jLabelStatus;
     private javax.swing.JLabel jLabelTelefono;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelUsuario;

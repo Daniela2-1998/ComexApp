@@ -1,7 +1,9 @@
 package Daniela.ComexApp.Frames;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
-import service.UsuariosServicio;
+import service.InicioSesionService;
 
 /**
  *
@@ -20,27 +22,34 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
-
         
         usuario = usuariosServicio.getUsuario();
         contraseña = usuariosServicio.getContraseña();
         
-        
-        JOptionPane.showMessageDialog(null, usuario + contraseña);
-        
         rol = usuariosServicio.obtenerRolUsuario(usuario, contraseña);
+        visibilidadAdministrador();
+        JOptionPane.showMessageDialog(null, usuario + contraseña);
         JOptionPane.showMessageDialog(null, rol);
+        
+        setTitle("Página principal - " + usuario + " - sistema ComexApp");
+    }
+    
+        // icono
+    public Image getLogo(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/loguito1.png"));
+        return retValue;   
     }
 
-    UsuariosServicio usuariosServicio = new UsuariosServicio();
+    InicioSesionService usuariosServicio = new InicioSesionService();
     InicioSesion inicioSesion = new InicioSesion();
     
     
-    
     public void visibilidadAdministrador(){
-        
-        
-        jMenuAdministrar.setVisible(true);
+        if(rol.equals("Administrador")){
+            jMenuAdministrar.setVisible(true);
+        }else{
+            jMenuAdministrar.setVisible(false);
+        } 
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,19 +77,24 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuInfo = new javax.swing.JMenu();
         jMenuItemInformacion = new javax.swing.JMenuItem();
+        jMenuItemModificar = new javax.swing.JMenuItem();
         jMenuItemCambioContraseña = new javax.swing.JMenuItem();
-        jMenuItemCambioContraseña1 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuPreferencias = new javax.swing.JMenu();
         jMenuItemFondo = new javax.swing.JMenuItem();
+        jMenuItemColores = new javax.swing.JMenuItem();
         jMenuAdministrar = new javax.swing.JMenu();
         jMenuItemDatosUsuarios = new javax.swing.JMenuItem();
         jMenuItemControl = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuUsuarios = new javax.swing.JMenu();
+        jMenuItemModificarDatosUs = new javax.swing.JMenuItem();
+        jMenuItemRecupero = new javax.swing.JMenuItem();
 
         jPopupMenu1.setPopupSize(new java.awt.Dimension(200, 200));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getLogo());
+        setIconImages(getIconImages());
         setPreferredSize(new java.awt.Dimension(1300, 867));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -136,6 +150,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jButtonCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonCerrarSesion.setForeground(new java.awt.Color(0, 0, 153));
         jButtonCerrarSesion.setText("Cerrar sesión");
+        jButtonCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCerrarSesionActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButtonCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 740, 210, 20));
 
         jLabelTitulo1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
@@ -167,6 +186,15 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         });
         jMenuInfo.add(jMenuItemInformacion);
 
+        jMenuItemModificar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemModificar.setText("Modificar datos");
+        jMenuItemModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemModificarActionPerformed(evt);
+            }
+        });
+        jMenuInfo.add(jMenuItemModificar);
+
         jMenuItemCambioContraseña.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItemCambioContraseña.setText("Cambiar contraseña");
         jMenuItemCambioContraseña.addActionListener(new java.awt.event.ActionListener() {
@@ -175,18 +203,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuInfo.add(jMenuItemCambioContraseña);
-
-        jMenuItemCambioContraseña1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItemCambioContraseña1.setText("Cambiar contraseña");
-        jMenuItemCambioContraseña1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCambioContraseña1ActionPerformed(evt);
-            }
-        });
-        jMenuInfo.add(jMenuItemCambioContraseña1);
-
-        jMenuItem1.setText("jMenuItem1");
-        jMenuInfo.add(jMenuItem1);
 
         jMenuBar1.add(jMenuInfo);
 
@@ -202,6 +218,15 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         });
         jMenuPreferencias.add(jMenuItemFondo);
 
+        jMenuItemColores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemColores.setText("Invertir colores");
+        jMenuItemColores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemColoresActionPerformed(evt);
+            }
+        });
+        jMenuPreferencias.add(jMenuItemColores);
+
         jMenuBar1.add(jMenuPreferencias);
 
         jMenuAdministrar.setText("Administrar sistema");
@@ -209,6 +234,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
         jMenuItemDatosUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItemDatosUsuarios.setText("Ver datos de usuarios");
+        jMenuItemDatosUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDatosUsuariosActionPerformed(evt);
+            }
+        });
         jMenuAdministrar.add(jMenuItemDatosUsuarios);
 
         jMenuItemControl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -221,14 +251,37 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuAdministrar);
 
+        jMenuUsuarios.setText("Información de usuarios");
+        jMenuUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jMenuItemModificarDatosUs.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemModificarDatosUs.setText("Modificar datos de usuarios");
+        jMenuItemModificarDatosUs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemModificarDatosUsActionPerformed(evt);
+            }
+        });
+        jMenuUsuarios.add(jMenuItemModificarDatosUs);
+
+        jMenuItemRecupero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemRecupero.setText("Recupero de cuentas");
+        jMenuItemRecupero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRecuperoActionPerformed(evt);
+            }
+        });
+        jMenuUsuarios.add(jMenuItemRecupero);
+
+        jMenuBar1.add(jMenuUsuarios);
+
         setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItemCambioContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCambioContraseñaActionPerformed
+    private void jMenuItemModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemModificarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemCambioContraseñaActionPerformed
+    }//GEN-LAST:event_jMenuItemModificarActionPerformed
 
     private void jMenuItemInformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInformacionActionPerformed
         // TODO add your handling code here:
@@ -238,9 +291,36 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemFondoActionPerformed
 
-    private void jMenuItemCambioContraseña1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCambioContraseña1ActionPerformed
+    private void jMenuItemCambioContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCambioContraseñaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemCambioContraseña1ActionPerformed
+    }//GEN-LAST:event_jMenuItemCambioContraseñaActionPerformed
+
+    private void jButtonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarSesionActionPerformed
+        
+        inicioSesion.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButtonCerrarSesionActionPerformed
+
+    private void jMenuItemModificarDatosUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemModificarDatosUsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemModificarDatosUsActionPerformed
+
+    private void jMenuItemColoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemColoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemColoresActionPerformed
+
+    private void jMenuItemRecuperoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRecuperoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemRecuperoActionPerformed
+
+    private void jMenuItemDatosUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDatosUsuariosActionPerformed
+       
+        AdministrarUsuarios administrarUsuarios = new AdministrarUsuarios();
+        administrarUsuarios.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jMenuItemDatosUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,15 +373,18 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuAdministrar;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuInfo;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemCambioContraseña;
-    private javax.swing.JMenuItem jMenuItemCambioContraseña1;
+    private javax.swing.JMenuItem jMenuItemColores;
     private javax.swing.JMenuItem jMenuItemControl;
     private javax.swing.JMenuItem jMenuItemDatosUsuarios;
     private javax.swing.JMenuItem jMenuItemFondo;
     private javax.swing.JMenuItem jMenuItemInformacion;
+    private javax.swing.JMenuItem jMenuItemModificar;
+    private javax.swing.JMenuItem jMenuItemModificarDatosUs;
+    private javax.swing.JMenuItem jMenuItemRecupero;
     private javax.swing.JMenu jMenuPreferencias;
+    private javax.swing.JMenu jMenuUsuarios;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu jPopupMenu1;
     // End of variables declaration//GEN-END:variables
