@@ -19,7 +19,7 @@ import service.UsuariosService;
  */
 public class VerUsuario extends javax.swing.JFrame {
 
-    String usuario, usuarioTraido, usuarioBuscado;
+    String usuario = "", usuarioTraido = "", usuarioBuscado = "";
     /**
      * Creates new form VerUsuario
      */
@@ -35,6 +35,7 @@ public class VerUsuario extends javax.swing.JFrame {
         //usuarioTraido = administrarUsuarios.usuarioBusqueda;
        // usuario = textUsuarioBuscado.getText().trim();
         usuario = textUsuarioBuscado.getText().trim();
+        
         setTitle("Informacíón completa de " + usuario + " - Administrador - Sistema ComexApp");
         jLabelTitulo.setText("Información completa de " + usuario + "");
        // usuarioBuscado = usuarioABuscar(usuarioTraido, usuario);
@@ -72,7 +73,6 @@ public class VerUsuario extends javax.swing.JFrame {
     
     public String usuarioABuscar(String usuarioTraido, String usuario){
        
-     
      if(!usuario.equals(usuarioTraido)){
         if(usuarioTraido.equals("")){
             usuarioBuscado = usuarioTraido;
@@ -84,6 +84,17 @@ public class VerUsuario extends javax.swing.JFrame {
     }
     
    
+    public void LimpiarCampos(){
+        textUsuario.setText("");
+        textContraseña.setText("");
+        textNombre.setText("");
+        textApellido.setText("");
+        textMail.setText("");
+        textTelefono.setText("");
+        textID.setText("");
+        cmbRol.setSelectedItem(0);
+        cmbStatus.setSelectedItem(0);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -517,7 +528,21 @@ public class VerUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+
+        int id = Integer.parseInt(textID.getText().trim());
+        String usuario = textUsuario.getText().trim();
         
+        try{
+            Boolean aprobarEliminar = usuariosService.eliminarUsuario(usuario, id);
+            
+            if(aprobarEliminar.equals(true)){
+                JOptionPane.showMessageDialog(null, "Eliminación éxitosa");
+                LimpiarCampos();
+            }
+                  
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "No pudimos eliminar al usuario");
+        }
         
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 

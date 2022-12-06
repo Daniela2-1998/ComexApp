@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
  * @author Daniela
  */
 @Service
-public class UsuariosService /*implements UsuariosImpl*/{
+public class UsuariosService implements UsuariosImpl{
     
     // campo usuarios para creación, modificación, etc.
     JTextField textID = new JTextField();
@@ -48,14 +48,16 @@ public class UsuariosService /*implements UsuariosImpl*/{
     ResultSet rs;
     int resultado;
     
+    Boolean eliminacionAprobada;
+    
 
     public void modificarTodosLosDatosDeUsuarios(int idMod, String usuario, String usuarioMod, 
             String contraseñaMod, String nombreMod, String apellidoMod, 
             String rolMod, String mailMod, String telefonoMod, String statusMod){
         
      int alternativaMensaje;
-     String sql = "update usuarios set id_usuarios=?, usuario=?, contraseña =?, nombre=?, "
-             + "apellido=?, rol=?, mail=?, telefono=?, status=? where "
+     String sql = "update usuarios set apellido=?, contraseña=?, mail=?, "
+             + "nombre=?, rol=?, telefono=?, usuario=?, status=? where "
              + "usuario = '" + usuario + "'";
      
      try{
@@ -66,15 +68,14 @@ public class UsuariosService /*implements UsuariosImpl*/{
             
         if(alternativaMensaje == 0){
           
-            pst.setInt(1, idMod);
-            pst.setString(2, apellidoMod);
-            pst.setString(3, contraseñaMod);
-            pst.setString(4, mailMod);
-            pst.setString(5, nombreMod);
-            pst.setString(6, rolMod);
-            pst.setString(7, telefonoMod);
-            pst.setString(8, usuarioMod);
-            pst.setString(9, statusMod);
+            pst.setString(1, apellidoMod);
+            pst.setString(2, contraseñaMod);
+            pst.setString(3, mailMod);
+            pst.setString(4, nombreMod);
+            pst.setString(5, rolMod);
+            pst.setString(6, telefonoMod);
+            pst.setString(7, usuarioMod);
+            pst.setString(8, statusMod);
 
             pst.executeUpdate();
             conec.close();
@@ -94,7 +95,7 @@ public class UsuariosService /*implements UsuariosImpl*/{
              String apellidoMod, String mailMod, String telefonoMod){
         
      int alternativaMensaje;
-     String sql = "update usuarios set nombre=?, apellido=?, mail=?, "
+     String sql = "update usuarios set apellido=?, mail=?, nombre=?, "
              + "telefono=? where usuario = '" + usuario + "'";
      
      try{
@@ -164,6 +165,44 @@ public class UsuariosService /*implements UsuariosImpl*/{
             JOptionPane.showMessageDialog(null, "No se pueden obtener los datos del "
                     + "usuario solicitado");
         }
+    }
+
+
+    public boolean eliminarUsuario(String usuario, int id) {
+        
+       String sql = "delete from usuarios where usuario = '" + usuario + "' "
+               + "and id_usuarios = '" + id + "'";
+       
+       int alternativaMensaje;
+       Boolean aprobado;
+       
+       try{
+           conec = cn.Conexion();
+           pst = conec.prepareStatement(sql);
+           
+           
+           alternativaMensaje = JOptionPane.showConfirmDialog(null, "Estás por eliminar un registro, "
+                    + "¿está seguro de que quieres hacerlo?");
+           
+           if(alternativaMensaje == 0){
+               pst.executeUpdate();
+               aprobado = true;
+               JOptionPane.showMessageDialog(null, "Eliminación de registro "
+                    + "éxitosa");
+               conec.close();
+               return aprobado;
+           } else {
+               conec.close();
+               aprobado = false;
+               JOptionPane.showMessageDialog(null, "No se ha eliminado el registro");
+               return aprobado;
+           }
+       }catch(SQLException e){
+           System.err.println("No se pudo eliminar el registro solicitado " + e);
+           JOptionPane.showMessageDialog(null, "No se pudo eliminar el registro "
+                   + "solicitado");
+       }
+       return eliminacionAprobada;
     }
 
    
