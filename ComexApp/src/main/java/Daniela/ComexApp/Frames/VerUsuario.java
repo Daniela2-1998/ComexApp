@@ -1,8 +1,14 @@
 package Daniela.ComexApp.Frames;
 
+import config.Conexion;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import service.InicioSesionService;
 import service.UsuariosService;
 
@@ -27,9 +33,10 @@ public class VerUsuario extends javax.swing.JFrame {
         
         
         //usuarioTraido = administrarUsuarios.usuarioBusqueda;
+       // usuario = textUsuarioBuscado.getText().trim();
         usuario = textUsuarioBuscado.getText().trim();
-        setTitle("Informacíón completa de " + usuarioBuscado + " - Administrador - Sistema ComexApp");
-        jLabelTitulo.setText("Información completa de " + usuarioBuscado + "");
+        setTitle("Informacíón completa de " + usuario + " - Administrador - Sistema ComexApp");
+        jLabelTitulo.setText("Información completa de " + usuario + "");
        // usuarioBuscado = usuarioABuscar(usuarioTraido, usuario);
 
        
@@ -119,7 +126,7 @@ public class VerUsuario extends javax.swing.JFrame {
         textContraseña = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setIconImage(getIconImage());
+        setIconImage(getLogo());
         setIconImages(getIconImages());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -457,47 +464,55 @@ public class VerUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVolverAtrasActionPerformed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+
+        try{        
         
-        String usuarioMod, contraseñaMod, nombreMod, apellidoMod, rolMod = null, 
+            String usuarioMod, contraseñaMod, nombreMod, apellidoMod, rolMod = null, 
                 mailMod, telefonoMod, statusMod = null;
-        int idMod, rolStatusMod = 0, statusNivelMod = 0;
-  
-        idMod = Integer.parseInt(textID.getText().trim());
-        usuarioMod = textUsuario.getText().trim();
-        contraseñaMod = textContraseña.getText().trim();
-        nombreMod = textNombre.getText().trim();
-        apellidoMod = textApellido.getText().trim();
-        mailMod = textMail.getText().trim();
-        telefonoMod = textTelefono.getText().trim();
-        rolStatusMod = cmbRol.getSelectedIndex() + 1;
-        statusNivelMod = cmbStatus.getSelectedIndex() + 1;
-
-        if(rolStatusMod == 1){
-            rolMod = "Administrador";
-        } else if(rolStatusMod == 2){
-            rolMod = "Importador";
-        } else if(rolStatusMod == 3){
-            rolMod = "Exportador";
-        } else if(rolStatusMod == 4){
-            rolMod = "Agente";
-        } else if(rolStatusMod == 5){
-            rolMod = "Logistica";
-        } else if(rolStatusMod == 6){
-            rolMod = "Marketing";
-        }
-
-        if(statusNivelMod == 1){
-            statusMod = "Activo";
-        } else if (statusNivelMod == 2){
-            statusMod = "Inactivo";
-        } else if (statusNivelMod == 3){
-            statusMod = "Suspendido";
-        }
-     
+            int idMod, rolStatusMod = 0, statusNivelMod = 0;
         
-        usuariosService.modificarTodosLosDatosDeUsuarios(idMod, usuarioMod, 
-                contraseñaMod, nombreMod, apellidoMod, rolMod, mailMod, 
-                telefonoMod, statusMod);
+            usuario = textUsuarioBuscado.getText().trim();
+            
+            idMod= Integer.parseInt(textID.getText().trim());
+            usuarioMod = textUsuario.getText().trim();
+            contraseñaMod = textContraseña.getText().trim();
+            nombreMod = textNombre.getText().trim();
+            apellidoMod = textApellido.getText().trim();
+            mailMod = textMail.getText().trim();
+            telefonoMod = textTelefono.getText().trim();
+            rolStatusMod = cmbRol.getSelectedIndex() + 1;
+            statusNivelMod = cmbStatus.getSelectedIndex() + 1;
+
+            if(rolStatusMod == 1){
+                rolMod = "Administrador";
+            } else if(rolStatusMod == 2){
+                rolMod = "Importador";
+            } else if(rolStatusMod == 3){
+                rolMod = "Exportador";
+            } else if(rolStatusMod == 4){
+                rolMod = "Agente";
+            } else if(rolStatusMod == 5){
+                rolMod = "Logistica";
+            } else if(rolStatusMod == 6){
+                rolMod = "Marketing";
+            }
+
+            if(statusNivelMod == 1){
+               statusMod = "Activo";
+            } else if (statusNivelMod == 2){
+               statusMod = "Inactivo";
+            } else if (statusNivelMod == 3){
+               statusMod = "Suspendido";
+            }
+     
+            usuariosService.modificarTodosLosDatosDeUsuarios(idMod, usuario, 
+                    usuarioMod, contraseñaMod, nombreMod, apellidoMod, rolMod, 
+                    mailMod, telefonoMod, statusMod);
+       
+        }catch(Exception e){
+            System.err.println("Fallo al modificar datos " + e);
+            JOptionPane.showMessageDialog(null, "Fallo al modificar datos");
+        }
         
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
@@ -564,9 +579,10 @@ public class VerUsuario extends javax.swing.JFrame {
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
 
-        String usuario = textUsuarioBuscado.getText().trim();
-        usuariosService.obtenerDatosDelUsuario(usuario);
-        
+      usuariosService.obtenerDatosDelUsuario(textUsuarioBuscado, textID, 
+              textUsuario, textNombre, textNombre, textApellido, textMail, 
+              textTelefono, cmbRol, cmbStatus);
+  
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void textUsuarioBuscadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textUsuarioBuscadoActionPerformed

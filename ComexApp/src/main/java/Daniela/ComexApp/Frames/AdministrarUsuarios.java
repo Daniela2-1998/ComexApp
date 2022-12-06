@@ -128,7 +128,8 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         });
     }
     
-    
+  
+     
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -143,6 +144,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableUsuarios = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
+        jButtonVolverAtras = new javax.swing.JButton();
         jPanelMenu = new javax.swing.JPanel();
         jButtonBuscar = new javax.swing.JButton();
         textBusqueda = new javax.swing.JTextField();
@@ -176,7 +178,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         jLabelTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setIconImage(getIconImage());
+        setIconImage(getLogo());
         setIconImages(getIconImages());
         setPreferredSize(new java.awt.Dimension(1500, 800));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -205,15 +207,32 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jButtonVolverAtras.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonVolverAtras.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonVolverAtras.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonVolverAtras.setText("Volver atrás");
+        jButtonVolverAtras.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 153), new java.awt.Color(0, 0, 153), new java.awt.Color(0, 0, 153), new java.awt.Color(0, 0, 153)));
+        jButtonVolverAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVolverAtrasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 390, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(154, 154, 154)
+                .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(206, Short.MAX_VALUE))
         );
 
         jPanelMenu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -544,7 +563,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(408, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabelTitulo)
                         .addGap(420, 420, 420))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -594,7 +613,24 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVerUsuarioActionPerformed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
-        // TODO add your handling code here:
+
+        try{
+            
+            String usuario, nombreMod, apellidoMod, telefonoMod, mailMod;
+        
+            usuario = textUsuario.getText().trim();
+            nombreMod = textNombre.getText().trim();
+            apellidoMod = textApellido.getText().trim();
+            telefonoMod = textTel.getText().trim();
+            mailMod = textMail.getText().trim();
+        
+           usuariosService.modificarAlgunosDatosDeUsuarios(usuario, nombreMod, 
+                apellidoMod, mailMod, telefonoMod);
+         
+        }catch(Exception e){
+            System.err.println("Fallo al modificar datos " + e);
+            JOptionPane.showMessageDialog(null, "Fallo al modificar datos");
+        }
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
@@ -704,6 +740,14 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonBuscarStatusActionPerformed
 
+    private void jButtonVolverAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverAtrasActionPerformed
+
+        PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
+        paginaPrincipal.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_jButtonVolverAtrasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -750,6 +794,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEliminar2;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JButton jButtonVerUsuario;
+    private javax.swing.JButton jButtonVolverAtras;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

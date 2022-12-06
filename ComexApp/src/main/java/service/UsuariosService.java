@@ -49,13 +49,14 @@ public class UsuariosService /*implements UsuariosImpl*/{
     int resultado;
     
 
-    public void modificarTodosLosDatosDeUsuarios(int idMod, String usuarioMod, 
+    public void modificarTodosLosDatosDeUsuarios(int idMod, String usuario, String usuarioMod, 
             String contraseñaMod, String nombreMod, String apellidoMod, 
             String rolMod, String mailMod, String telefonoMod, String statusMod){
         
      int alternativaMensaje;
-     String sql = "update usuarios set id_usuarios=?, usuario=?, nombre=?, "
-             + "apellido=?, rol=?, mail=?, telefono=?, status=?";
+     String sql = "update usuarios set id_usuarios=?, usuario=?, contraseña =?, nombre=?, "
+             + "apellido=?, rol=?, mail=?, telefono=?, status=? where "
+             + "usuario = '" + usuario + "'";
      
      try{
          conec = cn.Conexion();
@@ -64,7 +65,7 @@ public class UsuariosService /*implements UsuariosImpl*/{
         alternativaMensaje = JOptionPane.showConfirmDialog(null, "¿Quieres modificar los datos?");
             
         if(alternativaMensaje == 0){
-         
+          
             pst.setInt(1, idMod);
             pst.setString(2, apellidoMod);
             pst.setString(3, contraseñaMod);
@@ -89,9 +90,50 @@ public class UsuariosService /*implements UsuariosImpl*/{
      }
     }
 
-    public void obtenerDatosDelUsuario(String usuario){
+     public void modificarAlgunosDatosDeUsuarios(String usuario, String nombreMod, 
+             String apellidoMod, String mailMod, String telefonoMod){
         
-        String sql = "select * from usuarios where usuario = '" + usuario + "'";
+     int alternativaMensaje;
+     String sql = "update usuarios set nombre=?, apellido=?, mail=?, "
+             + "telefono=? where usuario = '" + usuario + "'";
+     
+     try{
+         conec = cn.Conexion();
+         pst = conec.prepareStatement(sql);
+         
+        alternativaMensaje = JOptionPane.showConfirmDialog(null, "¿Quieres modificar los datos?");
+            
+        if(alternativaMensaje == 0){
+          
+            pst.setString(1, apellidoMod);
+            pst.setString(2, mailMod);
+            pst.setString(3, nombreMod);
+            pst.setString(4, telefonoMod);
+
+
+            pst.executeUpdate();
+            conec.close();
+          
+        } else {
+         conec.close();
+         JOptionPane.showMessageDialog(null, "No se modificaron los datos");
+        }
+        
+     }catch(SQLException e){
+         System.err.println("No se pudo conectar con la base de datos para"
+                 + "modificar datos" + e);
+     }
+    }
+    
+    
+    public void obtenerDatosDelUsuario(JTextField textUsuarioBuscado, 
+            JTextField textID, JTextField textUsuario, JTextField textContraseña, 
+            JTextField textNombre, JTextField textApellido, JTextField textMail, 
+            JTextField textTelefono, JComboBox cmbRol, JComboBox cmbStatus){
+        
+        String usuarioABuscar = textUsuarioBuscado.getText().trim();
+        
+        String sql = "select * from usuarios where usuario = '" + usuarioABuscar + "'";
         
         try{
             conec = cn.Conexion();
@@ -109,6 +151,11 @@ public class UsuariosService /*implements UsuariosImpl*/{
                 textTelefono.setText(rs.getString("telefono"));
                 cmbRol.setSelectedItem("rol");
                 cmbStatus.setSelectedItem("status");
+            } else {
+                JOptionPane.showMessageDialog(null, "No es posible conseguir "
+                        + "los datos del usuario solicitado");
+                System.err.println("No es posible conseguir los datos del usuario "
+                        + "solicitado");
             }
             conec.close();
             
