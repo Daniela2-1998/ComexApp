@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import service.InicioSesionService;
+import service.UsuariosService;
 
 /**
  *
@@ -11,7 +12,7 @@ import service.InicioSesionService;
  */
 public class PaginaPrincipal extends javax.swing.JFrame {
 
-       String usuario, contraseña, rol;
+       String usuario = "", contraseña = "", rol = "", nombreCompleto = "";
     /**
      * Creates new form PaginaPrincipal
      */
@@ -28,8 +29,9 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         
         rol = usuariosServicio.obtenerRolUsuario(usuario, contraseña);
         visibilidadAdministrador();
-        JOptionPane.showMessageDialog(null, usuario + contraseña);
-        JOptionPane.showMessageDialog(null, rol);
+        
+        nombreCompleto = usuariosService.obtenerNombreCompleto(usuario);
+        jMenuInfo.setText(nombreCompleto + " - " + usuario);
         
         setTitle("Página principal - " + usuario + " - sistema ComexApp");
     }
@@ -42,7 +44,8 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
     InicioSesionService usuariosServicio = new InicioSesionService();
     InicioSesion inicioSesion = new InicioSesion();
-    
+    UsuariosService usuariosService = new UsuariosService();
+   
     
     public void visibilidadAdministrador(){
         if(rol.equals("Administrador")){
@@ -79,6 +82,10 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jMenuItemInformacion = new javax.swing.JMenuItem();
         jMenuItemModificar = new javax.swing.JMenuItem();
         jMenuItemCambioContraseña = new javax.swing.JMenuItem();
+        jMenuItemRecupero = new javax.swing.JMenuItem();
+        jMenuItemAgendar = new javax.swing.JMenuItem();
+        jMenuItemNotas = new javax.swing.JMenuItem();
+        jMenuItemCalendario = new javax.swing.JMenuItem();
         jMenuPreferencias = new javax.swing.JMenu();
         jMenuItemFondo = new javax.swing.JMenuItem();
         jMenuItemColores = new javax.swing.JMenuItem();
@@ -86,9 +93,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jMenuItemDatosUsuarios = new javax.swing.JMenuItem();
         jMenuItemControl = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuUsuarios = new javax.swing.JMenu();
-        jMenuItemModificarDatosUs = new javax.swing.JMenuItem();
-        jMenuItemRecupero = new javax.swing.JMenuItem();
 
         jPopupMenu1.setPopupSize(new java.awt.Dimension(200, 200));
 
@@ -110,6 +114,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jButtonImportadores.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonImportadores.setForeground(new java.awt.Color(0, 0, 153));
         jButtonImportadores.setText("Importadores");
+        jButtonImportadores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonImportadoresActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButtonImportadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 210, 50));
 
         jButtonExportadores.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -204,6 +213,42 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         });
         jMenuInfo.add(jMenuItemCambioContraseña);
 
+        jMenuItemRecupero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemRecupero.setText("Opciones de recupero de cuenta");
+        jMenuItemRecupero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRecuperoActionPerformed(evt);
+            }
+        });
+        jMenuInfo.add(jMenuItemRecupero);
+
+        jMenuItemAgendar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemAgendar.setText("Agendar contactos personales");
+        jMenuItemAgendar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAgendarActionPerformed(evt);
+            }
+        });
+        jMenuInfo.add(jMenuItemAgendar);
+
+        jMenuItemNotas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemNotas.setText("Tomar notas");
+        jMenuItemNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemNotasActionPerformed(evt);
+            }
+        });
+        jMenuInfo.add(jMenuItemNotas);
+
+        jMenuItemCalendario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemCalendario.setText("Calendario");
+        jMenuItemCalendario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCalendarioActionPerformed(evt);
+            }
+        });
+        jMenuInfo.add(jMenuItemCalendario);
+
         jMenuBar1.add(jMenuInfo);
 
         jMenuPreferencias.setText("Preferencias");
@@ -251,29 +296,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuAdministrar);
 
-        jMenuUsuarios.setText("Información de usuarios");
-        jMenuUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        jMenuItemModificarDatosUs.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItemModificarDatosUs.setText("Modificar datos de usuarios");
-        jMenuItemModificarDatosUs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemModificarDatosUsActionPerformed(evt);
-            }
-        });
-        jMenuUsuarios.add(jMenuItemModificarDatosUs);
-
-        jMenuItemRecupero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItemRecupero.setText("Recupero de cuentas");
-        jMenuItemRecupero.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemRecuperoActionPerformed(evt);
-            }
-        });
-        jMenuUsuarios.add(jMenuItemRecupero);
-
-        jMenuBar1.add(jMenuUsuarios);
-
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -302,17 +324,9 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonCerrarSesionActionPerformed
 
-    private void jMenuItemModificarDatosUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemModificarDatosUsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemModificarDatosUsActionPerformed
-
     private void jMenuItemColoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemColoresActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemColoresActionPerformed
-
-    private void jMenuItemRecuperoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRecuperoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemRecuperoActionPerformed
 
     private void jMenuItemDatosUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDatosUsuariosActionPerformed
        
@@ -321,6 +335,30 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_jMenuItemDatosUsuariosActionPerformed
+
+    private void jMenuItemAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAgendarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemAgendarActionPerformed
+
+    private void jMenuItemNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNotasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemNotasActionPerformed
+
+    private void jMenuItemRecuperoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRecuperoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemRecuperoActionPerformed
+
+    private void jMenuItemCalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCalendarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemCalendarioActionPerformed
+
+    private void jButtonImportadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImportadoresActionPerformed
+        
+        Importadores importadores = new Importadores();
+        importadores.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButtonImportadoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -374,6 +412,8 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuInfo;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItemAgendar;
+    private javax.swing.JMenuItem jMenuItemCalendario;
     private javax.swing.JMenuItem jMenuItemCambioContraseña;
     private javax.swing.JMenuItem jMenuItemColores;
     private javax.swing.JMenuItem jMenuItemControl;
@@ -381,10 +421,9 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemFondo;
     private javax.swing.JMenuItem jMenuItemInformacion;
     private javax.swing.JMenuItem jMenuItemModificar;
-    private javax.swing.JMenuItem jMenuItemModificarDatosUs;
+    private javax.swing.JMenuItem jMenuItemNotas;
     private javax.swing.JMenuItem jMenuItemRecupero;
     private javax.swing.JMenu jMenuPreferencias;
-    private javax.swing.JMenu jMenuUsuarios;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu jPopupMenu1;
     // End of variables declaration//GEN-END:variables

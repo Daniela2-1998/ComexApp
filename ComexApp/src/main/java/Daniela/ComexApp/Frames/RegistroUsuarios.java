@@ -257,7 +257,8 @@ public class RegistroUsuarios extends javax.swing.JFrame {
            status = "Suspendido";
        }
      
-       recepcion = inicioSesionService.agregarUsuario(id, usuario, contraseña, nombre, apellido, rol, mail, telefono, status).toString();
+       recepcion = inicioSesionService.agregarUsuario(id, usuario, contraseña, 
+               nombre, apellido, rol, mail, telefono, status).toString();
       
        if(!recepcion.isEmpty()){
            JOptionPane.showMessageDialog(null, "Se creó correctamente el usuario de " + usuario);

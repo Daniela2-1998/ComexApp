@@ -50,7 +50,11 @@ public class UsuariosService implements UsuariosImpl{
     
     Boolean eliminacionAprobada;
     
-
+    String nombreCompleto;
+    
+    //                              METODOS   
+    
+    // métodos modificar todos los datos
     public void modificarTodosLosDatosDeUsuarios(int idMod, String usuario, String usuarioMod, 
             String contraseñaMod, String nombreMod, String apellidoMod, 
             String rolMod, String mailMod, String telefonoMod, String statusMod){
@@ -91,6 +95,7 @@ public class UsuariosService implements UsuariosImpl{
      }
     }
 
+    // métodos modificar todos los datos (menú rápido de administracíón)
      public void modificarAlgunosDatosDeUsuarios(String usuario, String nombreMod, 
              String apellidoMod, String mailMod, String telefonoMod){
         
@@ -125,8 +130,33 @@ public class UsuariosService implements UsuariosImpl{
                  + "modificar datos" + e);
      }
     }
+     
+          
+    public String obtenerNombreCompleto(String usuario){
+        
+        String sql = "select nombre, apellido from usuarios where usuario = '" + usuario + "'";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                String nombre = rs.getString("nombre") ;
+                String apellido = rs.getString("apellido"); 
+                nombreCompleto = nombre + " " + apellido;
+            }
+           
+        }catch(SQLException e){
+            System.err.println("No es posible recuperar nombre y apellido " + e);
+            JOptionPane.showMessageDialog(null, "No es posible obtener nombre completo del usuario ");
+        }
+        return nombreCompleto;
+    }
     
     
+    
+    // método obtención datos del usuario
     public void obtenerDatosDelUsuario(JTextField textUsuarioBuscado, 
             JTextField textID, JTextField textUsuario, JTextField textContraseña, 
             JTextField textNombre, JTextField textApellido, JTextField textMail, 
@@ -167,7 +197,7 @@ public class UsuariosService implements UsuariosImpl{
         }
     }
 
-
+    // método eliminar usuario
     public boolean eliminarUsuario(String usuario, int id) {
         
        String sql = "delete from usuarios where usuario = '" + usuario + "' "
