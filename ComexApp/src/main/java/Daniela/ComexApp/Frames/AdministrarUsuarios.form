@@ -283,14 +283,13 @@
                                   <Component id="cmbStatus" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                                   <Component id="jButtonBuscarStatus" alignment="3" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jButtonEliminar2" min="-2" pref="32" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

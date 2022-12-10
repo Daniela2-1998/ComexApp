@@ -213,7 +213,7 @@ public class RegistroImportadores extends javax.swing.JFrame {
         textProductos.setRows(5);
         jScrollPane1.setViewportView(textProductos);
 
-        jPanelCampos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, 300, 170));
+        jPanelCampos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, 340, 170));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/contenedor.png"))); // NOI18N
         jPanelCampos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 320, 210, 160));
@@ -298,6 +298,8 @@ public class RegistroImportadores extends javax.swing.JFrame {
 
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
 
+       Importadores importadores = new Importadores();
+       importadores.setVisible(true);
        this.dispose();
 
     }//GEN-LAST:event_jButtonVolverActionPerformed
@@ -339,8 +341,8 @@ public class RegistroImportadores extends javax.swing.JFrame {
 
     private void jButtonInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInfoActionPerformed
 
-        InformacionID informacionID = new InformacionID();
-        informacionID.setVisible(true);
+        InformacionIDImportadores informacionIDImportadores = new InformacionIDImportadores();
+        informacionIDImportadores.setVisible(true);
 
     }//GEN-LAST:event_jButtonInfoActionPerformed
 

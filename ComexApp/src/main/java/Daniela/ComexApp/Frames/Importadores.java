@@ -50,7 +50,7 @@ public class Importadores extends javax.swing.JFrame {
         jButtonRegistro = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanelLista = new javax.swing.JPanel();
-        jButtonLista = new javax.swing.JButton();
+        jButtonListaImportadores = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jPanelAgenda = new javax.swing.JPanel();
         jButtonAgenda = new javax.swing.JButton();
@@ -60,9 +60,9 @@ public class Importadores extends javax.swing.JFrame {
         jPanelSesion = new javax.swing.JPanel();
         jLabelBienvenida = new javax.swing.JLabel();
         jPanelPedidos = new javax.swing.JPanel();
-        jButtonLista1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jButtonListaEmpresas = new javax.swing.JButton();
         jLabelWallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -111,8 +111,13 @@ public class Importadores extends javax.swing.JFrame {
         org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder2 = new org.jdesktop.swingx.border.DropShadowBorder();
         jPanelLista.setBorder(dropShadowBorder2);
 
-        jButtonLista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lista.png"))); // NOI18N
-        jButtonLista.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonListaImportadores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lista.png"))); // NOI18N
+        jButtonListaImportadores.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonListaImportadores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonListaImportadoresActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 153));
@@ -126,14 +131,14 @@ public class Importadores extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonLista, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonListaImportadores, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanelListaLayout.setVerticalGroup(
             jPanelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelListaLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jButtonLista)
+                .addComponent(jButtonListaImportadores)
                 .addGap(27, 27, 27)
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -242,10 +247,6 @@ public class Importadores extends javax.swing.JFrame {
         jPanelPedidos.setBorder(dropShadowBorder6);
         jPanelPedidos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButtonLista1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/import2.png"))); // NOI18N
-        jButtonLista1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanelPedidos.add(jButtonLista1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 24, 141, 110));
-
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 153));
         jLabel4.setText("Lista de empresas");
@@ -255,6 +256,15 @@ public class Importadores extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 153));
         jLabel5.setText("y productos pedidos");
         jPanelPedidos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 158, -1));
+
+        jButtonListaEmpresas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/import2.png"))); // NOI18N
+        jButtonListaEmpresas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonListaEmpresas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonListaEmpresasActionPerformed(evt);
+            }
+        });
+        jPanelPedidos.add(jButtonListaEmpresas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 140, 100));
 
         getContentPane().add(jPanelPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, 200, 200));
 
@@ -279,6 +289,22 @@ public class Importadores extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_jButtonRegistroActionPerformed
+
+    private void jButtonListaImportadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListaImportadoresActionPerformed
+        
+        ListaImportadores listaImportadores = new ListaImportadores();
+        listaImportadores.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButtonListaImportadoresActionPerformed
+
+    private void jButtonListaEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListaEmpresasActionPerformed
+
+        ListaEmpresasProductos listaEmpresasProductos = new ListaEmpresasProductos();
+        listaEmpresasProductos.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButtonListaEmpresasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -317,8 +343,8 @@ public class Importadores extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgenda;
-    private javax.swing.JButton jButtonLista;
-    private javax.swing.JButton jButtonLista1;
+    private javax.swing.JButton jButtonListaEmpresas;
+    private javax.swing.JButton jButtonListaImportadores;
     private javax.swing.JButton jButtonRegistro;
     private javax.swing.JButton jButtonVolverAtras;
     private javax.swing.JLabel jLabel1;

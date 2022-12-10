@@ -16,12 +16,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Daniela
  */
-public class InformacionID extends javax.swing.JFrame {
+public class InformacionIDImportadores extends javax.swing.JFrame {
 
     /**
      * Creates new form InformacionID
      */
-    public InformacionID() {
+    public InformacionIDImportadores() {
         initComponents();
         
         setSize(300, 300);
@@ -29,25 +29,27 @@ public class InformacionID extends javax.swing.JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         
-        setTitle("ID´s inscriptos - sistema ComexApp");
+        setTitle("ID´s de importadores inscriptos - sistema ComexApp");
+         
         
         cargarTablaIDs();
     }
-
+    
         // icono
     public Image getLogo(){
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/loguito1.png"));
         return retValue;   
     }
+    
     // conexión
     Conexion cn = new Conexion();
     Connection conec;
     PreparedStatement pst;
     ResultSet rs;
-    
-      public void cargarTablaIDs(){
 
-        String sql = "select id_usuarios from usuarios";
+    public void cargarTablaIDs(){
+    
+        String sql = "select id_importador from importadores";
           
         DefaultTableModel modelo = new DefaultTableModel();
         
@@ -74,6 +76,9 @@ public class InformacionID extends javax.swing.JFrame {
             System.err.println("Error al cargar tabla de IDs " + e);
         }
     }
+  
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -146,20 +151,21 @@ public class InformacionID extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InformacionID.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformacionIDImportadores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InformacionID.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformacionIDImportadores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InformacionID.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformacionIDImportadores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InformacionID.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformacionIDImportadores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InformacionID().setVisible(true);
+                new InformacionIDImportadores().setVisible(true);
             }
         });
     }
