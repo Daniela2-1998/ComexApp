@@ -726,10 +726,10 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
                 statusBuscado = "Activo";
             break;
             case 2:
-                statusBuscado = "Activo";
+                statusBuscado = "Inactivo";
             break;
             case 3:
-                statusBuscado = "Activo";
+                statusBuscado = "Suspendido";
             break;
         }
         

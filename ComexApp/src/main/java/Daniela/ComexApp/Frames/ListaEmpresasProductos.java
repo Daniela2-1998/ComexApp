@@ -61,14 +61,13 @@ public class ListaEmpresasProductos extends javax.swing.JFrame {
             jTableLista = new JTable(modelo);
             jScrollPane1.setViewportView(jTableLista);
             
-            modelo.addColumn("ID");
             modelo.addColumn("CUIT");
             modelo.addColumn("Empresa");
             modelo.addColumn("Productos pedidos");
             
             while(rs.next()){
-                Object[] fila = new Object[4];
-                for(int i = 0; i < 4; i++){
+                Object[] fila = new Object[3];
+                for(int i = 0; i < 3; i++){
                     fila[i] = rs.getObject(i + 1);
                 }
                modelo.addRow(fila);
@@ -84,7 +83,7 @@ public class ListaEmpresasProductos extends javax.swing.JFrame {
     //  String sql = "select id_importador, cuit, empleado, empresa, mail, "
              //   + "numero_contacto, pais, productos_pedidos, status from importadores";
      public void mostrarTodosLosDatos(){
-        String sql = "select id_importador, cuit, empresa, productos_pedidos from importadores";
+        String sql = "select cuit, empresa, productos_pedidos from importadores";
         cargarTablaUsuarios(sql);
     }
     
@@ -101,10 +100,9 @@ public class ListaEmpresasProductos extends javax.swing.JFrame {
                 int filaSeleccionada = tablaLista.rowAtPoint(point);
 
                 if(Mouse_evt.getClickCount() == 1){
-                  textID.setText(jTableLista.getValueAt(jTableLista.getSelectedRow(), 0).toString()); 
-                  textCUIT.setText(jTableLista.getValueAt(jTableLista.getSelectedRow(), 1).toString());
-                  textEmpresa.setText(jTableLista.getValueAt(jTableLista.getSelectedRow(), 2).toString());
-                  textProductos.setText(jTableLista.getValueAt(jTableLista.getSelectedRow(), 3).toString());
+                  textCUIT.setText(jTableLista.getValueAt(jTableLista.getSelectedRow(), 0).toString());
+                  textEmpresa.setText(jTableLista.getValueAt(jTableLista.getSelectedRow(), 1).toString());
+                  textProductos.setText(jTableLista.getValueAt(jTableLista.getSelectedRow(), 2).toString());
                 }
             }
         });
@@ -130,8 +128,6 @@ public class ListaEmpresasProductos extends javax.swing.JFrame {
         textEmpresa = new javax.swing.JTextField();
         jLabelCuit = new javax.swing.JLabel();
         textCUIT = new javax.swing.JTextField();
-        jLabelID = new javax.swing.JLabel();
-        textID = new javax.swing.JTextField();
         jLabelProductos = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         textProductos = new javax.swing.JTextArea();
@@ -196,16 +192,6 @@ public class ListaEmpresasProductos extends javax.swing.JFrame {
         textCUIT.setForeground(new java.awt.Color(0, 0, 153));
         textCUIT.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelTabla.add(textCUIT, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 80, 208, -1));
-
-        jLabelID.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabelID.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelID.setText("ID:");
-        jPanelTabla.add(jLabelID, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 340, -1, -1));
-
-        textID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textID.setForeground(new java.awt.Color(0, 0, 153));
-        textID.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanelTabla.add(textID, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 370, 100, -1));
 
         jLabelProductos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelProductos.setForeground(new java.awt.Color(255, 255, 255));
@@ -304,7 +290,6 @@ public class ListaEmpresasProductos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonVolver;
     private javax.swing.JLabel jLabelCuit;
     private javax.swing.JLabel jLabelEmpresa;
-    private javax.swing.JLabel jLabelID;
     private javax.swing.JLabel jLabelProductos;
     private javax.swing.JLabel jLabelSubt;
     private javax.swing.JLabel jLabelTitulo;
@@ -317,7 +302,6 @@ public class ListaEmpresasProductos extends javax.swing.JFrame {
     private javax.swing.JTable jTableLista;
     private javax.swing.JTextField textCUIT;
     private javax.swing.JTextField textEmpresa;
-    private javax.swing.JTextField textID;
     private javax.swing.JTextArea textProductos;
     // End of variables declaration//GEN-END:variables
 }

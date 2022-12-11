@@ -191,6 +191,7 @@ public class RegistroImportadores extends javax.swing.JFrame {
         jLabelStatus.setText("Status;");
         jPanelCampos.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 140, -1, -1));
 
+        cmbStatus.setForeground(new java.awt.Color(0, 0, 153));
         cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo", "Suspendido" }));
         cmbStatus.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         cmbStatus.addActionListener(new java.awt.event.ActionListener() {
