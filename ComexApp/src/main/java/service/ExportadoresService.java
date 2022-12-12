@@ -185,7 +185,7 @@ public class ExportadoresService {
         
     }
      
-     public boolean eliminarImportador(String empleado, int id){
+     public boolean eliminarExportador(String empleado, int id){
        
         String sql = "delete from exportadores where empleado = '" + empleado + "' "
                + "and id_exportador = '" + id + "'";

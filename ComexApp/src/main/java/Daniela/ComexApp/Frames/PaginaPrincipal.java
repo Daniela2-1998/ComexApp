@@ -19,7 +19,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     public PaginaPrincipal() {
         initComponents();
         
-        setSize(1050, 800);
+        setSize(1050, 850);
         setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -139,7 +139,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jButtonOperaciones.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonOperaciones.setForeground(new java.awt.Color(0, 0, 153));
         jButtonOperaciones.setText("Operaciones");
-        jPanel3.add(jButtonOperaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 210, 50));
+        jPanel3.add(jButtonOperaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 640, 210, 50));
 
         jButtonVentaLocal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonVentaLocal.setForeground(new java.awt.Color(0, 0, 153));
@@ -153,8 +153,8 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
         jButtonUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonUsuarios.setForeground(new java.awt.Color(0, 0, 153));
-        jButtonUsuarios.setText("Usuarios");
-        jPanel3.add(jButtonUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 640, 210, 50));
+        jButtonUsuarios.setText("Aereo");
+        jPanel3.add(jButtonUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 210, 50));
 
         jButtonCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonCerrarSesion.setForeground(new java.awt.Color(0, 0, 153));

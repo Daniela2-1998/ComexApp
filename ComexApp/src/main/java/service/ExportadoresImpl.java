@@ -23,6 +23,6 @@ public interface ExportadoresImpl {
             JTextField textEmpresa, JTextField textMail, JTextField textNumero, 
             JTextField textPais, JTextArea textProductos, JComboBox cmbStatus);
       
-      public boolean eliminarImportador(String empleado, int id);
+      public boolean eliminarExportador(String empleado, int id);
      
 }
