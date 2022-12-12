@@ -124,6 +124,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jButtonExportadores.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonExportadores.setForeground(new java.awt.Color(0, 0, 153));
         jButtonExportadores.setText("Exportadores");
+        jButtonExportadores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExportadoresActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButtonExportadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 210, 50));
 
         jButtonIDespachantes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -359,6 +364,14 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_jButtonImportadoresActionPerformed
+
+    private void jButtonExportadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportadoresActionPerformed
+       
+        Exportadores exportadores = new Exportadores();
+        exportadores.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButtonExportadoresActionPerformed
 
     /**
      * @param args the command line arguments
