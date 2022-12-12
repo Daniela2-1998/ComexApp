@@ -15,7 +15,7 @@ import javax.swing.JTextField;
  *
  * @author Daniela
  */
-public class ImportadoresService implements ImportadoresImpl{
+public class ExportadoresService {
     
     // fields
     JTextField textEmpresa = new JTextField();
@@ -35,7 +35,7 @@ public class ImportadoresService implements ImportadoresImpl{
     
     Boolean recepcionFuncion, modificacionEstado, eliminacionAprobada;
     
-    public boolean registroDeImportador(int ID, String cuit, String empleado, 
+    public boolean registroDeExportador(int ID, String cuit, String empleado, 
             String empresa, String mail, String numeroContacto, String pais,
             String productosPedidos, String status){
         
@@ -67,7 +67,7 @@ public class ImportadoresService implements ImportadoresImpl{
            avanzar++;
        }
         
-        String sql = "insert into importadores values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into exportadores values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         if(avanzar == 0){
             try{
@@ -87,13 +87,13 @@ public class ImportadoresService implements ImportadoresImpl{
                 pst.executeUpdate();
                 conec.close();
                 
-                JOptionPane.showMessageDialog(null, "Se añadió al importador " 
+                JOptionPane.showMessageDialog(null, "Se añadió al exportador " 
                         + empleado + " de la empresa " + empresa);
                 return recepcion = true;
                 
             }catch(SQLException e){
-                JOptionPane.showMessageDialog(null, "No se puede crear un importador");
-                System.err.println("No es posible crear importadores" + e);
+                JOptionPane.showMessageDialog(null, "No se puede crear un exportador");
+                System.err.println("No es posible crear exportadores" + e);
                 return recepcion = false;
             }
             
@@ -101,13 +101,13 @@ public class ImportadoresService implements ImportadoresImpl{
         return recepcionFuncion;
     }
     
-    public void modificarDatosImportador(String cuitMod, String empleado,
+     public void modificarDatosExportador(String cuitMod, String empleado,
             String empleadoMod, String empresaMod, String mailMod, String numeroContactoMod,
             String paisMod, String productosPedidosMod, String statusMod){
         
         int alternativaMensaje;
 
-        String sql = "update importadores set cuit=?, empleado=?, empresa=?, "
+        String sql = "update exportadores set cuit=?, empleado=?, empresa=?, "
                 + "mail=?, numero_contacto=?, pais=?, productos_pedidos=?, status=? where "
                 + "empleado = '" + empleado + "'";
 
@@ -143,14 +143,15 @@ public class ImportadoresService implements ImportadoresImpl{
         }
     }
     
-    public void obtenerDatosDelImportador(JTextField textImportadorBuscado, 
+     
+     public void obtenerDatosDelExportador(JTextField textExportadorBuscado, 
             JTextField textID, JTextField textCUIT, JTextField textEmpleado, 
             JTextField textEmpresa, JTextField textMail, JTextField textNumero, 
             JTextField textPais, JTextArea textProductos, JComboBox cmbStatus){
         
-         String importadorABuscar = textImportadorBuscado.getText().trim();
+         String exportadorABuscar = textExportadorBuscado.getText().trim();
         
-        String sql = "select * from importadores where empleado = '" + importadorABuscar + "'";
+        String sql = "select * from exportadores where empleado = '" + exportadorABuscar + "'";
         
         try{
             conec = cn.Conexion();
@@ -159,7 +160,7 @@ public class ImportadoresService implements ImportadoresImpl{
             
             if(rs.next()){
 
-                textID.setText(rs.getString("id_importador"));
+                textID.setText(rs.getString("id_exportador"));
                 textCUIT.setText(rs.getString("cuit"));
                 textEmpleado.setText(rs.getString("empleado"));
                 textEmpresa.setText(rs.getString("empresa"));
@@ -170,24 +171,24 @@ public class ImportadoresService implements ImportadoresImpl{
                 cmbStatus.setSelectedItem("status");
             } else {
                 JOptionPane.showMessageDialog(null, "No es posible conseguir "
-                        + "los datos del importador solicitado");
-                System.err.println("No es posible conseguir los datos del importador "
+                        + "los datos del exportador solicitado");
+                System.err.println("No es posible conseguir los datos del exportador "
                         + "solicitado");
             }
             conec.close();
             
         }catch(SQLException e){
-            System.err.println("Error al obtener los datos del importador solicitado" + e);
+            System.err.println("Error al obtener los datos del exportador solicitado" + e);
             JOptionPane.showMessageDialog(null, "No se pueden obtener los datos del "
-                    + "importador solicitado");
+                    + "exportador solicitado");
         }
         
     }
-    
-    public boolean eliminarImportador(String empleado, int id){
+     
+     public boolean eliminarImportador(String empleado, int id){
        
-        String sql = "delete from importadores where empleado = '" + empleado + "' "
-               + "and id_importador = '" + id + "'";
+        String sql = "delete from exportadores where empleado = '" + empleado + "' "
+               + "and id_exportador = '" + id + "'";
        
        int alternativaMensaje;
        Boolean aprobado;
@@ -222,6 +223,5 @@ public class ImportadoresService implements ImportadoresImpl{
     }
 
    
-        
-   
+    
 }

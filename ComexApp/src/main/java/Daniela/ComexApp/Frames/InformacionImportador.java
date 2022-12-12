@@ -27,7 +27,7 @@ public class InformacionImportador extends javax.swing.JFrame {
     public InformacionImportador() {
         initComponents();
         
-        setSize(850, 750);
+        setSize(870, 750);
         setResizable(false);
         setLayout(null);
         setLocationRelativeTo(null);
@@ -96,7 +96,7 @@ public class InformacionImportador extends javax.swing.JFrame {
         jLabelSubt = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabelCUIT = new javax.swing.JLabel();
-        textCUIT = new javax.swing.JPasswordField();
+        textCUIT = new javax.swing.JTextField();
         jLabelProductos = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         textProductos = new javax.swing.JTextArea();
@@ -251,12 +251,12 @@ public class InformacionImportador extends javax.swing.JFrame {
         jLabelPais.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelPais.setForeground(new java.awt.Color(255, 255, 255));
         jLabelPais.setText("Pais:");
-        jPanel1.add(jLabelPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 318, -1, -1));
+        jPanel1.add(jLabelPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, -1));
 
         textPais.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textPais.setForeground(new java.awt.Color(0, 0, 153));
         textPais.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(textPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 344, 163, -1));
+        jPanel1.add(textPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 163, -1));
 
         textID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textID.setForeground(new java.awt.Color(0, 0, 153));
@@ -295,11 +295,11 @@ public class InformacionImportador extends javax.swing.JFrame {
         jLabelSubt.setText("Datos completos:");
         jPanel1.add(jLabelSubt, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 18, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/empleados3.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/import.png"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(150, 150));
         jLabel1.setMinimumSize(new java.awt.Dimension(150, 150));
         jLabel1.setPreferredSize(new java.awt.Dimension(150, 150));
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 423, 341, 187));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 420, 260, 187));
 
         jLabelCUIT.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelCUIT.setForeground(new java.awt.Color(255, 255, 255));
@@ -308,7 +308,8 @@ public class InformacionImportador extends javax.swing.JFrame {
 
         textCUIT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textCUIT.setForeground(new java.awt.Color(0, 0, 153));
-        jPanel1.add(textCUIT, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 408, 163, 28));
+        textCUIT.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(textCUIT, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 163, -1));
 
         jLabelProductos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelProductos.setForeground(new java.awt.Color(255, 255, 255));
@@ -325,7 +326,7 @@ public class InformacionImportador extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 310, 170));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 590, 660));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 610, 660));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -353,7 +354,7 @@ public class InformacionImportador extends javax.swing.JFrame {
             cuitMod = textCUIT.getText().trim();
             empleadoMod = textEmpleado.getText().trim();
             empresaMod = textEmpresa.getText().trim();
-            mailMod = textNumero.getText().trim();
+            mailMod = textMail.getText().trim();
             numeroContactoMod = textNumero.getText().trim();
             paisMod = textPais.getText().trim();
             productosPedidosMod = textProductos.getText().trim();
@@ -514,7 +515,7 @@ public class InformacionImportador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelArriba;
     private javax.swing.JPanel jPanelMenu;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JPasswordField textCUIT;
+    private javax.swing.JTextField textCUIT;
     private javax.swing.JTextField textEmpleado;
     private javax.swing.JTextField textEmpresa;
     private javax.swing.JTextField textID;

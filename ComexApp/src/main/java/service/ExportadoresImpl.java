@@ -8,20 +8,21 @@ import javax.swing.JTextField;
  *
  * @author Daniela
  */
-public interface ImportadoresImpl {
+public interface ExportadoresImpl {
     
-    public boolean registroDeImportador(int ID, String cuit, String empleado, 
+     public boolean registroDeExportador(int ID, String cuit, String empleado, 
             String empresa, String mail, String numeroContacto, String pais,
             String productosPedidos, String status);
-    
-    public void modificarDatosImportador(String cuitMod, String empleado,
+     
+     public void modificarDatosExportador(String cuitMod, String empleado,
             String empleadoMod, String empresaMod, String mailMod, String numeroContactoMod,
             String paisMod, String productosPedidosMod, String statusMod);
-    
-    public void obtenerDatosDelImportador(JTextField textImportadorBuscado, 
+     
+      public void obtenerDatosDelExportador(JTextField textExportadorBuscado, 
             JTextField textID, JTextField textCUIT, JTextField textEmpleado, 
             JTextField textEmpresa, JTextField textMail, JTextField textNumero, 
             JTextField textPais, JTextArea textProductos, JComboBox cmbStatus);
-    
-    public boolean eliminarImportador(String empleado, int id);
+      
+      public boolean eliminarImportador(String empleado, int id);
+     
 }
