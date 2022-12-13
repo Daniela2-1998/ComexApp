@@ -306,8 +306,8 @@ public class RegistroExportadores extends javax.swing.JFrame {
 
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
 
-       Importadores importadores = new Importadores();
-       importadores.setVisible(true);
+       Exportadores exportadores = new Exportadores();
+       exportadores.setVisible(true);
        this.dispose();
 
     }//GEN-LAST:event_jButtonVolverActionPerformed

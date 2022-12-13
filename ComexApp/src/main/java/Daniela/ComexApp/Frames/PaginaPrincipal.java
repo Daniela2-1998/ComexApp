@@ -134,6 +134,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jButtonIDespachantes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonIDespachantes.setForeground(new java.awt.Color(0, 0, 153));
         jButtonIDespachantes.setText("Despachantes");
+        jButtonIDespachantes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIDespachantesActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButtonIDespachantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 210, 50));
 
         jButtonMaritimas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -372,6 +377,14 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_jButtonExportadoresActionPerformed
+
+    private void jButtonIDespachantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIDespachantesActionPerformed
+      
+        Despachantes despachantes = new Despachantes();
+        despachantes.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButtonIDespachantesActionPerformed
 
     /**
      * @param args the command line arguments
