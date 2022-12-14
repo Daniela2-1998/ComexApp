@@ -31,7 +31,7 @@ public class InicioSesion extends javax.swing.JFrame {
     public InicioSesion() {
         initComponents();
         
-        setSize(525, 625);
+        setSize(525, 650);
         setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -44,6 +44,8 @@ public class InicioSesion extends javax.swing.JFrame {
                 jLabelLogo.getWidth(), Image.SCALE_DEFAULT));
         jLabelLogo.setIcon(iconoLogo);
         this.repaint();
+        
+        jXBusyLabelCargaInicio.setVisible(false);
     }
 
     // icono
@@ -63,7 +65,9 @@ public class InicioSesion extends javax.swing.JFrame {
         validez = inicioSesionService.inicioDeSesion(textUsuario, textContraseña);
        
             if(validez.equals(true)){
+                jXBusyLabelCargaInicio.setVisible(true);
                 JOptionPane.showMessageDialog(null, "Ingresando al sistema");
+                
                 LimpiarCamposCorrectos();
                 PaginaPrincipal principal = new PaginaPrincipal();
                 principal.setVisible(true);
@@ -119,10 +123,19 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabelMensaje = new javax.swing.JLabel();
         jButtonCrearCuenta = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
+        jXBusyLabelCargaInicio = new org.jdesktop.swingx.JXBusyLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
         setIconImages(getIconImages());
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelBlanco.setBackground(new java.awt.Color(255, 255, 255));
@@ -217,6 +230,11 @@ public class InicioSesion extends javax.swing.JFrame {
         });
         jPanelAzul.add(jButtonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, 140, 25));
 
+        jXBusyLabelCargaInicio.setForeground(new java.awt.Color(0, 153, 0));
+        jXBusyLabelCargaInicio.setText("Ingresando al sistema");
+        jXBusyLabelCargaInicio.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jPanelAzul.add(jXBusyLabelCargaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 200, -1));
+
         getContentPane().add(jPanelAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 313, 550, 340));
 
         pack();
@@ -252,6 +270,16 @@ public class InicioSesion extends javax.swing.JFrame {
         botones.botonSalirSistema();
         
     }//GEN-LAST:event_jButtonSalirActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+       
+        botones.botonSalirSistema();
+        
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -302,6 +330,7 @@ public class InicioSesion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JPanel jPanelAzul;
     private javax.swing.JPanel jPanelBlanco;
+    private org.jdesktop.swingx.JXBusyLabel jXBusyLabelCargaInicio;
     private javax.swing.JPasswordField textContraseña;
     private javax.swing.JTextField textUsuario;
     // End of variables declaration//GEN-END:variables

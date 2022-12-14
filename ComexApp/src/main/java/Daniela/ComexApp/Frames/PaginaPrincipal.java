@@ -71,9 +71,9 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jButtonIDespachantes = new javax.swing.JButton();
         jButtonMaritimas = new javax.swing.JButton();
         jButtonOperaciones = new javax.swing.JButton();
-        jButtonVentaLocal = new javax.swing.JButton();
+        jButtonStock = new javax.swing.JButton();
         jButtonMarketing = new javax.swing.JButton();
-        jButtonUsuarios = new javax.swing.JButton();
+        jButtonAereo = new javax.swing.JButton();
         jButtonCerrarSesion = new javax.swing.JButton();
         jLabelTitulo1 = new javax.swing.JLabel();
         jLabelWallpaper = new javax.swing.JLabel();
@@ -151,20 +151,20 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jButtonOperaciones.setText("Operaciones");
         jPanel3.add(jButtonOperaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 640, 210, 50));
 
-        jButtonVentaLocal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonVentaLocal.setForeground(new java.awt.Color(0, 0, 153));
-        jButtonVentaLocal.setText("Venta local");
-        jPanel3.add(jButtonVentaLocal, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 500, 210, 50));
+        jButtonStock.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonStock.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonStock.setText("Stock/producción");
+        jPanel3.add(jButtonStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 500, 210, 50));
 
         jButtonMarketing.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonMarketing.setForeground(new java.awt.Color(0, 0, 153));
         jButtonMarketing.setText("Marketing");
         jPanel3.add(jButtonMarketing, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 570, 210, 50));
 
-        jButtonUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonUsuarios.setForeground(new java.awt.Color(0, 0, 153));
-        jButtonUsuarios.setText("Aereo");
-        jPanel3.add(jButtonUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 210, 50));
+        jButtonAereo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonAereo.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonAereo.setText("Aereo");
+        jPanel3.add(jButtonAereo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 210, 50));
 
         jButtonCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonCerrarSesion.setForeground(new java.awt.Color(0, 0, 153));
@@ -422,6 +422,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAereo;
     private javax.swing.JButton jButtonCerrarSesion;
     private javax.swing.JButton jButtonExportadores;
     private javax.swing.JButton jButtonIDespachantes;
@@ -429,8 +430,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButtonMaritimas;
     private javax.swing.JButton jButtonMarketing;
     private javax.swing.JButton jButtonOperaciones;
-    private javax.swing.JButton jButtonUsuarios;
-    private javax.swing.JButton jButtonVentaLocal;
+    private javax.swing.JButton jButtonStock;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelTitulo1;
     private javax.swing.JLabel jLabelWallpaper;

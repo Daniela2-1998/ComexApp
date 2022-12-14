@@ -18,11 +18,11 @@ public interface ExportadoresImpl {
             String empleadoMod, String empresaMod, String mailMod, String numeroContactoMod,
             String paisMod, String productosPedidosMod, String statusMod);
      
-      public void obtenerDatosDelExportador(JTextField textExportadorBuscado, 
+     public void obtenerDatosDelExportador(JTextField textExportadorBuscado, 
             JTextField textID, JTextField textCUIT, JTextField textEmpleado, 
             JTextField textEmpresa, JTextField textMail, JTextField textNumero, 
             JTextField textPais, JTextArea textProductos, JComboBox cmbStatus);
       
-      public boolean eliminarExportador(String empleado, int id);
+     public boolean eliminarExportador(String empleado, int id);
      
 }

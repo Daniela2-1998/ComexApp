@@ -1,7 +1,12 @@
 package Daniela.ComexApp.Frames;
 
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JTable;
 import service.UsuariosService;
 
 /**
@@ -10,7 +15,7 @@ import service.UsuariosService;
  */
 public class Despachantes extends javax.swing.JFrame {
  
-    public String usuario = "", nombreCompleto = "";
+    public String usuario = "", nombreCompleto = "", rol = "";
     /**
      * Creates new form Despachantes
      */
@@ -27,9 +32,19 @@ public class Despachantes extends javax.swing.JFrame {
         
         usuario = paginaPrincipal.usuario;
         nombreCompleto = usuariosService.obtenerNombreCompleto(usuario);
+        rol = paginaPrincipal.rol;
         
         setTitle("Despachantes - " + usuario + " - sistema ComexApp");
-        jLabelBienvenida.setText("Menú de importadores de " + nombreCompleto);
+        jMenuNombre.setText(usuario + " - " + rol);
+        jLabelBienvenida.setText("Menú de despachantes de " + nombreCompleto);
+        
+        
+        jPanelRegistro.setVisible(false);
+        jPanelLista.setVisible(false);
+        jPanelAgenda.setVisible(false);
+        jPanelPedidos.setVisible(false);
+        
+        alternarVistas();
     }
     
     // icono
@@ -37,6 +52,39 @@ public class Despachantes extends javax.swing.JFrame {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/loguito1.png"));
         return retValue;   
     }
+    
+    
+    
+    public void alternarVistas(){
+       
+        jRadioButtonMenuItemVistas.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent Mouse_evt){
+                
+                if(Mouse_evt.getClickCount() == 1){
+                   jMenuBar1.setVisible(false);
+                   jPanelRegistro.setVisible(true);
+                   jPanelLista.setVisible(true);
+                   jPanelAgenda.setVisible(true);
+                   jPanelPedidos.setVisible(true);
+                }
+            }    
+        });
+        
+    }
+         
+    public void aRegistro(){
+        RegistroDespachantes registroDespachantes = new RegistroDespachantes();
+        registroDespachantes.setVisible(true);
+        this.dispose();
+    }
+
+    public void aLista(){
+        ListaDespachantes listaDespachantes = new ListaDespachantes();
+        listaDespachantes.setVisible(true);
+        this.dispose();
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,18 +95,368 @@ public class Despachantes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanelSesion = new javax.swing.JPanel();
+        jLabelBienvenida = new javax.swing.JLabel();
+        jPanelOpciones = new javax.swing.JPanel();
+        jButtonVolverAtras = new javax.swing.JButton();
+        jPanelRegistro = new javax.swing.JPanel();
+        jButtonRegistro = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jPanelLista = new javax.swing.JPanel();
+        jButtonListaImportadores = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jPanelAgenda = new javax.swing.JPanel();
+        jButtonAgenda = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jPanelPedidos = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jButtonListaEmpresas = new javax.swing.JButton();
         jLabelWallpaper = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuDespachantes = new javax.swing.JMenu();
+        jMenuItemRegistro = new javax.swing.JMenuItem();
+        jMenuItemModificar = new javax.swing.JMenuItem();
+        jMenuItemEliminar = new javax.swing.JMenuItem();
+        jMenuLista = new javax.swing.JMenu();
+        jMenuItemLista = new javax.swing.JMenuItem();
+        jMenuConfiguracion = new javax.swing.JMenu();
+        jRadioButtonMenuItemVistas = new javax.swing.JRadioButtonMenuItem();
+        jMenuVacio = new javax.swing.JMenu();
+        jMenuNombre = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
         setIconImages(getIconImages());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder1 = new org.jdesktop.swingx.border.DropShadowBorder();
+        jPanelSesion.setBorder(dropShadowBorder1);
+
+        jLabelBienvenida.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelBienvenida.setForeground(new java.awt.Color(0, 0, 153));
+
+        javax.swing.GroupLayout jPanelSesionLayout = new javax.swing.GroupLayout(jPanelSesion);
+        jPanelSesion.setLayout(jPanelSesionLayout);
+        jPanelSesionLayout.setHorizontalGroup(
+            jPanelSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSesionLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabelBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+        jPanelSesionLayout.setVerticalGroup(
+            jPanelSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSesionLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabelBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanelSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 40, 380, 70));
+
+        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder2 = new org.jdesktop.swingx.border.DropShadowBorder();
+        jPanelOpciones.setBorder(dropShadowBorder2);
+
+        jButtonVolverAtras.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonVolverAtras.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonVolverAtras.setText("Volver atrás");
+        jButtonVolverAtras.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonVolverAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVolverAtrasActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelOpcionesLayout = new javax.swing.GroupLayout(jPanelOpciones);
+        jPanelOpciones.setLayout(jPanelOpcionesLayout);
+        jPanelOpcionesLayout.setHorizontalGroup(
+            jPanelOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 190, Short.MAX_VALUE)
+            .addGroup(jPanelOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelOpcionesLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
+        );
+        jPanelOpcionesLayout.setVerticalGroup(
+            jPanelOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+            .addGroup(jPanelOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelOpcionesLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
+        );
+
+        getContentPane().add(jPanelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 650, -1, 70));
+
+        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder3 = new org.jdesktop.swingx.border.DropShadowBorder();
+        jPanelRegistro.setBorder(dropShadowBorder3);
+
+        jButtonRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconoempleado.png"))); // NOI18N
+        jButtonRegistro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRegistroActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel1.setText("Registrar despachante");
+
+        javax.swing.GroupLayout jPanelRegistroLayout = new javax.swing.GroupLayout(jPanelRegistro);
+        jPanelRegistro.setLayout(jPanelRegistroLayout);
+        jPanelRegistroLayout.setHorizontalGroup(
+            jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRegistroLayout.createSequentialGroup()
+                .addGroup(jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelRegistroLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jButtonRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelRegistroLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelRegistroLayout.setVerticalGroup(
+            jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRegistroLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jButtonRegistro)
+                .addGap(27, 27, 27)
+                .addComponent(jLabel1)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanelRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 190, 200));
+
+        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder4 = new org.jdesktop.swingx.border.DropShadowBorder();
+        jPanelLista.setBorder(dropShadowBorder4);
+
+        jButtonListaImportadores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lista.png"))); // NOI18N
+        jButtonListaImportadores.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonListaImportadores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonListaImportadoresActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel2.setText("Lista de despachantes");
+
+        javax.swing.GroupLayout jPanelListaLayout = new javax.swing.GroupLayout(jPanelLista);
+        jPanelLista.setLayout(jPanelListaLayout);
+        jPanelListaLayout.setHorizontalGroup(
+            jPanelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelListaLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonListaImportadores, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+        jPanelListaLayout.setVerticalGroup(
+            jPanelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelListaLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jButtonListaImportadores)
+                .addGap(27, 27, 27)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanelLista, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, 200, 200));
+
+        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder5 = new org.jdesktop.swingx.border.DropShadowBorder();
+        jPanelAgenda.setBorder(dropShadowBorder5);
+
+        jButtonAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agenda.png"))); // NOI18N
+        jButtonAgenda.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel3.setText("Agenda personal");
+
+        javax.swing.GroupLayout jPanelAgendaLayout = new javax.swing.GroupLayout(jPanelAgenda);
+        jPanelAgenda.setLayout(jPanelAgendaLayout);
+        jPanelAgendaLayout.setHorizontalGroup(
+            jPanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAgendaLayout.createSequentialGroup()
+                .addGroup(jPanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelAgendaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelAgendaLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jButtonAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        jPanelAgendaLayout.setVerticalGroup(
+            jPanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAgendaLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jButtonAgenda)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(17, 17, 17))
+        );
+
+        getContentPane().add(jPanelAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, -1, 200));
+
+        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder6 = new org.jdesktop.swingx.border.DropShadowBorder();
+        jPanelPedidos.setBorder(dropShadowBorder6);
+        jPanelPedidos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel4.setText("Lista de empresas");
+        jPanelPedidos.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 142, 132, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel5.setText("y productos pedidos");
+        jPanelPedidos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 158, -1));
+
+        jButtonListaEmpresas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ex.png"))); // NOI18N
+        jButtonListaEmpresas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonListaEmpresas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonListaEmpresasActionPerformed(evt);
+            }
+        });
+        jPanelPedidos.add(jButtonListaEmpresas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 140, 100));
+
+        getContentPane().add(jPanelPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 190, 200, 200));
+
         jLabelWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo3.jpg"))); // NOI18N
         getContentPane().add(jLabelWallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -30, 1060, 800));
 
+        jMenuDespachantes.setText("Despachantes");
+        jMenuDespachantes.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jMenuItemRegistro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemRegistro.setText("Registrar despachante");
+        jMenuItemRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRegistroActionPerformed(evt);
+            }
+        });
+        jMenuDespachantes.add(jMenuItemRegistro);
+
+        jMenuItemModificar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemModificar.setText("Modificar despachante");
+        jMenuItemModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemModificarActionPerformed(evt);
+            }
+        });
+        jMenuDespachantes.add(jMenuItemModificar);
+
+        jMenuItemEliminar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemEliminar.setText("Eliminar despachante");
+        jMenuItemEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEliminarActionPerformed(evt);
+            }
+        });
+        jMenuDespachantes.add(jMenuItemEliminar);
+
+        jMenuBar1.add(jMenuDespachantes);
+
+        jMenuLista.setText("Lista despachantes");
+        jMenuLista.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jMenuItemLista.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemLista.setText("Ver lista");
+        jMenuItemLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemListaActionPerformed(evt);
+            }
+        });
+        jMenuLista.add(jMenuItemLista);
+
+        jMenuBar1.add(jMenuLista);
+
+        jMenuConfiguracion.setText("Configuración");
+        jMenuConfiguracion.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jRadioButtonMenuItemVistas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jRadioButtonMenuItemVistas.setSelected(true);
+        jRadioButtonMenuItemVistas.setText("Alternar vistas");
+        jMenuConfiguracion.add(jRadioButtonMenuItemVistas);
+
+        jMenuBar1.add(jMenuConfiguracion);
+
+        jMenuVacio.setBorderPainted(false);
+        jMenuVacio.setContentAreaFilled(false);
+        jMenuVacio.setEnabled(false);
+        jMenuVacio.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jMenuVacio.setMinimumSize(new java.awt.Dimension(470, 6));
+        jMenuVacio.setPreferredSize(new java.awt.Dimension(500, 6));
+        jMenuBar1.add(jMenuVacio);
+
+        jMenuNombre.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jMenuBar1.add(jMenuNombre);
+
+        setJMenuBar(jMenuBar1);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonVolverAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverAtrasActionPerformed
+
+        PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
+        paginaPrincipal.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_jButtonVolverAtrasActionPerformed
+
+    private void jButtonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistroActionPerformed
+
+        aRegistro();
+
+    }//GEN-LAST:event_jButtonRegistroActionPerformed
+
+    private void jButtonListaImportadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListaImportadoresActionPerformed
+
+        aLista();
+
+    }//GEN-LAST:event_jButtonListaImportadoresActionPerformed
+
+    private void jButtonListaEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListaEmpresasActionPerformed
+
+        ListaEmpresasDespachantes listaEmpresasDespachantes = new ListaEmpresasDespachantes();
+        listaEmpresasDespachantes.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_jButtonListaEmpresasActionPerformed
+
+    private void jMenuItemRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRegistroActionPerformed
+       
+        aRegistro();
+        
+    }//GEN-LAST:event_jMenuItemRegistroActionPerformed
+
+    private void jMenuItemModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemModificarActionPerformed
+        
+        aRegistro();
+        
+    }//GEN-LAST:event_jMenuItemModificarActionPerformed
+
+    private void jMenuItemEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEliminarActionPerformed
+        
+        aRegistro();
+        
+    }//GEN-LAST:event_jMenuItemEliminarActionPerformed
+
+    private void jMenuItemListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListaActionPerformed
+        
+         aLista();
+        
+    }//GEN-LAST:event_jMenuItemListaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -96,6 +494,34 @@ public class Despachantes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAgenda;
+    private javax.swing.JButton jButtonListaEmpresas;
+    private javax.swing.JButton jButtonListaImportadores;
+    private javax.swing.JButton jButtonRegistro;
+    private javax.swing.JButton jButtonVolverAtras;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelBienvenida;
     private javax.swing.JLabel jLabelWallpaper;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuConfiguracion;
+    private javax.swing.JMenu jMenuDespachantes;
+    private javax.swing.JMenuItem jMenuItemEliminar;
+    private javax.swing.JMenuItem jMenuItemLista;
+    private javax.swing.JMenuItem jMenuItemModificar;
+    private javax.swing.JMenuItem jMenuItemRegistro;
+    private javax.swing.JMenu jMenuLista;
+    private javax.swing.JMenu jMenuNombre;
+    private javax.swing.JMenu jMenuVacio;
+    private javax.swing.JPanel jPanelAgenda;
+    private javax.swing.JPanel jPanelLista;
+    private javax.swing.JPanel jPanelOpciones;
+    private javax.swing.JPanel jPanelPedidos;
+    private javax.swing.JPanel jPanelRegistro;
+    private javax.swing.JPanel jPanelSesion;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemVistas;
     // End of variables declaration//GEN-END:variables
 }
