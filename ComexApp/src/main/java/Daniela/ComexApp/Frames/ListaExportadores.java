@@ -52,7 +52,7 @@ public class ListaExportadores extends javax.swing.JFrame {
        
      
        
-    public void cargarTablaUsuarios(String sql){
+    public void cargarTablaExportadores(String sql){
 
         DefaultTableModel modelo = new DefaultTableModel();
       
@@ -91,7 +91,7 @@ public class ListaExportadores extends javax.swing.JFrame {
      public void mostrarTodosLosDatos(){
          String sql = "select id_exportador, empleado, empresa, mail, "
             + "numero_contacto, pais, status from exportadores";
-        cargarTablaUsuarios(sql);
+        cargarTablaExportadores(sql);
     }
     
      
@@ -318,11 +318,11 @@ public class ListaExportadores extends javax.swing.JFrame {
                 sql = "select id_exportador, empleado, empresa, mail, "
                         + "numero_contacto, pais, status from exportadores where empresa = '"
                         + busqueda + "' or empleado = '" + busqueda + "' and status = 'Activo'";
-                cargarTablaUsuarios(sql);
+                cargarTablaExportadores(sql);
             } else if (textBusqueda.equals("") && statusBuscado.equals("Activo")) {
                 sql = "select id_exportador, empleado, empresa, mail, "
                         + "numero_contacto, pais, status from exportadores where status = 'Activo'";
-                cargarTablaUsuarios(sql);
+                cargarTablaExportadores(sql);
             }
 
      
@@ -330,20 +330,20 @@ public class ListaExportadores extends javax.swing.JFrame {
                 sql = "select id_exportador, empleado, empresa, mail, "
                         + "numero_contacto, pais, status from exportadores where empresa = '"
                         + busqueda + "' or empleado = '" + busqueda + "' and status = 'Inactivo'";
-                cargarTablaUsuarios(sql);
+                cargarTablaExportadores(sql);
             } else if (textBusqueda.equals("") && statusBuscado.equals("Inactivo")) {
                 sql = "select id_exportador, empleado, empresa, mail, "
                         + "numero_contacto, pais, status from exportadores where status = 'Inactivo'";
-                cargarTablaUsuarios(sql);
+                cargarTablaExportadores(sql);
             } else if (!textBusqueda.equals("") && statusBuscado.equals("Suspendido")) {
                 sql = "select id_exportador, empleado, empresa, mail, "
                         + "numero_contacto, pais, status from exportadores where empresa = '"
                         + busqueda + "' or empleado = '" + busqueda + "' and status = 'Suspendido'";
-                cargarTablaUsuarios(sql);
+                cargarTablaExportadores(sql);
             } else if (textBusqueda.equals("") && statusBuscado.equals("Suspendido")) {
                 sql = "select id_exportador, empleado, empresa, mail, "
                         + "numero_contacto, pais, status from exportadores where status = 'Suspendido'";
-                cargarTablaUsuarios(sql);
+                cargarTablaExportadores(sql);
             }
           
         }catch(Exception e){

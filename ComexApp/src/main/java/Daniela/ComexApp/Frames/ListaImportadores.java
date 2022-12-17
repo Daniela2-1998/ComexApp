@@ -52,7 +52,7 @@ public class ListaImportadores extends javax.swing.JFrame {
        
      
        
-    public void cargarTablaUsuarios(String sql){
+    public void cargarTablaImportadores(String sql){
 
         DefaultTableModel modelo = new DefaultTableModel();
       
@@ -91,7 +91,7 @@ public class ListaImportadores extends javax.swing.JFrame {
      public void mostrarTodosLosDatos(){
          String sql = "select id_importador, empleado, empresa, mail, "
             + "numero_contacto, pais, status from importadores";
-        cargarTablaUsuarios(sql);
+        cargarTablaImportadores(sql);
     }
     
      
@@ -262,7 +262,7 @@ public class ListaImportadores extends javax.swing.JFrame {
         jLabelStatus.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabelStatus.setForeground(new java.awt.Color(0, 0, 153));
         jLabelStatus.setText("Status requerido:");
-        jPanel1.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 30, 280, 20));
+        jPanel1.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 30, 130, 20));
 
         cmbStatus.setForeground(new java.awt.Color(0, 0, 153));
         cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo", "Suspendido" }));
@@ -318,11 +318,11 @@ public class ListaImportadores extends javax.swing.JFrame {
                 sql = "select id_importador, empleado, empresa, mail, "
                         + "numero_contacto, pais, status from importadores where empresa = '"
                         + busqueda + "' or empleado = '" + busqueda + "' and status = 'Activo'";
-                cargarTablaUsuarios(sql);
+                cargarTablaImportadores(sql);
             } else if (textBusqueda.equals("") && statusBuscado.equals("Activo")) {
                 sql = "select id_importador, empleado, empresa, mail, "
                         + "numero_contacto, pais, status from importadores where status = 'Activo'";
-                cargarTablaUsuarios(sql);
+                cargarTablaImportadores(sql);
             }
 
      
@@ -330,20 +330,20 @@ public class ListaImportadores extends javax.swing.JFrame {
                 sql = "select id_importador, empleado, empresa, mail, "
                         + "numero_contacto, pais, status from importadores where empresa = '"
                         + busqueda + "' or empleado = '" + busqueda + "' and status = 'Inactivo'";
-                cargarTablaUsuarios(sql);
+                cargarTablaImportadores(sql);
             } else if (textBusqueda.equals("") && statusBuscado.equals("Inactivo")) {
                 sql = "select id_importador, empleado, empresa, mail, "
                         + "numero_contacto, pais, status from importadores where status = 'Inactivo'";
-                cargarTablaUsuarios(sql);
+                cargarTablaImportadores(sql);
             } else if (!textBusqueda.equals("") && statusBuscado.equals("Suspendido")) {
                 sql = "select id_importador, empleado, empresa, mail, "
                         + "numero_contacto, pais, status from importadores where empresa = '"
                         + busqueda + "' or empleado = '" + busqueda + "' and status = 'Suspendido'";
-                cargarTablaUsuarios(sql);
+                cargarTablaImportadores(sql);
             } else if (textBusqueda.equals("") && statusBuscado.equals("Suspendido")) {
                 sql = "select id_importador, empleado, empresa, mail, "
                         + "numero_contacto, pais, status from importadores where status = 'Suspendido'";
-                cargarTablaUsuarios(sql);
+                cargarTablaImportadores(sql);
             }
           
         }catch(Exception e){
