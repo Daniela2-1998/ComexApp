@@ -2,7 +2,10 @@ package Daniela.ComexApp.Frames;
 
 import config.Conexion;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,6 +44,7 @@ public class RegistroDespachantes extends javax.swing.JFrame {
         setTitle("Menú de despachantes - " + usuario + " - sistema ComexApp");
         
         mostrarTodosLosDatos();
+        mostrarTodosLosDatosDespachantes();
     }
     
         // icono
@@ -114,10 +118,74 @@ public class RegistroDespachantes extends javax.swing.JFrame {
      
      public void LimpiarBusqueda(){
          textBuscar.setText("");
+         textDespachanteBuscado.setText("");
          cmbStatus.setSelectedItem(0);
+         cmbStatus2.setSelectedItem(0);
      }
     
+     
+     
+     // TABLA DE DATOS DESPACHANTES
+     
+    public void cargarTablaDatos(String sql){
+
+        DefaultTableModel modelo = new DefaultTableModel();
+      
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            jTableDatos = new JTable(modelo);
+            jScrollPane3.setViewportView(jTableDatos);
+            
+            modelo.addColumn("Empleado");
+            modelo.addColumn("Empresa");
+            modelo.addColumn("Mail");
+            modelo.addColumn("Contacto");
+            modelo.addColumn("Status");
+            
+            while(rs.next()){
+                Object[] fila = new Object[5];
+                for(int i = 0; i < 5; i++){
+                    fila[i] = rs.getObject(i + 1);
+                }
+               modelo.addRow(fila);
+            }
+            
+            conec.close();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error al cargar tabla de datos de despachantes");
+            System.err.println("Error al cargar tabla de datos de despachantes " + e);
+        }
+    }
     
+    public void mostrarTodosLosDatosDespachantes(){
+         String sql = "select empleado, empresa, mail, " + "numero_contacto, "
+                 + "status from despachantes";
+        cargarTablaDatos(sql);
+      }
+        
+    public void pasarCamposDeLaTablaDatosAFields(){
+    
+        jTableDatos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent Mouse_evt){
+                
+                JTable tablaDatos = (JTable) Mouse_evt.getSource();
+                Point point = Mouse_evt.getPoint();
+    
+                int filaSeleccionada = tablaDatos.rowAtPoint(point);
+
+                if(Mouse_evt.getClickCount() == 1){
+                  textEmpresa1.setText(jTableDatos.getValueAt(jTableDatos.getSelectedRow(), 0).toString());
+                  textEmpleado1.setText(jTableDatos.getValueAt(jTableDatos.getSelectedRow(), 1).toString());
+                  textMail1.setText(jTableDatos.getValueAt(jTableDatos.getSelectedRow(), 2).toString());
+                  textNumero1.setText(jTableDatos.getValueAt(jTableDatos.getSelectedRow(), 3).toString()); 
+                }
+            }
+        });
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -172,6 +240,28 @@ public class RegistroDespachantes extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableDespachantes = new javax.swing.JTable();
         jLabelTitulo1 = new javax.swing.JLabel();
+        jPanelContacto = new javax.swing.JPanel();
+        jLabelNombre1 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableDatos = new javax.swing.JTable();
+        jLabelStatus2 = new javax.swing.JLabel();
+        cmbStatus2 = new javax.swing.JComboBox<>();
+        jToggleButton2 = new javax.swing.JToggleButton();
+        jLabelEmpresa1 = new javax.swing.JLabel();
+        textEmpresa1 = new javax.swing.JTextField();
+        jLabelEmpleado1 = new javax.swing.JLabel();
+        textEmpleado1 = new javax.swing.JTextField();
+        jLabelMail1 = new javax.swing.JLabel();
+        textMail1 = new javax.swing.JTextField();
+        jLabelNumero1 = new javax.swing.JLabel();
+        textNumero1 = new javax.swing.JTextField();
+        jPanelProductos = new javax.swing.JPanel();
+        jLabelDespachante = new javax.swing.JLabel();
+        jLabelProduc = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        textProductos1 = new javax.swing.JTextArea();
+        textDespachante = new javax.swing.JTextField();
+        jToggleButtonBusqueda = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -239,6 +329,9 @@ public class RegistroDespachantes extends javax.swing.JFrame {
 
         getContentPane().add(jPanelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 800));
 
+        jTabbedPane.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 153)));
+        jTabbedPane.setForeground(new java.awt.Color(0, 0, 153));
         jTabbedPane.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         jPanelContenido.setBackground(new java.awt.Color(0, 0, 153));
@@ -446,6 +539,135 @@ public class RegistroDespachantes extends javax.swing.JFrame {
 
         jTabbedPane.addTab("Sección de tabla y listado", jPanelTabla);
 
+        jPanelContacto.setBackground(new java.awt.Color(0, 0, 153));
+        jPanelContacto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelNombre1.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        jLabelNombre1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelNombre1.setText("Datos del despachante:");
+        jPanelContacto.add(jLabelNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 320, 60));
+
+        jTableDatos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTableDatos);
+
+        jPanelContacto.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 1140, -1));
+
+        jLabelStatus2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabelStatus2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelStatus2.setText("Status requerido:");
+        jPanelContacto.add(jLabelStatus2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 130, 20));
+
+        cmbStatus2.setForeground(new java.awt.Color(0, 0, 153));
+        cmbStatus2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo", "Suspendido" }));
+        jPanelContacto.add(cmbStatus2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 170, 40));
+
+        jToggleButton2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jToggleButton2.setForeground(new java.awt.Color(0, 0, 153));
+        jToggleButton2.setText("Buscar todos/Reiniciar");
+        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton2ActionPerformed(evt);
+            }
+        });
+        jPanelContacto.add(jToggleButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 240, 40));
+
+        jLabelEmpresa1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelEmpresa1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelEmpresa1.setText("Empresa:");
+        jPanelContacto.add(jLabelEmpresa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
+
+        textEmpresa1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textEmpresa1.setForeground(new java.awt.Color(0, 0, 153));
+        textEmpresa1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanelContacto.add(textEmpresa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 190, -1));
+
+        jLabelEmpleado1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelEmpleado1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelEmpleado1.setText("Empleado:");
+        jPanelContacto.add(jLabelEmpleado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, -1, -1));
+
+        textEmpleado1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textEmpleado1.setForeground(new java.awt.Color(0, 0, 153));
+        textEmpleado1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanelContacto.add(textEmpleado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 190, -1));
+
+        jLabelMail1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelMail1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelMail1.setText("Mail:");
+        jPanelContacto.add(jLabelMail1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 100, -1, -1));
+
+        textMail1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textMail1.setForeground(new java.awt.Color(0, 0, 153));
+        textMail1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanelContacto.add(textMail1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 120, 190, -1));
+
+        jLabelNumero1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelNumero1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelNumero1.setText("Número de contacto:");
+        jPanelContacto.add(jLabelNumero1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 100, -1, -1));
+
+        textNumero1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textNumero1.setForeground(new java.awt.Color(0, 0, 153));
+        textNumero1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanelContacto.add(textNumero1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 120, 190, -1));
+
+        jTabbedPane.addTab("Sección de contacto despachante", jPanelContacto);
+
+        jPanelProductos.setBackground(new java.awt.Color(0, 0, 153));
+        jPanelProductos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelDespachante.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelDespachante.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelDespachante.setText("Despachante:");
+        jPanelProductos.add(jLabelDespachante, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, 20));
+
+        jLabelProduc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelProduc.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelProduc.setText("Productos asociados:");
+        jPanelProductos.add(jLabelProduc, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, -1, 20));
+
+        jScrollPane4.setForeground(new java.awt.Color(0, 0, 153));
+
+        textProductos1.setColumns(20);
+        textProductos1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textProductos1.setForeground(new java.awt.Color(0, 0, 153));
+        textProductos1.setRows(5);
+        jScrollPane4.setViewportView(textProductos1);
+
+        jPanelProductos.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, 700, 190));
+
+        textDespachante.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textDespachante.setForeground(new java.awt.Color(0, 0, 153));
+        textDespachante.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        textDespachante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textDespachanteActionPerformed(evt);
+            }
+        });
+        jPanelProductos.add(textDespachante, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 190, -1));
+
+        jToggleButtonBusqueda.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jToggleButtonBusqueda.setForeground(new java.awt.Color(0, 0, 153));
+        jToggleButtonBusqueda.setText("Reiniciar busqueda de despachante");
+        jToggleButtonBusqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButtonBusquedaActionPerformed(evt);
+            }
+        });
+        jPanelProductos.add(jToggleButtonBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 330, 40));
+
+        jTabbedPane.addTab("Sección de despachantes-productos", jPanelProductos);
+
         getContentPane().add(jTabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1210, 800));
 
         pack();
@@ -473,7 +695,7 @@ public class RegistroDespachantes extends javax.swing.JFrame {
 
     private void jToggleButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonFiltrarActionPerformed
        
-         int statusBusqueda = cmbStatus.getSelectedIndex() + 1;
+        int statusBusqueda = cmbStatus.getSelectedIndex() + 1;
         String statusBuscado = null;
         
         switch(statusBusqueda){
@@ -494,13 +716,13 @@ public class RegistroDespachantes extends javax.swing.JFrame {
 
          if (!textBuscar.equals("") && statusBuscado.equals("Activo")) {
                 sql = "select id_despachantes, empleado, empresa, mail, "
-                        + "numero_contacto, pais, status " + "from despachantes "
+                        + "numero_contacto, pais, status from despachantes "
                         + "where empresa = '" + busqueda + "' or empleado = '" 
                         + busqueda + "' and status = 'Activo'";
                 cargarTablaDespachantes(sql);
             } else if (textBuscar.equals("") && statusBuscado.equals("Activo")) {
                 sql = "select id_despachantes, empleado, empresa, mail, "
-                        + "numero_contacto, pais, status " + "from despachantes "
+                        + "numero_contacto, pais, status from despachantes "
                         + "where status = 'Activo'";
                 cargarTablaDespachantes(sql);
             }
@@ -508,24 +730,24 @@ public class RegistroDespachantes extends javax.swing.JFrame {
      
            if (!textBuscar.equals("") && statusBuscado.equals("Inactivo")) {
                 sql = "select id_despachantes, empleado, empresa, mail, "
-                        + "numero_contacto, pais, status " + "from despachantes "
+                        + "numero_contacto, pais, status from despachantes "
                         + "where empresa = '" + busqueda + "' or empleado = '" + 
                         busqueda + "' and status = 'Inactivo'";
                 cargarTablaDespachantes(sql);
             } else if (textBuscar.equals("") && statusBuscado.equals("Inactivo")) {
                 sql = "select id_despachantes, empleado, empresa, mail, "
-                        + "numero_contacto, pais, status " + "from despachantes "
+                        + "numero_contacto, pais, status from despachantes "
                         + "where status = 'Inactivo'";
                 cargarTablaDespachantes(sql);
             } else if (!textBuscar.equals("") && statusBuscado.equals("Suspendido")) {
                 sql = "select id_despachantes, empleado, empresa, mail, "
-                        + "numero_contacto, pais, status " + "from despachantes"
+                        + "numero_contacto, pais, status from despachantes "
                         + "where empresa = '" + busqueda + "' or empleado = '" +
                         busqueda + "' and status = 'Suspendido'";
                 cargarTablaDespachantes(sql);
             } else if (textBuscar.equals("") && statusBuscado.equals("Suspendido")) {
                 sql = "select id_despachantes, empleado, empresa, mail, "
-                        + "numero_contacto, pais, status " + "from despachantes"
+                        + "numero_contacto, pais, status from despachantes"
                         + " where status = 'Suspendido'";
                 cargarTablaDespachantes(sql);
             }
@@ -535,6 +757,59 @@ public class RegistroDespachantes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No es posibe buscar por filtros");
         }
         
+      
+        
+        
+        // PASAR TODO ESTO DE DATOS A OTRO BOTON
+        
+        String datosBuscados = textDespachanteBuscado.getText().trim();
+        
+        if(jScrollPane3.isVisible()){
+         try{
+
+             if (!textDespachanteBuscado.equals("") && statusBuscado.equals("Activo")) {
+                sql = "select empleado, empresa, mail, numero_contacto, status " 
+                        + "from despachantes where empresa = '" + busqueda + 
+                        "' or empleado = '" + datosBuscados  + "' and status = 'Activo'";
+                cargarTablaDatos(sql);
+                pasarCamposDeLaTablaDatosAFields();
+              } else if (textDespachanteBuscado.equals("") && statusBuscado.equals("Activo")) {
+                sql = "select empleado, empresa, mail, numero_contacto, status from despachantes "
+                        + "where status = 'Activo'";
+                cargarTablaDatos(sql);
+                pasarCamposDeLaTablaDatosAFields();
+               }
+
+     
+            if (!textDespachanteBuscado.equals("") && statusBuscado.equals("Inactivo")) {
+                sql = "select empleado, empresa, mail, numero_contacto, status "
+                        + "from despachantes where empresa = '" + datosBuscados  
+                        + "' or empleado = '" + datosBuscados + "' and status = 'Inactivo'";
+                cargarTablaDatos(sql);
+                pasarCamposDeLaTablaDatosAFields();
+             } else if (textDespachanteBuscado.equals("") && statusBuscado.equals("Inactivo")) {
+                sql = "select empleado, empresa, mail, numero_contacto, status "
+                        + "from despachantes where status = 'Inactivo'";
+                cargarTablaDatos(sql);
+                pasarCamposDeLaTablaDatosAFields();
+             } else if (!textDespachanteBuscado.equals("") && statusBuscado.equals("Suspendido")) {
+                sql = "select empleado, empresa, mail, numero_contacto, status " 
+                        + "from despachantes where empresa = '" + datosBuscados + 
+                        "' or empleado = '" + datosBuscados  + "' and status = 'Suspendido'";
+                cargarTablaDatos(sql);
+                pasarCamposDeLaTablaDatosAFields();
+             } else if (textDespachanteBuscado.equals("") && statusBuscado.equals("Suspendido")) {
+                sql = "select empleado, empresa, mail, numero_contacto, status "
+                        + "from despachantes where status = 'Suspendido'";
+                cargarTablaDatos(sql);
+                pasarCamposDeLaTablaDatosAFields();
+            }
+          
+        }catch(Exception e){
+            System.err.println("Error al buscar por filtros" + e);
+            JOptionPane.showMessageDialog(null, "No es posibe buscar por filtros");
+        }
+        }
     }//GEN-LAST:event_jToggleButtonFiltrarActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
@@ -611,7 +886,12 @@ public class RegistroDespachantes extends javax.swing.JFrame {
             System.err.println("Fallo al modificar datos " + e);
             JOptionPane.showMessageDialog(null, "Fallo al modificar datos");
         }
-                                                        
+                
+        
+        if(jScrollPane2.isVisible()){
+           
+                
+        }
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
@@ -643,8 +923,31 @@ public class RegistroDespachantes extends javax.swing.JFrame {
                
        setTitle("Informacíón completa de " + despachanteABuscar + " - Sistema ComexApp");
        jLabelTitulo.setText("Información completa de " + despachanteABuscar + "");
+       
+       if(jPanelProductos.isVisible()){
+           despachantesService.obtenerDatosDeProductosDelDespachante(
+                   textDespachanteBuscado, textDespachante, textProductos1);
+       }
   
     }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+        
+        LimpiarBusqueda();
+        mostrarTodosLosDatosDespachantes();
+        
+    }//GEN-LAST:event_jToggleButton2ActionPerformed
+
+    private void jToggleButtonBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonBusquedaActionPerformed
+        
+        LimpiarBusqueda();
+        mostrarTodosLosDatosDespachantes();
+        
+    }//GEN-LAST:event_jToggleButtonBusquedaActionPerformed
+
+    private void textDespachanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDespachanteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textDespachanteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -686,6 +989,7 @@ public class RegistroDespachantes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbStatus;
     private javax.swing.JComboBox<String> cmbStatus1;
+    private javax.swing.JComboBox<String> cmbStatus2;
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonInfo;
@@ -696,37 +1000,58 @@ public class RegistroDespachantes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelBusqueda;
+    private javax.swing.JLabel jLabelDespachante;
     private javax.swing.JLabel jLabelEmpleado;
+    private javax.swing.JLabel jLabelEmpleado1;
     private javax.swing.JLabel jLabelEmpresa;
+    private javax.swing.JLabel jLabelEmpresa1;
     private javax.swing.JLabel jLabelID;
     private javax.swing.JLabel jLabelMail;
+    private javax.swing.JLabel jLabelMail1;
     private javax.swing.JLabel jLabelNombre;
+    private javax.swing.JLabel jLabelNombre1;
     private javax.swing.JLabel jLabelNumero;
+    private javax.swing.JLabel jLabelNumero1;
     private javax.swing.JLabel jLabelPais;
+    private javax.swing.JLabel jLabelProduc;
     private javax.swing.JLabel jLabelProductos;
     private javax.swing.JLabel jLabelStatus;
     private javax.swing.JLabel jLabelStatus1;
+    private javax.swing.JLabel jLabelStatus2;
     private javax.swing.JLabel jLabelSubTitulo;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelTitulo1;
     private javax.swing.JPanel jPanelBusqueda;
+    private javax.swing.JPanel jPanelContacto;
     private javax.swing.JPanel jPanelContenido;
     private javax.swing.JPanel jPanelOpciones;
+    private javax.swing.JPanel jPanelProductos;
     private javax.swing.JPanel jPanelTabla;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane;
+    private javax.swing.JTable jTableDatos;
     private javax.swing.JTable jTableDespachantes;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton jToggleButtonBusqueda;
     private javax.swing.JToggleButton jToggleButtonFiltrar;
     private javax.swing.JTextField textBuscar;
+    private javax.swing.JTextField textDespachante;
     private javax.swing.JTextField textDespachanteBuscado;
     private javax.swing.JTextField textEmpleado;
+    private javax.swing.JTextField textEmpleado1;
     private javax.swing.JTextField textEmpresa;
+    private javax.swing.JTextField textEmpresa1;
     private javax.swing.JTextField textID;
     private javax.swing.JTextField textMail;
+    private javax.swing.JTextField textMail1;
     private javax.swing.JTextField textNumero;
+    private javax.swing.JTextField textNumero1;
     private javax.swing.JTextField textPais;
     private javax.swing.JTextArea textProductos;
+    private javax.swing.JTextArea textProductos1;
     // End of variables declaration//GEN-END:variables
 }

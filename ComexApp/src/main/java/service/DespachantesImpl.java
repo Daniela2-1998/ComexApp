@@ -24,5 +24,8 @@ public interface DespachantesImpl {
             JTextField textEmpresa, JTextField textMail, JTextField textNumero, 
             JTextField textPais, JTextArea textProductos, JComboBox cmbStatus);
     
+    public void obtenerDatosDeProductosDelDespachante(JTextField textDespachanteBuscado, 
+            JTextField textDespachante, JTextArea textProductos1);
+    
     public boolean eliminarDespachante(String empleado, int id);
 }

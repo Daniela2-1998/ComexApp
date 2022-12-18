@@ -25,6 +25,7 @@ public class DespachantesService implements DespachantesImpl{
     JTextField textNumero = new JTextField();
     JTextArea textProductos = new JTextArea();
     JComboBox cmbStatus = new JComboBox();
+    JTextField textDespachante = new JTextField();
     
     
     // conexión
@@ -187,6 +188,39 @@ public class DespachantesService implements DespachantesImpl{
     }
      
        
+        
+    public void obtenerDatosDeProductosDelDespachante(JTextField textDespachanteBuscado, 
+            JTextField textDespachante, JTextArea textProductos1){
+        
+        String despachanteABuscar = textDespachanteBuscado.getText().trim();
+        
+        String sql = "select empleado, productos_asociados from despachantes "
+                + "where empleado = '" + despachanteABuscar + "'";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+
+                textDespachante.setText(rs.getString("empleado"));
+                textProductos1.setText(rs.getString("productos_asociados"));
+            } else {
+                JOptionPane.showMessageDialog(null, "No es posible conseguir "
+                        + "los datos del despachante solicitado");
+                System.err.println("No es posible conseguir los datos del despachante "
+                        + "solicitado");
+            }
+            conec.close();
+            
+        }catch(SQLException e){
+            System.err.println("Error al obtener los datos del despachante solicitado" + e);
+            JOptionPane.showMessageDialog(null, "No se pueden obtener los datos del "
+                    + "despachante solicitado");
+        }
+        
+    }
        
     public boolean eliminarDespachante(String empleado, int id){
        
