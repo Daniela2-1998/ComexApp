@@ -35,9 +35,6 @@ public class Maritimas {
     private String tipo_transporte;
 
     @NotBlank
-    private String modo;
-
-    @NotBlank
     private String requisitos_aviso;
 
    
@@ -47,14 +44,13 @@ public class Maritimas {
     public Maritimas() {
     }
     
-    public Maritimas(Integer id, String empresa, String empleado, String email, String numero_contacto, String tipo_transporte, String modo, String requisitos_aviso) {
+    public Maritimas(Integer id, String empresa, String empleado, String email, String numero_contacto, String tipo_transporte, String requisitos_aviso) {
         this.id = id;
         this.empresa = empresa;
         this.empleado = empleado;
         this.email = email;
         this.numero_contacto = numero_contacto;
         this.tipo_transporte = tipo_transporte;
-        this.modo = modo;
         this.requisitos_aviso = requisitos_aviso;
     }
 
@@ -104,14 +100,6 @@ public class Maritimas {
 
     public void setTipo_transporte(String tipo_transporte) {
         this.tipo_transporte = tipo_transporte;
-    }
-
-    public String getModo() {
-        return modo;
-    }
-
-    public void setModo(String modo) {
-        this.modo = modo;
     }
 
     public String getRequisitos_aviso() {

@@ -144,6 +144,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jButtonMaritimas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonMaritimas.setForeground(new java.awt.Color(0, 0, 153));
         jButtonMaritimas.setText("Marítimas");
+        jButtonMaritimas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMaritimasActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButtonMaritimas, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 210, 50));
 
         jButtonOperaciones.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -164,6 +169,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jButtonAereo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonAereo.setForeground(new java.awt.Color(0, 0, 153));
         jButtonAereo.setText("Aereo");
+        jButtonAereo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAereoActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButtonAereo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 210, 50));
 
         jButtonCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -385,6 +395,22 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_jButtonIDespachantesActionPerformed
+
+    private void jButtonMaritimasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMaritimasActionPerformed
+       
+        Maritimas maritimas = new Maritimas();
+        maritimas.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButtonMaritimasActionPerformed
+
+    private void jButtonAereoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAereoActionPerformed
+        
+        Aereo aereo = new Aereo();
+        aereo.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButtonAereoActionPerformed
 
     /**
      * @param args the command line arguments

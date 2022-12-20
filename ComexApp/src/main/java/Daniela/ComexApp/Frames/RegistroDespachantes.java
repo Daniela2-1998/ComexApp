@@ -853,7 +853,7 @@ public class RegistroDespachantes extends javax.swing.JFrame {
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
        
-         String empleadoMod, empresaMod, mailMod, numeroContactoMod, paisMod, 
+        String empleadoMod, empresaMod, mailMod, numeroContactoMod, paisMod, 
                 productosAsociadosMod, statusMod = null;
         
         int statusNivel = 0, IDMod; 
@@ -887,11 +887,7 @@ public class RegistroDespachantes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Fallo al modificar datos");
         }
                 
-        
-        if(jScrollPane2.isVisible()){
-           
-                
-        }
+  
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
