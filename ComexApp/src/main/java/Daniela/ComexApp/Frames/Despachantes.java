@@ -80,8 +80,8 @@ public class Despachantes extends javax.swing.JFrame {
     }
 
     public void aLista(){
-        ListaDespachantes listaDespachantes = new ListaDespachantes();
-        listaDespachantes.setVisible(true);
+//        ListaDespachantes listaDespachantes = new ListaDespachantes();
+     //   listaDespachantes.setVisible(true);
         this.dispose();
     }
 
@@ -424,8 +424,8 @@ public class Despachantes extends javax.swing.JFrame {
 
     private void jButtonListaEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListaEmpresasActionPerformed
 
-        ListaEmpresasDespachantes listaEmpresasDespachantes = new ListaEmpresasDespachantes();
-        listaEmpresasDespachantes.setVisible(true);
+//        ListaEmpresasDespachantes listaEmpresasDespachantes = new ListaEmpresasDespachantes();
+  //      listaEmpresasDespachantes.setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_jButtonListaEmpresasActionPerformed

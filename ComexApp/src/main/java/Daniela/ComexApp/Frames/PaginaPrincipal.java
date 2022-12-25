@@ -154,11 +154,21 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jButtonOperaciones.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonOperaciones.setForeground(new java.awt.Color(0, 0, 153));
         jButtonOperaciones.setText("Operaciones");
+        jButtonOperaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOperacionesActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButtonOperaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 640, 210, 50));
 
         jButtonStock.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonStock.setForeground(new java.awt.Color(0, 0, 153));
         jButtonStock.setText("Stock/producción");
+        jButtonStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonStockActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButtonStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 500, 210, 50));
 
         jButtonMarketing.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -411,6 +421,22 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_jButtonAereoActionPerformed
+
+    private void jButtonStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStockActionPerformed
+        
+        StockProduccion stockprod = new StockProduccion();
+        stockprod.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButtonStockActionPerformed
+
+    private void jButtonOperacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOperacionesActionPerformed
+       
+        Operaciones operaciones = new Operaciones();
+        operaciones.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButtonOperacionesActionPerformed
 
     /**
      * @param args the command line arguments

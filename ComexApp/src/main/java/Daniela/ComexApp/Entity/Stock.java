@@ -32,6 +32,9 @@ public class Stock {
 
     @NotBlank
     private String vendedor;
+    
+    @NotBlank
+    private String nombreProducto;
 
     @NotBlank
     private String paisOrigen;
@@ -172,16 +175,26 @@ public class Stock {
         this.operaciones = operaciones;
     }
 
+    public String getNombreProducto() {
+        return nombreProducto;
+    }
+
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+
+    
     
     
     
     public Stock() {
     }
 
-    public Stock(Integer id, String comprador, String vendedor, String paisOrigen, String codigoProducto, String detalle, String tipo_producto, String cuidados_requeridos, String reserva, String cantidad, String precio_unitario, String status, List<Operaciones> operaciones) {
+    public Stock(Integer id, String comprador, String vendedor, String nombreProducto, String paisOrigen, String codigoProducto, String detalle, String tipo_producto, String cuidados_requeridos, String reserva, String cantidad, String precio_unitario, String status, List<Operaciones> operaciones) {
         this.id = id;
         this.comprador = comprador;
         this.vendedor = vendedor;
+        this.nombreProducto = nombreProducto;
         this.paisOrigen = paisOrigen;
         this.codigoProducto = codigoProducto;
         this.detalle = detalle;
@@ -193,6 +206,8 @@ public class Stock {
         this.status = status;
         this.operaciones = operaciones;
     }
+
+
 
     
 }

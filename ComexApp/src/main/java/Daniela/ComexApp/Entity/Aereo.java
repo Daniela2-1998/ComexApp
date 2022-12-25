@@ -23,7 +23,7 @@ public class Aereo {
     private String empleado;
 
     @NotBlank
-    private String email;
+    private String mail;
     
     @NotBlank
     private String numero_contacto;
@@ -58,12 +58,12 @@ public class Aereo {
         this.empleado = empleado;
     }
 
-    public String getEmail() {
-        return email;
+    public String getMail() {
+        return mail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setMail(String email) {
+        this.mail = email;
     }
 
     public String getNumero_contacto() {
@@ -88,11 +88,11 @@ public class Aereo {
     public Aereo() {
     }
 
-    public Aereo(Integer id, String aerolinea, String empleado, String email, String numero_contacto, String requisitos) {
+    public Aereo(Integer id, String aerolinea, String empleado, String mail, String numero_contacto, String requisitos) {
         this.id = id;
         this.aerolinea = aerolinea;
         this.empleado = empleado;
-        this.email = email;
+        this.mail = mail;
         this.numero_contacto = numero_contacto;
         this.requisitos = requisitos;
     }

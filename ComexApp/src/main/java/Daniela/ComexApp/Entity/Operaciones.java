@@ -34,6 +34,9 @@ public class Operaciones {
     private String producto;
     
     @NotEmpty
+    private String cantidadProducto;
+    
+    @NotEmpty
     private String codigo_contenedores;
     
     @NotBlank
@@ -41,6 +44,8 @@ public class Operaciones {
     
     @NotBlank
     private String numero_embarque;
+
+    
             
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "operaciones_maritimas",
@@ -58,6 +63,10 @@ public class Operaciones {
     @JoinTable(name = "operaciones_contenedores",
             joinColumns = @JoinColumn(name = "id_operaciones"))
     List<Contenedores> contenedores;
+    
+ 
+    
+    
     
     
     public Integer getId() {
@@ -148,6 +157,15 @@ public class Operaciones {
         this.contenedores = contenedores;
     }
 
+    public String getCantidadProducto() {
+        return cantidadProducto;
+    }
+
+    public void setCantidadProducto(String cantidadProducto) {
+        this.cantidadProducto = cantidadProducto;
+    }
+
+    
     
     
     
@@ -155,11 +173,12 @@ public class Operaciones {
     public Operaciones() {
     }
 
-    public Operaciones(Integer id, String tipo_operacion, LocalDate fecha_operacion, String producto, String codigo_contenedores, Integer cantidad_contenedores, String numero_embarque, List<Maritimas> maritimas, String numero_embarqueop, List<Aereo> aereo, List<Contenedores> contenedores) {
+    public Operaciones(Integer id, String tipo_operacion, LocalDate fecha_operacion, String producto, String cantidadProducto, String codigo_contenedores, Integer cantidad_contenedores, String numero_embarque, List<Maritimas> maritimas, String numero_embarqueop, List<Aereo> aereo, List<Contenedores> contenedores) {
         this.id = id;
         this.tipo_operacion = tipo_operacion;
         this.fecha_operacion = fecha_operacion;
         this.producto = producto;
+        this.cantidadProducto = cantidadProducto;
         this.codigo_contenedores = codigo_contenedores;
         this.cantidad_contenedores = cantidad_contenedores;
         this.numero_embarque = numero_embarque;
@@ -168,10 +187,6 @@ public class Operaciones {
         this.aereo = aereo;
         this.contenedores = contenedores;
     }
-
-
-    
-    
     
     
 }
