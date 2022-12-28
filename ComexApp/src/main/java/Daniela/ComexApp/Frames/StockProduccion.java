@@ -50,6 +50,11 @@ public class StockProduccion extends javax.swing.JFrame {
         jMenuItemGestion = new javax.swing.JMenuItem();
         jMenuItemIngreso = new javax.swing.JMenuItem();
         jMenuItemDarDeBaja = new javax.swing.JMenuItem();
+        jMenuSuministros = new javax.swing.JMenu();
+        jMenuItemGestion2 = new javax.swing.JMenuItem();
+        jMenuItemIngreso2 = new javax.swing.JMenuItem();
+        jMenuItemDarDeBaja2 = new javax.swing.JMenuItem();
+        jMenuItemClientesProveedores = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -127,6 +132,53 @@ public class StockProduccion extends javax.swing.JFrame {
 
         jMenuBar.add(jMenuStock);
 
+        jMenuSuministros.setBackground(new java.awt.Color(204, 204, 204));
+        jMenuSuministros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/provs.png"))); // NOI18N
+        jMenuSuministros.setText("Suministros");
+        jMenuSuministros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        jMenuItemGestion2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItemGestion2.setForeground(new java.awt.Color(0, 0, 153));
+        jMenuItemGestion2.setText("Gestión de pedidos");
+        jMenuItemGestion2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemGestion2ActionPerformed(evt);
+            }
+        });
+        jMenuSuministros.add(jMenuItemGestion2);
+
+        jMenuItemIngreso2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItemIngreso2.setForeground(new java.awt.Color(0, 0, 153));
+        jMenuItemIngreso2.setText("Ingresar nuevo reabastecimiento al sistema");
+        jMenuItemIngreso2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemIngreso2ActionPerformed(evt);
+            }
+        });
+        jMenuSuministros.add(jMenuItemIngreso2);
+
+        jMenuItemDarDeBaja2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItemDarDeBaja2.setForeground(new java.awt.Color(0, 0, 153));
+        jMenuItemDarDeBaja2.setText("Eliminar operación del sistema");
+        jMenuItemDarDeBaja2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDarDeBaja2ActionPerformed(evt);
+            }
+        });
+        jMenuSuministros.add(jMenuItemDarDeBaja2);
+
+        jMenuItemClientesProveedores.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItemClientesProveedores.setForeground(new java.awt.Color(0, 0, 153));
+        jMenuItemClientesProveedores.setText("Clientes y proveedores");
+        jMenuItemClientesProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemClientesProveedoresActionPerformed(evt);
+            }
+        });
+        jMenuSuministros.add(jMenuItemClientesProveedores);
+
+        jMenuBar.add(jMenuSuministros);
+
         setJMenuBar(jMenuBar);
 
         pack();
@@ -162,6 +214,34 @@ public class StockProduccion extends javax.swing.JFrame {
         eliminarProducto.setVisible(true);
         
     }//GEN-LAST:event_jMenuItemDarDeBajaActionPerformed
+
+    private void jMenuItemGestion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGestion2ActionPerformed
+        
+        GestionSuministros gestionSuministros = new GestionSuministros();
+        gestionSuministros.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jMenuItemGestion2ActionPerformed
+
+    private void jMenuItemIngreso2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemIngreso2ActionPerformed
+   
+        IngresarNuevoReabastecimiento ingresarNuevoReabastecimiento = new IngresarNuevoReabastecimiento();
+        ingresarNuevoReabastecimiento.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jMenuItemIngreso2ActionPerformed
+
+    private void jMenuItemDarDeBaja2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDarDeBaja2ActionPerformed
+       
+        EliminarSuministro eliminarSuministro = new EliminarSuministro();
+        eliminarSuministro.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItemDarDeBaja2ActionPerformed
+
+    private void jMenuItemClientesProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClientesProveedoresActionPerformed
+        
+        
+    }//GEN-LAST:event_jMenuItemClientesProveedoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,14 +279,17 @@ public class StockProduccion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonVolver;
-    private javax.swing.JButton jButtonVolver1;
     private javax.swing.JButton jButtonVolver2;
     private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JMenuItem jMenuItemClientesProveedores;
     private javax.swing.JMenuItem jMenuItemDarDeBaja;
+    private javax.swing.JMenuItem jMenuItemDarDeBaja2;
     private javax.swing.JMenuItem jMenuItemGestion;
+    private javax.swing.JMenuItem jMenuItemGestion2;
     private javax.swing.JMenuItem jMenuItemIngreso;
+    private javax.swing.JMenuItem jMenuItemIngreso2;
     private javax.swing.JMenu jMenuStock;
+    private javax.swing.JMenu jMenuSuministros;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -29,6 +29,10 @@ public class Operaciones {
     @NotNull
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate fecha_operacion;
+    
+    @NotNull
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate fecha_ETA;
 
     @NotEmpty
     private String producto;
@@ -44,6 +48,9 @@ public class Operaciones {
     
     @NotBlank
     private String numero_embarque;
+    
+   @NotBlank
+   private String status;
 
     
             
@@ -165,6 +172,23 @@ public class Operaciones {
         this.cantidadProducto = cantidadProducto;
     }
 
+    public LocalDate getFecha_ETA() {
+        return fecha_ETA;
+    }
+
+    public void setFecha_ETA(LocalDate fecha_ETA) {
+        this.fecha_ETA = fecha_ETA;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    
     
     
     
@@ -173,20 +197,24 @@ public class Operaciones {
     public Operaciones() {
     }
 
-    public Operaciones(Integer id, String tipo_operacion, LocalDate fecha_operacion, String producto, String cantidadProducto, String codigo_contenedores, Integer cantidad_contenedores, String numero_embarque, List<Maritimas> maritimas, String numero_embarqueop, List<Aereo> aereo, List<Contenedores> contenedores) {
+    public Operaciones(Integer id, String tipo_operacion, LocalDate fecha_operacion, LocalDate fecha_ETA, String producto, String cantidadProducto, String codigo_contenedores, Integer cantidad_contenedores, String numero_embarque, String status, List<Maritimas> maritimas, String numero_embarqueop, List<Aereo> aereo, List<Contenedores> contenedores) {
         this.id = id;
         this.tipo_operacion = tipo_operacion;
         this.fecha_operacion = fecha_operacion;
+        this.fecha_ETA = fecha_ETA;
         this.producto = producto;
         this.cantidadProducto = cantidadProducto;
         this.codigo_contenedores = codigo_contenedores;
         this.cantidad_contenedores = cantidad_contenedores;
         this.numero_embarque = numero_embarque;
+        this.status = status;
         this.maritimas = maritimas;
         this.numero_embarqueop = numero_embarqueop;
         this.aereo = aereo;
         this.contenedores = contenedores;
     }
+
+  
     
     
 }

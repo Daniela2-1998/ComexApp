@@ -2,19 +2,19 @@ package Daniela.ComexApp.Frames;
 
 import java.awt.Image;
 import java.awt.Toolkit;
-import service.StockService;
+import service.ReabastecimientoService;
 
 /**
  *
  * @author Daniela
  */
-public class EliminarProductoDeStock extends javax.swing.JFrame {
+public class EliminarSuministro extends javax.swing.JFrame {
 
      String usuario = "", rol = "", nombreCompleto = "";
     /**
      * Creates new form IngresarNuevosProductosAStock
      */
-    public EliminarProductoDeStock() {
+    public EliminarSuministro() {
         initComponents();
         
         setSize(550, 340);
@@ -28,7 +28,7 @@ public class EliminarProductoDeStock extends javax.swing.JFrame {
         nombreCompleto = paginaPrincipal.nombreCompleto;
         rol = paginaPrincipal.rol;
         
-        setTitle("Eliminar producto de stock - " + usuario + " - sistema ComexApp");
+        setTitle("Eliminar pedido de suministro - " + usuario + " - sistema ComexApp");
     }
     // icono
     public Image getLogo(){
@@ -36,7 +36,7 @@ public class EliminarProductoDeStock extends javax.swing.JFrame {
         return retValue;   
     }
     
-    StockService stockService = new StockService();
+    ReabastecimientoService reabastecimientoService = new ReabastecimientoService();
 
     public void LimpiarCampos(){
         textID.setText("");
@@ -56,7 +56,7 @@ public class EliminarProductoDeStock extends javax.swing.JFrame {
         jButtonIngresar = new javax.swing.JButton();
         jPanelRegistro = new javax.swing.JPanel();
         jLabelTitulo = new javax.swing.JLabel();
-        jLabelID = new javax.swing.JLabel();
+        jLabelCodigo = new javax.swing.JLabel();
         textID = new javax.swing.JTextField();
         jLabelProducto = new javax.swing.JLabel();
         textProducto = new javax.swing.JTextField();
@@ -65,7 +65,6 @@ public class EliminarProductoDeStock extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
         setIconImages(getIconImages());
-        setPreferredSize(new java.awt.Dimension(550, 320));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(520, 320));
@@ -91,10 +90,10 @@ public class EliminarProductoDeStock extends javax.swing.JFrame {
         jLabelTitulo.setText("Eliminación de productos:");
         jPanelRegistro.add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
-        jLabelID.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabelID.setForeground(new java.awt.Color(0, 0, 153));
-        jLabelID.setText("ID del producto:");
-        jPanelRegistro.add(jLabelID, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
+        jLabelCodigo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelCodigo.setForeground(new java.awt.Color(0, 0, 153));
+        jLabelCodigo.setText("ID del producto:");
+        jPanelRegistro.add(jLabelCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
 
         textID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textID.setForeground(new java.awt.Color(0, 0, 153));
@@ -151,7 +150,7 @@ public class EliminarProductoDeStock extends javax.swing.JFrame {
         producto = textProducto.getText().trim();
         ID = Integer.parseInt(textID.getText().trim());
         
-        stockService.eliminarProductoDeStock(producto, ID);
+        reabastecimientoService.eliminarSuministros(producto, ID);
       
     }//GEN-LAST:event_jButtonIngresarActionPerformed
 
@@ -180,21 +179,23 @@ public class EliminarProductoDeStock extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EliminarProductoDeStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarSuministro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EliminarProductoDeStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarSuministro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EliminarProductoDeStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarSuministro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EliminarProductoDeStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarSuministro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EliminarProductoDeStock().setVisible(true);
+                new EliminarSuministro().setVisible(true);
             }
         });
     }
@@ -202,7 +203,7 @@ public class EliminarProductoDeStock extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAtras;
     private javax.swing.JButton jButtonIngresar;
-    private javax.swing.JLabel jLabelID;
+    private javax.swing.JLabel jLabelCodigo;
     private javax.swing.JLabel jLabelProducto;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JPanel jPanel1;

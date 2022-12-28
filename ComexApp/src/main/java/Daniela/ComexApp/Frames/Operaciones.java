@@ -27,6 +27,7 @@ public class Operaciones extends javax.swing.JFrame {
         nombreCompleto = paginaPrincipal.nombreCompleto;
         
         setTitle("Menú de operaciones - " + usuario + " - sistema ComexApp");
+        
     }
 
     // icono
@@ -34,6 +35,11 @@ public class Operaciones extends javax.swing.JFrame {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/loguito1.png"));
         return retValue;   
     }
+    
+    Boolean internacional;
+    Boolean nacional;
+    
+    RegistroOperaciones registroOperaciones = new RegistroOperaciones();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,10 +56,11 @@ public class Operaciones extends javax.swing.JFrame {
         jMenuItemGestion = new javax.swing.JMenuItem();
         jMenuItemIngreso = new javax.swing.JMenuItem();
         jMenuItemDarDeBaja = new javax.swing.JMenuItem();
-        jMenuInt1 = new javax.swing.JMenu();
+        jMenuNac = new javax.swing.JMenu();
         jMenuItemGestion1 = new javax.swing.JMenuItem();
         jMenuItemIngreso1 = new javax.swing.JMenuItem();
         jMenuItemDarDeBaja1 = new javax.swing.JMenuItem();
+        jMenuItemComprasVentas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -131,10 +138,10 @@ public class Operaciones extends javax.swing.JFrame {
 
         jMenuBar.add(jMenuInt);
 
-        jMenuInt1.setBackground(new java.awt.Color(204, 204, 204));
-        jMenuInt1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/national.png"))); // NOI18N
-        jMenuInt1.setText("Operaciones nacionales");
-        jMenuInt1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jMenuNac.setBackground(new java.awt.Color(204, 204, 204));
+        jMenuNac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/national.png"))); // NOI18N
+        jMenuNac.setText("Operaciones nacionales");
+        jMenuNac.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         jMenuItemGestion1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItemGestion1.setForeground(new java.awt.Color(0, 0, 153));
@@ -144,7 +151,7 @@ public class Operaciones extends javax.swing.JFrame {
                 jMenuItemGestion1ActionPerformed(evt);
             }
         });
-        jMenuInt1.add(jMenuItemGestion1);
+        jMenuNac.add(jMenuItemGestion1);
 
         jMenuItemIngreso1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItemIngreso1.setForeground(new java.awt.Color(0, 0, 153));
@@ -154,7 +161,7 @@ public class Operaciones extends javax.swing.JFrame {
                 jMenuItemIngreso1ActionPerformed(evt);
             }
         });
-        jMenuInt1.add(jMenuItemIngreso1);
+        jMenuNac.add(jMenuItemIngreso1);
 
         jMenuItemDarDeBaja1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItemDarDeBaja1.setForeground(new java.awt.Color(0, 0, 153));
@@ -164,9 +171,19 @@ public class Operaciones extends javax.swing.JFrame {
                 jMenuItemDarDeBaja1ActionPerformed(evt);
             }
         });
-        jMenuInt1.add(jMenuItemDarDeBaja1);
+        jMenuNac.add(jMenuItemDarDeBaja1);
 
-        jMenuBar.add(jMenuInt1);
+        jMenuItemComprasVentas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItemComprasVentas.setForeground(new java.awt.Color(0, 0, 153));
+        jMenuItemComprasVentas.setText("Ver compras y ventas nacionales");
+        jMenuItemComprasVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemComprasVentasActionPerformed(evt);
+            }
+        });
+        jMenuNac.add(jMenuItemComprasVentas);
+
+        jMenuBar.add(jMenuNac);
 
         setJMenuBar(jMenuBar);
 
@@ -179,8 +196,11 @@ public class Operaciones extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemGestionActionPerformed
 
     private void jMenuItemIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemIngresoActionPerformed
+
+       internacional = true;
+       nacional = false;
+       registroOperaciones.setVisible(true);
         
-     
     }//GEN-LAST:event_jMenuItemIngresoActionPerformed
 
     private void jButtonVolver2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolver2ActionPerformed
@@ -200,12 +220,20 @@ public class Operaciones extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemGestion1ActionPerformed
 
     private void jMenuItemIngreso1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemIngreso1ActionPerformed
-        // TODO add your handling code here:
+       
+       internacional = false;
+       nacional = true;
+       registroOperaciones.setVisible(true);
+       
     }//GEN-LAST:event_jMenuItemIngreso1ActionPerformed
 
     private void jMenuItemDarDeBaja1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDarDeBaja1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemDarDeBaja1ActionPerformed
+
+    private void jMenuItemComprasVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemComprasVentasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemComprasVentasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,13 +275,14 @@ public class Operaciones extends javax.swing.JFrame {
     private javax.swing.JButton jButtonVolver2;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuInt;
-    private javax.swing.JMenu jMenuInt1;
+    private javax.swing.JMenuItem jMenuItemComprasVentas;
     private javax.swing.JMenuItem jMenuItemDarDeBaja;
     private javax.swing.JMenuItem jMenuItemDarDeBaja1;
     private javax.swing.JMenuItem jMenuItemGestion;
     private javax.swing.JMenuItem jMenuItemGestion1;
     private javax.swing.JMenuItem jMenuItemIngreso;
     private javax.swing.JMenuItem jMenuItemIngreso1;
+    private javax.swing.JMenu jMenuNac;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
