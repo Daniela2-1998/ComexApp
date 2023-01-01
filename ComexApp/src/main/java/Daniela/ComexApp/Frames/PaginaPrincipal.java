@@ -72,7 +72,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jButtonMaritimas = new javax.swing.JButton();
         jButtonOperaciones = new javax.swing.JButton();
         jButtonStock = new javax.swing.JButton();
-        jButtonMarketing = new javax.swing.JButton();
         jButtonAereo = new javax.swing.JButton();
         jButtonCerrarSesion = new javax.swing.JButton();
         jLabelTitulo1 = new javax.swing.JLabel();
@@ -159,7 +158,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
                 jButtonOperacionesActionPerformed(evt);
             }
         });
-        jPanel3.add(jButtonOperaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 640, 210, 50));
+        jPanel3.add(jButtonOperaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 570, 210, 50));
 
         jButtonStock.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonStock.setForeground(new java.awt.Color(0, 0, 153));
@@ -170,11 +169,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jButtonStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 500, 210, 50));
-
-        jButtonMarketing.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonMarketing.setForeground(new java.awt.Color(0, 0, 153));
-        jButtonMarketing.setText("Marketing");
-        jPanel3.add(jButtonMarketing, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 570, 210, 50));
 
         jButtonAereo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonAereo.setForeground(new java.awt.Color(0, 0, 153));
@@ -432,9 +426,9 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
     private void jButtonOperacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOperacionesActionPerformed
        
-        Operaciones operaciones = new Operaciones();
-        operaciones.setVisible(true);
-        this.dispose();
+       Operaciones operaciones = new Operaciones();
+       operaciones.setVisible(true);
+       this.dispose();
         
     }//GEN-LAST:event_jButtonOperacionesActionPerformed
 
@@ -480,7 +474,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButtonIDespachantes;
     private javax.swing.JButton jButtonImportadores;
     private javax.swing.JButton jButtonMaritimas;
-    private javax.swing.JButton jButtonMarketing;
     private javax.swing.JButton jButtonOperaciones;
     private javax.swing.JButton jButtonStock;
     private javax.swing.JLabel jLabelTitulo;

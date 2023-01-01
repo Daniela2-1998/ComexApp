@@ -16,7 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
  */
 @Entity
 @Table(name="operaciones")
-public class Operaciones {
+public class OperacionesInternacionales {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,17 +28,32 @@ public class Operaciones {
     
     @NotNull
     @DateTimeFormat(iso = ISO.DATE)
-    private LocalDate fecha_operacion;
+    private String fecha_operacion;
     
     @NotNull
     @DateTimeFormat(iso = ISO.DATE)
-    private LocalDate fecha_ETA;
+    private String fecha_ETA;
 
     @NotEmpty
     private String producto;
     
     @NotEmpty
+    private String detalles;
+    
+    @NotEmpty
     private String cantidadProducto;
+    
+    @NotEmpty
+    private String precioTotal;
+    
+    @NotEmpty
+    private String comprador;
+    
+    @NotEmpty
+    private String vendedor;
+    
+    @NotEmpty
+    private String paisOrigen;
     
     @NotEmpty
     private String codigo_contenedores;
@@ -48,6 +63,9 @@ public class Operaciones {
     
     @NotBlank
     private String numero_embarque;
+    
+    @NotBlank
+    private String nombreBuque;
     
    @NotBlank
    private String status;
@@ -92,11 +110,11 @@ public class Operaciones {
         this.tipo_operacion = tipo_operacion;
     }
 
-    public LocalDate getFecha_operacion() {
+    public String getFecha_operacion() {
         return fecha_operacion;
     }
 
-    public void setFecha_operacion(LocalDate fecha_operacion) {
+    public void setFecha_operacion(String fecha_operacion) {
         this.fecha_operacion = fecha_operacion;
     }
 
@@ -172,11 +190,11 @@ public class Operaciones {
         this.cantidadProducto = cantidadProducto;
     }
 
-    public LocalDate getFecha_ETA() {
+    public String getFecha_ETA() {
         return fecha_ETA;
     }
 
-    public void setFecha_ETA(LocalDate fecha_ETA) {
+    public void setFecha_ETA(String fecha_ETA) {
         this.fecha_ETA = fecha_ETA;
     }
 
@@ -188,25 +206,79 @@ public class Operaciones {
         this.status = status;
     }
 
-    
-    
-    
-    
-    
-    
-    public Operaciones() {
+    public String getPrecioTotal() {
+        return precioTotal;
     }
 
-    public Operaciones(Integer id, String tipo_operacion, LocalDate fecha_operacion, LocalDate fecha_ETA, String producto, String cantidadProducto, String codigo_contenedores, Integer cantidad_contenedores, String numero_embarque, String status, List<Maritimas> maritimas, String numero_embarqueop, List<Aereo> aereo, List<Contenedores> contenedores) {
+    public void setPrecioTotal(String precioTotal) {
+        this.precioTotal = precioTotal;
+    }
+
+    public String getComprador() {
+        return comprador;
+    }
+
+    public void setComprador(String comprador) {
+        this.comprador = comprador;
+    }
+
+    public String getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(String vendedor) {
+        this.vendedor = vendedor;
+    }
+
+    public String getDetalles() {
+        return detalles;
+    }
+
+    public void setDetalles(String detalles) {
+        this.detalles = detalles;
+    }
+
+    public String getPaisOrigen() {
+        return paisOrigen;
+    }
+
+    public void setPaisOrigen(String paisOrigen) {
+        this.paisOrigen = paisOrigen;
+    }
+
+    public String getNombreBuque() {
+        return nombreBuque;
+    }
+
+    public void setNombreBuque(String nombreBuque) {
+        this.nombreBuque = nombreBuque;
+    }
+
+    
+    
+    
+    
+    
+    
+    public OperacionesInternacionales() {
+    }
+
+    public OperacionesInternacionales(Integer id, String tipo_operacion, String fecha_operacion, String fecha_ETA, String producto, String detalles, String cantidadProducto, String precioTotal, String comprador, String vendedor, String paisOrigen, String codigo_contenedores, Integer cantidad_contenedores, String numero_embarque, String nombreBuque, String status, List<Maritimas> maritimas, String numero_embarqueop, List<Aereo> aereo, List<Contenedores> contenedores) {
         this.id = id;
         this.tipo_operacion = tipo_operacion;
         this.fecha_operacion = fecha_operacion;
         this.fecha_ETA = fecha_ETA;
         this.producto = producto;
+        this.detalles = detalles;
         this.cantidadProducto = cantidadProducto;
+        this.precioTotal = precioTotal;
+        this.comprador = comprador;
+        this.vendedor = vendedor;
+        this.paisOrigen = paisOrigen;
         this.codigo_contenedores = codigo_contenedores;
         this.cantidad_contenedores = cantidad_contenedores;
         this.numero_embarque = numero_embarque;
+        this.nombreBuque = nombreBuque;
         this.status = status;
         this.maritimas = maritimas;
         this.numero_embarqueop = numero_embarqueop;
@@ -214,7 +286,7 @@ public class Operaciones {
         this.contenedores = contenedores;
     }
 
-  
-    
+
+
     
 }

@@ -39,14 +39,7 @@ public class Precio {
 
     @NotBlank
     private String impuestos;
- 
-    @NotEmpty
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "operaciones_precio",
-            joinColumns = @JoinColumn(name = "id_operaciones"))
-    List<Operaciones> operaciones;
 
-    
     
     
     public Integer getId() {
@@ -113,20 +106,15 @@ public class Precio {
         this.impuestos = impuestos;
     }
 
-    public List<Operaciones> getOperaciones() {
-        return operaciones;
-    }
-
-    public void setOperaciones(List<Operaciones> operaciones) {
-        this.operaciones = operaciones;
-    }
 
     
     
     public Precio() {
     }
 
-    public Precio(Integer id, String producto, String precio_unitario, String precio_total, String acuerdos_internacionales_disponibles, String descuento, String cantidad, String impuestos, List<Operaciones> operaciones) {
+    public Precio(Integer id, String producto, String precio_unitario,
+            String precio_total, String acuerdos_internacionales_disponibles,
+            String descuento, String cantidad, String impuestos) {
         this.id = id;
         this.producto = producto;
         this.precio_unitario = precio_unitario;
@@ -135,7 +123,6 @@ public class Precio {
         this.descuento = descuento;
         this.cantidad = cantidad;
         this.impuestos = impuestos;
-        this.operaciones = operaciones;
     }
  
 }

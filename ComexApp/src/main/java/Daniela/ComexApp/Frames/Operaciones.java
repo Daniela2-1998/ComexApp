@@ -36,10 +36,7 @@ public class Operaciones extends javax.swing.JFrame {
         return retValue;   
     }
     
-    Boolean internacional;
-    Boolean nacional;
-    
-    RegistroOperaciones registroOperaciones = new RegistroOperaciones();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,7 +57,6 @@ public class Operaciones extends javax.swing.JFrame {
         jMenuItemGestion1 = new javax.swing.JMenuItem();
         jMenuItemIngreso1 = new javax.swing.JMenuItem();
         jMenuItemDarDeBaja1 = new javax.swing.JMenuItem();
-        jMenuItemComprasVentas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -173,16 +169,6 @@ public class Operaciones extends javax.swing.JFrame {
         });
         jMenuNac.add(jMenuItemDarDeBaja1);
 
-        jMenuItemComprasVentas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItemComprasVentas.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuItemComprasVentas.setText("Ver compras y ventas nacionales");
-        jMenuItemComprasVentas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemComprasVentasActionPerformed(evt);
-            }
-        });
-        jMenuNac.add(jMenuItemComprasVentas);
-
         jMenuBar.add(jMenuNac);
 
         setJMenuBar(jMenuBar);
@@ -192,48 +178,55 @@ public class Operaciones extends javax.swing.JFrame {
 
     private void jMenuItemGestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGestionActionPerformed
 
+        GestionOperacionInternacional gestionInternacional = new GestionOperacionInternacional();
+        gestionInternacional.setVisible(true);
+        this.dispose();
         
     }//GEN-LAST:event_jMenuItemGestionActionPerformed
 
     private void jMenuItemIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemIngresoActionPerformed
 
-       internacional = true;
-       nacional = false;
-       registroOperaciones.setVisible(true);
+        IngresarNuevaOperacionInternacional ingresoInternacional = new IngresarNuevaOperacionInternacional();
+        ingresoInternacional.setVisible(true);
         
     }//GEN-LAST:event_jMenuItemIngresoActionPerformed
 
     private void jButtonVolver2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolver2ActionPerformed
 
-        
+        PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
+        paginaPrincipal.setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_jButtonVolver2ActionPerformed
 
     private void jMenuItemDarDeBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDarDeBajaActionPerformed
-        
-    
+
+        EliminarOperacion eliminarOperacion = new EliminarOperacion();
+        eliminarOperacion.setVisible(true);
         
     }//GEN-LAST:event_jMenuItemDarDeBajaActionPerformed
 
     private void jMenuItemGestion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGestion1ActionPerformed
-        // TODO add your handling code here:
+        
+        GestionOperacionNacional gestionNacional = new GestionOperacionNacional();
+        gestionNacional.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_jMenuItemGestion1ActionPerformed
 
     private void jMenuItemIngreso1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemIngreso1ActionPerformed
-       
-       internacional = false;
-       nacional = true;
-       registroOperaciones.setVisible(true);
+      
+        IngresarNuevaOperacionNacional ingresoNacional = new IngresarNuevaOperacionNacional();
+        ingresoNacional.setVisible(true);
        
     }//GEN-LAST:event_jMenuItemIngreso1ActionPerformed
 
     private void jMenuItemDarDeBaja1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDarDeBaja1ActionPerformed
-        // TODO add your handling code here:
+        
+        EliminarOperacion eliminarOperacion = new EliminarOperacion();
+        eliminarOperacion.setVisible(true);
+        
     }//GEN-LAST:event_jMenuItemDarDeBaja1ActionPerformed
-
-    private void jMenuItemComprasVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemComprasVentasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemComprasVentasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,7 +268,6 @@ public class Operaciones extends javax.swing.JFrame {
     private javax.swing.JButton jButtonVolver2;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuInt;
-    private javax.swing.JMenuItem jMenuItemComprasVentas;
     private javax.swing.JMenuItem jMenuItemDarDeBaja;
     private javax.swing.JMenuItem jMenuItemDarDeBaja1;
     private javax.swing.JMenuItem jMenuItemGestion;

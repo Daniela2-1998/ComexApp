@@ -24,6 +24,8 @@ public interface DespachantesImpl {
             JTextField textEmpresa, JTextField textMail, JTextField textNumero, 
             JTextField textPais, JTextArea textProductos, JComboBox cmbStatus);
     
+    public void obtenerNombreOIDDelDespachante(int ID, String nombreDespachante);
+    
     public void obtenerDatosDeProductosDelDespachante(JTextField textDespachanteBuscado, 
             JTextField textDespachante, JTextArea textProductos1);
     

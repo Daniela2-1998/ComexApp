@@ -47,7 +47,7 @@ public class Exportadores {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "operaciones_expo",
             joinColumns = @JoinColumn(name = "id_operaciones"))
-    List<Operaciones> operaciones;
+    List<OperacionesInternacionales> operaciones;
     
     
     
@@ -124,11 +124,11 @@ public class Exportadores {
         this.status = status;
     }
 
-    public List<Operaciones> getOperaciones() {
+    public List<OperacionesInternacionales> getOperaciones() {
         return operaciones;
     }
 
-    public void setOperaciones(List<Operaciones> operaciones) {
+    public void setOperaciones(List<OperacionesInternacionales> operaciones) {
         this.operaciones = operaciones;
     }
 
@@ -139,7 +139,7 @@ public class Exportadores {
     public Exportadores() {
     }
 
-    public Exportadores(Integer id, String empresa, String empleado, String pais, String CUIT, String mail, String numero_contacto, String productos_pedidos, String status, List<Operaciones> operaciones) {
+    public Exportadores(Integer id, String empresa, String empleado, String pais, String CUIT, String mail, String numero_contacto, String productos_pedidos, String status, List<OperacionesInternacionales> operaciones) {
         this.id = id;
         this.empresa = empresa;
         this.empleado = empleado;

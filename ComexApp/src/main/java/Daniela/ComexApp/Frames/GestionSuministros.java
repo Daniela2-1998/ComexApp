@@ -167,7 +167,7 @@ public class GestionSuministros extends javax.swing.JFrame {
                     
                     String fechaOperacion = rs.getString("fecha_operacion");
                     Date fechaRegistro = Date.valueOf(fechaOperacion);
-                    textFechaRegistro.setText(fechaRegistro.toString());
+                   
                     
                    // jDateChooserRegistro.setDate(fechaRegistro);
                     
@@ -413,7 +413,6 @@ public class GestionSuministros extends javax.swing.JFrame {
         textDescuento = new javax.swing.JTextField();
         jLabelDestino = new javax.swing.JLabel();
         textDestino = new javax.swing.JTextField();
-        textFechaRegistro = new javax.swing.JTextField();
         jPanelTablaSuministros = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableSuministros = new javax.swing.JTable();
@@ -729,11 +728,6 @@ public class GestionSuministros extends javax.swing.JFrame {
         textDestino.setForeground(new java.awt.Color(0, 0, 153));
         textDestino.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelCampos.add(textDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 220, 110, 30));
-
-        textFechaRegistro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textFechaRegistro.setForeground(new java.awt.Color(0, 0, 153));
-        textFechaRegistro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanelCampos.add(textFechaRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 360, 110, 30));
 
         jPanel1.add(jPanelCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, 720, 400));
 
@@ -1080,7 +1074,6 @@ public class GestionSuministros extends javax.swing.JFrame {
     private javax.swing.JTextField textDescuento;
     private javax.swing.JTextField textDestino;
     private javax.swing.JTextArea textDetalle;
-    private javax.swing.JTextField textFechaRegistro;
     private javax.swing.JTextField textID;
     private javax.swing.JTextField textPaisOrigen;
     private javax.swing.JTextField textPrecioTotal;

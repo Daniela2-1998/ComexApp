@@ -27,7 +27,10 @@ public class DespachantesService implements DespachantesImpl{
     JComboBox cmbStatus = new JComboBox();
     JTextField textDespachante = new JTextField();
     
+    JTextField textNombreDespachante = new JTextField();
+    JTextField textIDDespachante = new JTextField();
     
+
     // conexión
     Conexion cn = new Conexion();
     Connection conec;
@@ -188,6 +191,41 @@ public class DespachantesService implements DespachantesImpl{
     }
      
        
+    public void obtenerNombreOIDDelDespachante(int ID, String nombreDespachante){
+        
+        String sql = null;
+        
+        if(ID == 0 && nombreDespachante.equals("")){
+            sql = "select empleado from despachantes where id_despachantes ='" + ID + "'";
+        } else if (ID > 0 && !nombreDespachante.equals("")){
+            sql = "select id_despachantes from despachantes where "
+                    + "empleado ='" + nombreDespachante + "'";
+        } else if (ID == 0 && !nombreDespachante.equals("")){
+            System.err.println("Por favor ingrese algun dato para recuperar de la base");
+        }
+
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                if(ID == 0 && nombreDespachante.equals("")){
+                    textNombreDespachante.setText(rs.getString("empleado"));
+                }
+
+                if (ID > 0 && !nombreDespachante.equals("")){
+                    textIDDespachante.setText(rs.getString("id_despachantes"));
+                }
+            }
+            
+        }catch(SQLException e){
+            System.err.println("No se puede obtener el nombre o id del despachante " + e);
+            JOptionPane.showMessageDialog(null, "No es posible obtener el nombre o id del despachante " + e);
+        }
+        
+    }
         
     public void obtenerDatosDeProductosDelDespachante(JTextField textDespachanteBuscado, 
             JTextField textDespachante, JTextArea textProductos1){

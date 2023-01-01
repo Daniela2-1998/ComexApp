@@ -67,7 +67,7 @@ public class Stock {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "operaciones_productos",
             joinColumns = @JoinColumn(name = "id_operaciones"))
-    List<Operaciones> operaciones;
+    List<OperacionesInternacionales> operaciones;
 
     
     
@@ -167,11 +167,11 @@ public class Stock {
         this.status = status;
     }
 
-    public List<Operaciones> getOperaciones() {
+    public List<OperacionesInternacionales> getOperaciones() {
         return operaciones;
     }
 
-    public void setOperaciones(List<Operaciones> operaciones) {
+    public void setOperaciones(List<OperacionesInternacionales> operaciones) {
         this.operaciones = operaciones;
     }
 
@@ -190,7 +190,7 @@ public class Stock {
     public Stock() {
     }
 
-    public Stock(Integer id, String comprador, String vendedor, String nombreProducto, String paisOrigen, String codigoProducto, String detalle, String tipo_producto, String cuidados_requeridos, String reserva, String cantidad, String precio_unitario, String status, List<Operaciones> operaciones) {
+    public Stock(Integer id, String comprador, String vendedor, String nombreProducto, String paisOrigen, String codigoProducto, String detalle, String tipo_producto, String cuidados_requeridos, String reserva, String cantidad, String precio_unitario, String status, List<OperacionesInternacionales> operaciones) {
         this.id = id;
         this.comprador = comprador;
         this.vendedor = vendedor;

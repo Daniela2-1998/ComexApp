@@ -19,7 +19,7 @@ import javax.swing.JTextField;
  *
  * @author Daniela
  */
-public class ReabastecimientoService {
+public class ReabastecimientoService implements ReabastecimientoImpl {
     
      // conexión
     Conexion cn = new Conexion();
@@ -249,6 +249,8 @@ public class ReabastecimientoService {
        }
        return eliminacionAprobada;
     }
+
+  
 }
 
 
