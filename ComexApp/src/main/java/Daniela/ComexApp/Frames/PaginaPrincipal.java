@@ -79,7 +79,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuInfo = new javax.swing.JMenu();
         jMenuItemInformacion = new javax.swing.JMenuItem();
-        jMenuItemModificar = new javax.swing.JMenuItem();
         jMenuItemCambioContraseña = new javax.swing.JMenuItem();
         jMenuItemRecupero = new javax.swing.JMenuItem();
         jMenuItemAgendar = new javax.swing.JMenuItem();
@@ -219,15 +218,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         });
         jMenuInfo.add(jMenuItemInformacion);
 
-        jMenuItemModificar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItemModificar.setText("Modificar datos");
-        jMenuItemModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemModificarActionPerformed(evt);
-            }
-        });
-        jMenuInfo.add(jMenuItemModificar);
-
         jMenuItemCambioContraseña.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItemCambioContraseña.setText("Cambiar contraseña");
         jMenuItemCambioContraseña.addActionListener(new java.awt.event.ActionListener() {
@@ -325,12 +315,12 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItemModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemModificarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemModificarActionPerformed
-
     private void jMenuItemInformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInformacionActionPerformed
-        // TODO add your handling code here:
+       
+        InformacionUsuario informacionUsuario = new InformacionUsuario();
+        informacionUsuario.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_jMenuItemInformacionActionPerformed
 
     private void jMenuItemFondoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFondoActionPerformed
@@ -338,7 +328,10 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemFondoActionPerformed
 
     private void jMenuItemCambioContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCambioContraseñaActionPerformed
-        // TODO add your handling code here:
+     
+        CambioContraseña cambioContraseña = new CambioContraseña();
+        cambioContraseña.setVisible(true);
+              
     }//GEN-LAST:event_jMenuItemCambioContraseñaActionPerformed
 
     private void jButtonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarSesionActionPerformed
@@ -361,7 +354,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemDatosUsuariosActionPerformed
 
     private void jMenuItemAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAgendarActionPerformed
-        // TODO add your handling code here:
+      
+        AgendaContactosPersonal agendaContactosPersonal = new AgendaContactosPersonal();
+        agendaContactosPersonal.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_jMenuItemAgendarActionPerformed
 
     private void jMenuItemNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNotasActionPerformed
@@ -491,7 +488,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemDatosUsuarios;
     private javax.swing.JMenuItem jMenuItemFondo;
     private javax.swing.JMenuItem jMenuItemInformacion;
-    private javax.swing.JMenuItem jMenuItemModificar;
     private javax.swing.JMenuItem jMenuItemNotas;
     private javax.swing.JMenuItem jMenuItemRecupero;
     private javax.swing.JMenu jMenuPreferencias;

@@ -21,7 +21,7 @@ public interface UsuariosImpl{
   
  public String obtenerNombreCompleto(String usuario);
   
-  public void obtenerDatosDelUsuario(JTextField textUsuarioBuscado, 
+  public void obtenerDatosDelUsuario(String UsuarioBuscado, 
             JTextField textID, JTextField textUsuario, JTextField textContraseña, 
             JTextField textNombre, JTextField textApellido, JTextField textMail, 
             JTextField textTelefono, JComboBox cmbRol, JComboBox cmbStatus);

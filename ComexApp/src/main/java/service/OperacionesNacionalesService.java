@@ -16,7 +16,7 @@ import javax.swing.JTextField;
  *
  * @author Daniela
  */
-public class OperacionesNacionalesService {
+public class OperacionesNacionalesService implements OperacionesNacionalesImpl{
     
      // conexión
     Conexion cn = new Conexion();

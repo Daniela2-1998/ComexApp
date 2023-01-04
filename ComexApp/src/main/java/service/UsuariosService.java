@@ -157,14 +157,13 @@ public class UsuariosService implements UsuariosImpl{
     
     
     // método obtención datos del usuario
-    public void obtenerDatosDelUsuario(JTextField textUsuarioBuscado, 
+    public void obtenerDatosDelUsuario(String usuarioBuscado, 
             JTextField textID, JTextField textUsuario, JTextField textContraseña, 
             JTextField textNombre, JTextField textApellido, JTextField textMail, 
             JTextField textTelefono, JComboBox cmbRol, JComboBox cmbStatus){
         
-        String usuarioABuscar = textUsuarioBuscado.getText().trim();
         
-        String sql = "select * from usuarios where usuario = '" + usuarioABuscar + "'";
+        String sql = "select * from usuarios where usuario = '" + usuarioBuscado + "'";
         
         try{
             conec = cn.Conexion();

@@ -30,19 +30,11 @@ public class VerUsuario extends javax.swing.JFrame {
         setResizable(false);
         setLayout(null);
         setLocationRelativeTo(null);
-        
-        
-        //usuarioTraido = administrarUsuarios.usuarioBusqueda;
-       // usuario = textUsuarioBuscado.getText().trim();
+
         usuario = textUsuarioBuscado.getText().trim();
         
         setTitle("Informacíón completa del usuario - Administrador - Sistema ComexApp");
         jLabelTitulo.setText("Información completa del usuario");
-       // usuarioBuscado = usuarioABuscar(usuarioTraido, usuario);
-
-       
-       // personalizacionTitulos(usuarioBuscado, usuarioTraido);
-        //usuariosService.obtenerDatosDelUsuario(usuarioTraido);
        
     }
       // icono
@@ -604,7 +596,9 @@ public class VerUsuario extends javax.swing.JFrame {
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
 
-      usuariosService.obtenerDatosDelUsuario(textUsuarioBuscado, textID, 
+      String usuarioBuscado = textUsuarioBuscado.getText().trim();
+      
+      usuariosService.obtenerDatosDelUsuario(usuarioBuscado, textID, 
               textUsuario, textNombre, textNombre, textApellido, textMail, 
               textTelefono, cmbRol, cmbStatus);
       

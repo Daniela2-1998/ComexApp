@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import service.AereoService;
+import service.AgendaPersonalService;
 import service.UsuariosService;
 
 /**
@@ -50,6 +51,7 @@ public class Aereo extends javax.swing.JFrame {
         return retValue;   
     }
     
+    AgendaPersonalService agendaPersonalService = new AgendaPersonalService();
     AereoService aereoService = new AereoService();
     
      // conexión
@@ -174,6 +176,7 @@ public class Aereo extends javax.swing.JFrame {
         jButtonVolver = new javax.swing.JButton();
         textAereoBuscado = new javax.swing.JTextField();
         jToggleButton1 = new javax.swing.JToggleButton();
+        jButtonAgendaPersonal = new javax.swing.JButton();
         jLabelWallp = new javax.swing.JLabel();
         jPanelLista = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -364,6 +367,19 @@ public class Aereo extends javax.swing.JFrame {
         });
         jPanelInfo.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, 300, 40));
 
+        jButtonAgendaPersonal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButtonAgendaPersonal.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonAgendaPersonal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agendar.png"))); // NOI18N
+        jButtonAgendaPersonal.setText("Agendar");
+        jButtonAgendaPersonal.setBorderPainted(false);
+        jButtonAgendaPersonal.setContentAreaFilled(false);
+        jButtonAgendaPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgendaPersonalActionPerformed(evt);
+            }
+        });
+        jPanelInfo.add(jButtonAgendaPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 640, 220, -1));
+
         jLabelWallp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fa.jpg"))); // NOI18N
         jPanelInfo.add(jLabelWallp, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, 1110, 870));
 
@@ -543,6 +559,35 @@ public class Aereo extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
+    private void jButtonAgendaPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgendaPersonalActionPerformed
+
+        String nombre, empresa, mail, numeroContacto, pais,
+        productosAsociados, status, cargo;
+
+        int statusNivel = 0, ID;
+
+        Boolean recepcion;
+
+        ID = Integer.parseInt(textID.getText().trim());
+        empresa = textEmpresa.getText().trim();
+        mail = textMail.getText().trim();
+        nombre = textEmpleado.getText().trim();
+        numeroContacto = textNumero.getText().trim();
+        pais = "-";
+        productosAsociados = "-";
+        status = "Activo";
+        cargo = "Aereo";
+
+
+        recepcion = agendaPersonalService.registroContactoAgendaPersonal(ID, nombre,
+            empresa, mail, numeroContacto, pais, productosAsociados, status,
+            usuario, cargo);
+
+        if(recepcion.equals(true)){
+            LimpiarCamposRegistroAereo();
+        }
+    }//GEN-LAST:event_jButtonAgendaPersonalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -580,6 +625,7 @@ public class Aereo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAgendaPersonal;
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonInfo;

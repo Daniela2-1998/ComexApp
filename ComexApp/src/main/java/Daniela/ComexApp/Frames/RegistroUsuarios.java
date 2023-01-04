@@ -147,6 +147,7 @@ public class RegistroUsuarios extends javax.swing.JFrame {
         jLabelRol.setText("Rol:");
         getContentPane().add(jLabelRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 50, 50));
 
+        cmbRol.setForeground(new java.awt.Color(0, 0, 153));
         cmbRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Importador", "Exportador", "Agente", "Logistica", "Marketing" }));
         getContentPane().add(cmbRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 210, 40));
 

@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import service.AgendaPersonalService;
 import service.DespachantesService;
 import service.UsuariosService;
 
@@ -61,7 +62,8 @@ public class RegistroDespachantes extends javax.swing.JFrame {
     ResultSet rs;
     
     DespachantesService despachantesService = new DespachantesService();
-
+    AgendaPersonalService agendaPersonalService = new AgendaPersonalService(); 
+    
     public void LimpiarCamposRegistroDespachantes(){
         textID.setText("");
         textEmpleado.setText("");
@@ -204,6 +206,7 @@ public class RegistroDespachantes extends javax.swing.JFrame {
         jButtonEliminar = new javax.swing.JButton();
         jButtonBuscar = new javax.swing.JButton();
         textDespachanteBuscado = new javax.swing.JTextField();
+        jButtonAgendaPersonal = new javax.swing.JButton();
         jTabbedPane = new javax.swing.JTabbedPane();
         jPanelContenido = new javax.swing.JPanel();
         jLabelTitulo = new javax.swing.JLabel();
@@ -326,6 +329,17 @@ public class RegistroDespachantes extends javax.swing.JFrame {
         });
         jPanelOpciones.add(jButtonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 250, -1));
         jPanelOpciones.add(textDespachanteBuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 250, 33));
+
+        jButtonAgendaPersonal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButtonAgendaPersonal.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonAgendaPersonal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agendar.png"))); // NOI18N
+        jButtonAgendaPersonal.setText("Agendar");
+        jButtonAgendaPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgendaPersonalActionPerformed(evt);
+            }
+        });
+        jPanelOpciones.add(jButtonAgendaPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 240, -1));
 
         getContentPane().add(jPanelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 800));
 
@@ -945,6 +959,43 @@ public class RegistroDespachantes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textDespachanteActionPerformed
 
+    private void jButtonAgendaPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgendaPersonalActionPerformed
+       
+        String nombre, empresa, mail, numeroContacto, pais, 
+                productosAsociados, status = null, cargo;
+        
+        int statusNivel = 0, ID;
+        
+        Boolean recepcion;
+        
+        ID = Integer.parseInt(textID.getText().trim());
+        empresa = textEmpresa.getText().trim();
+        mail = textMail.getText().trim();
+        nombre = textEmpleado.getText().trim();
+        numeroContacto = textNumero.getText().trim();
+        pais = textPais.getText().trim();
+        productosAsociados = textProductos.getText().trim();
+        statusNivel = cmbStatus.getSelectedIndex() + 1;
+        cargo = "Despachante";
+        
+        if(statusNivel == 1){
+           status = "Activo";
+        } else if (statusNivel == 2){
+           status = "Inactivo";
+        } else if (statusNivel == 3){
+           status = "Suspendido";
+        }
+                   
+        recepcion = agendaPersonalService.registroContactoAgendaPersonal(ID, nombre, 
+                empresa, mail, numeroContacto, pais, productosAsociados, status, 
+                usuario, cargo);
+        
+        if(recepcion.equals(true)){
+           LimpiarCamposRegistroDespachantes();
+        }
+        
+    }//GEN-LAST:event_jButtonAgendaPersonalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -986,6 +1037,7 @@ public class RegistroDespachantes extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbStatus;
     private javax.swing.JComboBox<String> cmbStatus1;
     private javax.swing.JComboBox<String> cmbStatus2;
+    private javax.swing.JButton jButtonAgendaPersonal;
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonInfo;

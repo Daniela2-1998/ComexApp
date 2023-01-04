@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import service.AgendaPersonalService;
 import service.ImportadoresService;
 import service.InicioSesionService;
 import service.UsuariosService;
@@ -20,7 +21,7 @@ import service.UsuariosService;
  */
 public class InformacionImportador extends javax.swing.JFrame {
 
-    String importadorBuscado = "";
+    String importadorBuscado = "", usuario = "";
     /**
      * Creates new form VerUsuario
      */
@@ -32,6 +33,8 @@ public class InformacionImportador extends javax.swing.JFrame {
         setLayout(null);
         setLocationRelativeTo(null);
 
+        PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
+        usuario = paginaPrincipal.usuario;
         
         importadorBuscado = textImportadorBuscado.getText().trim();
         
@@ -46,7 +49,7 @@ public class InformacionImportador extends javax.swing.JFrame {
     }
     
     ImportadoresService importadoresService = new ImportadoresService();
-   
+    AgendaPersonalService agendaPersonalService = new AgendaPersonalService();
    
     public void LimpiarCampos(){
         textEmpresa.setText("");
@@ -77,6 +80,7 @@ public class InformacionImportador extends javax.swing.JFrame {
         jButtonRegistrar = new javax.swing.JButton();
         jButtonBuscar = new javax.swing.JButton();
         textImportadorBuscado = new javax.swing.JTextField();
+        jButtonAgendaPersonal = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabelEmpresa = new javax.swing.JLabel();
         textEmpresa = new javax.swing.JTextField();
@@ -182,7 +186,7 @@ public class InformacionImportador extends javax.swing.JFrame {
                 jButtonRegistrarActionPerformed(evt);
             }
         });
-        jPanelMenu.add(jButtonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 190, 140));
+        jPanelMenu.add(jButtonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 190, 140));
 
         jButtonBuscar.setBackground(new java.awt.Color(0, 0, 153));
         jButtonBuscar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -201,6 +205,17 @@ public class InformacionImportador extends javax.swing.JFrame {
             }
         });
         jPanelMenu.add(textImportadorBuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 217, 33));
+
+        jButtonAgendaPersonal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButtonAgendaPersonal.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonAgendaPersonal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agendar.png"))); // NOI18N
+        jButtonAgendaPersonal.setText("Agendar");
+        jButtonAgendaPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgendaPersonalActionPerformed(evt);
+            }
+        });
+        jPanelMenu.add(jButtonAgendaPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 220, -1));
 
         getContentPane().add(jPanelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 750));
 
@@ -455,6 +470,42 @@ public class InformacionImportador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textImportadorBuscadoActionPerformed
 
+    private void jButtonAgendaPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgendaPersonalActionPerformed
+
+        String nombre, empresa, mail, numeroContacto, pais,
+        productosAsociados, status = null, cargo;
+
+        int statusNivel = 0, ID;
+
+        Boolean recepcion;
+
+        ID = Integer.parseInt(textID.getText().trim());
+        empresa = textEmpresa.getText().trim();
+        mail = textMail.getText().trim();
+        nombre = textEmpleado.getText().trim();
+        numeroContacto = textNumero.getText().trim();
+        pais = textPais.getText().trim();
+        productosAsociados = textProductos.getText().trim();
+        statusNivel = cmbStatus.getSelectedIndex() + 1;
+        cargo = "Importador";
+
+        if(statusNivel == 1){
+            status = "Activo";
+        } else if (statusNivel == 2){
+            status = "Inactivo";
+        } else if (statusNivel == 3){
+            status = "Suspendido";
+        }
+
+        recepcion = agendaPersonalService.registroContactoAgendaPersonal(ID, nombre,
+            empresa, mail, numeroContacto, pais, productosAsociados, status,
+            usuario, cargo);
+
+        if(recepcion.equals(true)){
+            LimpiarCampos();
+        }
+    }//GEN-LAST:event_jButtonAgendaPersonalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -493,6 +544,7 @@ public class InformacionImportador extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbStatus;
+    private javax.swing.JButton jButtonAgendaPersonal;
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonInfo;

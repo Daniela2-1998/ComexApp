@@ -69,27 +69,6 @@ public class OperacionesInternacionales {
     
    @NotBlank
    private String status;
-
-    
-            
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "operaciones_maritimas",
-            joinColumns = @JoinColumn(name = "id_operaciones"))
-    List<Maritimas> maritimas;
-    private String numero_embarqueop;
-    
-    
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "operaciones_aereo",
-            joinColumns = @JoinColumn(name = "id_operaciones"))
-    List<Aereo> aereo;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "operaciones_contenedores",
-            joinColumns = @JoinColumn(name = "id_operaciones"))
-    List<Contenedores> contenedores;
-    
- 
     
     
     
@@ -148,38 +127,6 @@ public class OperacionesInternacionales {
 
     public void setNumero_embarque(String numero_embarque) {
         this.numero_embarque = numero_embarque;
-    }
-
-    public List<Maritimas> getMaritimas() {
-        return maritimas;
-    }
-
-    public void setMaritimas(List<Maritimas> maritimas) {
-        this.maritimas = maritimas;
-    }
-
-    public String getNumero_embarqueop() {
-        return numero_embarqueop;
-    }
-
-    public void setNumero_embarqueop(String numero_embarqueop) {
-        this.numero_embarqueop = numero_embarqueop;
-    }
-
-    public List<Aereo> getAereo() {
-        return aereo;
-    }
-
-    public void setAereo(List<Aereo> aereo) {
-        this.aereo = aereo;
-    }
-
-    public List<Contenedores> getContenedores() {
-        return contenedores;
-    }
-
-    public void setContenedores(List<Contenedores> contenedores) {
-        this.contenedores = contenedores;
     }
 
     public String getCantidadProducto() {
@@ -263,7 +210,11 @@ public class OperacionesInternacionales {
     public OperacionesInternacionales() {
     }
 
-    public OperacionesInternacionales(Integer id, String tipo_operacion, String fecha_operacion, String fecha_ETA, String producto, String detalles, String cantidadProducto, String precioTotal, String comprador, String vendedor, String paisOrigen, String codigo_contenedores, Integer cantidad_contenedores, String numero_embarque, String nombreBuque, String status, List<Maritimas> maritimas, String numero_embarqueop, List<Aereo> aereo, List<Contenedores> contenedores) {
+    public OperacionesInternacionales(Integer id, String tipo_operacion, String fecha_operacion, 
+            String fecha_ETA, String producto, String detalles, String cantidadProducto,
+            String precioTotal, String comprador, String vendedor, String paisOrigen,
+            String codigo_contenedores, Integer cantidad_contenedores, String numero_embarque, 
+            String nombreBuque, String status) {
         this.id = id;
         this.tipo_operacion = tipo_operacion;
         this.fecha_operacion = fecha_operacion;
@@ -280,10 +231,6 @@ public class OperacionesInternacionales {
         this.numero_embarque = numero_embarque;
         this.nombreBuque = nombreBuque;
         this.status = status;
-        this.maritimas = maritimas;
-        this.numero_embarqueop = numero_embarqueop;
-        this.aereo = aereo;
-        this.contenedores = contenedores;
     }
 
 

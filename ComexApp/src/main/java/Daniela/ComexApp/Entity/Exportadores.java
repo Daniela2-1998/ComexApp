@@ -43,13 +43,6 @@ public class Exportadores {
     @NotBlank
     private String status;
     
-    @NotEmpty
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "operaciones_expo",
-            joinColumns = @JoinColumn(name = "id_operaciones"))
-    List<OperacionesInternacionales> operaciones;
-    
-    
     
     
     public Integer getId() {
@@ -124,22 +117,13 @@ public class Exportadores {
         this.status = status;
     }
 
-    public List<OperacionesInternacionales> getOperaciones() {
-        return operaciones;
-    }
-
-    public void setOperaciones(List<OperacionesInternacionales> operaciones) {
-        this.operaciones = operaciones;
-    }
-
-    
-    
     
     
     public Exportadores() {
     }
 
-    public Exportadores(Integer id, String empresa, String empleado, String pais, String CUIT, String mail, String numero_contacto, String productos_pedidos, String status, List<OperacionesInternacionales> operaciones) {
+    public Exportadores(Integer id, String empresa, String empleado, String pais, String CUIT,
+            String mail, String numero_contacto, String productos_pedidos, String status) {
         this.id = id;
         this.empresa = empresa;
         this.empleado = empleado;
@@ -149,7 +133,6 @@ public class Exportadores {
         this.numero_contacto = numero_contacto;
         this.productos_pedidos = productos_pedidos;
         this.status = status;
-        this.operaciones = operaciones;
     }
 
 }

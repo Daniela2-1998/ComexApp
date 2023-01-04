@@ -107,6 +107,60 @@ public class InicioSesionService implements InicioSesionImp{
       return validezInicio;
    }
 
+   public void cambioContraseña(String contraseñaAnterior, String contraseñaNueva,
+           String confirmacion, String usuario){
+       
+       Boolean coincidencia; 
+       int alternativaMensaje;
+       
+       if(contraseñaNueva.equals(confirmacion)){
+           coincidencia = true;
+       } else {
+           JOptionPane.showMessageDialog(null, "Las contraseñas ingresadas no coinciden");
+           coincidencia = false;
+       }
+       
+       if(contraseñaAnterior.equals(contraseñaNueva)){
+           coincidencia = false;
+           JOptionPane.showMessageDialog(null, "La contraseña nueva es identica a la anterior");
+       }
+       
+       if(coincidencia = true){
+       
+           String sql = "update usuarios set contraseña=? where contraseña = '" + 
+                   contraseñaAnterior + "' and usuario = '" + usuario + "'";
+                   
+           try{
+            
+               conec = cn.Conexion();
+               pst = conec.prepareStatement(sql);
+               
+               
+                alternativaMensaje = JOptionPane.showConfirmDialog(null, "¿Quieres modificar la contraseña?");
+
+            if (alternativaMensaje == 0) {
+
+                pst.setString(1, contraseñaNueva); 
+                pst.executeUpdate();
+                
+                conec.close();
+                JOptionPane.showMessageDialog(null, "Modificación éxitosa");
+
+            } else {
+                conec.close();
+                JOptionPane.showMessageDialog(null, "No se modificaron los datos");
+            }
+      
+           }catch(SQLException e){
+               System.err.println("Erro al realizar cambio de contraseña " + e);
+               JOptionPane.showMessageDialog(null, "No es posible realizar el cambio de contraseña");
+           }
+       }
+       
+   }
+  
+  
+  
   
    // métodos obtención datos
    public String obtenerRolUsuario(String usuario, String contraseña){
