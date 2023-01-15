@@ -19,6 +19,12 @@ public interface UsuariosImpl{
   public void modificarAlgunosDatosDeUsuarios(String usuario, String nombreMod, 
              String apellidoMod, String mailMod, String telefonoMod);
   
+ public int obtenerIDUsuario (String usuario, String nombre);
+ 
+ public String obtenerNombre(String usuario);
+  
+ public String obtenerApellido(String usuario);
+ 
  public String obtenerNombreCompleto(String usuario);
   
   public void obtenerDatosDelUsuario(String UsuarioBuscado, 

@@ -52,9 +52,6 @@ public class Importadores extends javax.swing.JFrame {
         jPanelLista = new javax.swing.JPanel();
         jButtonListaImportadores = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jPanelAgenda = new javax.swing.JPanel();
-        jButtonAgenda = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jPanelOpciones = new javax.swing.JPanel();
         jButtonVolverAtras = new javax.swing.JButton();
         jPanelSesion = new javax.swing.JPanel();
@@ -147,43 +144,7 @@ public class Importadores extends javax.swing.JFrame {
         getContentPane().add(jPanelLista, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, 200, 200));
 
         org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder3 = new org.jdesktop.swingx.border.DropShadowBorder();
-        jPanelAgenda.setBorder(dropShadowBorder3);
-
-        jButtonAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agenda.png"))); // NOI18N
-        jButtonAgenda.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel3.setText("Agenda personal");
-
-        javax.swing.GroupLayout jPanelAgendaLayout = new javax.swing.GroupLayout(jPanelAgenda);
-        jPanelAgenda.setLayout(jPanelAgendaLayout);
-        jPanelAgendaLayout.setHorizontalGroup(
-            jPanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelAgendaLayout.createSequentialGroup()
-                .addGroup(jPanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelAgendaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelAgendaLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jButtonAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
-        );
-        jPanelAgendaLayout.setVerticalGroup(
-            jPanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelAgendaLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jButtonAgenda)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(17, 17, 17))
-        );
-
-        getContentPane().add(jPanelAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, -1, 200));
-
-        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder4 = new org.jdesktop.swingx.border.DropShadowBorder();
-        jPanelOpciones.setBorder(dropShadowBorder4);
+        jPanelOpciones.setBorder(dropShadowBorder3);
 
         jButtonVolverAtras.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButtonVolverAtras.setForeground(new java.awt.Color(0, 0, 153));
@@ -218,8 +179,8 @@ public class Importadores extends javax.swing.JFrame {
 
         getContentPane().add(jPanelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 650, -1, 70));
 
-        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder5 = new org.jdesktop.swingx.border.DropShadowBorder();
-        jPanelSesion.setBorder(dropShadowBorder5);
+        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder4 = new org.jdesktop.swingx.border.DropShadowBorder();
+        jPanelSesion.setBorder(dropShadowBorder4);
 
         jLabelBienvenida.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelBienvenida.setForeground(new java.awt.Color(0, 0, 153));
@@ -243,8 +204,8 @@ public class Importadores extends javax.swing.JFrame {
 
         getContentPane().add(jPanelSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 650, 380, 70));
 
-        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder6 = new org.jdesktop.swingx.border.DropShadowBorder();
-        jPanelPedidos.setBorder(dropShadowBorder6);
+        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder5 = new org.jdesktop.swingx.border.DropShadowBorder();
+        jPanelPedidos.setBorder(dropShadowBorder5);
         jPanelPedidos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -266,7 +227,7 @@ public class Importadores extends javax.swing.JFrame {
         });
         jPanelPedidos.add(jButtonListaEmpresas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 140, 100));
 
-        getContentPane().add(jPanelPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, 200, 200));
+        getContentPane().add(jPanelPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 200, 200));
 
         jLabelWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo3.jpg"))); // NOI18N
         getContentPane().add(jLabelWallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 800));
@@ -342,19 +303,16 @@ public class Importadores extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAgenda;
     private javax.swing.JButton jButtonListaEmpresas;
     private javax.swing.JButton jButtonListaImportadores;
     private javax.swing.JButton jButtonRegistro;
     private javax.swing.JButton jButtonVolverAtras;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelBienvenida;
     private javax.swing.JLabel jLabelWallpaper;
-    private javax.swing.JPanel jPanelAgenda;
     private javax.swing.JPanel jPanelLista;
     private javax.swing.JPanel jPanelOpciones;
     private javax.swing.JPanel jPanelPedidos;

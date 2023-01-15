@@ -157,8 +157,6 @@ public class EliminarProductoDeStock extends javax.swing.JFrame {
 
     private void jButtonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtrasActionPerformed
         
-        StockProduccion stockProd = new StockProduccion();
-        stockProd.setVisible(true);
         this.dispose();
         
     }//GEN-LAST:event_jButtonAtrasActionPerformed

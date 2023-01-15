@@ -15,23 +15,21 @@ import javax.swing.JTextField;
  *
  * @author Daniela
  */
-public class AgendaPersonalService {
+public class PreguntasSeguridadService {
     
      // fields
-    JTextField textEmpresa = new JTextField();
-    JTextField textEmpleado = new JTextField();
-    JTextField textPais = new JTextField();
-    JTextField textMail = new JTextField();
-    JTextField textNumero = new JTextField();
-    JTextArea textProductos = new JTextArea();
-    JComboBox cmbStatus = new JComboBox();
-    JTextField textDespachante = new JTextField();
-    JTextField textCargo = new JTextField();
-     
-    JTextField textBuscar= new JTextField();
-    JTextField textID = new JTextField();
+    JTextField IDPreguntas = new JTextField();
+    JTextField textNombre = new JTextField();
+    JTextField textPreguntaUno = new JTextField();
+    JTextField textPreguntaDos = new JTextField();
+    JTextField textPreguntaTres = new JTextField();
+    JTextField textPreguntaExtra = new JTextField();
     
-
+    JComboBox cmbPreguntaUno = new JComboBox();
+    JComboBox cmbPreguntaDos = new JComboBox();
+    JComboBox cmbPreguntaTres = new JComboBox();
+    JComboBox cmbPreguntaExtra = new JComboBox();
+    
     // conexión
     Conexion cn = new Conexion();
     Connection conec;
@@ -43,91 +41,84 @@ public class AgendaPersonalService {
     
     
     
-    public boolean registroContactoAgendaPersonal(int ID, String nombre, 
-            String empresa, String mail, String numeroContacto, String pais,
-            String productosAsociados, String status, String usuario, String cargo){
+    public boolean crearPreguntasDeSeguridad(int ID, String usuario, String nombre, 
+            String preguntaUno, String preguntaDos, String preguntaTres,
+            String eleccionUno, String eleccionDos, String eleccionTres){
         
         Boolean recepcion;
         int avanzar = 0;
 
-       if(empresa.equals("")){
-           textEmpresa.setBackground(Color.red);
+       if(preguntaUno.equals("")){
+           textPreguntaUno.setBackground(Color.red);
            avanzar++;
        }
-       if(nombre.equals("")){
-           textEmpleado.setBackground(Color.red);
+       if(preguntaDos.equals("")){
+           textPreguntaDos.setBackground(Color.red);
            avanzar++;
        }
-       if(mail.equals("")){
-           textMail.setBackground(Color.red);
-           avanzar++;
-       }
-       if(numeroContacto.equals("")){
-           textNumero.setBackground(Color.red);
-           avanzar++;
-       }
-       if(pais.equals("")){
-           textPais.setBackground(Color.red);
-           avanzar++;
-       }
-       if(productosAsociados.equals("")){
-           textProductos.setBackground(Color.red);
-           avanzar++;
-       }
-       if(cargo.equals("")){
-           textCargo.setBackground(Color.red);
+       if(preguntaTres.equals("")){
+           textPreguntaTres.setBackground(Color.red);
            avanzar++;
        }
        
        if(usuario.equals("")){
            avanzar++;
        }
+       
+       if(nombre.equals("")){
+           avanzar++;
+       }
         
-        String sql = "insert into agenda_personal values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into preguntas_seguridad values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        
+        String preguntaExtra = "";
+        String eleccionExtra = "¿Cúal es el nombre de tu primera mascota?";
         
         if(avanzar == 0){
+            
             try{
                 conec = cn.Conexion();
                 pst = conec.prepareStatement(sql);
                 
                 pst.setInt(1, ID);
-                pst.setString(2, empresa);
-                pst.setString(3, mail);
-                pst.setString(4, nombre);
-                pst.setString(5, numeroContacto);
-                pst.setString(6, pais);
-                pst.setString(7, productosAsociados);
-                pst.setString(8, status);
-                pst.setString(9, usuario);
-                pst.setString(10, cargo);
+                pst.setString(2, nombre);
+                pst.setString(3, preguntaDos);
+                pst.setString(4, preguntaExtra);
+                pst.setString(5, preguntaTres);
+                pst.setString(6, preguntaUno);
+                pst.setString(7, usuario);
+                pst.setString(8, eleccionDos);
+                pst.setString(9, eleccionExtra);
+                pst.setString(10, eleccionTres);
+                pst.setString(11, eleccionUno);
                 
                 pst.executeUpdate();
                 conec.close();
                 
-                JOptionPane.showMessageDialog(null, "Se añadió el " + cargo + " "
-                        + nombre + " de " + empresa + " al sistema ComexApp");
+                JOptionPane.showMessageDialog(null, "Preguntas de seguridad "
+                        + "del usuario " + usuario + " registradas");
                 return recepcion = true;
                 
             }catch(SQLException e){
-                JOptionPane.showMessageDialog(null, "No se puede crear un nuevo contacto");
-                System.err.println("No es posible crear contactos" + e);
+                JOptionPane.showMessageDialog(null, "No se pueden registrar las "
+                        + "preguntas de seguridad para " + usuario);
+                System.err.println("No es posible crear preguntas de seguridad" + e);
                 return recepcion = false;
             }
             
         }
         return recepcionFuncion;
     }
-     
-      public void modificarDatosContactoAgendaPersonal(int IDMod, String nombreMod, 
-            String empresaMod, String mailMod, String numeroContactoMod, String paisMod,
-            String productosAsociadosMod, String statusMod, String cargoMod, 
-            String nombre, String usuario){
+
+    public void modificarDatosContactoAgendaPersonal(String preguntaUnoMod, 
+              String preguntaDosMod, String preguntaTresMod, String eleccionUnoMod, 
+              String eleccionDosMod, String eleccionTresMod, String nombre, String usuario){
         
         int alternativaMensaje;
 
-        String sql = "update agenda_personal set empresa=?, mail=?, nombre=?, "
-                + "numero_contacto=?, pais=?, productos=?, status=?, cargo=? "
-                + "where nombre = '" + nombre + "' and usuario_registrador ='" + usuario + "'";
+        String sql = "update preguntas_seguridad set pregunta_dos=?, pregunta_tres=?, "
+                + "pregunta_uno=?, eleccion_dos=?, eleccion_tres=?, eleccion_uno=? "
+                + "where nombre = '" + nombre + "' and usuario ='" + usuario + "'";
 
         try {
             conec = cn.Conexion();
@@ -137,14 +128,13 @@ public class AgendaPersonalService {
 
             if (alternativaMensaje == 0) {
 
-                pst.setString(1, empresaMod);
-                pst.setString(2, mailMod);
-                pst.setString(3, nombreMod);
-                pst.setString(4, numeroContactoMod);
-                pst.setString(5, paisMod);
-                pst.setString(6, productosAsociadosMod);
-                pst.setString(7, statusMod);
-                pst.setString(8, cargoMod);
+                pst.setString(1, preguntaDosMod);
+                pst.setString(2, preguntaTresMod);
+                pst.setString(3, preguntaUnoMod);
+                pst.setString(4, eleccionDosMod);
+                pst.setString(5, eleccionTresMod);
+                pst.setString(6, eleccionUnoMod);
+                
                 
                 pst.executeUpdate();
                 conec.close();
@@ -161,14 +151,15 @@ public class AgendaPersonalService {
         }
     }
     
-      public void obtenerDatosDelContactoPersonal(JTextField textBuscar, 
-            JTextField textID, JTextField textEmpleado, JTextField textEmpresa, 
-            JTextField textMail, JTextField textNumero, JTextField textPais, 
-            JTextArea textProductos, JComboBox cmbStatus, JComboBox cmbCargo){
+     
+    public void recuperarLasPreguntasDeSeguridadYSusRespuestas(JTextField textPreguntaUno, 
+            JTextField textPreguntaDos, JTextField textPreguntaTres, 
+            JComboBox cmbPreguntaUno, JComboBox cmbPreguntaDos, JComboBox cmbPreguntaTres,
+            String usuario, String nombre){
         
-         String contactoABuscar = textBuscar.getText().trim();
-        
-        String sql = "select * from agenda_personal where nombre = '" + contactoABuscar + "'";
+        String sql = "select pregunta_dos, pregunta_tres, pregunta_uno, eleccion_dos, "
+                + "eleccion_tres, eleccion_uno from preguntas_seguridad where "
+                + "usuario = '" + usuario + "' and nombre = '" + nombre + "'";
         
         try{
             conec = cn.Conexion();
@@ -176,36 +167,34 @@ public class AgendaPersonalService {
             rs = pst.executeQuery();
             
             if(rs.next()){
-
-                textID.setText(rs.getString("id_agenda"));
-                textEmpresa.setText(rs.getString("empresa"));
-                textMail.setText(rs.getString("mail"));
-                textEmpleado.setText(rs.getString("nombre"));
-                textNumero.setText(rs.getString("numero_contacto")); 
-                textPais.setText(rs.getString("pais"));
-                textProductos.setText(rs.getString("productos"));
-                cmbStatus.setSelectedItem("status");
-                cmbCargo.setSelectedItem(rs.getString("cargo"));
+                
+                textPreguntaUno.setText(rs.getString("pregunta_uno"));
+                textPreguntaDos.setText(rs.getString("pregunta_dos"));
+                textPreguntaTres.setText(rs.getString("pregunta_tres"));
+                cmbPreguntaUno.setSelectedItem("eleccion_uno");
+                cmbPreguntaDos.setSelectedItem("eleccion_dos");
+                cmbPreguntaTres.setSelectedItem("eleccion_tres");
+                
             } else {
-                JOptionPane.showMessageDialog(null, "No es posible conseguir "
-                        + "los datos del contacto solicitado");
-                System.err.println("No es posible conseguir los datos del contacto "
-                        + "solicitado");
+                JOptionPane.showMessageDialog(null, "No hay preguntas de seguridad "
+                        + "cargadas para " + usuario);
+                System.err.println("No hay preguntas cargadas");
             }
             conec.close();
             
         }catch(SQLException e){
-            System.err.println("Error al obtener los datos del contacto solicitado" + e);
+            System.err.println("Error al obtener los datos del usuario solicitado" + e);
             JOptionPane.showMessageDialog(null, "No se pueden obtener los datos del "
-                    + "contacto solicitado");
+                    + "usuario solicitado");
         }
-        
     }
+
      
-     public boolean eliminarContactoPersonal(String nombre, int id){
+      
+    public boolean eliminarPreguntasDeSeguridad(String nombre, int id){
        
-        String sql = "delete from agenda_personal where nombre = '" + nombre + "' "
-               + "and id_agenda = '" + id + "'";
+        String sql = "delete from preguntas_seguridad where nombre = '" + nombre + "' "
+               + "and id_preguntas = '" + id + "'";
        
        int alternativaMensaje;
        Boolean aprobado;
@@ -238,6 +227,6 @@ public class AgendaPersonalService {
        }
        return eliminacionAprobada;
     }
-    
+   
     
 }

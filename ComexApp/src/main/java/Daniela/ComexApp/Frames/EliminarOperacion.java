@@ -173,8 +173,6 @@ public class EliminarOperacion extends javax.swing.JFrame {
 
     private void jButtonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtrasActionPerformed
         
-        Operaciones operaciones = new Operaciones();
-        operaciones.setVisible(true);
         this.dispose();
         
     }//GEN-LAST:event_jButtonAtrasActionPerformed

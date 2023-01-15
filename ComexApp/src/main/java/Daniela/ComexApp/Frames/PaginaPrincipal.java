@@ -63,7 +63,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
         jPanel3 = new javax.swing.JPanel();
         jLabelTitulo = new javax.swing.JLabel();
         jButtonImportadores = new javax.swing.JButton();
@@ -91,8 +90,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jMenuItemDatosUsuarios = new javax.swing.JMenuItem();
         jMenuItemControl = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-
-        jPopupMenu1.setPopupSize(new java.awt.Dimension(200, 200));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -362,11 +359,19 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemAgendarActionPerformed
 
     private void jMenuItemNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNotasActionPerformed
-        // TODO add your handling code here:
+        
+        StickyNotes stickyNotes = new StickyNotes();
+        stickyNotes.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_jMenuItemNotasActionPerformed
 
     private void jMenuItemRecuperoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRecuperoActionPerformed
-        // TODO add your handling code here:
+        
+        PreguntasDeSeguridad preguntasDeSeguridad = new PreguntasDeSeguridad();
+        preguntasDeSeguridad.setVisible(true);
+        this.dispose();
+                
     }//GEN-LAST:event_jMenuItemRecuperoActionPerformed
 
     private void jMenuItemCalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCalendarioActionPerformed
@@ -492,6 +497,5 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemRecupero;
     private javax.swing.JMenu jMenuPreferencias;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPopupMenu jPopupMenu1;
     // End of variables declaration//GEN-END:variables
 }

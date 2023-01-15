@@ -62,7 +62,8 @@ public class InicioSesionService implements InicioSesionImp{
     
     JLabel jLabelMensaje = new JLabel();
    
-    //UsuariosServ usuariosServ = new UsuariosServ();
+    String contraseñaRecuperada;
+    String usuarioRecuperado;
     
     
     
@@ -79,6 +80,12 @@ public class InicioSesionService implements InicioSesionImp{
         
       if(usuario.isBlank() && contraseña.isBlank()){
           JOptionPane.showMessageDialog(null, "Los campos estan vacios");
+          if(usuario.isBlank()){
+              JOptionPane.showMessageDialog(null, "Debes ingresar un usuario");
+          }
+          if(contraseña.isBlank()){
+              JOptionPane.showMessageDialog(null, "Debes ingresar una contraseña");
+          }
       } 
       
       String sql = "select usuario, contraseña from usuarios where usuario = '" 
@@ -103,6 +110,8 @@ public class InicioSesionService implements InicioSesionImp{
             JOptionPane.showMessageDialog(null, "No se pudo iniciar sesión");
         }
         
+      } else {
+          JOptionPane.showMessageDialog(null, "Debes ingresar un usuario y contraseña");
       } 
       return validezInicio;
    }
@@ -155,6 +164,8 @@ public class InicioSesionService implements InicioSesionImp{
                System.err.println("Erro al realizar cambio de contraseña " + e);
                JOptionPane.showMessageDialog(null, "No es posible realizar el cambio de contraseña");
            }
+       } else{
+           JOptionPane.showMessageDialog(null, "No es posible realizar el cambio de contraseña");
        }
        
    }
@@ -207,6 +218,42 @@ public class InicioSesionService implements InicioSesionImp{
    }
  
 
+   public String recuperoContraseña (String usuario, String nombre, String apellido){
+        
+       int avanzar = 0;
+       
+       String sql = "select contraseña from usuarios where usuario = '" + usuario +
+               "' and nombre = '" + nombre + "' and apellido = '" + apellido + "'";
+       
+       if(usuario.equals("")){
+           avanzar++;
+       }
+       
+       if(nombre.equals("")){
+           avanzar++;
+       }
+       
+       if(avanzar == 0){
+           try{
+               conec = cn.Conexion();
+               pst = conec.prepareStatement(sql);
+               rs = pst.executeQuery();
+               
+               if(rs.next()){
+                   String contraseña = rs.getString("contraseña");
+               }
+               conec.close();
+               
+           }catch(SQLException e){
+               System.err.println("No se puede recuperar la contraseña " + e);
+               JOptionPane.showMessageDialog(null, "No es posible recuperar la "
+                       + "contraseña de " + usuario);
+           }
+       }else {
+           JOptionPane.showMessageDialog(null, "Usuario o nombre no encontrado");
+       }
+       return contraseñaRecuperada;
+   }
    
    public Usuarios agregarUsuario(Integer id, String usuario, String contraseña, String nombre, 
            String apellido, String rol, String mail, String telefono, String status){

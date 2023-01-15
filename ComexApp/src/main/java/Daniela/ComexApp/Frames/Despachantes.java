@@ -41,7 +41,6 @@ public class Despachantes extends javax.swing.JFrame {
         
         jPanelRegistro.setVisible(false);
         jPanelLista.setVisible(false);
-        jPanelAgenda.setVisible(false);
         jPanelPedidos.setVisible(false);
         
         alternarVistas();
@@ -65,7 +64,6 @@ public class Despachantes extends javax.swing.JFrame {
                    jMenuBar1.setVisible(false);
                    jPanelRegistro.setVisible(true);
                    jPanelLista.setVisible(true);
-                   jPanelAgenda.setVisible(true);
                    jPanelPedidos.setVisible(true);
                 }
             }    
@@ -105,9 +103,6 @@ public class Despachantes extends javax.swing.JFrame {
         jPanelLista = new javax.swing.JPanel();
         jButtonListaImportadores = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jPanelAgenda = new javax.swing.JPanel();
-        jButtonAgenda = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jPanelPedidos = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -267,43 +262,7 @@ public class Despachantes extends javax.swing.JFrame {
         getContentPane().add(jPanelLista, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, 200, 200));
 
         org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder5 = new org.jdesktop.swingx.border.DropShadowBorder();
-        jPanelAgenda.setBorder(dropShadowBorder5);
-
-        jButtonAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agenda.png"))); // NOI18N
-        jButtonAgenda.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel3.setText("Agenda personal");
-
-        javax.swing.GroupLayout jPanelAgendaLayout = new javax.swing.GroupLayout(jPanelAgenda);
-        jPanelAgenda.setLayout(jPanelAgendaLayout);
-        jPanelAgendaLayout.setHorizontalGroup(
-            jPanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelAgendaLayout.createSequentialGroup()
-                .addGroup(jPanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelAgendaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelAgendaLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jButtonAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
-        );
-        jPanelAgendaLayout.setVerticalGroup(
-            jPanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelAgendaLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jButtonAgenda)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(17, 17, 17))
-        );
-
-        getContentPane().add(jPanelAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, -1, 200));
-
-        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder6 = new org.jdesktop.swingx.border.DropShadowBorder();
-        jPanelPedidos.setBorder(dropShadowBorder6);
+        jPanelPedidos.setBorder(dropShadowBorder5);
         jPanelPedidos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -325,7 +284,7 @@ public class Despachantes extends javax.swing.JFrame {
         });
         jPanelPedidos.add(jButtonListaEmpresas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 140, 100));
 
-        getContentPane().add(jPanelPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 190, 200, 200));
+        getContentPane().add(jPanelPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, 200, 200));
 
         jLabelWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo3.jpg"))); // NOI18N
         getContentPane().add(jLabelWallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -30, 1060, 800));
@@ -490,14 +449,12 @@ public class Despachantes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAgenda;
     private javax.swing.JButton jButtonListaEmpresas;
     private javax.swing.JButton jButtonListaImportadores;
     private javax.swing.JButton jButtonRegistro;
     private javax.swing.JButton jButtonVolverAtras;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelBienvenida;
@@ -512,7 +469,6 @@ public class Despachantes extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuLista;
     private javax.swing.JMenu jMenuNombre;
     private javax.swing.JMenu jMenuVacio;
-    private javax.swing.JPanel jPanelAgenda;
     private javax.swing.JPanel jPanelLista;
     private javax.swing.JPanel jPanelOpciones;
     private javax.swing.JPanel jPanelPedidos;

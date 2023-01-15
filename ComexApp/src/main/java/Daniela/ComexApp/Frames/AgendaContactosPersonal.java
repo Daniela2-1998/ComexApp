@@ -25,7 +25,7 @@ public class AgendaContactosPersonal extends javax.swing.JFrame {
 
     String nombreCompleto = "", usuario = "";
     /**
-     * Creates new form VerUsuario
+     * Creates new form AgendaContactosPersonal
      */
     public AgendaContactosPersonal() {
         initComponents();
@@ -174,6 +174,7 @@ public class AgendaContactosPersonal extends javax.swing.JFrame {
         jButtonRegistrar = new javax.swing.JButton();
         jButtonBuscar = new javax.swing.JButton();
         textBuscar = new javax.swing.JTextField();
+        jButtonLimpiar = new javax.swing.JButton();
         jPanelInfo = new javax.swing.JPanel();
         jLabelEmpresa = new javax.swing.JLabel();
         textEmpresa = new javax.swing.JTextField();
@@ -260,7 +261,7 @@ public class AgendaContactosPersonal extends javax.swing.JFrame {
                 jButtonModificarActionPerformed(evt);
             }
         });
-        jPanelMenu.add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 220, -1));
+        jPanelMenu.add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 220, -1));
 
         jButtonEliminar.setBackground(new java.awt.Color(0, 0, 153));
         jButtonEliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -271,7 +272,7 @@ public class AgendaContactosPersonal extends javax.swing.JFrame {
                 jButtonEliminarActionPerformed(evt);
             }
         });
-        jPanelMenu.add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 220, -1));
+        jPanelMenu.add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 220, -1));
 
         jButtonRegistrar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButtonRegistrar.setForeground(new java.awt.Color(0, 0, 153));
@@ -305,6 +306,17 @@ public class AgendaContactosPersonal extends javax.swing.JFrame {
             }
         });
         jPanelMenu.add(textBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 217, 33));
+
+        jButtonLimpiar.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonLimpiar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonLimpiar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonLimpiar.setText("Limpiar busqueda");
+        jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimpiarActionPerformed(evt);
+            }
+        });
+        jPanelMenu.add(jButtonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 217, 20));
 
         getContentPane().add(jPanelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 750));
 
@@ -673,6 +685,14 @@ public class AgendaContactosPersonal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuListaMouseClicked
 
+    private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
+        
+        LimpiarCampos();
+        mostrarTodosLosDatosContacto();
+        mostrarTodosLosDatosProducto();
+        
+    }//GEN-LAST:event_jButtonLimpiarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -717,6 +737,7 @@ public class AgendaContactosPersonal extends javax.swing.JFrame {
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonInfo;
+    private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JButton jButtonVolverAtras;

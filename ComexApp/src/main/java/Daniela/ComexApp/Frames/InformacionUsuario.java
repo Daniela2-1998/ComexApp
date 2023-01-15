@@ -9,9 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import service.AgendaPersonalService;
-import service.ImportadoresService;
-import service.InicioSesionService;
+import service.PreguntasSeguridadService;
 import service.UsuariosService;
 
 /**
@@ -21,7 +19,7 @@ import service.UsuariosService;
  */
 public class InformacionUsuario extends javax.swing.JFrame {
 
-    String usuario = "", nombreCompleto = "", rol = "", contraseña = "";
+    String usuario = "", nombreCompleto = "", rol = "", contraseña = "", nombre = "";
     /**
      * Creates new form VerUsuario
      */
@@ -38,11 +36,13 @@ public class InformacionUsuario extends javax.swing.JFrame {
         nombreCompleto = paginaPrincipal.nombreCompleto;
         rol = paginaPrincipal.rol;    
         contraseña = paginaPrincipal.contraseña;
+        nombre = usuariosService.obtenerNombre(usuario);
         
         setTitle("Informacíón completa de " + usuario + " - Sistema ComexApp");
         jLabelTitulo.setText("Información completa de " + nombreCompleto);
         
         jLabelUsuario1.setText(usuario);
+        jLabelUsuario2.setText(rol);
         
         usuariosService.obtenerDatosDelUsuario(usuario, textID, textUsuario,
                 textContraseña, textNombre, textApellido, textMail, textApellido, 
@@ -54,7 +54,7 @@ public class InformacionUsuario extends javax.swing.JFrame {
         return retValue;   
     }
     UsuariosService usuariosService = new UsuariosService();
-    
+    PreguntasSeguridadService preguntasSeguridadService = new PreguntasSeguridadService();
     
     public void LimpiarCampos(){
         textUsuario.setText("");
@@ -83,6 +83,8 @@ public class InformacionUsuario extends javax.swing.JFrame {
         jButtonVolverAtras = new javax.swing.JButton();
         jButtonModificar = new javax.swing.JButton();
         jLabelUsuario1 = new javax.swing.JLabel();
+        jLabelUsuario2 = new javax.swing.JLabel();
+        jButtonPreguntas = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabelUsuario = new javax.swing.JLabel();
         textUsuario = new javax.swing.JTextField();
@@ -161,11 +163,30 @@ public class InformacionUsuario extends javax.swing.JFrame {
                 jButtonModificarActionPerformed(evt);
             }
         });
-        jPanelMenu.add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 210, -1));
+        jPanelMenu.add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 240, -1));
 
         jLabelUsuario1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabelUsuario1.setForeground(new java.awt.Color(0, 0, 153));
+        jLabelUsuario1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelUsuario1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanelMenu.add(jLabelUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 150, 200, 40));
+
+        jLabelUsuario2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabelUsuario2.setForeground(new java.awt.Color(0, 0, 153));
+        jLabelUsuario2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelUsuario2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanelMenu.add(jLabelUsuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 200, 40));
+
+        jButtonPreguntas.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonPreguntas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonPreguntas.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonPreguntas.setText("Preguntas de seguridad ");
+        jButtonPreguntas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPreguntasActionPerformed(evt);
+            }
+        });
+        jPanelMenu.add(jButtonPreguntas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 240, 30));
 
         getContentPane().add(jPanelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 750));
 
@@ -353,6 +374,16 @@ public class InformacionUsuario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonInfoActionPerformed
 
+    private void jButtonPreguntasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPreguntasActionPerformed
+        
+        PreguntasDeSeguridad preguntasSeguridad = new PreguntasDeSeguridad();
+        preguntasSeguridad.setVisible(true);
+        this.dispose();
+        preguntasSeguridadService.recuperarLasPreguntasDeSeguridadYSusRespuestas
+        (textUsuario, textApellido, textNombre, cmbStatus, cmbStatus, cmbStatus, usuario, nombre);
+      
+    }//GEN-LAST:event_jButtonPreguntasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -396,6 +427,7 @@ public class InformacionUsuario extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbStatus;
     private javax.swing.JButton jButtonInfo;
     private javax.swing.JButton jButtonModificar;
+    private javax.swing.JButton jButtonPreguntas;
     private javax.swing.JButton jButtonVolverAtras;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelApellido;
@@ -410,6 +442,7 @@ public class InformacionUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JLabel jLabelUsuario1;
+    private javax.swing.JLabel jLabelUsuario2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelArriba;
     private javax.swing.JPanel jPanelMenu;

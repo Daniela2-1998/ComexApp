@@ -33,7 +33,7 @@ public class VerUsuario extends javax.swing.JFrame {
 
         usuario = textUsuarioBuscado.getText().trim();
         
-        setTitle("Informacíón completa del usuario - Administrador - Sistema ComexApp");
+        setTitle("Información completa del usuario - Administrador - Sistema ComexApp");
         jLabelTitulo.setText("Información completa del usuario");
        
     }

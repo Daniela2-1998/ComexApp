@@ -22,7 +22,7 @@ public class Aereo extends javax.swing.JFrame {
 
     public String usuario = "", nombreCompleto = "", rol = "";
     /**
-     * Creates new form Maritimas
+     * Creates new form Aereo
      */
     public Aereo() {
         initComponents();

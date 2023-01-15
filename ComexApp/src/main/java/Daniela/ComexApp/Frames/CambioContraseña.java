@@ -15,12 +15,12 @@ public class CambioContraseña extends javax.swing.JFrame {
 
      String usuario = "", nombreCompleto = "", contraseña = "";
     /**
-     * Creates new form IngresarNuevosProductosAStock
+     * Creates new form CambioContraseña
      */
     public CambioContraseña() {
         initComponents();
         
-        setSize(400, 500);
+        setSize(460, 400);
         setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -69,7 +69,7 @@ public class CambioContraseña extends javax.swing.JFrame {
         jLabelContraseña1 = new javax.swing.JLabel();
         textContraseñaNueva = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(getLogo());
         setIconImages(getIconImages());
 
@@ -139,11 +139,15 @@ public class CambioContraseña extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();

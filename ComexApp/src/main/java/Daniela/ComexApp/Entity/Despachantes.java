@@ -48,14 +48,6 @@ public class Despachantes {
     @NotBlank
     private String status;
     
-    @NotEmpty
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "operaciones_despachante",
-            joinColumns = @JoinColumn(name = "id_operaciones"))
-    List<OperacionesInternacionales> operaciones;
-
-    
-    
     
     public Integer getId() {
         return id;
@@ -120,22 +112,12 @@ public class Despachantes {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    public List<OperacionesInternacionales> getOperaciones() {
-        return operaciones;
-    }
-
-    public void setOperaciones(List<OperacionesInternacionales> operaciones) {
-        this.operaciones = operaciones;
-    }
-
-    
-    
+ 
     
     public Despachantes() {
     }
 
-    public Despachantes(Integer id, String empresa, String empleado, String pais, String mail, String numero_contacto, String productos_asociados, String status, List<OperacionesInternacionales> operaciones) {
+    public Despachantes(Integer id, String empresa, String empleado, String pais, String mail, String numero_contacto, String productos_asociados, String status) {
         this.id = id;
         this.empresa = empresa;
         this.empleado = empleado;
@@ -144,7 +126,6 @@ public class Despachantes {
         this.numero_contacto = numero_contacto;
         this.productos_asociados = productos_asociados;
         this.status = status;
-        this.operaciones = operaciones;
     }
     
     

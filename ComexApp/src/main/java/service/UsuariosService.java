@@ -51,6 +51,9 @@ public class UsuariosService implements UsuariosImpl{
     Boolean eliminacionAprobada;
     
     String nombreCompleto;
+    String nombre;
+    String apellido;
+    int ID;
     
     //                              METODOS   
     
@@ -131,11 +134,74 @@ public class UsuariosService implements UsuariosImpl{
      }
     }
      
+    public int obtenerIDUsuario (String usuario, String nombre){
+        
+        String sql = "select id_usuarios from usuarios where usuario = '" + usuario +
+                "' and nombre = '" + nombre + "'";
           
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                ID = rs.getInt("id_usuarios") ; 
+            }
+           
+        }catch(SQLException e){
+            System.err.println("No es posible recuperar el ID" + e);
+            JOptionPane.showMessageDialog(null, "No es posible obtener el ID del usuario ");
+        }
+        return ID;
+        
+    }
+     
+    public String obtenerNombre(String usuario){
+        
+        String sql = "select nombre from usuarios where usuario = '" + usuario + "'";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+               nombre = rs.getString("nombre") ; 
+            }
+            conec.close();
+            
+        }catch(SQLException e){
+            System.err.println("No es posible recuperar nombre" + e);
+            JOptionPane.showMessageDialog(null, "No es posible obtener nombre del usuario ");
+        }
+        return nombre;
+    }    
+    
+       public String obtenerApellido(String usuario){
+        
+        String sql = "select apellido from usuarios where usuario = '" + usuario + "'";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                apellido = rs.getString("apellido") ; 
+            }
+           
+        }catch(SQLException e){
+            System.err.println("No es posible recuperar el apellido" + e);
+            JOptionPane.showMessageDialog(null, "No es posible obtener apellido del usuario ");
+        }
+        return nombre;
+    }    
+    
+     
     public String obtenerNombreCompleto(String usuario){
         
         String sql = "select nombre, apellido from usuarios where usuario = '" + usuario + "'";
-        
+         
         try{
             conec = cn.Conexion();
             pst = conec.prepareStatement(sql);

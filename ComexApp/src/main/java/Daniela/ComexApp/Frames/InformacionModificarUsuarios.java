@@ -63,6 +63,7 @@ public class InformacionModificarUsuarios extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("Información importante:");
 
+        jTextPane1.setEditable(false);
         jTextPane1.setText("Entra a \"información usuarios\" si deseas modificar por completo la información de un usuario en concreto. \nSi por el contrario, deseas modificar los campos mencionados arriba, modificalos con este botón.");
         jScrollPane4.setViewportView(jTextPane1);
 
@@ -159,28 +160,10 @@ public class InformacionModificarUsuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonVolverAtras;
-    private javax.swing.JButton jButtonVolverAtras1;
-    private javax.swing.JButton jButtonVolverAtras2;
     private javax.swing.JButton jButtonVolverAtras3;
-    private javax.swing.JEditorPane jEditorPane1;
-    private javax.swing.JEditorPane jEditorPane2;
-    private javax.swing.JEditorPane jEditorPane3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables

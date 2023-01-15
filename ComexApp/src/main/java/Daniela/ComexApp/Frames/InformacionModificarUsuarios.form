@@ -117,6 +117,7 @@
           <SubComponents>
             <Component class="javax.swing.JTextPane" name="jTextPane1">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="text" type="java.lang.String" value="Entra a &quot;informaci&#xf3;n usuarios&quot; si deseas modificar por completo la informaci&#xf3;n de un usuario en concreto. &#xa;Si por el contrario, deseas modificar los campos mencionados arriba, modificalos con este bot&#xf3;n."/>
               </Properties>
             </Component>

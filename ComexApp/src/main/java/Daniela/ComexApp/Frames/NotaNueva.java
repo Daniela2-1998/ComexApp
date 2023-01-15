@@ -7,16 +7,17 @@ import java.awt.Toolkit;
  *
  * @author Daniela
  */
-public class Operaciones extends javax.swing.JFrame {
+public class NotaNueva extends javax.swing.JFrame {
 
-     String usuario = "", rol = "", nombreCompleto = "";
+     String usuario = "", titulo = "";
+     int id = 0;
     /**
      * Creates new form StockProduccion
      */
-    public Operaciones() {
+    public NotaNueva() {
         initComponents();
         
-        setSize(700, 500);
+        setSize(200, 200);
         setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -24,9 +25,10 @@ public class Operaciones extends javax.swing.JFrame {
         PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
         
         usuario = paginaPrincipal.usuario;
-        nombreCompleto = paginaPrincipal.nombreCompleto;
-        
-        setTitle("Menú de operaciones - " + usuario + " - sistema ComexApp");
+        id = Integer.parseInt(textID.getText().trim());
+        titulo = textTitulo.getText().trim();
+ 
+        setTitle("Datos nueva nota - " + usuario + " - sistema ComexApp");
         
     }
 
@@ -47,186 +49,61 @@ public class Operaciones extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButtonVolver2 = new javax.swing.JButton();
-        jMenuBar = new javax.swing.JMenuBar();
-        jMenuInt = new javax.swing.JMenu();
-        jMenuItemGestion = new javax.swing.JMenuItem();
-        jMenuItemIngreso = new javax.swing.JMenuItem();
-        jMenuItemDarDeBaja = new javax.swing.JMenuItem();
-        jMenuNac = new javax.swing.JMenu();
-        jMenuItemGestion1 = new javax.swing.JMenuItem();
-        jMenuItemIngreso1 = new javax.swing.JMenuItem();
-        jMenuItemDarDeBaja1 = new javax.swing.JMenuItem();
+        textTitulo = new javax.swing.JTextField();
+        jLabelTitulo = new javax.swing.JLabel();
+        jLabelTitulo1 = new javax.swing.JLabel();
+        textID = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(getLogo());
         setIconImages(getIconImages());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 153));
 
-        jButtonVolver2.setBackground(new java.awt.Color(0, 0, 153));
-        jButtonVolver2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonVolver2.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonVolver2.setText("Volver");
-        jButtonVolver2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonVolver2ActionPerformed(evt);
-            }
-        });
+        textTitulo.setForeground(new java.awt.Color(0, 0, 153));
+
+        jLabelTitulo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTitulo.setText("Titulo:");
+
+        jLabelTitulo1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelTitulo1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTitulo1.setText("N°:");
+
+        textID.setForeground(new java.awt.Color(0, 0, 153));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(289, 289, 289)
-                .addComponent(jButtonVolver2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1117, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(1343, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(218, 218, 218)
-                .addComponent(jButtonVolver2)
-                .addContainerGap(630, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addComponent(jLabelTitulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelTitulo1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(743, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 880));
 
-        jMenuBar.setBackground(new java.awt.Color(204, 204, 204));
-        jMenuBar.setForeground(new java.awt.Color(0, 0, 153));
-
-        jMenuInt.setBackground(new java.awt.Color(204, 204, 204));
-        jMenuInt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/international.png"))); // NOI18N
-        jMenuInt.setText("Operaciones internacionales");
-        jMenuInt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
-        jMenuItemGestion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItemGestion.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuItemGestion.setText("Gestión de operaciones internacionales");
-        jMenuItemGestion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemGestionActionPerformed(evt);
-            }
-        });
-        jMenuInt.add(jMenuItemGestion);
-
-        jMenuItemIngreso.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItemIngreso.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuItemIngreso.setText("Ingresar nuevas operaciones al sistema");
-        jMenuItemIngreso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemIngresoActionPerformed(evt);
-            }
-        });
-        jMenuInt.add(jMenuItemIngreso);
-
-        jMenuItemDarDeBaja.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItemDarDeBaja.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuItemDarDeBaja.setText("Eliminar operación del sistema");
-        jMenuItemDarDeBaja.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemDarDeBajaActionPerformed(evt);
-            }
-        });
-        jMenuInt.add(jMenuItemDarDeBaja);
-
-        jMenuBar.add(jMenuInt);
-
-        jMenuNac.setBackground(new java.awt.Color(204, 204, 204));
-        jMenuNac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/national.png"))); // NOI18N
-        jMenuNac.setText("Operaciones nacionales");
-        jMenuNac.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
-        jMenuItemGestion1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItemGestion1.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuItemGestion1.setText("Gestión de operaciones nacionales");
-        jMenuItemGestion1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemGestion1ActionPerformed(evt);
-            }
-        });
-        jMenuNac.add(jMenuItemGestion1);
-
-        jMenuItemIngreso1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItemIngreso1.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuItemIngreso1.setText("Ingresar nuevas operaciones al sistema");
-        jMenuItemIngreso1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemIngreso1ActionPerformed(evt);
-            }
-        });
-        jMenuNac.add(jMenuItemIngreso1);
-
-        jMenuItemDarDeBaja1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItemDarDeBaja1.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuItemDarDeBaja1.setText("Eliminar operación del sistema");
-        jMenuItemDarDeBaja1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemDarDeBaja1ActionPerformed(evt);
-            }
-        });
-        jMenuNac.add(jMenuItemDarDeBaja1);
-
-        jMenuBar.add(jMenuNac);
-
-        setJMenuBar(jMenuBar);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItemGestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGestionActionPerformed
-
-        GestionOperacionInternacional gestionInternacional = new GestionOperacionInternacional();
-        gestionInternacional.setVisible(true);
-        this.dispose();
-        
-    }//GEN-LAST:event_jMenuItemGestionActionPerformed
-
-    private void jMenuItemIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemIngresoActionPerformed
-
-        IngresarNuevaOperacionInternacional ingresoInternacional = new IngresarNuevaOperacionInternacional();
-        ingresoInternacional.setVisible(true);
-        
-    }//GEN-LAST:event_jMenuItemIngresoActionPerformed
-
-    private void jButtonVolver2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolver2ActionPerformed
-
-        PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
-        paginaPrincipal.setVisible(true);
-        this.dispose();
-
-    }//GEN-LAST:event_jButtonVolver2ActionPerformed
-
-    private void jMenuItemDarDeBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDarDeBajaActionPerformed
-
-        EliminarOperacion eliminarOperacion = new EliminarOperacion();
-        eliminarOperacion.setVisible(true);
-        
-    }//GEN-LAST:event_jMenuItemDarDeBajaActionPerformed
-
-    private void jMenuItemGestion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGestion1ActionPerformed
-        
-        GestionOperacionNacional gestionNacional = new GestionOperacionNacional();
-        gestionNacional.setVisible(true);
-        this.dispose();
-        
-    }//GEN-LAST:event_jMenuItemGestion1ActionPerformed
-
-    private void jMenuItemIngreso1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemIngreso1ActionPerformed
-      
-        IngresarNuevaOperacionNacional ingresoNacional = new IngresarNuevaOperacionNacional();
-        ingresoNacional.setVisible(true);
-       
-    }//GEN-LAST:event_jMenuItemIngreso1ActionPerformed
-
-    private void jMenuItemDarDeBaja1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDarDeBaja1ActionPerformed
-        
-        EliminarOperacion eliminarOperacion = new EliminarOperacion();
-        eliminarOperacion.setVisible(true);
-        
-    }//GEN-LAST:event_jMenuItemDarDeBaja1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,36 +122,32 @@ public class Operaciones extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Operaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NotaNueva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Operaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NotaNueva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Operaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NotaNueva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Operaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NotaNueva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Operaciones().setVisible(true);
+                new NotaNueva().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonVolver2;
-    private javax.swing.JMenuBar jMenuBar;
-    private javax.swing.JMenu jMenuInt;
-    private javax.swing.JMenuItem jMenuItemDarDeBaja;
-    private javax.swing.JMenuItem jMenuItemDarDeBaja1;
-    private javax.swing.JMenuItem jMenuItemGestion;
-    private javax.swing.JMenuItem jMenuItemGestion1;
-    private javax.swing.JMenuItem jMenuItemIngreso;
-    private javax.swing.JMenuItem jMenuItemIngreso1;
-    private javax.swing.JMenu jMenuNac;
+    private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JLabel jLabelTitulo1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField textID;
+    private javax.swing.JTextField textTitulo;
     // End of variables declaration//GEN-END:variables
 }
