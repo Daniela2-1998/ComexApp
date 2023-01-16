@@ -50,6 +50,7 @@ public class StickyNotes extends javax.swing.JFrame {
         nombreCompleto = usuariosService.obtenerNombreCompleto(usuario);
         rol = paginaPrincipal.rol;
         
+        jMenuNombre.setText(usuario + " - " + nombreCompleto);
         setTitle("Sticky notes - " + usuario + " - sistema ComexApp");
         
         notasService.obtenerNota1(usuario, textID, textNombre, textContenido);
@@ -128,6 +129,17 @@ public class StickyNotes extends javax.swing.JFrame {
         
         jRadioButton1.setSelected(true);
         jPanelConfiguracion.setVisible(false);    
+        jButtonBuscar.setVisible(false);
+        textBusqueda.setVisible(false);
+        jLabel1.setVisible(false);
+        
+        jCheckBoxActivo.setSelected(true);
+        if(jCheckBoxActivo.equals(false)){
+            String ubicacion = obtenerNotaUbicacion();
+            JTextField cajaNombre = cajaNombreSegunUbi(ubicacion);
+            String titulo = cajaNombre.getText().trim();
+            notasService.notaInactiva(titulo, ubicacion, usuario);
+        }
     }
     
     // icono
@@ -138,6 +150,15 @@ public class StickyNotes extends javax.swing.JFrame {
 
     NotasService notasService = new NotasService(); 
  
+    
+    public void LimpiarCampos(JTextPane textContenido, JTextField textID, 
+            JTextField textNombre, JButton jButtonCrear, JButton jButtonModificar, 
+            JPanel Nota){
+        
+        textContenido.setText("");
+        textID.setText("");
+        textNombre.setText("");
+    }
     
     public String obtenerNotaUbicacion(){
         
@@ -244,6 +265,19 @@ public class StickyNotes extends javax.swing.JFrame {
         jButtonCrear.setForeground(colorLetra);
 
         Nota.setBackground(colorFondo); 
+        
+        if(color.equals("Negro")){
+            Color colorContenido =  new java.awt.Color(255,255,255);  
+            textContenido.setForeground(colorContenido);
+            textID.setForeground(colorContenido);
+            textNombre.setForeground(colorContenido);
+        } else {
+            Color colorContenido =  new java.awt.Color(0,0,0);  
+            textContenido.setForeground(colorContenido);
+            textID.setForeground(colorContenido);
+            textNombre.setForeground(colorContenido);
+        
+        }
     }
     
     
@@ -591,20 +625,12 @@ public class StickyNotes extends javax.swing.JFrame {
         jRadioButton7 = new javax.swing.JRadioButton();
         jRadioButton8 = new javax.swing.JRadioButton();
         jRadioButton9 = new javax.swing.JRadioButton();
+        jCheckBoxActivo = new javax.swing.JCheckBox();
         jLabelWallpaper = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuNotas = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuAgregar = new javax.swing.JMenu();
-        jMenuItemTituloNum = new javax.swing.JMenuItem();
-        jMenuModificar = new javax.swing.JMenu();
-        jMenuItemColor = new javax.swing.JMenuItem();
-        jMenuItemCambiarNumTitulo = new javax.swing.JMenuItem();
-        jMenuEliminar = new javax.swing.JMenu();
-        jMenuItemTituloNum1 = new javax.swing.JMenuItem();
-        jMenuOcultar = new javax.swing.JMenu();
-        jMenuItemOcultarUna = new javax.swing.JMenuItem();
-        jMenuItemOcultarTodas = new javax.swing.JMenuItem();
+        jMenuItemLista = new javax.swing.JMenuItem();
         jMenuVacio = new javax.swing.JMenu();
         jMenuNombre = new javax.swing.JMenu();
 
@@ -645,6 +671,7 @@ public class StickyNotes extends javax.swing.JFrame {
 
         getContentPane().add(jPanelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 640, -1, 70));
 
+        Nota1.setBackground(new java.awt.Color(255, 255, 204));
         org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder2 = new org.jdesktop.swingx.border.DropShadowBorder();
         Nota1.setBorder(dropShadowBorder2);
         Nota1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -666,6 +693,7 @@ public class StickyNotes extends javax.swing.JFrame {
         jScrollPane1.setPreferredSize(new java.awt.Dimension(64, 10));
         jScrollPane1.setVerticalScrollBar(jScrollBar1);
 
+        textContenido.setBackground(new java.awt.Color(255, 255, 204));
         textContenido.setBorder(null);
         textContenido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textContenido.setAutoscrolls(false);
@@ -698,6 +726,7 @@ public class StickyNotes extends javax.swing.JFrame {
         });
         Nota1.add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, 10));
 
+        textID.setBackground(new java.awt.Color(255, 255, 204));
         textID.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         Nota1.add(textID, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 40, 25));
 
@@ -714,6 +743,7 @@ public class StickyNotes extends javax.swing.JFrame {
         });
         Nota1.add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, 20));
 
+        textNombre.setBackground(new java.awt.Color(255, 255, 204));
         textNombre.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         textNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Nota1.add(textNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 150, 30));
@@ -1576,6 +1606,11 @@ public class StickyNotes extends javax.swing.JFrame {
         jRadioButton9.setText("Negro y blanco");
         jPanelConfiguracion.add(jRadioButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, 210, -1));
 
+        jCheckBoxActivo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jCheckBoxActivo.setForeground(new java.awt.Color(153, 153, 0));
+        jCheckBoxActivo.setText("Nota activa");
+        jPanelConfiguracion.add(jCheckBoxActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 610, -1, -1));
+
         getContentPane().add(jPanelConfiguracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 0, 570, 770));
 
         jLabelWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo3.jpg"))); // NOI18N
@@ -1595,89 +1630,15 @@ public class StickyNotes extends javax.swing.JFrame {
         });
         jMenuNotas.add(jMenuItem1);
 
-        jMenuAgregar.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuAgregar.setText("Agregar");
-        jMenuAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
-        jMenuItemTituloNum.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItemTituloNum.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuItemTituloNum.setText("Ingresar titulo y N°");
-        jMenuItemTituloNum.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemLista.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jMenuItemLista.setForeground(new java.awt.Color(0, 0, 153));
+        jMenuItemLista.setText("Ver notas ingresadas en el sistema");
+        jMenuItemLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemTituloNumActionPerformed(evt);
+                jMenuItemListaActionPerformed(evt);
             }
         });
-        jMenuAgregar.add(jMenuItemTituloNum);
-
-        jMenuNotas.add(jMenuAgregar);
-
-        jMenuModificar.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuModificar.setText("Modificar");
-        jMenuModificar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
-        jMenuItemColor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItemColor.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuItemColor.setText("Elegir color");
-        jMenuItemColor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemColorActionPerformed(evt);
-            }
-        });
-        jMenuModificar.add(jMenuItemColor);
-
-        jMenuItemCambiarNumTitulo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItemCambiarNumTitulo.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuItemCambiarNumTitulo.setText("Cambiar N° y/o titulo");
-        jMenuItemCambiarNumTitulo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCambiarNumTituloActionPerformed(evt);
-            }
-        });
-        jMenuModificar.add(jMenuItemCambiarNumTitulo);
-
-        jMenuNotas.add(jMenuModificar);
-
-        jMenuEliminar.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuEliminar.setText("Eliminar nota");
-        jMenuEliminar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
-        jMenuItemTituloNum1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItemTituloNum1.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuItemTituloNum1.setText("Ingresar titulo y N°");
-        jMenuItemTituloNum1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemTituloNum1ActionPerformed(evt);
-            }
-        });
-        jMenuEliminar.add(jMenuItemTituloNum1);
-
-        jMenuNotas.add(jMenuEliminar);
-
-        jMenuOcultar.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuOcultar.setText("Ocultar notas");
-        jMenuOcultar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
-        jMenuItemOcultarUna.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItemOcultarUna.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuItemOcultarUna.setText("Ocultar nota específica");
-        jMenuItemOcultarUna.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemOcultarUnaActionPerformed(evt);
-            }
-        });
-        jMenuOcultar.add(jMenuItemOcultarUna);
-
-        jMenuItemOcultarTodas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItemOcultarTodas.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuItemOcultarTodas.setText("Ocultar todas las notas");
-        jMenuItemOcultarTodas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemOcultarTodasActionPerformed(evt);
-            }
-        });
-        jMenuOcultar.add(jMenuItemOcultarTodas);
-
-        jMenuNotas.add(jMenuOcultar);
+        jMenuNotas.add(jMenuItemLista);
 
         jMenuBar1.add(jMenuNotas);
 
@@ -1796,24 +1757,118 @@ public class StickyNotes extends javax.swing.JFrame {
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
 
-        String ubicacion = obtenerNotaUbicacion();
+        int ubicacion = cmbNota.getSelectedIndex() + 1;
+        String titulo = null;
+        String ubicacionNota = obtenerNotaUbicacion();
+        JTextPane cajaContenido = cajaContenidoSegunUbi(ubicacionNota);
         
-        if(ubicacion.equals("Nota 1")){
-           notasService.obtenerNotaPedida(usuario, textID, textNombre, textContenido);
-        } else if (ubicacion.equals("Nota 2")){
-           notasService.obtenerNotaPedida(usuario, textID1, textNombre1, textContenido2);
-        } else if (ubicacion.equals("Nota 3")){
+        if(cajaContenido.equals("")){
+            titulo = JOptionPane.showInputDialog(null, "Ingresa el titulo que deseas dejar inactivo", 
+                "Desactivar nota previa");
+            notasService.notaInactiva(titulo, ubicacionNota, usuario);
+        }
+        
+        if(ubicacion == 1){
+            LimpiarCampos(textContenido, textID, textNombre, jButtonCrear, jButtonModificar, 
+            Nota1);
+            
+            notasService.obtenerNotaPedida(usuario, textID, textNombre, textContenido);
+            String colorRecuperado1 = notasService.obtencionColorNota(usuario, "Nota 1");
+            cambioDeColor(colorRecuperado1, textContenido, textID, textNombre,
+                    jButtonCrear, jButtonModificar, Nota1);
+            String letraRecuperada1 = notasService.obtencionFuenteNota(usuario, "Nota 1");
+            Font fuenteRecuperada1 = cambioFuente(letraRecuperada1);
+            textContenido.setFont(fuenteRecuperada1);
+
+        } else if (ubicacion == 2){  
+            LimpiarCampos(textContenido2, textID1, textNombre1, jButtonCrear1, 
+                    jButtonModificar1, Nota2);
+            
+            notasService.obtenerNotaPedida(usuario, textID1, textNombre1, textContenido2);
+            String colorRecuperado2 = notasService.obtencionColorNota(usuario, "Nota 2");
+            cambioDeColor(colorRecuperado2, textContenido2, textID1, textNombre1,
+                    jButtonCrear1, jButtonModificar1, Nota2);
+            String letraRecuperada2 = notasService.obtencionFuenteNota(usuario, "Nota 2");
+            Font fuenteRecuperada2 = cambioFuente(letraRecuperada2);
+            textContenido2.setFont(fuenteRecuperada2);
+            
+        } else if (ubicacion == 3){
+            LimpiarCampos(textContenido3, textID2, textNombre2, jButtonCrear2, 
+                    jButtonModificar2, Nota3);
+            
            notasService.obtenerNotaPedida(usuario, textID2, textNombre2, textContenido3);
-        } else if (ubicacion.equals("Nota 4")){
-           notasService.obtenerNotaPedida(usuario, textID3, textNombre3, textContenido4);
-        } else if (ubicacion.equals("Nota 5")){
-           notasService.obtenerNotaPedida(usuario, textID4, textNombre4, textContenido5);
-        } else if (ubicacion.equals("Nota 6")){
-           notasService.obtenerNotaPedida(usuario, textID5, textNombre5, textContenido6);
-        } else if (ubicacion.equals("Nota 7")){
-           notasService.obtenerNotaPedida(usuario, textID6, textNombre6, textContenido7);
-        } else if (ubicacion.equals("Nota 8")){
-           notasService.obtenerNotaPedida(usuario, textID7, textNombre7, textContenido8);
+           String colorRecuperado3 = notasService.obtencionColorNota(usuario, "Nota 3");
+           cambioDeColor(colorRecuperado3, textContenido3, textID2, textNombre2,
+                    jButtonCrear2, jButtonModificar2, Nota3);
+            String letraRecuperada3 = notasService.obtencionFuenteNota(usuario, "Nota 3");
+            Font fuenteRecuperada3 = cambioFuente(letraRecuperada3);
+            textContenido3.setFont(fuenteRecuperada3);
+            
+        } else if (ubicacion == 4){
+            LimpiarCampos(textContenido4, textID3, textNombre3, jButtonCrear3, 
+                    jButtonModificar3, Nota4);
+            
+            notasService.obtenerNotaPedida(usuario, textID3, textNombre3, textContenido4);
+       
+            String colorRecuperado4 = notasService.obtencionColorNota(usuario, "Nota 4");
+            cambioDeColor(colorRecuperado4, textContenido4, textID3, textNombre3,
+                    jButtonCrear3, jButtonModificar3, Nota4);
+            String letraRecuperada4 = notasService.obtencionFuenteNota(usuario, "Nota 4");
+            Font fuenteRecuperada4 = cambioFuente(letraRecuperada4);
+            textContenido4.setFont(fuenteRecuperada4);
+            
+        } else if (ubicacion == 5){
+            LimpiarCampos(textContenido5, textID4, textNombre4, jButtonCrear4, 
+                    jButtonModificar4, Nota5);
+            
+            notasService.obtenerNotaPedida(usuario, textID4, textNombre4, textContenido5);
+
+            String colorRecuperado5 = notasService.obtencionColorNota(usuario, "Nota 5");
+            cambioDeColor(colorRecuperado5, textContenido5, textID4, textNombre4,
+                    jButtonCrear4, jButtonModificar4, Nota5);
+            String letraRecuperada5 = notasService.obtencionFuenteNota(usuario, "Nota 5");
+            Font fuenteRecuperada5 = cambioFuente(letraRecuperada5);
+            textContenido5.setFont(fuenteRecuperada5);
+            
+        } else if (ubicacion == 6){
+            LimpiarCampos(textContenido6, textID5, textNombre5, jButtonCrear5, 
+                    jButtonModificar5, Nota6);
+            
+            notasService.obtenerNotaPedida(usuario, textID5, textNombre5, textContenido6);
+ 
+            String colorRecuperado6 = notasService.obtencionColorNota(usuario, "Nota 6");
+            cambioDeColor(colorRecuperado6, textContenido6, textID5, textNombre5,
+                    jButtonCrear5, jButtonModificar5, Nota6);
+            String letraRecuperada6 = notasService.obtencionFuenteNota(usuario, "Nota 6");
+            Font fuenteRecuperada6 = cambioFuente(letraRecuperada6);
+            textContenido6.setFont(fuenteRecuperada6);
+            
+        } else if (ubicacion == 7){    
+            LimpiarCampos(textContenido7, textID6, textNombre6, jButtonCrear6, 
+                    jButtonModificar6, Nota7);
+            
+            notasService.obtenerNotaPedida(usuario, textID6, textNombre6, textContenido7);
+            
+            String colorRecuperado7 = notasService.obtencionColorNota(usuario, "Nota 7");
+            cambioDeColor(colorRecuperado7, textContenido7, textID6, textNombre6,
+                    jButtonCrear6, jButtonModificar6, Nota7);
+            String letraRecuperada7 = notasService.obtencionFuenteNota(usuario, "Nota 7");
+            Font fuenteRecuperada7 = cambioFuente(letraRecuperada7);
+            textContenido7.setFont(fuenteRecuperada7);
+ 
+        } else if (ubicacion == 8){
+            LimpiarCampos(textContenido8, textID7, textNombre7, jButtonCrear7,
+                    jButtonModificar7, Nota8);
+            
+            notasService.obtenerNotaPedida(usuario, textID7, textNombre7, textContenido8);
+           
+            String colorRecuperado8 = notasService.obtencionColorNota(usuario, "Nota 8");
+            cambioDeColor(colorRecuperado8, textContenido8, textID7, textNombre7,
+                    jButtonCrear7, jButtonModificar7, Nota8);
+            String letraRecuperada8 = notasService.obtencionFuenteNota(usuario, "Nota 8");
+            Font fuenteRecuperada8 = cambioFuente(letraRecuperada8);
+            textContenido8.setFont(fuenteRecuperada8);
+             
         }
 
     }//GEN-LAST:event_jButtonBuscarActionPerformed
@@ -2214,8 +2269,8 @@ public class StickyNotes extends javax.swing.JFrame {
         String color;
         String letra;
         
-           id = Integer.parseInt(textID.getText().trim());
-           titulo = textNombre.getText().trim();
+           id = Integer.parseInt(textID2.getText().trim());
+           titulo = textNombre2.getText().trim();
            contenido = textContenido3.getText().trim();
            color = eleccionDeColor();
            letra = eleccionFuente();
@@ -2391,30 +2446,6 @@ public class StickyNotes extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jButtonActualizar7ActionPerformed
 
-    private void jMenuItemOcultarTodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOcultarTodasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemOcultarTodasActionPerformed
-
-    private void jMenuItemOcultarUnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOcultarUnaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemOcultarUnaActionPerformed
-
-    private void jMenuItemTituloNum1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTituloNum1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemTituloNum1ActionPerformed
-
-    private void jMenuItemCambiarNumTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCambiarNumTituloActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemCambiarNumTituloActionPerformed
-
-    private void jMenuItemColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemColorActionPerformed
-
-    }//GEN-LAST:event_jMenuItemColorActionPerformed
-
-    private void jMenuItemTituloNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTituloNumActionPerformed
-
-    }//GEN-LAST:event_jMenuItemTituloNumActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
 
         this.setSize(1050, 800);
@@ -2489,6 +2520,13 @@ public class StickyNotes extends javax.swing.JFrame {
             cajaPanel);
 
     }//GEN-LAST:event_jToggleButtonCambioActionPerformed
+
+    private void jMenuItemListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListaActionPerformed
+        
+        ListaNotas listaNotas = new ListaNotas();
+        listaNotas.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItemListaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2583,6 +2621,7 @@ public class StickyNotes extends javax.swing.JFrame {
     private javax.swing.JButton jButtonNota;
     private javax.swing.JButton jButtonNotaLetra;
     private javax.swing.JButton jButtonVolverAtras;
+    private javax.swing.JCheckBox jCheckBoxActivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelAviso1;
@@ -2602,20 +2641,11 @@ public class StickyNotes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNum6;
     private javax.swing.JLabel jLabelNum7;
     private javax.swing.JLabel jLabelWallpaper;
-    private javax.swing.JMenu jMenuAgregar;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu jMenuEliminar;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItemCambiarNumTitulo;
-    private javax.swing.JMenuItem jMenuItemColor;
-    private javax.swing.JMenuItem jMenuItemOcultarTodas;
-    private javax.swing.JMenuItem jMenuItemOcultarUna;
-    private javax.swing.JMenuItem jMenuItemTituloNum;
-    private javax.swing.JMenuItem jMenuItemTituloNum1;
-    private javax.swing.JMenu jMenuModificar;
+    private javax.swing.JMenuItem jMenuItemLista;
     private javax.swing.JMenu jMenuNombre;
     private javax.swing.JMenu jMenuNotas;
-    private javax.swing.JMenu jMenuOcultar;
     private javax.swing.JMenu jMenuVacio;
     private javax.swing.JPanel jPanelConfiguracion;
     private javax.swing.JPanel jPanelOpciones;

@@ -339,7 +339,9 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCerrarSesionActionPerformed
 
     private void jMenuItemColoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemColoresActionPerformed
-        // TODO add your handling code here:
+        
+        Boolean defecto = true;
+        
     }//GEN-LAST:event_jMenuItemColoresActionPerformed
 
     private void jMenuItemDatosUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDatosUsuariosActionPerformed

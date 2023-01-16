@@ -113,13 +113,57 @@ public class NotasService {
         }
     }
     
+    public void notaInactiva(String titulo, String ubicacion, String usuario){
+        
+        String sql = "update notas set status=? where usuario = '" + usuario + 
+                "' and ubicacion = '" + ubicacion + "' and titulo = '" + titulo + "'";
+        
+        int alternativaMensaje;
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            
+             alternativaMensaje = JOptionPane.showConfirmDialog(null, "¿Quieres modificar los datos?");
+
+            if (alternativaMensaje == 0) {
+
+                pst.setString(1, "Inactiva");
+                pst.executeUpdate();
+                conec.close();
+                JOptionPane.showMessageDialog(null, "Modificación éxitosa");
+             } else {
+                conec.close();
+                JOptionPane.showMessageDialog(null, "No se modificaron los datos");
+            }
+        }catch(SQLException e){
+            System.err.println("No es posible dejar inactiva la nota");
+            JOptionPane.showMessageDialog(null, "No es posible dejar inactiva " + titulo);
+        }
+    }
     
+    public void modificarUbicacionNota(String ubicacion, String usuario, String titulo){
+        
+        String sql = "update notas set ubicacion=? where usuario = '" + usuario + 
+                "' and titulo = '" + titulo + "'";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            pst.setString(1, ubicacion);
+            pst.executeQuery();
+            conec.close();
+            
+        }catch(SQLException e){
+            System.err.println("Error al cambiar ubicación de la nota " + e);
+        }
+    }
     
     public void obtenerNota1(String usuario, JTextField textID, 
             JTextField textNombre, JTextPane textContenido){
 
         String sql = "select id_nota, contenido, titulo from notas where "
-                + "ubicacion = 'Nota 1' and usuario = '" + usuario + "'";
+                + "ubicacion = 'Nota 1' and usuario = '" + usuario + "' and status = 'Activo'";
         
         try{
             conec = cn.Conexion();
@@ -146,7 +190,7 @@ public class NotasService {
 
         
         String sql = "select id_nota, contenido, titulo from notas where "
-                + "ubicacion = 'Nota 2' and usuario = '" + usuario + "'";
+                + "ubicacion = 'Nota 2' and usuario = '" + usuario + "' and status = 'Activo'";
         
         try{
             conec = cn.Conexion();
@@ -171,7 +215,7 @@ public class NotasService {
             JButton jButtonAgregar2, JButton jButtonModificar2){
 
         String sql = "select id_nota, contenido, titulo from notas where "
-                + "ubicacion = 'Nota 3' and usuario = '" + usuario + "'";
+                + "ubicacion = 'Nota 3' and usuario = '" + usuario + "' and status = 'Activo'";
         
         try{
             conec = cn.Conexion();
@@ -197,7 +241,7 @@ public class NotasService {
             JButton jButtonAgregar3, JButton jButtonModificar3){
         
         String sql = "select id_nota, contenido, titulo from notas where "
-                + "ubicacion = 'Nota 4' and usuario = '" + usuario + "'";
+                + "ubicacion = 'Nota 4' and usuario = '" + usuario + "' and status = 'Activo'";
         
         try{
             conec = cn.Conexion();
@@ -222,7 +266,7 @@ public class NotasService {
             JButton jButtonAgregar4, JButton jButtonModificar4){
         
         String sql = "select id_nota, contenido, titulo from notas where "
-                + "ubicacion = 'Nota 5' and usuario = '" + usuario + "'";
+                + "ubicacion = 'Nota 5' and usuario = '" + usuario + "' and status = 'Activo'";
         
         try{
             conec = cn.Conexion();
@@ -247,7 +291,7 @@ public class NotasService {
             JButton jButtonAgregar5, JButton jButtonModificar5){
 
         String sql = "select id_nota, contenido, titulo from notas where "
-                + "ubicacion = 'Nota 6' and usuario = '" + usuario + "'";
+                + "ubicacion = 'Nota 6' and usuario = '" + usuario + "' and status = 'Activo'";
         
         try{
             conec = cn.Conexion();
@@ -273,7 +317,7 @@ public class NotasService {
             JButton jButtonAgregar6, JButton jButtonModificar6){
 
         String sql = "select id_nota, contenido, titulo from notas where "
-                + "ubicacion = 'Nota 7' and usuario = '" + usuario + "'";
+                + "ubicacion = 'Nota 7' and usuario = '" + usuario + "' and status = 'Activo'";
         
         try{
             conec = cn.Conexion();
@@ -298,7 +342,7 @@ public class NotasService {
             JButton jButtonAgregar7, JButton jButtonModificar7){
 
         String sql = "select id_nota, contenido, titulo from notas where "
-                + "ubicacion = 'Nota 8' and usuario = '" + usuario + "'";
+                + "ubicacion = 'Nota 8' and usuario = '" + usuario + "' and status = 'Activo'";
         
         try{
             conec = cn.Conexion();
@@ -338,9 +382,6 @@ public class NotasService {
                 textNombre.setText(rs.getString("titulo"));    
                 textContenido.setText(rs.getString("contenido"));
 
-            } else {
-                JOptionPane.showMessageDialog(null, "No es posible recuperar la nota");
-                System.err.println("No es posible recuperar la nota");
             }
             conec.close();
             
@@ -356,7 +397,7 @@ public class NotasService {
         String colorRecuperado = null;
         
         String sql = "select color from notas where usuario = '" + usuario + "' and "
-                + "ubicacion = '" + ubicacion + "'";
+                + "ubicacion = '" + ubicacion + "' and status = 'Activo'";
         try{
             conec = cn.Conexion();
             pst = conec.prepareStatement(sql);
@@ -381,7 +422,7 @@ public class NotasService {
         String letraRecuperada = null;
         
         String sql = "select letra from notas where usuario = '" + usuario + "' and "
-                + "ubicacion = '" + ubicacion + "'";
+                + "ubicacion = '" + ubicacion + "' and status = 'Activo'";
         
         try{
             conec = cn.Conexion();
@@ -406,7 +447,7 @@ public class NotasService {
     public void cambiarColorNota (String usuario, String ubicacion, String color){
         
         String sql = "update notas set color=? where usuario = '" + usuario + 
-                "' and ubicacion = '" + ubicacion + "'";
+                "' and ubicacion = '" + ubicacion + "' and status = 'Activo'";
         
         try{
             conec = cn.Conexion();
@@ -441,7 +482,7 @@ public class NotasService {
     public void cambiarFuenteNota (String usuario, String ubicacion, String letra){
         
         String sql = "update notas set letra=? where usuario = '" + usuario + 
-                "' and ubicacion = '" + ubicacion + "'";
+                "' and ubicacion = '" + ubicacion + "' and status = 'Activo'";
         
         try{
             conec = cn.Conexion();
@@ -475,7 +516,7 @@ public class NotasService {
     public boolean eliminarNota(int ID, String usuario, String titulo, String ubicacion){
        
         String sql = "delete from notas where usuario = '" + usuario + "' and titulo = '"
-                + titulo + "' and id_nota = '" + ID + "' and ubicacion =  '" + ubicacion + "'";
+                + titulo + "' and id_nota = '" + ID + "' and ubicacion =  '" + ubicacion + "' and status = 'Activo'";
        
        int alternativaMensaje;
        Boolean aprobado;
