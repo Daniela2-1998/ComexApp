@@ -289,9 +289,7 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
             modelo.addColumn("id_operaciones");
             modelo.addColumn("Comprador");
             modelo.addColumn("Vendedor");
-            //modelo.addColumn("Despachante");
-            //modelo.addColumn("Maritima");
-            
+
             while(rs.next()){
                 Object[] fila = new Object[3];
                 for(int i = 0; i < 3; i++){

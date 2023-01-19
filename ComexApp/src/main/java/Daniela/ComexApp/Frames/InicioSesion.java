@@ -39,7 +39,7 @@ public class InicioSesion extends javax.swing.JFrame {
         setTitle("Inicio de sesión - sistema ComexApp");
          
         // logo 
-        ImageIcon logo  = new ImageIcon("src/imagenes/logo12.png");
+        ImageIcon logo  = new ImageIcon("imagenes/logo12.png");
         Icon iconoLogo = new ImageIcon(logo.getImage().getScaledInstance(jLabelLogo.getHeight(), 
                 jLabelLogo.getWidth(), Image.SCALE_DEFAULT));
         jLabelLogo.setIcon(iconoLogo);

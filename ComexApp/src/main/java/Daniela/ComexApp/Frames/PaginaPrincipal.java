@@ -86,6 +86,8 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jMenuPreferencias = new javax.swing.JMenu();
         jMenuItemFondo = new javax.swing.JMenuItem();
         jMenuItemColores = new javax.swing.JMenuItem();
+        jMenuInformes = new javax.swing.JMenu();
+        jMenuItemCrearInforme = new javax.swing.JMenuItem();
         jMenuAdministrar = new javax.swing.JMenu();
         jMenuItemDatosUsuarios = new javax.swing.JMenuItem();
         jMenuItemControl = new javax.swing.JMenuItem();
@@ -285,6 +287,20 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuPreferencias);
 
+        jMenuInformes.setText("Informes y documentos");
+        jMenuInformes.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jMenuItemCrearInforme.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemCrearInforme.setText("Crear informes y reportes");
+        jMenuItemCrearInforme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCrearInformeActionPerformed(evt);
+            }
+        });
+        jMenuInformes.add(jMenuItemCrearInforme);
+
+        jMenuBar1.add(jMenuInformes);
+
         jMenuAdministrar.setText("Administrar sistema");
         jMenuAdministrar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
@@ -436,6 +452,14 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonOperacionesActionPerformed
 
+    private void jMenuItemCrearInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCrearInformeActionPerformed
+       
+        Informes informes = new Informes();
+        informes.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jMenuItemCrearInformeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -486,12 +510,14 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuAdministrar;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuInfo;
+    private javax.swing.JMenu jMenuInformes;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemAgendar;
     private javax.swing.JMenuItem jMenuItemCalendario;
     private javax.swing.JMenuItem jMenuItemCambioContraseña;
     private javax.swing.JMenuItem jMenuItemColores;
     private javax.swing.JMenuItem jMenuItemControl;
+    private javax.swing.JMenuItem jMenuItemCrearInforme;
     private javax.swing.JMenuItem jMenuItemDatosUsuarios;
     private javax.swing.JMenuItem jMenuItemFondo;
     private javax.swing.JMenuItem jMenuItemInformacion;

@@ -391,11 +391,11 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
 
         if(tipoOperacionNivel == 1){
            tipoOperacion = "Importación";
-        } else if (statusNivel == 2){
+        } else if (tipoOperacionNivel == 2){
            tipoOperacion = "Exportación";
-        } else if (statusNivel == 3){
+        } else if (tipoOperacionNivel == 3){
            tipoOperacion = "Logística internacional";
-        } else if (statusNivel == 4){
+        } else if (tipoOperacionNivel == 4){
            tipoOperacion = "Despacho aduanero";
         }
        
@@ -418,9 +418,7 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonInfoActionPerformed
 
     private void jButtonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtrasActionPerformed
-        
-        Operaciones operaciones = new Operaciones();
-        operaciones.setVisible(true);
+
         this.dispose();
         
     }//GEN-LAST:event_jButtonAtrasActionPerformed
