@@ -4,9 +4,12 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Date;
 import java.time.LocalDate;
+import javax.swing.JOptionPane;
 import service.PDFContactosImpl;
 import service.PDFOperacionesImpl;
 import service.PDFProduccionImpl;
+import service.ReportesEstadisticasExportacionesImpl;
+import service.ReportesEstadisticasGeneralesImpl;
 
 /**
  *
@@ -78,19 +81,17 @@ public class Informes extends javax.swing.JFrame {
         jMenuItemTodas = new javax.swing.JMenuItem();
         jMenuItemInternacionales = new javax.swing.JMenuItem();
         jMenuItemNacionales = new javax.swing.JMenuItem();
+        jMenuInformePersonalizado = new javax.swing.JMenu();
         jMenuReportesYEstadisticas = new javax.swing.JMenu();
         jMenuReportes = new javax.swing.JMenu();
         jMenuItemTodos1 = new javax.swing.JMenuItem();
         jMenuItemExportadores1 = new javax.swing.JMenuItem();
         jMenuEstadisticas = new javax.swing.JMenu();
-        jMenuItemTodos2 = new javax.swing.JMenuItem();
-        jMenuItemExportadores2 = new javax.swing.JMenuItem();
+        jMenuItemOpsInt = new javax.swing.JMenuItem();
+        jMenuItemOpsNac = new javax.swing.JMenuItem();
         jMenuReportesPersonalizados = new javax.swing.JMenu();
         jMenuItemTodos3 = new javax.swing.JMenuItem();
         jMenuItemExportadores3 = new javax.swing.JMenuItem();
-        jMenuEstadisticasPersonalizadas = new javax.swing.JMenu();
-        jMenuItemTodos4 = new javax.swing.JMenuItem();
-        jMenuItemExportadores4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -269,6 +270,11 @@ public class Informes extends javax.swing.JFrame {
 
         jMenuInformes.add(jMenuOperaciones);
 
+        jMenuInformePersonalizado.setForeground(new java.awt.Color(0, 0, 153));
+        jMenuInformePersonalizado.setText("Informes personalizados");
+        jMenuInformePersonalizado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jMenuInformes.add(jMenuInformePersonalizado);
+
         jMenuBar.add(jMenuInformes);
 
         jMenuReportesYEstadisticas.setBackground(new java.awt.Color(204, 204, 204));
@@ -306,25 +312,25 @@ public class Informes extends javax.swing.JFrame {
         jMenuEstadisticas.setText("Estadísticas");
         jMenuEstadisticas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
-        jMenuItemTodos2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItemTodos2.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuItemTodos2.setText("Exportaciones");
-        jMenuItemTodos2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemOpsInt.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItemOpsInt.setForeground(new java.awt.Color(0, 0, 153));
+        jMenuItemOpsInt.setText("Operaciones internacionales");
+        jMenuItemOpsInt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemTodos2ActionPerformed(evt);
+                jMenuItemOpsIntActionPerformed(evt);
             }
         });
-        jMenuEstadisticas.add(jMenuItemTodos2);
+        jMenuEstadisticas.add(jMenuItemOpsInt);
 
-        jMenuItemExportadores2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItemExportadores2.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuItemExportadores2.setText("Importaciones");
-        jMenuItemExportadores2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemOpsNac.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItemOpsNac.setForeground(new java.awt.Color(0, 0, 153));
+        jMenuItemOpsNac.setText("Operaciones nacionales");
+        jMenuItemOpsNac.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemExportadores2ActionPerformed(evt);
+                jMenuItemOpsNacActionPerformed(evt);
             }
         });
-        jMenuEstadisticas.add(jMenuItemExportadores2);
+        jMenuEstadisticas.add(jMenuItemOpsNac);
 
         jMenuReportesYEstadisticas.add(jMenuEstadisticas);
 
@@ -353,32 +359,6 @@ public class Informes extends javax.swing.JFrame {
         jMenuReportesPersonalizados.add(jMenuItemExportadores3);
 
         jMenuReportesYEstadisticas.add(jMenuReportesPersonalizados);
-
-        jMenuEstadisticasPersonalizadas.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuEstadisticasPersonalizadas.setText("Estadísticas personalizadas");
-        jMenuEstadisticasPersonalizadas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
-        jMenuItemTodos4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItemTodos4.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuItemTodos4.setText("Exportaciones");
-        jMenuItemTodos4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemTodos4ActionPerformed(evt);
-            }
-        });
-        jMenuEstadisticasPersonalizadas.add(jMenuItemTodos4);
-
-        jMenuItemExportadores4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItemExportadores4.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuItemExportadores4.setText("Importaciones");
-        jMenuItemExportadores4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemExportadores4ActionPerformed(evt);
-            }
-        });
-        jMenuEstadisticasPersonalizadas.add(jMenuItemExportadores4);
-
-        jMenuReportesYEstadisticas.add(jMenuEstadisticasPersonalizadas);
 
         jMenuBar.add(jMenuReportesYEstadisticas);
 
@@ -516,20 +496,38 @@ public class Informes extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemNacionalesActionPerformed
 
     private void jMenuItemTodos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTodos1ActionPerformed
-        // TODO add your handling code here:
+        
+        ReportesEstadisticasExportacionesImpl expos = new ReportesEstadisticasExportacionesImpl();
+        int exposTotales = expos.cantidadDeOperacionesDeExportacionTotales();
+        JOptionPane.showMessageDialog(null, exposTotales + " exportaciones fueron "
+                + "registradas en ComexApp");
+        
     }//GEN-LAST:event_jMenuItemTodos1ActionPerformed
 
     private void jMenuItemExportadores1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExportadores1ActionPerformed
-        // TODO add your handling code here:
+       
+        ReportesEstadisticasGeneralesImpl total = new ReportesEstadisticasGeneralesImpl();
+        int totalOps = total.cantidadDeOperacionesInternacionalesRegistradas();
+        JOptionPane.showMessageDialog(null, totalOps + " operaciones totales fueron "
+                + "registradas en el sistema de ComexApp");
+        
     }//GEN-LAST:event_jMenuItemExportadores1ActionPerformed
 
-    private void jMenuItemTodos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTodos2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemTodos2ActionPerformed
+    private void jMenuItemOpsIntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpsIntActionPerformed
+       
+        EstadisticasGeneralesOperaciones estats = new EstadisticasGeneralesOperaciones();
+        estats.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jMenuItemOpsIntActionPerformed
 
-    private void jMenuItemExportadores2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExportadores2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemExportadores2ActionPerformed
+    private void jMenuItemOpsNacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpsNacActionPerformed
+        
+        EstadisticasGeneralesOperacionesNacionales estatsNac = new EstadisticasGeneralesOperacionesNacionales();
+        estatsNac.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jMenuItemOpsNacActionPerformed
 
     private void jMenuItemTodos3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTodos3ActionPerformed
         // TODO add your handling code here:
@@ -538,14 +536,6 @@ public class Informes extends javax.swing.JFrame {
     private void jMenuItemExportadores3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExportadores3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemExportadores3ActionPerformed
-
-    private void jMenuItemTodos4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTodos4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemTodos4ActionPerformed
-
-    private void jMenuItemExportadores4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExportadores4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemExportadores4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -591,27 +581,25 @@ public class Informes extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuContactos;
     private javax.swing.JMenu jMenuEstadisticas;
-    private javax.swing.JMenu jMenuEstadisticasPersonalizadas;
+    private javax.swing.JMenu jMenuInformePersonalizado;
     private javax.swing.JMenu jMenuInformes;
     private javax.swing.JMenuItem jMenuItemAgenda;
     private javax.swing.JMenuItem jMenuItemDespachantes;
     private javax.swing.JMenuItem jMenuItemExportadores;
     private javax.swing.JMenuItem jMenuItemExportadores1;
-    private javax.swing.JMenuItem jMenuItemExportadores2;
     private javax.swing.JMenuItem jMenuItemExportadores3;
-    private javax.swing.JMenuItem jMenuItemExportadores4;
     private javax.swing.JMenuItem jMenuItemImportadores;
     private javax.swing.JMenuItem jMenuItemInternacionales;
     private javax.swing.JMenuItem jMenuItemNacionales;
+    private javax.swing.JMenuItem jMenuItemOpsInt;
+    private javax.swing.JMenuItem jMenuItemOpsNac;
     private javax.swing.JMenuItem jMenuItemStock;
     private javax.swing.JMenuItem jMenuItemSuministros;
     private javax.swing.JMenuItem jMenuItemTodas;
     private javax.swing.JMenuItem jMenuItemTodo;
     private javax.swing.JMenuItem jMenuItemTodos;
     private javax.swing.JMenuItem jMenuItemTodos1;
-    private javax.swing.JMenuItem jMenuItemTodos2;
     private javax.swing.JMenuItem jMenuItemTodos3;
-    private javax.swing.JMenuItem jMenuItemTodos4;
     private javax.swing.JMenuItem jMenuItemTransporte;
     private javax.swing.JMenu jMenuOperaciones;
     private javax.swing.JMenu jMenuProduccion;
