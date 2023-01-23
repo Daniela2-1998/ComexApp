@@ -82,6 +82,7 @@ public class Informes extends javax.swing.JFrame {
         jMenuItemInternacionales = new javax.swing.JMenuItem();
         jMenuItemNacionales = new javax.swing.JMenuItem();
         jMenuInformePersonalizado = new javax.swing.JMenu();
+        jMenuItemPers = new javax.swing.JMenuItem();
         jMenuReportesYEstadisticas = new javax.swing.JMenu();
         jMenuReportes = new javax.swing.JMenu();
         jMenuItemTodos1 = new javax.swing.JMenuItem();
@@ -273,6 +274,17 @@ public class Informes extends javax.swing.JFrame {
         jMenuInformePersonalizado.setForeground(new java.awt.Color(0, 0, 153));
         jMenuInformePersonalizado.setText("Informes personalizados");
         jMenuInformePersonalizado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        jMenuItemPers.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItemPers.setForeground(new java.awt.Color(0, 0, 153));
+        jMenuItemPers.setText("Personalizar");
+        jMenuItemPers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPersActionPerformed(evt);
+            }
+        });
+        jMenuInformePersonalizado.add(jMenuItemPers);
+
         jMenuInformes.add(jMenuInformePersonalizado);
 
         jMenuBar.add(jMenuInformes);
@@ -537,6 +549,14 @@ public class Informes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemExportadores3ActionPerformed
 
+    private void jMenuItemPersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPersActionPerformed
+        
+        InformesPersonalizados informesPersonalizados = new InformesPersonalizados();
+        informesPersonalizados.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jMenuItemPersActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -593,6 +613,7 @@ public class Informes extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemNacionales;
     private javax.swing.JMenuItem jMenuItemOpsInt;
     private javax.swing.JMenuItem jMenuItemOpsNac;
+    private javax.swing.JMenuItem jMenuItemPers;
     private javax.swing.JMenuItem jMenuItemStock;
     private javax.swing.JMenuItem jMenuItemSuministros;
     private javax.swing.JMenuItem jMenuItemTodas;

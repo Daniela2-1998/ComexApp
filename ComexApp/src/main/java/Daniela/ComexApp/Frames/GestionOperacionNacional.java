@@ -518,10 +518,12 @@ public class GestionOperacionNacional extends javax.swing.JFrame {
         jScrollPane3.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane3.setForeground(new java.awt.Color(0, 0, 153));
 
-        textProductos.setColumns(20);
+        textProductos.setColumns(10);
         textProductos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textProductos.setForeground(new java.awt.Color(0, 0, 153));
+        textProductos.setLineWrap(true);
         textProductos.setRows(5);
+        textProductos.setWrapStyleWord(true);
         jScrollPane3.setViewportView(textProductos);
 
         jPanelCampos.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 150, 120));

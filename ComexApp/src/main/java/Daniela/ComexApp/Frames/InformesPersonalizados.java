@@ -1,13 +1,9 @@
 package Daniela.ComexApp.Frames;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
-import service.ReportesEstadisticasExportacionesImpl;
-import service.ReportesEstadisticasGeneralesImpl;
-import service.ReportesEstadisticasImportacionesImpl;
+import service.InformesPersonalizadosImpl;
 
 /**
  *
@@ -22,7 +18,7 @@ public class InformesPersonalizados extends javax.swing.JFrame {
     public InformesPersonalizados() {
         initComponents();
         
-        setSize(750, 700);
+        setSize(950, 700);
         setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -32,11 +28,9 @@ public class InformesPersonalizados extends javax.swing.JFrame {
         usuario = paginaPrincipal.usuario;
         nombreCompleto = paginaPrincipal.nombreCompleto;
         
-        setTitle("Estadísticas de operaciones - " + usuario + " - sistema ComexApp");
-        repaint();  
+        setTitle("Informes personalizados - " + usuario + " - sistema ComexApp");
         
-        reportesExpos.productosMasExportados(textProducto1, textProducto2, 
-                textProducto3, textProducto4, textProducto5);
+        Boolean idExistente = informesPersonalizadosService.recuperarID(usuario, textNumero);
     }
 
     // icono
@@ -44,18 +38,9 @@ public class InformesPersonalizados extends javax.swing.JFrame {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/loguito1.png"));
         return retValue;   
     }
+
     
-    ReportesEstadisticasExportacionesImpl reportesExpos = new ReportesEstadisticasExportacionesImpl();
-    
-    
-    ReportesEstadisticasImportacionesImpl reportesImpos = new ReportesEstadisticasImportacionesImpl();
-    
-    
-    
-    ReportesEstadisticasGeneralesImpl reportesOperacionesInternacionales = new ReportesEstadisticasGeneralesImpl();
-    
-    
-    
+    InformesPersonalizadosImpl informesPersonalizadosService = new InformesPersonalizadosImpl();
     
 
 
@@ -72,13 +57,48 @@ public class InformesPersonalizados extends javax.swing.JFrame {
         jButtonVolver = new javax.swing.JButton();
         jLabelTitulo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        textProducto1 = new javax.swing.JTextField();
-        textProducto2 = new javax.swing.JTextField();
-        textProducto3 = new javax.swing.JTextField();
-        textProducto4 = new javax.swing.JTextField();
-        textProducto5 = new javax.swing.JTextField();
+        jLabelTitulos = new javax.swing.JLabel();
+        textTitulo = new javax.swing.JTextField();
+        jLabelNumero = new javax.swing.JLabel();
+        textNumero = new javax.swing.JTextField();
+        jLabelParrafos = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textParrafo = new javax.swing.JTextArea();
+        jScrollBar1 = new javax.swing.JScrollBar();
+        jButtonTitulo = new javax.swing.JButton();
+        textTituloEspacio = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jButtonParrafo = new javax.swing.JButton();
+        textParrafoEspacio = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jButtonCrear = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        textNombre = new javax.swing.JTextField();
+        jButtonInfo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        textTitulo1 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        textTitulo2 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        textTitulo3 = new javax.swing.JTextField();
+        textTitulo4 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        textTitulo5 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        textTitulo6 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        textTitulo7 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        textTitulo8 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        textTitulo9 = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        textTitulo10 = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -98,47 +118,264 @@ public class InformesPersonalizados extends javax.swing.JFrame {
                 jButtonVolverActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 660, 94, -1));
+        jPanel1.add(jButtonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 610, 94, -1));
 
         jLabelTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabelTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelTitulo.setText("Operaciones internacionales");
-        jPanel1.add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
+        jLabelTitulo.setText("Creación de informes");
+        jPanel1.add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Productos más exportados");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, -1, -1));
+        jLabelTitulos.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabelTitulos.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTitulos.setText("Titulos:");
+        jPanel2.add(jLabelTitulos, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
 
-        textProducto1.setBackground(new java.awt.Color(102, 102, 102));
-        textProducto1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jPanel2.add(textProducto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 120, 30));
+        textTitulo.setBackground(new java.awt.Color(102, 102, 102));
+        textTitulo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        textTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(textTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 120, 30));
 
-        textProducto2.setBackground(new java.awt.Color(102, 102, 102));
-        textProducto2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jPanel2.add(textProducto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 120, 30));
+        jLabelNumero.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabelNumero.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelNumero.setText("N° informe:");
+        jPanel2.add(jLabelNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, -1, -1));
 
-        textProducto3.setBackground(new java.awt.Color(102, 102, 102));
-        textProducto3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jPanel2.add(textProducto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 120, 30));
+        textNumero.setBackground(new java.awt.Color(102, 102, 102));
+        textNumero.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        textNumero.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(textNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 120, 30));
 
-        textProducto4.setBackground(new java.awt.Color(102, 102, 102));
-        textProducto4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jPanel2.add(textProducto4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, 120, 30));
+        jLabelParrafos.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabelParrafos.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelParrafos.setText("Párrafos:");
+        jPanel2.add(jLabelParrafos, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, -1, -1));
 
-        textProducto5.setBackground(new java.awt.Color(102, 102, 102));
-        textProducto5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jPanel2.add(textProducto5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, 120, 30));
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setHorizontalScrollBar(null);
+        jScrollPane1.setVerticalScrollBar(jScrollBar1);
+
+        textParrafo.setBackground(new java.awt.Color(102, 102, 102));
+        textParrafo.setColumns(5);
+        textParrafo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        textParrafo.setForeground(new java.awt.Color(255, 255, 255));
+        textParrafo.setLineWrap(true);
+        textParrafo.setRows(5);
+        textParrafo.setTabSize(5);
+        textParrafo.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(textParrafo);
+
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 390, 250));
+
+        jScrollBar1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jScrollBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, -1, 250));
+
+        jButtonTitulo.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonTitulo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonTitulo.setText("Añadir");
+        jButtonTitulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTituloActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, -1, 30));
+
+        textTituloEspacio.setBackground(new java.awt.Color(102, 102, 102));
+        textTituloEspacio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        textTituloEspacio.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(textTituloEspacio, new org.netbeans.lib.awtextra.AbsoluteConstraints(227, 30, 40, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Espacio:");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, -1, 20));
+
+        jButtonParrafo.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonParrafo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonParrafo.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonParrafo.setText("Añadir");
+        jPanel2.add(jButtonParrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, -1, -1));
+
+        textParrafoEspacio.setBackground(new java.awt.Color(102, 102, 102));
+        textParrafoEspacio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        textParrafoEspacio.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(textParrafoEspacio, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 40, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Espacio:");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, 20));
+
+        jButtonCrear.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonCrear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonCrear.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonCrear.setText("Crear informe base");
+        jButtonCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCrearActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 420, -1, 30));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Nombre informe:");
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 410, -1, -1));
+
+        textNombre.setBackground(new java.awt.Color(102, 102, 102));
+        textNombre.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        textNombre.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(textNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, 130, -1));
+
+        jButtonInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/signo4.png"))); // NOI18N
+        jButtonInfo.setBorder(null);
+        jButtonInfo.setBorderPainted(false);
+        jButtonInfo.setContentAreaFilled(false);
+        jButtonInfo.setFocusPainted(false);
+        jButtonInfo.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/signo5.png"))); // NOI18N
+        jButtonInfo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/signo5.png"))); // NOI18N
+        jButtonInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInfoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 20, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cuadro.png"))); // NOI18N
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 510, 490));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 510, 490));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 530, 520));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1500, 880));
+        jPanel3.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        textTitulo1.setEditable(false);
+        textTitulo1.setBackground(new java.awt.Color(102, 102, 102));
+        textTitulo1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        textTitulo1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.add(textTitulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 70, 80, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("1");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 20, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("2");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 20, -1));
+
+        textTitulo2.setEditable(false);
+        textTitulo2.setBackground(new java.awt.Color(102, 102, 102));
+        textTitulo2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        textTitulo2.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.add(textTitulo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 110, 80, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("3");
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 20, -1));
+
+        textTitulo3.setEditable(false);
+        textTitulo3.setBackground(new java.awt.Color(102, 102, 102));
+        textTitulo3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        textTitulo3.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.add(textTitulo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 150, 80, -1));
+
+        textTitulo4.setEditable(false);
+        textTitulo4.setBackground(new java.awt.Color(102, 102, 102));
+        textTitulo4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        textTitulo4.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.add(textTitulo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 190, 80, -1));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("4");
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 20, -1));
+
+        textTitulo5.setEditable(false);
+        textTitulo5.setBackground(new java.awt.Color(102, 102, 102));
+        textTitulo5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        textTitulo5.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.add(textTitulo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 230, 80, -1));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("5");
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 20, -1));
+
+        textTitulo6.setEditable(false);
+        textTitulo6.setBackground(new java.awt.Color(102, 102, 102));
+        textTitulo6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        textTitulo6.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.add(textTitulo6, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 270, 80, -1));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("6");
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 20, -1));
+
+        textTitulo7.setEditable(false);
+        textTitulo7.setBackground(new java.awt.Color(102, 102, 102));
+        textTitulo7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        textTitulo7.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.add(textTitulo7, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 310, 80, -1));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("7");
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 20, -1));
+
+        textTitulo8.setEditable(false);
+        textTitulo8.setBackground(new java.awt.Color(102, 102, 102));
+        textTitulo8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        textTitulo8.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.add(textTitulo8, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 350, 80, -1));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("8");
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 20, -1));
+
+        textTitulo9.setEditable(false);
+        textTitulo9.setBackground(new java.awt.Color(102, 102, 102));
+        textTitulo9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        textTitulo9.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.add(textTitulo9, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 390, 80, -1));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("9");
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 20, -1));
+
+        textTitulo10.setEditable(false);
+        textTitulo10.setBackground(new java.awt.Color(102, 102, 102));
+        textTitulo10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        textTitulo10.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.add(textTitulo10, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 430, 80, -1));
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("10");
+        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 20, -1));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Espacios del informe");
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
+
+        jLabel2.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/opcionescuadro.png"))); // NOI18N
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 210, 480));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 80, 230, 510));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 1500, 880));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -150,6 +387,35 @@ public class InformesPersonalizados extends javax.swing.JFrame {
         this.dispose();
 
     }//GEN-LAST:event_jButtonVolverActionPerformed
+
+    private void jButtonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearActionPerformed
+        
+        int id = Integer.parseInt(textNumero.getText().trim());
+        
+        String nombre, titulo1, parrafo1;
+        
+        nombre = textNombre.getText().trim();
+        titulo1 = textTitulo.getText().trim();
+        parrafo1 = textParrafo.getText().trim();
+        
+        informesPersonalizadosService.crearInformePersonalizado(id, usuario, nombre, titulo1, parrafo1);
+        
+    }//GEN-LAST:event_jButtonCrearActionPerformed
+
+    private void jButtonTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTituloActionPerformed
+       
+        
+        //informesPersonalizadosService.agregarTitulo2(id, titulo2);
+        
+    }//GEN-LAST:event_jButtonTituloActionPerformed
+
+    private void jButtonInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInfoActionPerformed
+
+        InformacionIDInformePersonalizado informacionIDInformePersonalizado = 
+                new InformacionIDInformePersonalizado();
+        informacionIDInformePersonalizado.setVisible(true);
+        
+    }//GEN-LAST:event_jButtonInfoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,17 +468,52 @@ public class InformesPersonalizados extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCrear;
+    private javax.swing.JButton jButtonInfo;
+    private javax.swing.JButton jButtonParrafo;
+    private javax.swing.JButton jButtonTitulo;
     private javax.swing.JButton jButtonVolver;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelNumero;
+    private javax.swing.JLabel jLabelParrafos;
     private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JLabel jLabelTitulos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField textProducto1;
-    private javax.swing.JTextField textProducto2;
-    private javax.swing.JTextField textProducto3;
-    private javax.swing.JTextField textProducto4;
-    private javax.swing.JTextField textProducto5;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField textNombre;
+    private javax.swing.JTextField textNumero;
+    private javax.swing.JTextArea textParrafo;
+    private javax.swing.JTextField textParrafoEspacio;
+    private javax.swing.JTextField textTitulo;
+    private javax.swing.JTextField textTitulo1;
+    private javax.swing.JTextField textTitulo10;
+    private javax.swing.JTextField textTitulo2;
+    private javax.swing.JTextField textTitulo3;
+    private javax.swing.JTextField textTitulo4;
+    private javax.swing.JTextField textTitulo5;
+    private javax.swing.JTextField textTitulo6;
+    private javax.swing.JTextField textTitulo7;
+    private javax.swing.JTextField textTitulo8;
+    private javax.swing.JTextField textTitulo9;
+    private javax.swing.JTextField textTituloEspacio;
     // End of variables declaration//GEN-END:variables
 
 

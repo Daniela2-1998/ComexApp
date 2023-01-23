@@ -74,7 +74,7 @@ public class ReportesEstadisticasCompraImpl {
        
        String sql = "select productos_pedidos, COUNT(productos_pedidos) as maximo from ventalocal "
                + "where tipo_operacion = 'Compra'"
-               + "group by productos_pedidos order by productos_pedidos desc limit 2";
+               + "group by productos_pedidos order by productos_pedidos desc limit 1";
        try{
            conec = cn.Conexion();
            pst = conec.prepareStatement(sql);

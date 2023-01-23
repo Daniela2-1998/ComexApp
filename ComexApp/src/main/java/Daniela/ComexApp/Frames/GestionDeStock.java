@@ -393,10 +393,12 @@ public class GestionDeStock extends javax.swing.JFrame {
         jScrollPane3.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane3.setForeground(new java.awt.Color(0, 0, 153));
 
-        textDetalle.setColumns(20);
+        textDetalle.setColumns(10);
         textDetalle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textDetalle.setForeground(new java.awt.Color(0, 0, 153));
+        textDetalle.setLineWrap(true);
         textDetalle.setRows(5);
+        textDetalle.setWrapStyleWord(true);
         jScrollPane3.setViewportView(textDetalle);
 
         jPanelCampos.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 260, 110));
@@ -409,10 +411,12 @@ public class GestionDeStock extends javax.swing.JFrame {
         jScrollPane4.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane4.setForeground(new java.awt.Color(0, 0, 153));
 
-        textCuidados.setColumns(20);
+        textCuidados.setColumns(10);
         textCuidados.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textCuidados.setForeground(new java.awt.Color(0, 0, 153));
+        textCuidados.setLineWrap(true);
         textCuidados.setRows(5);
+        textCuidados.setWrapStyleWord(true);
         jScrollPane4.setViewportView(textCuidados);
 
         jPanelCampos.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 180, 110));

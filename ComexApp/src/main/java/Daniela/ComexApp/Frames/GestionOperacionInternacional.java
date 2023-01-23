@@ -614,10 +614,12 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
         jScrollPane3.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane3.setForeground(new java.awt.Color(0, 0, 153));
 
-        textProductos.setColumns(20);
+        textProductos.setColumns(10);
         textProductos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textProductos.setForeground(new java.awt.Color(0, 0, 153));
+        textProductos.setLineWrap(true);
         textProductos.setRows(5);
+        textProductos.setWrapStyleWord(true);
         jScrollPane3.setViewportView(textProductos);
 
         jPanelCampos.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 150, 120));
@@ -675,10 +677,12 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
         jScrollPane4.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane4.setForeground(new java.awt.Color(0, 0, 153));
 
-        textDetalle.setColumns(20);
+        textDetalle.setColumns(10);
         textDetalle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textDetalle.setForeground(new java.awt.Color(0, 0, 153));
+        textDetalle.setLineWrap(true);
         textDetalle.setRows(5);
+        textDetalle.setWrapStyleWord(true);
         jScrollPane4.setViewportView(textDetalle);
 
         jPanelCampos.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 180, 80));

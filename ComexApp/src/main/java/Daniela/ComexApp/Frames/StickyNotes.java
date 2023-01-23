@@ -688,6 +688,7 @@ public class StickyNotes extends javax.swing.JFrame {
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 204));
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setAutoscrolls(true);
         jScrollPane1.setHorizontalScrollBar(null);
         jScrollPane1.setMaximumSize(new java.awt.Dimension(50, 10));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(64, 10));
@@ -696,9 +697,9 @@ public class StickyNotes extends javax.swing.JFrame {
         textContenido.setBackground(new java.awt.Color(255, 255, 204));
         textContenido.setBorder(null);
         textContenido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textContenido.setAutoscrolls(false);
         textContenido.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         textContenido.setMaximumSize(new java.awt.Dimension(60, 10));
+        textContenido.setVerifyInputWhenFocusTarget(false);
         jScrollPane1.setViewportView(textContenido);
 
         Nota1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 150, 140));

@@ -145,10 +145,12 @@ public class IngresarNuevosProductosAStock extends javax.swing.JFrame {
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setForeground(new java.awt.Color(0, 0, 153));
 
-        textDetalle.setColumns(20);
+        textDetalle.setColumns(10);
         textDetalle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textDetalle.setForeground(new java.awt.Color(0, 0, 153));
+        textDetalle.setLineWrap(true);
         textDetalle.setRows(5);
+        textDetalle.setWrapStyleWord(true);
         jScrollPane1.setViewportView(textDetalle);
 
         jPanelRegistro.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 180, 150));
@@ -161,10 +163,12 @@ public class IngresarNuevosProductosAStock extends javax.swing.JFrame {
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setForeground(new java.awt.Color(0, 0, 153));
 
-        textCuidados.setColumns(20);
+        textCuidados.setColumns(10);
         textCuidados.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textCuidados.setForeground(new java.awt.Color(0, 0, 153));
+        textCuidados.setLineWrap(true);
         textCuidados.setRows(5);
+        textCuidados.setWrapStyleWord(true);
         jScrollPane2.setViewportView(textCuidados);
 
         jPanelRegistro.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 160, 150));

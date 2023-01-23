@@ -159,10 +159,12 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setForeground(new java.awt.Color(0, 0, 153));
 
-        textProductos.setColumns(20);
+        textProductos.setColumns(10);
         textProductos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textProductos.setForeground(new java.awt.Color(0, 0, 153));
+        textProductos.setLineWrap(true);
         textProductos.setRows(5);
+        textProductos.setWrapStyleWord(true);
         jScrollPane2.setViewportView(textProductos);
 
         jPanelRegistro.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 150, 120));

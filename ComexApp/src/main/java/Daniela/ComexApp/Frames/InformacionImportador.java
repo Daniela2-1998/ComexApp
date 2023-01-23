@@ -333,10 +333,12 @@ public class InformacionImportador extends javax.swing.JFrame {
 
         jScrollPane1.setForeground(new java.awt.Color(0, 0, 153));
 
-        textProductos.setColumns(20);
+        textProductos.setColumns(10);
         textProductos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textProductos.setForeground(new java.awt.Color(0, 0, 153));
+        textProductos.setLineWrap(true);
         textProductos.setRows(5);
+        textProductos.setWrapStyleWord(true);
         jScrollPane1.setViewportView(textProductos);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 310, 170));

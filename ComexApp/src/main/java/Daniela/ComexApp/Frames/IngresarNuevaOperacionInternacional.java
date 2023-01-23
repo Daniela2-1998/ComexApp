@@ -161,11 +161,14 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setForeground(new java.awt.Color(0, 0, 153));
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        textDetalle.setColumns(20);
+        textDetalle.setColumns(10);
         textDetalle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textDetalle.setForeground(new java.awt.Color(0, 0, 153));
+        textDetalle.setLineWrap(true);
         textDetalle.setRows(5);
+        textDetalle.setWrapStyleWord(true);
         jScrollPane1.setViewportView(textDetalle);
 
         jPanelRegistro.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 180, 80));
@@ -177,11 +180,14 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setForeground(new java.awt.Color(0, 0, 153));
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        textProductos.setColumns(20);
+        textProductos.setColumns(10);
         textProductos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textProductos.setForeground(new java.awt.Color(0, 0, 153));
+        textProductos.setLineWrap(true);
         textProductos.setRows(5);
+        textProductos.setWrapStyleWord(true);
         jScrollPane2.setViewportView(textProductos);
 
         jPanelRegistro.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 150, 120));

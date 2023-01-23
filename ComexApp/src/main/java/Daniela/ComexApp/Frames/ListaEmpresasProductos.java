@@ -200,10 +200,12 @@ public class ListaEmpresasProductos extends javax.swing.JFrame {
 
         jScrollPane2.setForeground(new java.awt.Color(0, 0, 153));
 
-        textProductos.setColumns(20);
+        textProductos.setColumns(10);
         textProductos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textProductos.setForeground(new java.awt.Color(0, 0, 153));
+        textProductos.setLineWrap(true);
         textProductos.setRows(5);
+        textProductos.setWrapStyleWord(true);
         jScrollPane2.setViewportView(textProductos);
 
         jPanelTabla.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 160, 470, 170));

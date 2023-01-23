@@ -42,8 +42,6 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
     Connection conec;
     PreparedStatement pst;
     ResultSet rs;
-
-    PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
    
     ImageIcon logo = new ImageIcon("imagenes/logo12.png");
     Icon iconoLogo = new ImageIcon(logo.getImage());
