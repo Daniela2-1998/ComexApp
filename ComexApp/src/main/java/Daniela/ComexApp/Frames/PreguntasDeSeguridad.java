@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import service.NotasService;
 import service.PreguntasSeguridadService;
-import service.UsuariosService;
+import service.UsuariosImpl;
 
 /**
  *
@@ -59,7 +59,7 @@ public class PreguntasDeSeguridad extends javax.swing.JFrame {
         return retValue;   
     }
     
-    UsuariosService usuariosService = new UsuariosService();
+    UsuariosImpl usuariosService = new UsuariosImpl();
     PreguntasSeguridadService preguntasSeguridadService = new PreguntasSeguridadService();
     
     public void LimpiarCampos(){

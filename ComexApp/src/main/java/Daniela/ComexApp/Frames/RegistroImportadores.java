@@ -4,7 +4,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import service.ImportadoresService;
-import service.UsuariosService;
+import service.UsuariosImpl;
 
 /**
  *
@@ -25,7 +25,7 @@ public class RegistroImportadores extends javax.swing.JFrame {
         setResizable(false);
         
         PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
-        UsuariosService usuariosService = new UsuariosService();
+        UsuariosImpl usuariosService = new UsuariosImpl();
         
         usuario = paginaPrincipal.usuario;
         nombreCompleto = usuariosService.obtenerNombreCompleto(usuario);

@@ -2,6 +2,8 @@ package Daniela.ComexApp.Frames;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.Date;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import service.InformesPersonalizadosImpl;
 
@@ -18,7 +20,7 @@ public class InformesPersonalizados extends javax.swing.JFrame {
     public InformesPersonalizados() {
         initComponents();
         
-        setSize(950, 700);
+        setSize(950, 770);
         setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -28,9 +30,7 @@ public class InformesPersonalizados extends javax.swing.JFrame {
         usuario = paginaPrincipal.usuario;
         nombreCompleto = paginaPrincipal.nombreCompleto;
         
-        setTitle("Informes personalizados - " + usuario + " - sistema ComexApp");
-        
-        Boolean idExistente = informesPersonalizadosService.recuperarID(usuario, textNumero);
+        setTitle("Informes personalizados - " + usuario + " - sistema ComexApp");  
     }
 
     // icono
@@ -41,9 +41,150 @@ public class InformesPersonalizados extends javax.swing.JFrame {
 
     
     InformesPersonalizadosImpl informesPersonalizadosService = new InformesPersonalizadosImpl();
+
+    public String obtencionMes(){
+     
+        String mes = null;
+        int mesNivel;
+        
+        mesNivel = cmbMes.getSelectedIndex() + 1;
+        
+        if(mesNivel == 1){
+            mes = "Enero";
+        } else if(mesNivel == 2){
+            mes = "Febrero";
+        } else if(mesNivel == 3){
+            mes = "Marzo";
+        } else if(mesNivel == 4){
+            mes = "Abril";
+        } else if(mesNivel == 5){
+            mes = "Mayo";
+        } else if(mesNivel == 6){
+            mes = "Junio";
+        } else if(mesNivel == 7){
+            mes = "Julio";
+        } else if(mesNivel == 8){
+            mes = "Agosto";
+        } else if(mesNivel == 9){
+            mes = "Septiembre";
+        } else if(mesNivel == 10){
+            mes = "Octubre";
+        } else if(mesNivel == 11){
+            mes = "Noviembre";
+        } else if(mesNivel == 12){
+            mes = "Diciembre";
+        }
+        
+        return mes;
+    }
+
+    public int cantidadDiasMes(String mes){
+        
+        int diasMes = 0;
+        
+        if(mes.equals("Enero")){
+            diasMes = 31;
+        } else if(mes.equals("Febrero")){
+            diasMes = 28;
+        } else if(mes.equals("Marzo")){
+            diasMes = 31;
+        } else if(mes.equals("Abril")){
+            diasMes = 30;
+        } else if(mes.equals("Mayo")){
+            diasMes = 31;
+        } else if(mes.equals("Junio")){
+            diasMes = 30;
+        } else if(mes.equals("Julio")){
+            diasMes = 31;
+        } else if(mes.equals("Agosto")){
+            diasMes = 31;
+        } else if(mes.equals("Septiembre")){
+            diasMes = 30;
+        } else if(mes.equals("Octubre")){
+            diasMes = 31;
+        } else if(mes.equals("Noviembre")){
+            diasMes = 30;
+        } else if(mes.equals("Diciembre")){
+            diasMes = 31;
+        }
+        
+        return diasMes;
+    }
     
+    
+    public int obtencionDelDia(String mes){
+        
+       int dia = 0;
+       int diaNivel;
+       
+       diaNivel = cmbDia.getSelectedIndex() + 1;
+       
+       if(diaNivel == 1){
+           dia = 01;
+       } else if(diaNivel == 2){
+           dia = 02;
+       } else if(diaNivel == 3){
+           dia = 03;
+       } else if(diaNivel == 4){
+           dia = 04;
+       } else if(diaNivel == 5){
+           dia = 05;
+       } else if(diaNivel == 6){
+           dia = 06;
+       } else if(diaNivel == 7){
+           dia = 07;
+       } else if(diaNivel == 8){
+           dia = 8;
+       } else if(diaNivel == 9){
+           dia = 9;
+       } else if(diaNivel == 10){
+           dia = 10;
+       } else if(diaNivel == 11){
+           dia = 11;
+       } else if(diaNivel == 12){
+           dia = 12;
+       } else if(diaNivel == 13){
+           dia = 13;
+       } else if(diaNivel == 14){
+           dia = 14;
+       } else if(diaNivel == 15){
+           dia = 15;
+       } else if(diaNivel == 16){
+           dia = 16;
+       } else if(diaNivel == 17){
+           dia = 17;
+       } else if(diaNivel == 18){
+           dia = 18;
+       } else if(diaNivel == 19){
+           dia = 19;
+       } else if(diaNivel == 20){
+           dia = 20;
+       } else if(diaNivel == 21){
+           dia = 21;
+       }  else if(diaNivel == 22){
+           dia = 22;
+       } else if(diaNivel == 23){
+           dia = 23;
+       } else if(diaNivel == 24){
+           dia = 24;
+       } else if(diaNivel == 25){
+           dia = 25;
+       } else if(diaNivel == 26){
+           dia = 26;
+       } else if(diaNivel == 27){
+           dia = 27;
+       } else if(diaNivel == 28){
+           dia = 28;
+       } else if(diaNivel == 29){
+           dia = 29;
+       } else if(diaNivel == 30){
+           dia = 30;
+       } else if(diaNivel == 31){
+           dia = 31;
+       }
 
-
+       return dia;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,6 +196,7 @@ public class InformesPersonalizados extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jButtonVolver = new javax.swing.JButton();
+        jButtonPDF = new javax.swing.JButton();
         jLabelTitulo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabelTitulos = new javax.swing.JLabel();
@@ -98,7 +240,22 @@ public class InformesPersonalizados extends javax.swing.JFrame {
         textTitulo10 = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanelBusqueda = new javax.swing.JPanel();
+        jButtonBuscar = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        textBusqueda = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        jButtonBuscarN = new javax.swing.JButton();
+        textBusquedaN = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        textAño = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        cmbMes = new javax.swing.JComboBox<>();
+        cmbDia = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -118,7 +275,18 @@ public class InformesPersonalizados extends javax.swing.JFrame {
                 jButtonVolverActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 610, 94, -1));
+        jPanel1.add(jButtonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 640, 94, -1));
+
+        jButtonPDF.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonPDF.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonPDF.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonPDF.setText("Descargar PDF");
+        jButtonPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPDFActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 590, 160, -1));
 
         jLabelTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabelTitulo.setForeground(new java.awt.Color(255, 255, 255));
@@ -197,6 +365,11 @@ public class InformesPersonalizados extends javax.swing.JFrame {
         jButtonParrafo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonParrafo.setForeground(new java.awt.Color(255, 255, 255));
         jButtonParrafo.setText("Añadir");
+        jButtonParrafo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonParrafoActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButtonParrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, -1, -1));
 
         textParrafoEspacio.setBackground(new java.awt.Color(102, 102, 102));
@@ -247,7 +420,7 @@ public class InformesPersonalizados extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cuadro.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 510, 490));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 530, 520));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 530, 500));
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -367,6 +540,10 @@ public class InformesPersonalizados extends javax.swing.JFrame {
         jLabel15.setText("Espacios del informe");
         jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
 
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setText("5 titulos y 5 párrafos");
+        jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, -1, -1));
+
         jLabel2.setBackground(new java.awt.Color(102, 102, 102));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -375,6 +552,89 @@ public class InformesPersonalizados extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 80, 230, 510));
 
+        jPanelBusqueda.setBackground(new java.awt.Color(51, 51, 51));
+        jPanelBusqueda.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonBuscar.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarActionPerformed(evt);
+            }
+        });
+        jPanelBusqueda.add(jButtonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Por nombre informe:");
+        jPanelBusqueda.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, -1));
+
+        textBusqueda.setBackground(new java.awt.Color(102, 102, 102));
+        textBusqueda.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        textBusqueda.setForeground(new java.awt.Color(255, 255, 255));
+        jPanelBusqueda.add(textBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 110, 25));
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Por N°:");
+        jPanelBusqueda.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
+
+        jButtonBuscarN.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonBuscarN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonBuscarN.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonBuscarN.setText("N°");
+        jButtonBuscarN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarNActionPerformed(evt);
+            }
+        });
+        jPanelBusqueda.add(jButtonBuscarN, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 50, 25));
+
+        textBusquedaN.setBackground(new java.awt.Color(102, 102, 102));
+        textBusquedaN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        textBusquedaN.setForeground(new java.awt.Color(255, 255, 255));
+        jPanelBusqueda.add(textBusquedaN, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 40, 70, 25));
+
+        jLabel17.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/busquedacuadro.png"))); // NOI18N
+        jPanelBusqueda.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 480, 110));
+
+        jPanel1.add(jPanelBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 580, 480, 110));
+
+        textAño.setBackground(new java.awt.Color(102, 102, 102));
+        textAño.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        textAño.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(textAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 50, 40, -1));
+
+        jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("Dia:");
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 30, -1, -1));
+
+        jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Mes:");
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 30, -1, -1));
+
+        jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("Año:");
+        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 30, -1, -1));
+
+        cmbMes.setBackground(new java.awt.Color(102, 102, 102));
+        cmbMes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        cmbMes.setForeground(new java.awt.Color(255, 255, 255));
+        cmbMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
+        jPanel1.add(cmbMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 50, 90, -1));
+
+        cmbDia.setBackground(new java.awt.Color(102, 102, 102));
+        cmbDia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        cmbDia.setForeground(new java.awt.Color(255, 255, 255));
+        cmbDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        jPanel1.add(cmbDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 50, 50, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 1500, 880));
 
         pack();
@@ -382,8 +642,8 @@ public class InformesPersonalizados extends javax.swing.JFrame {
 
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
 
-        EstadisticasGeneralesOperaciones estatsGeneral = new EstadisticasGeneralesOperaciones();
-        estatsGeneral.setVisible(true);
+        Informes informes = new Informes();
+        informes.setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_jButtonVolverActionPerformed
@@ -400,12 +660,37 @@ public class InformesPersonalizados extends javax.swing.JFrame {
         
         informesPersonalizadosService.crearInformePersonalizado(id, usuario, nombre, titulo1, parrafo1);
         
+        int ID = Integer.parseInt(textNumero.getText().trim());
+        informesPersonalizadosService.existeTituloYParrafo1(ID, textTitulo1, textTitulo6);
+        informesPersonalizadosService.existeTituloYParrafo2(ID, textTitulo2, textTitulo7);
+        informesPersonalizadosService.existeTituloYParrafo3(ID, textTitulo3, textTitulo8);
+        informesPersonalizadosService.existeTituloYParrafo4(ID, textTitulo4, textTitulo9);
+        informesPersonalizadosService.existeTituloYParrafo5(ID, textTitulo5, textTitulo10);
+        
     }//GEN-LAST:event_jButtonCrearActionPerformed
 
     private void jButtonTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTituloActionPerformed
-       
+
+        int id = Integer.parseInt(textNumero.getText().trim());
+        String titulo = textTitulo.getText().trim();
         
-        //informesPersonalizadosService.agregarTitulo2(id, titulo2);
+        String ubicacion = textTituloEspacio.getText().trim();
+        
+        if(ubicacion.equals("0") || ubicacion.equals("1")){
+            JOptionPane.showMessageDialog(null, "Opción inválida");
+        } else if(ubicacion.equals("2")){
+            informesPersonalizadosService.agregarTitulo2(id, titulo);
+        } else if(ubicacion.equals("3")){
+            informesPersonalizadosService.agregarTitulo3(id, titulo);
+        } else if(ubicacion.equals("4")){
+            informesPersonalizadosService.agregarTitulo4(id, titulo);
+        } else if(ubicacion.equals("5")){
+            informesPersonalizadosService.agregarTitulo5(id, titulo);
+        } else {
+            JOptionPane.showMessageDialog(null, "Coloca una ubicación válida "
+                    + "entre 2 y 5.");
+        }
+        
         
     }//GEN-LAST:event_jButtonTituloActionPerformed
 
@@ -416,6 +701,85 @@ public class InformesPersonalizados extends javax.swing.JFrame {
         informacionIDInformePersonalizado.setVisible(true);
         
     }//GEN-LAST:event_jButtonInfoActionPerformed
+
+    private void jButtonBuscarNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarNActionPerformed
+       
+        int ID = Integer.parseInt(textBusquedaN.getText().trim());
+        
+        informesPersonalizadosService.busquedaPorID(ID, usuario, textNumero, 
+                textNombre, textTitulo, textParrafo);
+        
+        informesPersonalizadosService.existeTituloYParrafo1(ID, textTitulo1, textTitulo6);
+        informesPersonalizadosService.existeTituloYParrafo2(ID, textTitulo2, textTitulo7);
+        informesPersonalizadosService.existeTituloYParrafo3(ID, textTitulo3, textTitulo8);
+        informesPersonalizadosService.existeTituloYParrafo4(ID, textTitulo4, textTitulo9);
+        informesPersonalizadosService.existeTituloYParrafo5(ID, textTitulo5, textTitulo10);
+        
+    }//GEN-LAST:event_jButtonBuscarNActionPerformed
+
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+        
+        String nombre = textBusqueda.getText().trim();
+        
+        informesPersonalizadosService.busquedaPorNombre(nombre, usuario, 
+                textNumero, textNombre, textTitulo, textParrafo);
+        
+        int ID = Integer.parseInt(textNumero.getText().trim());
+        informesPersonalizadosService.existeTituloYParrafo1(ID, textTitulo1, textTitulo6);
+        informesPersonalizadosService.existeTituloYParrafo2(ID, textTitulo2, textTitulo7);
+        informesPersonalizadosService.existeTituloYParrafo3(ID, textTitulo3, textTitulo8);
+        informesPersonalizadosService.existeTituloYParrafo4(ID, textTitulo4, textTitulo9);
+        informesPersonalizadosService.existeTituloYParrafo5(ID, textTitulo5, textTitulo10);
+
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+    private void jButtonParrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonParrafoActionPerformed
+       
+        int id = Integer.parseInt(textNumero.getText().trim());
+        String parrafo = textParrafo.getText().trim();
+        
+        String ubicacion = textParrafoEspacio.getText().trim();
+        
+        if(ubicacion.equals("0") || ubicacion.equals("1")){
+            JOptionPane.showMessageDialog(null, "Opción inválida");
+        } else if(ubicacion.equals("2")){
+            informesPersonalizadosService.agregarParrafo2(id, parrafo);
+        } else if(ubicacion.equals("3")){
+            informesPersonalizadosService.agregarParrafo3(id, parrafo);
+        } else if(ubicacion.equals("4")){
+            informesPersonalizadosService.agregarParrafo4(id, parrafo);
+        } else if(ubicacion.equals("5")){
+            informesPersonalizadosService.agregarParrafo5(id, parrafo);
+        } else {
+            JOptionPane.showMessageDialog(null, "Coloca una ubicación válida "
+                    + "entre 2 y 5.");
+        }
+        
+    }//GEN-LAST:event_jButtonParrafoActionPerformed
+
+    private void jButtonPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPDFActionPerformed
+        
+        int id = Integer.parseInt(textNumero.getText().trim());
+        String nombre = textNombre.getText().trim();
+        
+        int dia, diasMes;
+        String mes;
+        int diaNivel, mesNivel;
+      
+        mes = obtencionMes();
+        dia = obtencionDelDia(mes);
+        diasMes = cantidadDiasMes(mes);
+        String año = textAño.getText().trim();
+        
+        if(dia > diasMes){
+            JOptionPane.showMessageDialog(null, "Ingresa un dia válido acorde al mes.");
+        } else if(dia <= diasMes){
+            String diaElegido = String.valueOf(dia);
+            informesPersonalizadosService.pdfInformePersonalizado(usuario, id, nombre,
+                diaElegido, mes, año);
+        }
+        
+    }//GEN-LAST:event_jButtonPDFActionPerformed
 
     /**
      * @param args the command line arguments
@@ -468,8 +832,13 @@ public class InformesPersonalizados extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbDia;
+    private javax.swing.JComboBox<String> cmbMes;
+    private javax.swing.JButton jButtonBuscar;
+    private javax.swing.JButton jButtonBuscarN;
     private javax.swing.JButton jButtonCrear;
     private javax.swing.JButton jButtonInfo;
+    private javax.swing.JButton jButtonPDF;
     private javax.swing.JButton jButtonParrafo;
     private javax.swing.JButton jButtonTitulo;
     private javax.swing.JButton jButtonVolver;
@@ -481,7 +850,14 @@ public class InformesPersonalizados extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -496,8 +872,12 @@ public class InformesPersonalizados extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanelBusqueda;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField textAño;
+    private javax.swing.JTextField textBusqueda;
+    private javax.swing.JTextField textBusquedaN;
     private javax.swing.JTextField textNombre;
     private javax.swing.JTextField textNumero;
     private javax.swing.JTextArea textParrafo;

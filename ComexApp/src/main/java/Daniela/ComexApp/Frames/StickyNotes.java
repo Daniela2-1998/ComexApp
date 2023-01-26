@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import static org.jdesktop.swingx.graphics.BlendComposite.Color;
 import service.NotasService;
-import service.UsuariosService;
+import service.UsuariosImpl;
 
 /**
  *
@@ -44,7 +44,7 @@ public class StickyNotes extends javax.swing.JFrame {
         setResizable(false);
         
         PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
-        UsuariosService usuariosService = new UsuariosService();
+        UsuariosImpl usuariosService = new UsuariosImpl();
         
         usuario = paginaPrincipal.usuario;
         nombreCompleto = usuariosService.obtenerNombreCompleto(usuario);

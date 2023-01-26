@@ -2,7 +2,7 @@ package Daniela.ComexApp.Frames;
 
 import java.awt.Image;
 import java.awt.Toolkit;
-import service.UsuariosService;
+import service.UsuariosImpl;
 
 /**
  *
@@ -23,7 +23,7 @@ public class Importadores extends javax.swing.JFrame {
         setResizable(false);
         
         PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
-        UsuariosService usuariosService = new UsuariosService();
+        UsuariosImpl usuariosService = new UsuariosImpl();
         
         usuario = paginaPrincipal.usuario;
         nombreCompleto = usuariosService.obtenerNombreCompleto(usuario);

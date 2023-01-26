@@ -9,10 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import service.AgendaPersonalService;
+import service.AgendaPersonalImpl;
 import service.ImportadoresService;
 import service.InicioSesionService;
-import service.UsuariosService;
+import service.UsuariosImpl;
 
 /**
  *
@@ -49,7 +49,7 @@ public class InformacionImportador extends javax.swing.JFrame {
     }
     
     ImportadoresService importadoresService = new ImportadoresService();
-    AgendaPersonalService agendaPersonalService = new AgendaPersonalService();
+    AgendaPersonalImpl agendaPersonalService = new AgendaPersonalImpl();
    
     public void LimpiarCampos(){
         textEmpresa.setText("");

@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 import java.sql.Date;
 import java.util.Calendar;
 import service.ReabastecimientoService;
-import service.StockService;
+import service.StockImpl;
 
 
 

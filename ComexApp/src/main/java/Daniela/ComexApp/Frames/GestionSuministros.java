@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import service.ReabastecimientoService;
-import service.StockService;
+import service.StockImpl;
 
 /**
  *
@@ -65,7 +65,7 @@ public class GestionSuministros extends javax.swing.JFrame {
     PreparedStatement pst;
     ResultSet rs;
 
-    StockService stockService = new StockService();
+    StockImpl stockService = new StockImpl();
     ReabastecimientoService reabastecimientoService = new ReabastecimientoService();
     
     

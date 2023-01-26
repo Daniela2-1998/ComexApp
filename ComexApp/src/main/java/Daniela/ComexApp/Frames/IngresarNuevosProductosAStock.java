@@ -2,7 +2,7 @@ package Daniela.ComexApp.Frames;
 
 import java.awt.Image;
 import java.awt.Toolkit;
-import service.StockService;
+import service.StockImpl;
 
 /**
  *
@@ -35,7 +35,7 @@ public class IngresarNuevosProductosAStock extends javax.swing.JFrame {
         return retValue;   
     }
     
-    StockService stockService = new StockService();
+    StockImpl stockService = new StockImpl();
 
     public void LimpiarCampos(){
         textID.setText("");

@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import service.InicioSesionService;
-import service.UsuariosService;
+import service.UsuariosImpl;
 
 /**
  *
@@ -45,7 +45,7 @@ public class VerUsuario extends javax.swing.JFrame {
     
     InicioSesionService inicioSesionService = new InicioSesionService();
     RegistroUsuarios registroUsuarios = new RegistroUsuarios();
-    UsuariosService usuariosService = new UsuariosService();
+    UsuariosImpl usuariosService = new UsuariosImpl();
     AdministrarUsuarios administrarUsuarios = new AdministrarUsuarios();
     
      

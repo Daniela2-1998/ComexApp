@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import service.PreguntasSeguridadService;
-import service.UsuariosService;
+import service.UsuariosImpl;
 
 /**
  *
@@ -53,7 +53,7 @@ public class InformacionUsuario extends javax.swing.JFrame {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/loguito1.png"));
         return retValue;   
     }
-    UsuariosService usuariosService = new UsuariosService();
+    UsuariosImpl usuariosService = new UsuariosImpl();
     PreguntasSeguridadService preguntasSeguridadService = new PreguntasSeguridadService();
     
     public void LimpiarCampos(){

@@ -11,10 +11,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import service.AgendaPersonalService;
+import service.AgendaPersonalImpl;
 import service.ImportadoresService;
 import service.InicioSesionService;
-import service.UsuariosService;
+import service.UsuariosImpl;
 
 /**
  *
@@ -56,7 +56,7 @@ public class AgendaContactosPersonal extends javax.swing.JFrame {
         return retValue;   
     }
     
-    AgendaPersonalService agendaPersonalService = new AgendaPersonalService();
+    AgendaPersonalImpl agendaPersonalService = new AgendaPersonalImpl();
     
     
     public void LimpiarCampos(){

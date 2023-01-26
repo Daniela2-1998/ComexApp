@@ -4,7 +4,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import service.InicioSesionService;
-import service.UsuariosService;
+import service.UsuariosImpl;
 
 /**
  *
@@ -44,7 +44,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
     InicioSesionService usuariosServicio = new InicioSesionService();
     InicioSesion inicioSesion = new InicioSesion();
-    UsuariosService usuariosService = new UsuariosService();
+    UsuariosImpl usuariosService = new UsuariosImpl();
    
     
     public void visibilidadAdministrador(){

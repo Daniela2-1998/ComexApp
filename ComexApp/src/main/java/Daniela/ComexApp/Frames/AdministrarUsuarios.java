@@ -14,7 +14,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import service.UsuariosService;
+import service.UsuariosImpl;
 
 
 /**
@@ -47,7 +47,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         return retValue;   
     }
     
-    UsuariosService usuariosService = new UsuariosService();
+    UsuariosImpl usuariosService = new UsuariosImpl();
     
     Conexion cn = new Conexion();
     Connection conec;

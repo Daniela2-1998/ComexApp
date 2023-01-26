@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import service.StockService;
+import service.StockImpl;
 
 /**
  *
@@ -57,7 +57,7 @@ public class Calendario extends javax.swing.JFrame {
     PreparedStatement pst;
     ResultSet rs;
 
-    StockService stockService = new StockService();
+    StockImpl stockService = new StockImpl();
     
     
     public void cargarTablaStock(String sql){

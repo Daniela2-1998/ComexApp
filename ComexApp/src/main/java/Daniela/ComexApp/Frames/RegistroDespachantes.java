@@ -13,9 +13,9 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import service.AgendaPersonalService;
+import service.AgendaPersonalImpl;
 import service.DespachantesService;
-import service.UsuariosService;
+import service.UsuariosImpl;
 
 /**
  *
@@ -36,7 +36,7 @@ public class RegistroDespachantes extends javax.swing.JFrame {
         setResizable(false);
         
         PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
-        UsuariosService usuariosService = new UsuariosService();
+        UsuariosImpl usuariosService = new UsuariosImpl();
         
         usuario = paginaPrincipal.usuario;
         nombreCompleto = usuariosService.obtenerNombreCompleto(usuario);
@@ -62,7 +62,7 @@ public class RegistroDespachantes extends javax.swing.JFrame {
     ResultSet rs;
     
     DespachantesService despachantesService = new DespachantesService();
-    AgendaPersonalService agendaPersonalService = new AgendaPersonalService(); 
+    AgendaPersonalImpl agendaPersonalService = new AgendaPersonalImpl(); 
     
     public void LimpiarCamposRegistroDespachantes(){
         textID.setText("");

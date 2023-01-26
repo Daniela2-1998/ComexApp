@@ -10,9 +10,9 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import service.AgendaPersonalService;
+import service.AgendaPersonalImpl;
 import service.MaritimasService;
-import service.UsuariosService;
+import service.UsuariosImpl;
 
 /**
  *
@@ -33,7 +33,7 @@ public class Maritimas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
-        UsuariosService usuariosService = new UsuariosService();
+        UsuariosImpl usuariosService = new UsuariosImpl();
         
         usuario = paginaPrincipal.usuario;
         
@@ -50,7 +50,7 @@ public class Maritimas extends javax.swing.JFrame {
         return retValue;   
     }
     
-    AgendaPersonalService agendaPersonalService = new AgendaPersonalService();
+    AgendaPersonalImpl agendaPersonalService = new AgendaPersonalImpl();
     MaritimasService maritimasService = new MaritimasService();
     
      // conexión

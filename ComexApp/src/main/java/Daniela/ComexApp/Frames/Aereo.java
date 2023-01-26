@@ -10,9 +10,9 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import service.AereoService;
-import service.AgendaPersonalService;
-import service.UsuariosService;
+import service.AereoImpl;
+import service.AgendaPersonalImpl;
+import service.UsuariosImpl;
 
 /**
  *
@@ -33,7 +33,7 @@ public class Aereo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
-        UsuariosService usuariosService = new UsuariosService();
+        UsuariosImpl usuariosService = new UsuariosImpl();
         
         usuario = paginaPrincipal.usuario;
         
@@ -51,8 +51,8 @@ public class Aereo extends javax.swing.JFrame {
         return retValue;   
     }
     
-    AgendaPersonalService agendaPersonalService = new AgendaPersonalService();
-    AereoService aereoService = new AereoService();
+    AgendaPersonalImpl agendaPersonalService = new AgendaPersonalImpl();
+    AereoImpl aereoService = new AereoImpl();
     
      // conexión
     Conexion cn = new Conexion();

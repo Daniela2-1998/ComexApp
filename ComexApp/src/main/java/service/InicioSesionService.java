@@ -39,7 +39,7 @@ public class InicioSesionService implements InicioSesionImp{
     
     // datos usuarios
     Usuarios usuarios = new Usuarios();
-    UsuariosService usuariosService = new UsuariosService();
+    UsuariosImpl usuariosService = new UsuariosImpl();
     UsuariosRepository usuariosRepository;
     InicioSesion inicioses = new InicioSesion();
     

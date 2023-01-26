@@ -7,7 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTable;
-import service.UsuariosService;
+import service.UsuariosImpl;
 
 /**
  *
@@ -28,7 +28,7 @@ public class Despachantes extends javax.swing.JFrame {
         setResizable(false);
         
         PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
-        UsuariosService usuariosService = new UsuariosService();
+        UsuariosImpl usuariosService = new UsuariosImpl();
         
         usuario = paginaPrincipal.usuario;
         nombreCompleto = usuariosService.obtenerNombreCompleto(usuario);
