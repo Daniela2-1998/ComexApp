@@ -3,9 +3,11 @@ package service;
 import config.Conexion;
 import java.awt.Color;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -150,6 +152,68 @@ public class ObjetivosImpl {
     }
      
        
+    public void recuperarProximos3Registros(JLabel jLabelObjetivoRec1, JLabel jLabelFechaPub1, 
+            JTextArea textDetalles1, JLabel jLabelImportancia1, JLabel jLabelFechaObj1, 
+            JLabel jLabelID1, JLabel jLabelObjetivoRec2, JLabel jLabelFechaPub2, 
+            JTextArea textDetalles2, JLabel jLabelImportancia2, JLabel jLabelFechaObj2, 
+            JLabel jLabelID2, JLabel jLabelObjetivoRec3, JLabel jLabelFechaPub3, 
+            JTextArea textDetalles3, JLabel jLabelImportancia3, JLabel jLabelFechaObj3, 
+            JLabel jLabelID3, String rol){
+        
+        LocalDate fechaActual = LocalDate.now();
+        LocalDate tresDiasDespues = LocalDate.now().plusDays(3);
+
+        /*String sql = "select fecha_fin, objetivo, usuario_creador, importancia, "
+                 + "visibilidad, fecha_registro, status from objetivos where "
+                + "fecha_fin between '" + fechaActual + "' and '" + tresDiasDespues 
+                + "' order by fecha_fin desc fetch first 3 rows only";
+       */
+        
+        String sql = "select objetivo, fecha_registro, descripcion, importancia, "
+                + "fecha_fin, id_objetivo from objetivos where fecha_fin >= '" + 
+                fechaActual + "' order by fecha_fin desc limit 3";
+
+         try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            while(rs.next()){
+                
+                for(int i = 0; i < 3; i++){
+                    jLabelObjetivoRec1.setText(rs.getString("objetivo")); 
+                    jLabelFechaPub1.setText(rs.getString("fecha_registro"));
+                    textDetalles1.setText(rs.getString("descripcion"));
+                    jLabelImportancia1.setText(rs.getString("importancia"));
+                    jLabelFechaObj1.setText(rs.getString("fecha_fin"));
+                    jLabelID1.setText(rs.getString("id_objetivo"));
+                    if(i == 1){
+                        jLabelObjetivoRec2.setText(rs.getString("objetivo"));
+                        jLabelFechaPub2.setText(rs.getString("fecha_registro"));
+                        textDetalles2.setText(rs.getString("descripcion"));
+                        jLabelImportancia2.setText(rs.getString("importancia"));
+                        jLabelFechaObj2.setText(rs.getString("fecha_fin"));
+                        jLabelID2.setText(rs.getString("id_objetivo"));  
+                    }
+                    if(i == 2){
+                        jLabelObjetivoRec3.setText(rs.getString("objetivo"));
+                        jLabelFechaPub3.setText(rs.getString("fecha_registro"));
+                        textDetalles3.setText(rs.getString("descripcion"));
+                        jLabelImportancia3.setText(rs.getString("importancia"));
+                        jLabelFechaObj3.setText(rs.getString("fecha_fin"));
+                        jLabelID3.setText(rs.getString("id_objetivo"));
+                    }
+                }
+            }
+            conec.close();
+            
+        }catch(SQLException e){
+            System.err.println("Error al obtener el objetivo" + e);
+            JOptionPane.showMessageDialog(null, "No se puede conseguir el objetivo");
+        }
+        
+        
+    }
   
     public boolean eliminarObjetivo(String usuario, int id){
        
