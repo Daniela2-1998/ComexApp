@@ -83,6 +83,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jMenuItemAgendar = new javax.swing.JMenuItem();
         jMenuItemNotas = new javax.swing.JMenuItem();
         jMenuItemCalendario = new javax.swing.JMenuItem();
+        jMenuItemObjetivos = new javax.swing.JMenuItem();
         jMenuPreferencias = new javax.swing.JMenu();
         jMenuItemFondo = new javax.swing.JMenuItem();
         jMenuItemColores = new javax.swing.JMenuItem();
@@ -261,6 +262,15 @@ public class PaginaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuInfo.add(jMenuItemCalendario);
+
+        jMenuItemObjetivos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemObjetivos.setText("Objetivos ");
+        jMenuItemObjetivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemObjetivosActionPerformed(evt);
+            }
+        });
+        jMenuInfo.add(jMenuItemObjetivos);
 
         jMenuBar1.add(jMenuInfo);
 
@@ -460,6 +470,14 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItemCrearInformeActionPerformed
 
+    private void jMenuItemObjetivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemObjetivosActionPerformed
+      
+        Objetivos objetivos = new Objetivos();
+        objetivos.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jMenuItemObjetivosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -522,6 +540,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemFondo;
     private javax.swing.JMenuItem jMenuItemInformacion;
     private javax.swing.JMenuItem jMenuItemNotas;
+    private javax.swing.JMenuItem jMenuItemObjetivos;
     private javax.swing.JMenuItem jMenuItemRecupero;
     private javax.swing.JMenu jMenuPreferencias;
     private javax.swing.JPanel jPanel3;

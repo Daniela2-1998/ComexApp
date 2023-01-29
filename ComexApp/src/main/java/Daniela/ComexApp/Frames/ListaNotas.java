@@ -52,7 +52,7 @@ public class ListaNotas extends javax.swing.JFrame {
     PreparedStatement pst;
     ResultSet rs;
 
-     public void cargarTablaNotas(String sql){
+    public void cargarTablaNotas(String sql){
 
         DefaultTableModel modelo = new DefaultTableModel();
       

@@ -19,7 +19,7 @@ public class ObjetivosEmpresa {
     private Integer id;
     
     @NotBlank
-    private String nombre;
+    private String objetivo;
 
     @NotBlank
     private String descripcion;
@@ -56,13 +56,14 @@ public class ObjetivosEmpresa {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getObjetivo() {
+        return objetivo;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setObjetivo(String objetivo) {
+        this.objetivo = objetivo;
     }
+   
 
     public String getDescripcion() {
         return descripcion;
@@ -126,9 +127,9 @@ public class ObjetivosEmpresa {
     public ObjetivosEmpresa() {
     }
 
-    public ObjetivosEmpresa(Integer id, String nombre, String descripcion, String importancia, String visibilidad, String status, String usuario_creador, String fecha_registro, String fecha_fin) {
+    public ObjetivosEmpresa(Integer id, String objetivo, String descripcion, String importancia, String visibilidad, String status, String usuario_creador, String fecha_registro, String fecha_fin) {
         this.id = id;
-        this.nombre = nombre;
+        this.objetivo = objetivo;
         this.descripcion = descripcion;
         this.importancia = importancia;
         this.visibilidad = visibilidad;
@@ -137,6 +138,6 @@ public class ObjetivosEmpresa {
         this.fecha_registro = fecha_registro;
         this.fecha_fin = fecha_fin;
     }
-    
-    
+
+
 }
