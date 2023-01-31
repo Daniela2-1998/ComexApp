@@ -2,13 +2,17 @@ package Daniela.ComexApp.Frames;
 
 import config.Conexion;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -43,7 +47,7 @@ public class Objetivos extends javax.swing.JFrame {
         jPanelCrear.setVisible(false);
         jPanelVer.setVisible(false);
         jPanelMensajes.setVisible(false);
-        jPanelUltimos.setVisible(true);
+        jPanelProximos.setVisible(true);
 
         textElegirUsuario.setVisible(false);
 
@@ -51,20 +55,7 @@ public class Objetivos extends javax.swing.JFrame {
         jRadioButtonTodos.setSelected(true);
 
         VistaObjetivosSegunRol(rol);
-
-        objetivosImpl.recuperarProximos3Registros(jLabelObjetivoRec1, jLabelFechaPub1, 
-                textDetalles1, jLabelImportancia1, jLabelFechaObj1, jLabelID1, 
-                jLabelObjetivoRec2, jLabelFechaPub2, textDetalles2, jLabelImportancia2, 
-                jLabelFechaObj2, jLabelID2, jLabelObjetivoRec3, jLabelFechaPub3, 
-                textDetalles3, jLabelImportancia3, jLabelFechaObj3, jLabelID3, rol);
-     
-       /* objetivosImpl.recuperarProximos3Registros(jLabelObjetivoRec1, jLabelFechaPub1, 
-               textDetalles1, jLabelImportancia1, jLabelFechaObj1, jLabelID1, rol);
-       objetivosImpl.recuperarProximos3Registros(jLabelObjetivoRec2, jLabelFechaPub2, 
-               textDetalles2, jLabelImportancia2, jLabelFechaObj2, jLabelID2, rol);
-       objetivosImpl.recuperarProximos3Registros(jLabelObjetivoRec3, jLabelFechaPub3, 
-               textDetalles3, jLabelImportancia3, jLabelFechaObj3, jLabelID3, rol);
-        */
+        VistaProximosObjetivosSegunRol(rol);
     }
 
     // icono
@@ -75,6 +66,8 @@ public class Objetivos extends javax.swing.JFrame {
 
     ObjetivosImpl objetivosImpl = new ObjetivosImpl();
     
+    LocalDate fechaActual = LocalDate.now();
+    LocalDate fechaDiasPlus = fechaActual.plusDays(5);
     
     // conexión
     Conexion cn = new Conexion();
@@ -99,7 +92,101 @@ public class Objetivos extends javax.swing.JFrame {
         
         return importanciaElegida;
     }
+
     
+    public void cargarTablaProximosObjetivosRol(LocalDate fechaActual, LocalDate fechaDiasPlus){
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+    
+        Date fechaInicio = Date.valueOf(fechaActual);
+        Date fechaFin = Date.valueOf(fechaDiasPlus);
+
+        
+        String sql = "select fecha_objetivo, objetivo, usuario_creador, importancia, "
+                + "visibilidad, fecha_registro, status from objetivos where "
+                + "fecha_objetivo between '" + fechaActual + "' and '" + fechaDiasPlus + "' "
+                + " and visibilidad = '" + rol + "' order by fecha_objetivo asc";
+
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            jTableProximos = new JTable(modelo);
+            jScrollPane6.setViewportView(jTableProximos);
+            
+            modelo.addColumn("Fecha del objetivo");
+            modelo.addColumn("Objetivo");
+            modelo.addColumn("Creador");
+            modelo.addColumn("Importancia");
+            modelo.addColumn("Usuarios afectados");
+            modelo.addColumn("Fecha creación");
+            modelo.addColumn("Status");
+            
+            while(rs.next()){
+                Object[] fila = new Object[7];
+                for(int i = 0; i < 7; i++){
+                    fila[i] = rs.getObject(i + 1);
+                }
+               modelo.addRow(fila);
+            }
+            
+            conec.close();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos "
+                    + "de la tabla");
+            System.err.println("Error al cargar los datos de la tabla" + e);
+        }
+    }
+    
+    
+    
+    public void cargarTablaProximosObjetivosAdmin(LocalDate fechaActual, LocalDate fechaDiasPlus){
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+    
+        Date fechaInicio = Date.valueOf(fechaActual);
+        Date fechaFin = Date.valueOf(fechaDiasPlus);
+
+        
+        String sql = "select fecha_objetivo, objetivo, usuario_creador, importancia, "
+                + "visibilidad, fecha_registro, status from objetivos where "
+                + "fecha_objetivo between '" + fechaActual + "' and '" + fechaDiasPlus + "' "
+                + "order by fecha_objetivo asc";
+
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            jTableProximos = new JTable(modelo);
+            jScrollPane6.setViewportView(jTableProximos);
+            
+            modelo.addColumn("Fecha del objetivo");
+            modelo.addColumn("Objetivo");
+            modelo.addColumn("Creador");
+            modelo.addColumn("Importancia");
+            modelo.addColumn("Usuarios afectados");
+            modelo.addColumn("Fecha creación");
+            modelo.addColumn("Status");
+            
+            while(rs.next()){
+                Object[] fila = new Object[7];
+                for(int i = 0; i < 7; i++){
+                    fila[i] = rs.getObject(i + 1);
+                }
+               modelo.addRow(fila);
+            }
+            
+            conec.close();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos "
+                    + "de la tabla");
+            System.err.println("Error al cargar los datos de la tabla" + e);
+        }
+    }
     
     public void cargarTablaObjetivos(String sql){
 
@@ -138,30 +225,30 @@ public class Objetivos extends javax.swing.JFrame {
     }
    
     public void mostrarTodosLosObjetivosRol(){
-        String sql = "select fecha_fin, objetivo, usuario_creador, importancia, "
+        String sql = "select fecha_objetivo, objetivo, usuario_creador, importancia, "
                 + "visibilidad, fecha_registro, status from objetivos where "
                 + "visibilidad = '" + rol + "'";
         cargarTablaObjetivos(sql);
     }
      
     public void mostrarTodosLosObjetivosAdmin(){
-         String sql = "select fecha_fin, objetivo, usuario_creador, importancia, "
+         String sql = "select fecha_objetivo, objetivo, usuario_creador, importancia, "
                  + "visibilidad, fecha_registro, status from objetivos";
         cargarTablaObjetivos(sql);
     }
      
     public void mostrarTodosLosObjetivosEnProgreso(){
-         String sql = "select fecha_fin, objetivo, usuario_creador, importancia, "
+         String sql = "select fecha_objetivo, objetivo, usuario_creador, importancia, "
                  + "visibilidad, fecha_registro, status from objetivos where "
                  + "status = 'En progreso'";
         cargarTablaObjetivos(sql);
     }
     
-    String fechaActual = LocalDate.now().toString();
+  
     public void mostrarTodosLosObjetivosProximos(){
-         String sql = "select fecha_fin, objetivo, usuario_creador, importancia, "
+         String sql = "select fecha_objetivo, objetivo, usuario_creador, importancia, "
                  + "visibilidad, fecha_registro, status from objetivos where "
-                 + "fecha_fin = 'min(" + fechaActual + ")' order by asc";
+                 + "fecha_objetivo >= '" + fechaActual + "' order by fecha_objetivo asc";
         cargarTablaObjetivos(sql);
     }
      
@@ -173,9 +260,40 @@ public class Objetivos extends javax.swing.JFrame {
        }
     }
     
+    public void VistaProximosObjetivosSegunRol(String rol){
+        if(rol.equals("Administrador")){
+           cargarTablaProximosObjetivosAdmin(fechaActual, fechaDiasPlus);
+       } else {
+           cargarTablaProximosObjetivosRol(fechaActual, fechaDiasPlus);
+       }
+    }
     
+    public void pasarCamposDeLaTablaProximosAFields(){
     
-   
+        jTableProximos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent Mouse_evt){
+                
+                JTable tablaProximos = (JTable) Mouse_evt.getSource();
+                Point point = Mouse_evt.getPoint();
+    
+                int filaSeleccionada = tablaProximos.rowAtPoint(point);
+
+                if(Mouse_evt.getClickCount() == 1){
+                  jLabelFechaObj1.setText(jTableProximos.getValueAt(jTableProximos.getSelectedRow(), 0).toString());
+                  jLabelObjetivoRec1.setText(jTableProximos.getValueAt(jTableProximos.getSelectedRow(), 1).toString());
+                  jLabelImportancia1.setText(jTableProximos.getValueAt(jTableProximos.getSelectedRow(), 3).toString());
+                  jLabelFechaObj1.setText(jTableProximos.getValueAt(jTableProximos.getSelectedRow(), 5).toString());
+                }
+            }
+        });
+    }
+
+     
+    public void recuperarDatosFaltantesDelProximoMensaje(){
+        
+    }
+ // ID, Detalles y status
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -223,7 +341,7 @@ public class Objetivos extends javax.swing.JFrame {
         jRadioButtonTodos = new javax.swing.JRadioButton();
         jButtonBuscar = new javax.swing.JButton();
         jPanelMensajes = new javax.swing.JPanel();
-        jPanelUltimos = new javax.swing.JPanel();
+        jPanelProximos = new javax.swing.JPanel();
         jPanelMensaje1 = new javax.swing.JPanel();
         jLabelObjetivoRec1 = new javax.swing.JLabel();
         jLabelFechaPub1 = new javax.swing.JLabel();
@@ -241,14 +359,8 @@ public class Objetivos extends javax.swing.JFrame {
         jLabelImportancia2 = new javax.swing.JLabel();
         jLabelFechaObj2 = new javax.swing.JLabel();
         jLabelID2 = new javax.swing.JLabel();
-        jPanelMensaje3 = new javax.swing.JPanel();
-        jLabelObjetivoRec3 = new javax.swing.JLabel();
-        jLabelFechaPub3 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        textDetalles3 = new javax.swing.JTextArea();
-        jLabelImportancia3 = new javax.swing.JLabel();
-        jLabelFechaObj3 = new javax.swing.JLabel();
-        jLabelID3 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTableProximos = new javax.swing.JTable();
         jPanelMenu = new javax.swing.JPanel();
         jLabelTitulo = new javax.swing.JLabel();
         jButtonCrear = new javax.swing.JButton();
@@ -376,10 +488,10 @@ public class Objetivos extends javax.swing.JFrame {
         jPanelContenido.add(jMonthChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 70, -1, -1));
 
         jYearChooser.setDayChooser(jDayChooser);
-        jPanelContenido.add(jYearChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 100, -1, -1));
+        jPanelContenido.add(jYearChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 110, -1, 20));
 
         jDayChooser.setForeground(new java.awt.Color(102, 102, 102));
-        jPanelContenido.add(jDayChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 290, 160));
+        jPanelContenido.add(jDayChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 320, 160));
 
         jPanelCrear.add(jPanelContenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 890, 380));
 
@@ -462,8 +574,8 @@ public class Objetivos extends javax.swing.JFrame {
         jPanelMensajes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanelMensajes, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 1250, 880));
 
-        jPanelUltimos.setBackground(new java.awt.Color(204, 204, 204));
-        jPanelUltimos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelProximos.setBackground(new java.awt.Color(204, 204, 204));
+        jPanelProximos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder4 = new org.jdesktop.swingx.border.DropShadowBorder();
         jPanelMensaje1.setBorder(dropShadowBorder4);
@@ -489,12 +601,12 @@ public class Objetivos extends javax.swing.JFrame {
         jLabelID1.setForeground(new java.awt.Color(102, 102, 102));
         jPanelMensaje1.add(jLabelID1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
-        jPanelUltimos.add(jPanelMensaje1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 710, 170));
+        jPanelProximos.add(jPanelMensaje1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 710, 170));
 
         jLabelTitulo1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabelTitulo1.setForeground(new java.awt.Color(102, 102, 102));
         jLabelTitulo1.setText("Últimos 3 objetivos registrados en el sistema.");
-        jPanelUltimos.add(jLabelTitulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 530, 50));
+        jPanelProximos.add(jLabelTitulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 530, 50));
 
         org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder5 = new org.jdesktop.swingx.border.DropShadowBorder();
         jPanelMensaje2.setBorder(dropShadowBorder5);
@@ -520,39 +632,28 @@ public class Objetivos extends javax.swing.JFrame {
         jLabelID2.setForeground(new java.awt.Color(102, 102, 102));
         jPanelMensaje2.add(jLabelID2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
-        jPanelUltimos.add(jPanelMensaje2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 710, 170));
+        jPanelProximos.add(jPanelMensaje2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 710, 170));
 
-        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder6 = new org.jdesktop.swingx.border.DropShadowBorder();
-        jPanelMensaje3.setBorder(dropShadowBorder6);
-        jPanelMensaje3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jTableProximos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane6.setViewportView(jTableProximos);
 
-        jLabelObjetivoRec3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabelObjetivoRec3.setForeground(new java.awt.Color(102, 102, 102));
-        jPanelMensaje3.add(jLabelObjetivoRec3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        jPanelProximos.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 490, 1170, 300));
 
-        jLabelFechaPub3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabelFechaPub3.setForeground(new java.awt.Color(102, 102, 102));
-        jPanelMensaje3.add(jLabelFechaPub3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 150, 150, -1));
-
-        textDetalles3.setColumns(20);
-        textDetalles3.setRows(5);
-        jScrollPane4.setViewportView(textDetalles3);
-
-        jPanelMensaje3.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 660, -1));
-        jPanelMensaje3.add(jLabelImportancia3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 20, -1, -1));
-        jPanelMensaje3.add(jLabelFechaObj3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, -1, -1));
-
-        jLabelID3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabelID3.setForeground(new java.awt.Color(102, 102, 102));
-        jPanelMensaje3.add(jLabelID3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
-
-        jPanelUltimos.add(jPanelMensaje3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 500, 710, 170));
-
-        getContentPane().add(jPanelUltimos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 1250, 880));
+        getContentPane().add(jPanelProximos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 1250, 880));
 
         jPanelMenu.setBackground(new java.awt.Color(153, 153, 153));
-        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder7 = new org.jdesktop.swingx.border.DropShadowBorder();
-        jPanelMenu.setBorder(dropShadowBorder7);
+        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder6 = new org.jdesktop.swingx.border.DropShadowBorder();
+        jPanelMenu.setBorder(dropShadowBorder6);
         jPanelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelTitulo.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
@@ -575,7 +676,7 @@ public class Objetivos extends javax.swing.JFrame {
         jButtonUltimos.setBackground(new java.awt.Color(204, 204, 204));
         jButtonUltimos.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButtonUltimos.setForeground(new java.awt.Color(102, 102, 102));
-        jButtonUltimos.setText("Últimos objetivos");
+        jButtonUltimos.setText("Próximos objetivos");
         jButtonUltimos.setBorder(null);
         jButtonUltimos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -631,16 +732,20 @@ public class Objetivos extends javax.swing.JFrame {
                 objetivo, status, visibilidad = null;
        
         int ID, visibilidadNivel, mesNum;
+        
+        Date fechaObjetivo;
                 
         LocalDate fechaActual = LocalDate.now();
         Date ahora = Date.valueOf(fechaActual);
         
          int dia = jDayChooser.getDay();
-         int mes = jMonthChooser.getMonth();
+         int mes = jMonthChooser.getMonth() + 1;
          int año = jYearChooser.getYear();
         
         fechaLimite = año + "-" + mes + "-" + dia;
-        fechaRegistro = LocalDate.now().toString();
+        
+        fechaRegistro = fechaActual.toString();
+        fechaObjetivo = Date.valueOf(fechaLimite);
         
         ID = Integer.parseInt(textID.getText().trim());
         descripcion = textDescripcion.getText().trim();
@@ -670,7 +775,7 @@ public class Objetivos extends javax.swing.JFrame {
         
         
         objetivosImpl.establecerObjetivo(ID, descripcion, fechaLimite, fechaRegistro, 
-                nivelImportancia, objetivo, status, usuario, visibilidad);
+                nivelImportancia, objetivo, status, usuario, visibilidad, fechaObjetivo);
         
         VistaObjetivosSegunRol(rol);
         mostrarTodosLosObjetivosRol();
@@ -683,7 +788,7 @@ public class Objetivos extends javax.swing.JFrame {
        textElegirUsuario.setVisible(false);
        jPanelVer.setVisible(false);
        jPanelMensajes.setVisible(false);
-       jPanelUltimos.setVisible(false);
+       jPanelProximos.setVisible(false);
         
     }//GEN-LAST:event_jButtonCrearActionPerformed
 
@@ -692,44 +797,7 @@ public class Objetivos extends javax.swing.JFrame {
        jPanelCrear.setVisible(false);
        jPanelVer.setVisible(false);
        jPanelMensajes.setVisible(false);
-       jPanelUltimos.setVisible(true);
-       
-       
-       
-        /*String sql = "select fecha_fin, objetivo, usuario_creador, importancia, "
-                 + "visibilidad, fecha_registro, status from objetivos where "
-                 + "visibilidad = '" + rol + "'";
-       
-      objetivosImpl.obtenerObjetivos(jLabelObjetivoRec1, jLabelFechaPub1, 
-               textDetalles1, jLabelImportancia1, jLabelFechaObj1, jLabelID1, sql);
-       objetivosImpl.obtenerObjetivos(jLabelObjetivoRec2, jLabelFechaPub2, 
-               textDetalles2, jLabelImportancia2, jLabelFechaObj2, jLabelID2, sql);
-       objetivosImpl.obtenerObjetivos(jLabelObjetivoRec3, jLabelFechaPub3, 
-               textDetalles3, jLabelImportancia3, jLabelFechaObj3, jLabelID3, sql);
-       
-       
-       
-       objetivosImpl.recuperarProximos3Registros(jLabelObjetivoRec1, jLabelFechaPub1, 
-               textDetalles1, jLabelImportancia1, jLabelFechaObj1, jLabelID1, rol);
-       objetivosImpl.recuperarProximos3Registros(jLabelObjetivoRec2, jLabelFechaPub2, 
-               textDetalles2, jLabelImportancia2, jLabelFechaObj2, jLabelID2, rol);
-       objetivosImpl.recuperarProximos3Registros(jLabelObjetivoRec3, jLabelFechaPub3, 
-               textDetalles3, jLabelImportancia3, jLabelFechaObj3, jLabelID3, rol);
-       */
-       
-       objetivosImpl.recuperarProximos3Registros(jLabelObjetivoRec1, jLabelFechaPub1, 
-                textDetalles1, jLabelImportancia1, jLabelFechaObj1, jLabelID1, 
-                jLabelObjetivoRec2, jLabelFechaPub2, textDetalles2, jLabelImportancia2, 
-                jLabelFechaObj2, jLabelID2, jLabelObjetivoRec3, jLabelFechaPub3, 
-                textDetalles3, jLabelImportancia3, jLabelFechaObj3, jLabelID3, rol);
-        
-       int ID1 = Integer.parseInt(jLabelID1.getText().trim());
-       int ID2 = Integer.parseInt(jLabelID2.getText().trim());
-       int ID3 = Integer.parseInt(jLabelID3.getText().trim());
-       
-       String importancia1 = objetivosImpl.recuperarNivelImportancia(ID1);
-       String importancia2 = objetivosImpl.recuperarNivelImportancia(ID2);
-       String importancia3 = objetivosImpl.recuperarNivelImportancia(ID3);
+       jPanelProximos.setVisible(true);
        
     }//GEN-LAST:event_jButtonUltimosActionPerformed
 
@@ -738,7 +806,7 @@ public class Objetivos extends javax.swing.JFrame {
        jPanelCrear.setVisible(false);
        jPanelVer.setVisible(true);
        jPanelMensajes.setVisible(false);
-       jPanelUltimos.setVisible(false);
+       jPanelProximos.setVisible(false);
        
        jRadioButtonTodos.setSelected(true);
        
@@ -751,7 +819,7 @@ public class Objetivos extends javax.swing.JFrame {
        jPanelCrear.setVisible(false);
        jPanelVer.setVisible(false);
        jPanelMensajes.setVisible(true);
-       jPanelUltimos.setVisible(false);
+       jPanelProximos.setVisible(false);
        
     }//GEN-LAST:event_jButtonMensajesActionPerformed
 
@@ -854,23 +922,18 @@ public class Objetivos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelFecha;
     private javax.swing.JLabel jLabelFechaObj1;
     private javax.swing.JLabel jLabelFechaObj2;
-    private javax.swing.JLabel jLabelFechaObj3;
     private javax.swing.JLabel jLabelFechaPub1;
     private javax.swing.JLabel jLabelFechaPub2;
-    private javax.swing.JLabel jLabelFechaPub3;
     private javax.swing.JLabel jLabelFiltro;
     private javax.swing.JLabel jLabelID1;
     private javax.swing.JLabel jLabelID2;
-    private javax.swing.JLabel jLabelID3;
     private javax.swing.JLabel jLabelImportancia;
     private javax.swing.JLabel jLabelImportancia1;
     private javax.swing.JLabel jLabelImportancia2;
-    private javax.swing.JLabel jLabelImportancia3;
     private javax.swing.JLabel jLabelN;
     private javax.swing.JLabel jLabelObjetivo;
     private javax.swing.JLabel jLabelObjetivoRec1;
     private javax.swing.JLabel jLabelObjetivoRec2;
-    private javax.swing.JLabel jLabelObjetivoRec3;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelTitulo1;
     private javax.swing.JLabel jLabelTituloVer;
@@ -882,10 +945,9 @@ public class Objetivos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelCrear;
     private javax.swing.JPanel jPanelMensaje1;
     private javax.swing.JPanel jPanelMensaje2;
-    private javax.swing.JPanel jPanelMensaje3;
     private javax.swing.JPanel jPanelMensajes;
     private javax.swing.JPanel jPanelMenu;
-    private javax.swing.JPanel jPanelUltimos;
+    private javax.swing.JPanel jPanelProximos;
     private javax.swing.JPanel jPanelVer;
     private javax.swing.JRadioButton jRadioButtonAlta;
     private javax.swing.JRadioButton jRadioButtonBaja;
@@ -897,14 +959,14 @@ public class Objetivos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTableObjetivos;
+    private javax.swing.JTable jTableProximos;
     private com.toedter.calendar.JYearChooser jYearChooser;
     private javax.swing.JTextArea textDescripcion;
     private javax.swing.JTextArea textDetalles1;
     private javax.swing.JTextArea textDetalles2;
-    private javax.swing.JTextArea textDetalles3;
     private javax.swing.JTextField textElegirUsuario;
     private javax.swing.JTextField textID;
     private javax.swing.JTextField textObjetivo;

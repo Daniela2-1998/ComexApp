@@ -18,7 +18,7 @@ import javax.swing.JTextField;
  *
  * @author Daniela
  */
-public class ObjetivosImpl {
+public class MensajesDeObjetivosImpl {
     
     // fields
     JTextField textID = new JTextField();
@@ -42,7 +42,7 @@ public class ObjetivosImpl {
     
     public boolean establecerObjetivo(int ID, String descripcion, String fechaLimite, 
             String fechaRegistro, String nivelImportancia, String objetivo, 
-            String status, String usuario, String visibilidad, Date fechaObjetivo){
+            String status, String usuario, String visibilidad){
         
         Boolean recepcion;
         int avanzar = 0;
@@ -56,8 +56,7 @@ public class ObjetivosImpl {
            avanzar++;
        }
 
-        
-        String sql = "insert into objetivos values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into objetivos values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         if(avanzar == 0){
             try{
@@ -73,7 +72,6 @@ public class ObjetivosImpl {
                 pst.setString(7, usuario);
                 pst.setString(8, visibilidad);
                 pst.setString(9, objetivo);
-                pst.setDate(10, fechaObjetivo);
                 
                 pst.executeUpdate();
                 conec.close();
@@ -153,7 +151,7 @@ public class ObjetivosImpl {
     }
      
        
-    /*public void recuperarProximos3Registros(JLabel jLabelObjetivoRec1, JLabel jLabelFechaPub1, 
+    public void recuperarProximos3Registros(JLabel jLabelObjetivoRec1, JLabel jLabelFechaPub1, 
             JTextArea textDetalles1, JLabel jLabelImportancia1, JLabel jLabelFechaObj1, 
             JLabel jLabelID1, String rol){
         
@@ -164,7 +162,7 @@ public class ObjetivosImpl {
                  + "visibilidad, fecha_registro, status from objetivos where "
                 + "fecha_fin between '" + fechaActual + "' and '" + tresDiasDespues 
                 + "' order by fecha_fin desc fetch first 3 rows only";
-      
+       */
         
         String sql = "select objetivo, fecha_registro, descripcion, importancia, "
                 + "fecha_fin, id_objetivo from objetivos where fecha_fin = '" + 
@@ -193,9 +191,9 @@ public class ObjetivosImpl {
             System.err.println("Error al obtener el objetivo" + e);
             JOptionPane.showMessageDialog(null, "No se puede conseguir el objetivo");
         }
+        
+        
     }
- 
-*/
   
     public boolean eliminarObjetivo(String usuario, int id){
        
