@@ -19,6 +19,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import service.MensajesDeObjetivosImpl;
 import service.ObjetivosImpl;
 
 /**
@@ -34,7 +35,7 @@ public class Objetivos extends javax.swing.JFrame {
     public Objetivos() {
         initComponents();
         
-        setSize(1500, 900);
+        setSize(1500, 930);
         setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -60,6 +61,9 @@ public class Objetivos extends javax.swing.JFrame {
         VistaProximosObjetivosSegunRol(rol);
         llenadoPrimerObjetivoProximo();
         pasarCamposDeLaTablaProximosAFields();
+        
+        cargarTablaMensajes(fechaActual);
+        pasarCamposDeLaTablaMensajesAFields();
     }
 
     // icono
@@ -69,6 +73,7 @@ public class Objetivos extends javax.swing.JFrame {
     }
 
     ObjetivosImpl objetivosImpl = new ObjetivosImpl();
+    MensajesDeObjetivosImpl mensajesObjetivosImpl = new MensajesDeObjetivosImpl();
     
     LocalDate fechaActual = LocalDate.now();
     LocalDate fechaDiasPlus = fechaActual.plusDays(5);
@@ -387,6 +392,33 @@ public class Objetivos extends javax.swing.JFrame {
         jRadioButtonTodos = new javax.swing.JRadioButton();
         jButtonBuscar = new javax.swing.JButton();
         jPanelMensajes = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jButtonBuscarMensaje = new javax.swing.JButton();
+        jPanelMensaje3 = new javax.swing.JPanel();
+        jLabelTituloMensaje = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        textMensaje = new javax.swing.JTextArea();
+        jLabelUsuario = new javax.swing.JLabel();
+        jLabelFechaMensaje = new javax.swing.JLabel();
+        jLabelObjetivoAsociado = new javax.swing.JLabel();
+        textBusqueda = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jButtonCrearMensaje = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableMensajes = new javax.swing.JTable();
+        jPanelMensaje4 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        textContenido = new javax.swing.JTextArea();
+        jLabel7 = new javax.swing.JLabel();
+        textTituloMensaje = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        textObjetivoAsociado = new javax.swing.JTextField();
+        cmbVisibilidad1 = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        textIDMensaje = new javax.swing.JTextField();
+        textUsuarioElegidoMensaje = new javax.swing.JTextField();
         jPanelProximos = new javax.swing.JPanel();
         jPanelMensaje1 = new javax.swing.JPanel();
         jLabelObjetivoRec1 = new javax.swing.JLabel();
@@ -407,6 +439,8 @@ public class Objetivos extends javax.swing.JFrame {
         textDetalles2 = new javax.swing.JTextArea();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTableProximos = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanelMenu = new javax.swing.JPanel();
         jLabelTitulo = new javax.swing.JLabel();
         jButtonCrear = new javax.swing.JButton();
@@ -632,13 +666,171 @@ public class Objetivos extends javax.swing.JFrame {
 
         jPanelMensajes.setBackground(new java.awt.Color(204, 204, 204));
         jPanelMensajes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel4.setText("Mensajes ");
+        jPanelMensajes.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
+
+        jButtonBuscarMensaje.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonBuscarMensaje.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonBuscarMensaje.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonBuscarMensaje.setText("Buscar objetivo");
+        jButtonBuscarMensaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarMensajeActionPerformed(evt);
+            }
+        });
+        jPanelMensajes.add(jButtonBuscarMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 120, -1));
+
+        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder4 = new org.jdesktop.swingx.border.DropShadowBorder();
+        jPanelMensaje3.setBorder(dropShadowBorder4);
+        jPanelMensaje3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelTituloMensaje.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelTituloMensaje.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelMensaje3.add(jLabelTituloMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        jScrollPane7.setBackground(new java.awt.Color(204, 204, 204));
+        jScrollPane7.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane7.setHorizontalScrollBar(null);
+
+        textMensaje.setEditable(false);
+        textMensaje.setBackground(new java.awt.Color(204, 204, 204));
+        textMensaje.setColumns(5);
+        textMensaje.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        textMensaje.setForeground(new java.awt.Color(255, 255, 255));
+        textMensaje.setLineWrap(true);
+        textMensaje.setRows(5);
+        textMensaje.setTabSize(5);
+        textMensaje.setWrapStyleWord(true);
+        jScrollPane7.setViewportView(textMensaje);
+
+        jPanelMensaje3.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 660, 90));
+
+        jLabelUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabelUsuario.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelMensaje3.add(jLabelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 140, -1, -1));
+
+        jLabelFechaMensaje.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabelFechaMensaje.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelMensaje3.add(jLabelFechaMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, -1, -1));
+
+        jLabelObjetivoAsociado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelObjetivoAsociado.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelMensaje3.add(jLabelObjetivoAsociado, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
+
+        jPanelMensajes.add(jPanelMensaje3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 710, 170));
+
+        textBusqueda.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        textBusqueda.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelMensajes.add(textBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 120, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel5.setText("Mensaje recuperado");
+        jPanelMensajes.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
+
+        jButtonCrearMensaje.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonCrearMensaje.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonCrearMensaje.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonCrearMensaje.setText("Crear mensaje");
+        jButtonCrearMensaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCrearMensajeActionPerformed(evt);
+            }
+        });
+        jPanelMensajes.add(jButtonCrearMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 600, 120, -1));
+
+        jTableMensajes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTableMensajes);
+
+        jPanelMensajes.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 1170, 270));
+
+        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder5 = new org.jdesktop.swingx.border.DropShadowBorder();
+        jPanelMensaje4.setBorder(dropShadowBorder5);
+        jPanelMensaje4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel6.setText("Contenido del mensaje:");
+        jPanelMensaje4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        jScrollPane8.setBackground(new java.awt.Color(204, 204, 204));
+        jScrollPane8.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane8.setHorizontalScrollBar(null);
+
+        textContenido.setBackground(new java.awt.Color(204, 204, 204));
+        textContenido.setColumns(5);
+        textContenido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        textContenido.setForeground(new java.awt.Color(255, 255, 255));
+        textContenido.setLineWrap(true);
+        textContenido.setRows(5);
+        textContenido.setTabSize(5);
+        textContenido.setWrapStyleWord(true);
+        jScrollPane8.setViewportView(textContenido);
+
+        jPanelMensaje4.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 680, 160));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel7.setText("Titulo del mensaje:");
+        jPanelMensaje4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 20, -1, -1));
+
+        textTituloMensaje.setBackground(new java.awt.Color(204, 204, 204));
+        textTituloMensaje.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelMensaje4.add(textTituloMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 40, 140, -1));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel8.setText("Objetivo asociado:");
+        jPanelMensaje4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 80, -1, -1));
+
+        textObjetivoAsociado.setBackground(new java.awt.Color(204, 204, 204));
+        textObjetivoAsociado.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelMensaje4.add(textObjetivoAsociado, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 100, 140, -1));
+
+        cmbVisibilidad1.setForeground(new java.awt.Color(102, 102, 102));
+        cmbVisibilidad1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Administrador", "Importador", "Exportador", "Agente", "Logistica", "Marketing", "Elegir un usuario" }));
+        jPanelMensaje4.add(cmbVisibilidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 160, 120, -1));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel9.setText("Visibilidad:");
+        jPanelMensaje4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 140, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel10.setText("N°:");
+        jPanelMensaje4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, -1, -1));
+
+        textIDMensaje.setBackground(new java.awt.Color(204, 204, 204));
+        textIDMensaje.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelMensaje4.add(textIDMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 40, 70, -1));
+
+        textUsuarioElegidoMensaje.setBackground(new java.awt.Color(204, 204, 204));
+        textUsuarioElegidoMensaje.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelMensaje4.add(textUsuarioElegidoMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 190, 140, -1));
+
+        jPanelMensajes.add(jPanelMensaje4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 560, 1030, 240));
+
         getContentPane().add(jPanelMensajes, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 1250, 880));
 
         jPanelProximos.setBackground(new java.awt.Color(204, 204, 204));
         jPanelProximos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder4 = new org.jdesktop.swingx.border.DropShadowBorder();
-        jPanelMensaje1.setBorder(dropShadowBorder4);
+        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder6 = new org.jdesktop.swingx.border.DropShadowBorder();
+        jPanelMensaje1.setBorder(dropShadowBorder6);
         jPanelMensaje1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelObjetivoRec1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -676,11 +868,11 @@ public class Objetivos extends javax.swing.JFrame {
 
         jLabelTitulo1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabelTitulo1.setForeground(new java.awt.Color(102, 102, 102));
-        jLabelTitulo1.setText("Últimos 3 objetivos registrados en el sistema.");
+        jLabelTitulo1.setText("Próximos objetivos registrados en el sistema");
         jPanelProximos.add(jLabelTitulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 530, 50));
 
-        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder5 = new org.jdesktop.swingx.border.DropShadowBorder();
-        jPanelMensaje2.setBorder(dropShadowBorder5);
+        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder7 = new org.jdesktop.swingx.border.DropShadowBorder();
+        jPanelMensaje2.setBorder(dropShadowBorder7);
         jPanelMensaje2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelObjetivoRec2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -731,11 +923,21 @@ public class Objetivos extends javax.swing.JFrame {
 
         jPanelProximos.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 490, 1170, 300));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel2.setText("Objetivo próximo:");
+        jPanelProximos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel3.setText("Elije un objetivo y podrás verlo aquí:");
+        jPanelProximos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, -1, -1));
+
         getContentPane().add(jPanelProximos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 1250, 880));
 
         jPanelMenu.setBackground(new java.awt.Color(153, 153, 153));
-        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder6 = new org.jdesktop.swingx.border.DropShadowBorder();
-        jPanelMenu.setBorder(dropShadowBorder6);
+        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder8 = new org.jdesktop.swingx.border.DropShadowBorder();
+        jPanelMenu.setBorder(dropShadowBorder8);
         jPanelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelTitulo.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
@@ -851,7 +1053,7 @@ public class Objetivos extends javax.swing.JFrame {
             visibilidad = "Logistica";
         } else if(visibilidadNivel == 7){
             visibilidad = "Marketing";
-        } else if(visibilidadNivel == 7){
+        } else if(visibilidadNivel == 8){
             textElegirUsuario.setVisible(true);
             visibilidad = textElegirUsuario.getSelectedText().trim();
         }
@@ -953,6 +1155,58 @@ public class Objetivos extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonInfoActionPerformed
 
+    private void jButtonCrearMensajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearMensajeActionPerformed
+       
+        String contenido, objetivoAsociado, titulo, visibilidad = null;
+        int ID, visibilidadNivel = 0;
+        Date fechaPublicacion;
+        
+        ID = Integer.parseInt(textIDMensaje.getText().trim());
+        contenido = textContenido.getText().trim();
+        objetivoAsociado = textObjetivoAsociado.getText().trim();
+        titulo = textTituloMensaje.getText().trim();
+        
+        fechaPublicacion = Date.valueOf(LocalDate.now());
+        
+        visibilidadNivel = cmbVisibilidad1.getSelectedIndex() + 1;
+        
+        if(visibilidadNivel == 1){
+            visibilidad = "Todos";
+        } else if(visibilidadNivel == 2){
+            visibilidad = "Administrador";
+        } else if(visibilidadNivel == 3){
+            visibilidad = "Importador";
+        } else if(visibilidadNivel == 4){
+            visibilidad = "Exportador";
+        } else if(visibilidadNivel == 5){
+            visibilidad = "Agente";
+        } else if(visibilidadNivel == 6){
+            visibilidad = "Logistica";
+        } else if(visibilidadNivel == 7){
+            visibilidad = "Marketing";
+        } else if(visibilidadNivel == 8){
+            visibilidad = textUsuarioElegidoMensaje.getSelectedText().trim();
+        }
+        
+        Boolean aprobado = mensajesObjetivosImpl.crearMensaje(ID, contenido, objetivoAsociado, titulo, 
+                usuario, visibilidad, fechaPublicacion);
+        if(aprobado == false){
+            JOptionPane.showMessageDialog(null, "No pudimos crear tu mensaje");
+            cargarTablaMensajes(fechaActual);
+        }
+        
+        
+    }//GEN-LAST:event_jButtonCrearMensajeActionPerformed
+
+    private void jButtonBuscarMensajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarMensajeActionPerformed
+       
+        String busquedaMensaje = textBusqueda.getText().trim();
+        
+        mensajesObjetivosImpl.obtenerMensajeBuscado(busquedaMensaje, jLabelFechaMensaje, 
+                jLabelObjetivoAsociado, jLabelTituloMensaje, textMensaje, jLabelUsuario);
+        
+    }//GEN-LAST:event_jButtonBuscarMensajeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -999,8 +1253,11 @@ public class Objetivos extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroupFiltro;
     private javax.swing.ButtonGroup buttonGroupImportancia;
     private javax.swing.JComboBox<String> cmbVisibilidad;
+    private javax.swing.JComboBox<String> cmbVisibilidad1;
     private javax.swing.JButton jButtonBuscar;
+    private javax.swing.JButton jButtonBuscarMensaje;
     private javax.swing.JButton jButtonCrear;
+    private javax.swing.JButton jButtonCrearMensaje;
     private javax.swing.JButton jButtonEstablecer;
     private javax.swing.JButton jButtonInfo;
     private javax.swing.JButton jButtonMensajes;
@@ -1009,8 +1266,18 @@ public class Objetivos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonVer;
     private com.toedter.calendar.JDayChooser jDayChooser;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelDescripcion;
     private javax.swing.JLabel jLabelFecha;
+    private javax.swing.JLabel jLabelFechaMensaje;
     private javax.swing.JLabel jLabelFechaObj1;
     private javax.swing.JLabel jLabelFechaObj2;
     private javax.swing.JLabel jLabelFechaPub1;
@@ -1023,11 +1290,14 @@ public class Objetivos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelImportancia2;
     private javax.swing.JLabel jLabelN;
     private javax.swing.JLabel jLabelObjetivo;
+    private javax.swing.JLabel jLabelObjetivoAsociado;
     private javax.swing.JLabel jLabelObjetivoRec1;
     private javax.swing.JLabel jLabelObjetivoRec2;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelTitulo1;
+    private javax.swing.JLabel jLabelTituloMensaje;
     private javax.swing.JLabel jLabelTituloVer;
+    private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JLabel jLabelVisibilidad;
     private com.toedter.calendar.JMonthChooser jMonthChooser;
     private javax.swing.JPanel jPanelBase;
@@ -1036,6 +1306,8 @@ public class Objetivos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelCrear;
     private javax.swing.JPanel jPanelMensaje1;
     private javax.swing.JPanel jPanelMensaje2;
+    private javax.swing.JPanel jPanelMensaje3;
+    private javax.swing.JPanel jPanelMensaje4;
     private javax.swing.JPanel jPanelMensajes;
     private javax.swing.JPanel jPanelMenu;
     private javax.swing.JPanel jPanelProximos;
@@ -1049,18 +1321,92 @@ public class Objetivos extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButtonTodos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JTable jTableMensajes;
     private javax.swing.JTable jTableObjetivos;
     private javax.swing.JTable jTableProximos;
     private com.toedter.calendar.JYearChooser jYearChooser;
+    private javax.swing.JTextField textBusqueda;
+    private javax.swing.JTextArea textContenido;
     private javax.swing.JTextArea textDescripcion;
     private javax.swing.JTextArea textDetalles1;
     private javax.swing.JTextArea textDetalles2;
     private javax.swing.JTextField textElegirUsuario;
     private javax.swing.JTextField textID;
+    private javax.swing.JTextField textIDMensaje;
+    private javax.swing.JTextArea textMensaje;
     private javax.swing.JTextField textObjetivo;
+    private javax.swing.JTextField textObjetivoAsociado;
     private javax.swing.JTextField textRol;
+    private javax.swing.JTextField textTituloMensaje;
+    private javax.swing.JTextField textUsuarioElegidoMensaje;
     // End of variables declaration//GEN-END:variables
+
+    public void cargarTablaMensajes (LocalDate fechaActual) {
+
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        String sql = "select fecha_publicacion, objetivo_asociado, titulo, contenido, "
+                + "usuario_emisor, visibilidad from mensajes_objetivos order by "
+                + "fecha_publicacion asc";
+
+        try {
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            jTableMensajes = new JTable(modelo);
+            jScrollPane3.setViewportView(jTableMensajes);
+
+            modelo.addColumn("Fecha de publicación");
+            modelo.addColumn("Objetivo asociado");
+            modelo.addColumn("Título");
+            modelo.addColumn("Contenido");
+            modelo.addColumn("Creador");
+            modelo.addColumn("Visibilidad");
+
+            while (rs.next()) {
+                Object[] fila = new Object[6];
+                for (int i = 0; i < 6; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                modelo.addRow(fila);
+            }
+
+            conec.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos "
+                    + "de la tabla");
+            System.err.println("Error al cargar los datos de la tabla" + e);
+        }
+    }
+    
+    
+    public void pasarCamposDeLaTablaMensajesAFields(){
+    
+        jTableMensajes.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent Mouse_evt){
+                
+                JTable tablaMensajes = (JTable) Mouse_evt.getSource();
+                Point point = Mouse_evt.getPoint();
+    
+                int filaSeleccionada = tablaMensajes.rowAtPoint(point);
+
+                if(Mouse_evt.getClickCount() == 1){
+                  jLabelFechaMensaje.setText (jTableMensajes.getValueAt(jTableProximos.getSelectedRow(), 0).toString());
+                  jLabelObjetivoAsociado.setText(jTableProximos.getValueAt(jTableMensajes.getSelectedRow(), 1).toString());
+                  jLabelTituloMensaje.setText(jTableProximos.getValueAt(jTableMensajes.getSelectedRow(), 2).toString());
+                  textMensaje.setText(jTableMensajes.getValueAt(jTableProximos.getSelectedRow(), 3).toString());
+                  jLabelUsuario.setText(jTableMensajes.getValueAt(jTableProximos.getSelectedRow(), 4).toString());
+
+                }
+            }
+        });
+    }
 }

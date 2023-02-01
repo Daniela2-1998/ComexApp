@@ -22,14 +22,11 @@ public class MensajesDeObjetivosImpl {
     
     // fields
     JTextField textID = new JTextField();
-    JTextField textFechaLimite = new JTextField();
     JTextField textFechaRegistro = new JTextField();
-    JTextField textObjetivo = new JTextField();
-    JTextArea textDescripcion = new JTextArea();
-    JComboBox cmbNivelImportancia = new JComboBox();
-    JComboBox cmbNivelStatus = new JComboBox();
+    JTextField textTitulo = new JTextField();
+    JTextField textObjetivoAsociado = new JTextField();
+    JTextArea textContenido = new JTextArea();
     JComboBox cmbNivelVisibilidad = new JComboBox();
-    JTextField textVisibilidad = new JTextField();
     
     // conexión
     Conexion cn = new Conexion();
@@ -40,23 +37,26 @@ public class MensajesDeObjetivosImpl {
     Boolean recepcionFuncion, modificacionEstado, eliminacionAprobada;
     
     
-    public boolean establecerObjetivo(int ID, String descripcion, String fechaLimite, 
-            String fechaRegistro, String nivelImportancia, String objetivo, 
-            String status, String usuario, String visibilidad){
+    public boolean crearMensaje(int ID, String contenido, String objetivoAsociado, 
+            String titulo, String usuario, String visibilidad, Date fechaPublicacion){
         
         Boolean recepcion;
         int avanzar = 0;
 
-       if(descripcion.equals("")){
-           textDescripcion.setBackground(Color.red);
+       if(contenido.equals("")){
+           textContenido.setBackground(Color.red);
            avanzar++;
        }
-       if(objetivo.equals("")){
-           textObjetivo.setBackground(Color.red);
+       if(titulo.equals("")){
+           textTitulo.setBackground(Color.red);
+           avanzar++;
+       }
+       if(objetivoAsociado.equals("")){
+           textObjetivoAsociado.setBackground(Color.red);
            avanzar++;
        }
 
-        String sql = "insert into objetivos values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into mensajes_objetivos values (?, ?, ?, ?, ?, ?, ?)";
         
         if(avanzar == 0){
             try{
@@ -64,25 +64,22 @@ public class MensajesDeObjetivosImpl {
                 pst = conec.prepareStatement(sql);
                 
                 pst.setInt(1, ID);
-                pst.setString(2, descripcion);
-                pst.setString(3, fechaLimite);
-                pst.setString(4, fechaRegistro);
-                pst.setString(5, nivelImportancia);
-                pst.setString(6, status);
-                pst.setString(7, usuario);
-                pst.setString(8, visibilidad);
-                pst.setString(9, objetivo);
+                pst.setString(2, contenido);
+                pst.setString(3, objetivoAsociado);
+                pst.setString(4, titulo);
+                pst.setString(5, usuario);
+                pst.setString(6, visibilidad);
+                pst.setDate(7, fechaPublicacion);
                 
                 pst.executeUpdate();
                 conec.close();
                 
-                JOptionPane.showMessageDialog(null, "Se registró un nuevo "
-                        + "objetivo en el sistema ComexApp");
+                JOptionPane.showMessageDialog(null, "Mensaje creado");
                 return recepcion = true;
                 
             }catch(SQLException e){
-                JOptionPane.showMessageDialog(null, "No se puede crear el objetivo");
-                System.err.println("No es posible crear el objetivo" + e);
+                JOptionPane.showMessageDialog(null, "No se puede crear el mensaje");
+                System.err.println("No es posible crear el mensaje" + e);
                 return recepcion = false;
             }
             
@@ -93,10 +90,14 @@ public class MensajesDeObjetivosImpl {
   
     
     
-    public void obtenerObjetivos(JLabel jLabelObjetivoRec1, JLabel jLabelFechaPub1, 
-            JTextArea textDetalles1, JLabel jLabelImportancia1, JLabel jLabelFechaObj1, 
-            JLabel jLabelID1, String sql){ 
+    public void obtenerMensajeBuscado(String busquedaMensaje, JLabel jLabelFechaMensaje, 
+            JLabel jLabelObjetivoAsociado, JLabel jLabelTituloMensaje, 
+            JTextArea textMensaje, JLabel jLabelUsuario){ 
             
+        String sql = "select fecha_publicacion, objetivo_asociado, titulo, contenido, "
+                + "usuario_emisor from mensajes_objetivos where objetivo_asociado = '" 
+                + busquedaMensaje + "'";
+        
         try{
             conec = cn.Conexion();
             pst = conec.prepareStatement(sql);
@@ -104,22 +105,21 @@ public class MensajesDeObjetivosImpl {
             
             if(rs.next()){
 
-                jLabelObjetivoRec1.setText(rs.getString("objetivo")); 
-                jLabelFechaPub1.setText(rs.getString("fecha_registro"));
-                textDetalles1.setText(rs.getString("descripcion"));
-                jLabelImportancia1.setText(rs.getString("importancia"));
-                jLabelFechaObj1.setText(rs.getString("fecha_fin"));
-                jLabelID1.setText(rs.getString("id_objetivo"));
+                jLabelFechaMensaje.setText(rs.getString("fecha_publicacion")); 
+                jLabelObjetivoAsociado.setText(rs.getString("objetivo_asociado"));
+                jLabelTituloMensaje.setText(rs.getString("titulo"));
+                textMensaje.setText(rs.getString("contenido"));
+                jLabelUsuario.setText(rs.getString("usuario"));
                 
             } else {
-                JOptionPane.showMessageDialog(null, "No es posible recuperar objetivo");
-                System.err.println("No es posible conseguir el objetivo");
+                JOptionPane.showMessageDialog(null, "No es posible recuperar el mensaje");
+                System.err.println("No es posible conseguir el mensaje");
             }
             conec.close();
             
         }catch(SQLException e){
-            System.err.println("Error al obtener el objetivo" + e);
-            JOptionPane.showMessageDialog(null, "No se puede conseguir el objetivo");
+            System.err.println("Error al obtener el mensaje" + e);
+            JOptionPane.showMessageDialog(null, "No se puede conseguir el mensaje");
         }
         
     }

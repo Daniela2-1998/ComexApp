@@ -1,5 +1,6 @@
 package Daniela.ComexApp.Entity;
 
+import java.sql.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -35,11 +36,8 @@ public class MensajesObjetivos {
 
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private String fecha_registro;
+    private Date fecha_registro;
     
-    @NotNull
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private String fecha_fin;
 
    
     
@@ -93,29 +91,20 @@ public class MensajesObjetivos {
         this.visibilidad = visibilidad;
     }
 
-    public String getFecha_registro() {
+    public Date getFecha_registro() {
         return fecha_registro;
     }
 
-    public void setFecha_registro(String fecha_registro) {
+    public void setFecha_registro(Date fecha_registro) {
         this.fecha_registro = fecha_registro;
     }
 
-    public String getFecha_fin() {
-        return fecha_fin;
-    }
-
-    public void setFecha_fin(String fecha_fin) {
-        this.fecha_fin = fecha_fin;
-    }
-
-    
-    
+  
     
     public MensajesObjetivos() {
     }
 
-    public MensajesObjetivos(Integer id, String titulo, String contenido, String usuario_emisor, String objetivo_asociado, String visibilidad, String fecha_registro, String fecha_fin) {
+    public MensajesObjetivos(Integer id, String titulo, String contenido, String usuario_emisor, String objetivo_asociado, String visibilidad, Date fecha_registro) {
         this.id = id;
         this.titulo = titulo;
         this.contenido = contenido;
@@ -123,8 +112,7 @@ public class MensajesObjetivos {
         this.objetivo_asociado = objetivo_asociado;
         this.visibilidad = visibilidad;
         this.fecha_registro = fecha_registro;
-        this.fecha_fin = fecha_fin;
     }
-  
+
 
 }
