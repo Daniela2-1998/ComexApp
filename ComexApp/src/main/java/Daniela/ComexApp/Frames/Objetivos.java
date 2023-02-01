@@ -13,8 +13,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Calendar;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import service.ObjetivosImpl;
 
@@ -49,13 +52,14 @@ public class Objetivos extends javax.swing.JFrame {
         jPanelMensajes.setVisible(false);
         jPanelProximos.setVisible(true);
 
-        textElegirUsuario.setVisible(false);
-
         buttonGroupFiltro.getSelection();
         jRadioButtonTodos.setSelected(true);
 
         VistaObjetivosSegunRol(rol);
+        
         VistaProximosObjetivosSegunRol(rol);
+        llenadoPrimerObjetivoProximo();
+        pasarCamposDeLaTablaProximosAFields();
     }
 
     // icono
@@ -268,6 +272,7 @@ public class Objetivos extends javax.swing.JFrame {
        }
     }
     
+    
     public void pasarCamposDeLaTablaProximosAFields(){
     
         jTableProximos.addMouseListener(new MouseAdapter() {
@@ -280,20 +285,60 @@ public class Objetivos extends javax.swing.JFrame {
                 int filaSeleccionada = tablaProximos.rowAtPoint(point);
 
                 if(Mouse_evt.getClickCount() == 1){
-                  jLabelFechaObj1.setText(jTableProximos.getValueAt(jTableProximos.getSelectedRow(), 0).toString());
-                  jLabelObjetivoRec1.setText(jTableProximos.getValueAt(jTableProximos.getSelectedRow(), 1).toString());
-                  jLabelImportancia1.setText(jTableProximos.getValueAt(jTableProximos.getSelectedRow(), 3).toString());
-                  jLabelFechaObj1.setText(jTableProximos.getValueAt(jTableProximos.getSelectedRow(), 5).toString());
+                  jLabelFechaObj2.setText("Fecha objetivo: " + jTableProximos.getValueAt
+        (jTableProximos.getSelectedRow(), 0).toString());
+                  jLabelObjetivoRec2.setText(jTableProximos.getValueAt(jTableProximos.getSelectedRow(), 1).toString());
+                  jLabelImportancia2.setText(jTableProximos.getValueAt(jTableProximos.getSelectedRow(), 3).toString());
+                  jLabelFechaPub2.setText("Fecha de registro: " + jTableProximos.getValueAt
+        (jTableProximos.getSelectedRow(), 5).toString());
+                  recuperarDatosFaltantesDelProximoMensaje(jLabelObjetivoRec2, jLabelFechaPub2, 
+                jLabelID2, textDetalles2);
                 }
             }
         });
     }
+    
+    public void llenadoPrimerObjetivoProximo(){
+        jLabelFechaObj1.setText("Fecha objetivo: " + jTableProximos.getValueAt(1, 0).toString());
+        jLabelObjetivoRec1.setText(jTableProximos.getValueAt(1, 1).toString());
+        jLabelImportancia1.setText(jTableProximos.getValueAt(1, 3).toString());
+        jLabelFechaPub1.setText("Fecha de registro: " + jTableProximos.getValueAt(1, 5).toString());
+        recuperarDatosFaltantesDelProximoMensaje(jLabelObjetivoRec1, jLabelFechaPub1, 
+                jLabelID1, textDetalles1);
+    }
+  
 
      
-    public void recuperarDatosFaltantesDelProximoMensaje(){
+    public void recuperarDatosFaltantesDelProximoMensaje(JLabel jLabelObjetivoRec, 
+            JLabel jLabelFechaPub, JLabel jLabelID, JTextArea textDetalles){
         
+        String objetivo = jLabelObjetivoRec.getText().trim();
+        String fechaRegistro = jLabelFechaPub.getText().trim();
+        
+        String sql = "select id_objetivo, descripcion from objetivos where "
+                + "objetivo = '" + objetivo + "'";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                int id = rs.getInt("id_objetivo");
+                jLabelID.setText(String.valueOf(id));
+                textDetalles.setText(rs.getString("descripcion"));  
+            }
+            conec.close();
+            
+        }catch(SQLException e){
+            System.err.println("No se pueden completar los datos faltante " + e);
+        }  
     }
- // ID, Detalles y status
+    
+   
+   
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -314,6 +359,7 @@ public class Objetivos extends javax.swing.JFrame {
         jLabelVisibilidad = new javax.swing.JLabel();
         cmbVisibilidad = new javax.swing.JComboBox<>();
         textElegirUsuario = new javax.swing.JTextField();
+        jButtonInfo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanelContenido = new javax.swing.JPanel();
         jLabelDescripcion = new javax.swing.JLabel();
@@ -345,20 +391,20 @@ public class Objetivos extends javax.swing.JFrame {
         jPanelMensaje1 = new javax.swing.JPanel();
         jLabelObjetivoRec1 = new javax.swing.JLabel();
         jLabelFechaPub1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        textDetalles1 = new javax.swing.JTextArea();
         jLabelImportancia1 = new javax.swing.JLabel();
         jLabelFechaObj1 = new javax.swing.JLabel();
         jLabelID1 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        textDetalles1 = new javax.swing.JTextArea();
         jLabelTitulo1 = new javax.swing.JLabel();
         jPanelMensaje2 = new javax.swing.JPanel();
         jLabelObjetivoRec2 = new javax.swing.JLabel();
         jLabelFechaPub2 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        textDetalles2 = new javax.swing.JTextArea();
         jLabelImportancia2 = new javax.swing.JLabel();
         jLabelFechaObj2 = new javax.swing.JLabel();
         jLabelID2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        textDetalles2 = new javax.swing.JTextArea();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTableProximos = new javax.swing.JTable();
         jPanelMenu = new javax.swing.JPanel();
@@ -409,7 +455,21 @@ public class Objetivos extends javax.swing.JFrame {
         textElegirUsuario.setForeground(new java.awt.Color(102, 102, 102));
         jPanelBase.add(textElegirUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 120, -1));
 
-        jPanelCrear.add(jPanelBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 540, 130));
+        jButtonInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/signo4.png"))); // NOI18N
+        jButtonInfo.setBorder(null);
+        jButtonInfo.setBorderPainted(false);
+        jButtonInfo.setContentAreaFilled(false);
+        jButtonInfo.setFocusPainted(false);
+        jButtonInfo.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/signo5.png"))); // NOI18N
+        jButtonInfo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/signo5.png"))); // NOI18N
+        jButtonInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInfoActionPerformed(evt);
+            }
+        });
+        jPanelBase.add(jButtonInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 50, -1));
+
+        jPanelCrear.add(jPanelBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 590, 130));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
@@ -485,15 +545,15 @@ public class Objetivos extends javax.swing.JFrame {
         jMonthChooser.setForeground(new java.awt.Color(102, 102, 102));
         jMonthChooser.setDayChooser(jDayChooser);
         jMonthChooser.setYearChooser(jYearChooser);
-        jPanelContenido.add(jMonthChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 70, -1, -1));
+        jPanelContenido.add(jMonthChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 210, -1, -1));
 
         jYearChooser.setDayChooser(jDayChooser);
-        jPanelContenido.add(jYearChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 110, -1, 20));
+        jPanelContenido.add(jYearChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 240, -1, 20));
 
         jDayChooser.setForeground(new java.awt.Color(102, 102, 102));
-        jPanelContenido.add(jDayChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 320, 160));
+        jPanelContenido.add(jDayChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 440, 160));
 
-        jPanelCrear.add(jPanelContenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 890, 380));
+        jPanelCrear.add(jPanelContenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 910, 380));
 
         getContentPane().add(jPanelCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 1250, 880));
 
@@ -587,19 +647,30 @@ public class Objetivos extends javax.swing.JFrame {
 
         jLabelFechaPub1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelFechaPub1.setForeground(new java.awt.Color(102, 102, 102));
-        jPanelMensaje1.add(jLabelFechaPub1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 150, 150, -1));
-
-        textDetalles1.setColumns(20);
-        textDetalles1.setRows(5);
-        jScrollPane2.setViewportView(textDetalles1);
-
-        jPanelMensaje1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 660, -1));
+        jPanelMensaje1.add(jLabelFechaPub1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 150, 200, -1));
         jPanelMensaje1.add(jLabelImportancia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 20, -1, -1));
-        jPanelMensaje1.add(jLabelFechaObj1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, -1, -1));
+        jPanelMensaje1.add(jLabelFechaObj1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, -1));
 
         jLabelID1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelID1.setForeground(new java.awt.Color(102, 102, 102));
         jPanelMensaje1.add(jLabelID1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+
+        jScrollPane4.setBackground(new java.awt.Color(204, 204, 204));
+        jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane4.setHorizontalScrollBar(null);
+
+        textDetalles1.setEditable(false);
+        textDetalles1.setBackground(new java.awt.Color(204, 204, 204));
+        textDetalles1.setColumns(5);
+        textDetalles1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        textDetalles1.setForeground(new java.awt.Color(255, 255, 255));
+        textDetalles1.setLineWrap(true);
+        textDetalles1.setRows(5);
+        textDetalles1.setTabSize(5);
+        textDetalles1.setWrapStyleWord(true);
+        jScrollPane4.setViewportView(textDetalles1);
+
+        jPanelMensaje1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 660, 90));
 
         jPanelProximos.add(jPanelMensaje1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 710, 170));
 
@@ -618,19 +689,30 @@ public class Objetivos extends javax.swing.JFrame {
 
         jLabelFechaPub2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelFechaPub2.setForeground(new java.awt.Color(102, 102, 102));
-        jPanelMensaje2.add(jLabelFechaPub2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 150, 150, -1));
-
-        textDetalles2.setColumns(20);
-        textDetalles2.setRows(5);
-        jScrollPane3.setViewportView(textDetalles2);
-
-        jPanelMensaje2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 660, -1));
+        jPanelMensaje2.add(jLabelFechaPub2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 150, 200, -1));
         jPanelMensaje2.add(jLabelImportancia2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 20, -1, -1));
-        jPanelMensaje2.add(jLabelFechaObj2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, -1, -1));
+        jPanelMensaje2.add(jLabelFechaObj2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, -1));
 
         jLabelID2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelID2.setForeground(new java.awt.Color(102, 102, 102));
         jPanelMensaje2.add(jLabelID2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+
+        jScrollPane2.setBackground(new java.awt.Color(204, 204, 204));
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane2.setHorizontalScrollBar(null);
+
+        textDetalles2.setEditable(false);
+        textDetalles2.setBackground(new java.awt.Color(204, 204, 204));
+        textDetalles2.setColumns(5);
+        textDetalles2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        textDetalles2.setForeground(new java.awt.Color(255, 255, 255));
+        textDetalles2.setLineWrap(true);
+        textDetalles2.setRows(5);
+        textDetalles2.setTabSize(5);
+        textDetalles2.setWrapStyleWord(true);
+        jScrollPane2.setViewportView(textDetalles2);
+
+        jPanelMensaje2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 660, 80));
 
         jPanelProximos.add(jPanelMensaje2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 710, 170));
 
@@ -728,7 +810,7 @@ public class Objetivos extends javax.swing.JFrame {
 
     private void jButtonEstablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEstablecerActionPerformed
 
-        String descripcion, fechaLimite, fechaRegistro, nivelImportancia, 
+        String descripcion, fechaLimite, nivelImportancia, 
                 objetivo, status, visibilidad = null;
        
         int ID, visibilidadNivel, mesNum;
@@ -744,8 +826,9 @@ public class Objetivos extends javax.swing.JFrame {
         
         fechaLimite = año + "-" + mes + "-" + dia;
         
-        fechaRegistro = fechaActual.toString();
+        Date fechaRegistro = Date.valueOf(fechaActual);
         fechaObjetivo = Date.valueOf(fechaLimite);
+        
         
         ID = Integer.parseInt(textID.getText().trim());
         descripcion = textDescripcion.getText().trim();
@@ -863,6 +946,13 @@ public class Objetivos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
+    private void jButtonInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInfoActionPerformed
+
+        InformacionIDObjetivo informacionIDObjetivo = new InformacionIDObjetivo();
+        informacionIDObjetivo.setVisible(true);
+
+    }//GEN-LAST:event_jButtonInfoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -912,6 +1002,7 @@ public class Objetivos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonCrear;
     private javax.swing.JButton jButtonEstablecer;
+    private javax.swing.JButton jButtonInfo;
     private javax.swing.JButton jButtonMensajes;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JButton jButtonUltimos;
@@ -958,7 +1049,7 @@ public class Objetivos extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButtonTodos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTableObjetivos;

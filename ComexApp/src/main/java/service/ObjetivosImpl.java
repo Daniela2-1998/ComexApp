@@ -41,7 +41,7 @@ public class ObjetivosImpl {
     
     
     public boolean establecerObjetivo(int ID, String descripcion, String fechaLimite, 
-            String fechaRegistro, String nivelImportancia, String objetivo, 
+            Date fechaRegistro, String nivelImportancia, String objetivo, 
             String status, String usuario, String visibilidad, Date fechaObjetivo){
         
         Boolean recepcion;
@@ -67,7 +67,7 @@ public class ObjetivosImpl {
                 pst.setInt(1, ID);
                 pst.setString(2, descripcion);
                 pst.setString(3, fechaLimite);
-                pst.setString(4, fechaRegistro);
+                pst.setDate(4, fechaRegistro);
                 pst.setString(5, nivelImportancia);
                 pst.setString(6, status);
                 pst.setString(7, usuario);
