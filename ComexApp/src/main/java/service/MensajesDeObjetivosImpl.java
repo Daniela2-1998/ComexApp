@@ -7,7 +7,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -56,9 +58,13 @@ public class MensajesDeObjetivosImpl {
            avanzar++;
        }
 
-        String sql = "insert into mensajes_objetivos values (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into mensajes_objetivos values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         if(avanzar == 0){
+            
+            Time horaRegistro = Time.valueOf(LocalTime.now());
+            Boolean visto = false;
+            
             try{
                 conec = cn.Conexion();
                 pst = conec.prepareStatement(sql);
@@ -70,6 +76,8 @@ public class MensajesDeObjetivosImpl {
                 pst.setString(5, usuario);
                 pst.setString(6, visibilidad);
                 pst.setDate(7, fechaPublicacion);
+                pst.setBoolean(8, visto);
+                pst.setTime(9, horaRegistro);
                 
                 pst.executeUpdate();
                 conec.close();
@@ -109,7 +117,7 @@ public class MensajesDeObjetivosImpl {
                 jLabelObjetivoAsociado.setText(rs.getString("objetivo_asociado"));
                 jLabelTituloMensaje.setText(rs.getString("titulo"));
                 textMensaje.setText(rs.getString("contenido"));
-                jLabelUsuario.setText(rs.getString("usuario"));
+                jLabelUsuario.setText(rs.getString("usuario_emisor"));
                 
             } else {
                 JOptionPane.showMessageDialog(null, "No es posible recuperar el mensaje");
@@ -124,81 +132,74 @@ public class MensajesDeObjetivosImpl {
         
     }
     
-    
-    public String recuperarNivelImportancia(int ID){
+
+    public Boolean verificarMensajesSinVer(String usuario, String rol){ 
         
-        String nivelImportancia = null;
-        String sql = "select importancia from objetivos where id_objetivo = '" + ID + "'";
+        Boolean visto = null;
         
-         try{
+        String sql = "select titulo, fecha_publicacion, hora_registro, visto from "
+                + "mensajes_objetivos where visto = 'false'";
+                
+        try{
             conec = cn.Conexion();
             pst = conec.prepareStatement(sql);
             rs = pst.executeQuery();
             
             if(rs.next()){
-                nivelImportancia = rs.getString("importancia");
+                
+                   String titulo = rs.getString("titulo");
+                   Date fechaPublicacion = rs.getDate("fecha_publicacion");
+                   Time horaPublicacion = rs.getTime("hora_registro");
+                   visto = rs.getBoolean("visto");
+                   
+                if (visto.equals(false)) {
+
+                    Mensajes mensajes = new Mensajes();
+                    mensajes.notificacionMensajesDeObjetivosSinVer(titulo, fechaPublicacion,
+                            horaPublicacion);
+
+                } else if (visto.equals(true)) {
+                    System.err.println("No hay mensajes disponibles");
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "No es posible recuperar nivel de importancia");
-                System.err.println("No es posible recuperar el nivel de importancia");
+                
             }
             conec.close();
             
         }catch(SQLException e){
-            System.err.println("Error al obtener el nivel" + e);
-            JOptionPane.showMessageDialog(null, "No se pueden obtener el nivel");
+            System.err.println("No hay mensajes disponibles " + e);
         }
-        return nivelImportancia;
-    }
-     
-       
-    public void recuperarProximos3Registros(JLabel jLabelObjetivoRec1, JLabel jLabelFechaPub1, 
-            JTextArea textDetalles1, JLabel jLabelImportancia1, JLabel jLabelFechaObj1, 
-            JLabel jLabelID1, String rol){
-        
-        LocalDate fechaActual = LocalDate.now();
-        LocalDate tresDiasDespues = LocalDate.now().plusDays(3);
-
-        /*String sql = "select fecha_fin, objetivo, usuario_creador, importancia, "
-                 + "visibilidad, fecha_registro, status from objetivos where "
-                + "fecha_fin between '" + fechaActual + "' and '" + tresDiasDespues 
-                + "' order by fecha_fin desc fetch first 3 rows only";
-       */
-        
-        String sql = "select objetivo, fecha_registro, descripcion, importancia, "
-                + "fecha_fin, id_objetivo from objetivos where fecha_fin = '" + 
-                fechaActual + "' limit 1";
-
-         try{
-            conec = cn.Conexion();
-            pst = conec.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            if(rs.next()){
-
-                    jLabelObjetivoRec1.setText(rs.getString("objetivo")); 
-                    jLabelFechaPub1.setText(rs.getString("fecha_registro"));
-                    textDetalles1.setText(rs.getString("descripcion"));
-                    jLabelImportancia1.setText(rs.getString("importancia"));
-                    jLabelFechaObj1.setText(rs.getString("fecha_fin"));
-                    jLabelID1.setText(rs.getString("id_objetivo"));
-                } else {
-                System.err.print("No pudimos obtener los datos");
-            }
-            
-            conec.close();
-            
-        }catch(SQLException e){
-            System.err.println("Error al obtener el objetivo" + e);
-            JOptionPane.showMessageDialog(null, "No se puede conseguir el objetivo");
-        }
-        
-        
-    }
   
-    public boolean eliminarObjetivo(String usuario, int id){
+        return visto;
+    }
+    
+
+    
+    
+    public void marcarMensajesComoVisto(String titulo){
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement("update mensajes_objetivos set visto =? "
+                    + "where titulo = '" + titulo + "'");
+            
+            pst.setBoolean(1, true);
+            pst.executeUpdate();
+            
+            conec.close();
+            
+        }catch(SQLException e){
+            System.err.println("No es posible marcar como visto " + e);
+        }
+    }
+
+  
+    
+     
+    public boolean eliminarMensajeDeObjetivo(String usuario, int id){
        
-        String sql = "delete from objetivos where usuario_creador = '" + usuario + "' "
-               + "and id_objetivo = '" + id + "'";
+        String sql = "delete from mensajes_objetivos where usuario_emisor = '" + usuario + "' "
+               + "and id_mensaje_objetivo = '" + id + "'";
        
        int alternativaMensaje;
        Boolean aprobado;

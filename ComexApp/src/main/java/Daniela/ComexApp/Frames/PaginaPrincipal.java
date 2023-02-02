@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import service.InicioSesionService;
+import service.MensajesDeObjetivosImpl;
 import service.UsuariosImpl;
 
 /**
@@ -34,6 +35,8 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jMenuInfo.setText(nombreCompleto + " - " + usuario);
         
         setTitle("Página principal - " + usuario + " - sistema ComexApp");
+        
+        mensajesDeObjetivosImpl.verificarMensajesSinVer(usuario, rol);
     }
     
         // icono
@@ -45,6 +48,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     InicioSesionService usuariosServicio = new InicioSesionService();
     InicioSesion inicioSesion = new InicioSesion();
     UsuariosImpl usuariosService = new UsuariosImpl();
+    MensajesDeObjetivosImpl mensajesDeObjetivosImpl = new MensajesDeObjetivosImpl();
    
     
     public void visibilidadAdministrador(){

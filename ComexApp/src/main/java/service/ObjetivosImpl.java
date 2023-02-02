@@ -153,49 +153,27 @@ public class ObjetivosImpl {
     }
      
        
-    /*public void recuperarProximos3Registros(JLabel jLabelObjetivoRec1, JLabel jLabelFechaPub1, 
-            JTextArea textDetalles1, JLabel jLabelImportancia1, JLabel jLabelFechaObj1, 
-            JLabel jLabelID1, String rol){
+    public void cambiarStatusDeObjetivosConFechaCumplida(){
         
-        LocalDate fechaActual = LocalDate.now();
-        LocalDate tresDiasDespues = LocalDate.now().plusDays(3);
+        Date fechaActual = Date.valueOf(LocalDate.now());
 
-        /*String sql = "select fecha_fin, objetivo, usuario_creador, importancia, "
-                 + "visibilidad, fecha_registro, status from objetivos where "
-                + "fecha_fin between '" + fechaActual + "' and '" + tresDiasDespues 
-                + "' order by fecha_fin desc fetch first 3 rows only";
-      
         
-        String sql = "select objetivo, fecha_registro, descripcion, importancia, "
-                + "fecha_fin, id_objetivo from objetivos where fecha_fin = '" + 
-                fechaActual + "' limit 1";
-
-         try{
+        String sql = "update objetivos set status=? where fecha_objetivo <= '" 
+                + fechaActual + "'";
+        try{
             conec = cn.Conexion();
             pst = conec.prepareStatement(sql);
-            rs = pst.executeQuery();
 
-            if(rs.next()){
+            pst.setString(1, "Fecha cumplida");
 
-                    jLabelObjetivoRec1.setText(rs.getString("objetivo")); 
-                    jLabelFechaPub1.setText(rs.getString("fecha_registro"));
-                    textDetalles1.setText(rs.getString("descripcion"));
-                    jLabelImportancia1.setText(rs.getString("importancia"));
-                    jLabelFechaObj1.setText(rs.getString("fecha_fin"));
-                    jLabelID1.setText(rs.getString("id_objetivo"));
-                } else {
-                System.err.print("No pudimos obtener los datos");
-            }
-            
-            conec.close();
-            
+            pst.executeUpdate();
+            conec.close();        
+
         }catch(SQLException e){
-            System.err.println("Error al obtener el objetivo" + e);
-            JOptionPane.showMessageDialog(null, "No se puede conseguir el objetivo");
+            System.err.println("No se puede realizar el cambio de status del objetivo. " + e);
         }
+        
     }
- 
-*/
   
     public boolean eliminarObjetivo(String usuario, int id){
        

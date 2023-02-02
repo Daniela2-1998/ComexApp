@@ -12,12 +12,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Calendar;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import service.MensajesDeObjetivosImpl;
 import service.ObjetivosImpl;
@@ -46,6 +44,9 @@ public class Objetivos extends javax.swing.JFrame {
         nombreCompleto = paginaPrincipal.nombreCompleto;
         rol = paginaPrincipal.rol;
 
+        mensajesObjetivosImpl.verificarMensajesSinVer(usuario, rol);
+        objetivosImpl.cambiarStatusDeObjetivosConFechaCumplida();
+        
         setTitle("Objetivos - " + usuario + " - sistema ComexApp");
 
         jPanelCrear.setVisible(false);
@@ -236,20 +237,21 @@ public class Objetivos extends javax.swing.JFrame {
     public void mostrarTodosLosObjetivosRol(){
         String sql = "select fecha_objetivo, objetivo, usuario_creador, importancia, "
                 + "visibilidad, fecha_registro, status from objetivos where "
-                + "visibilidad = '" + rol + "'";
+                + "visibilidad = '" + rol + "' order by fecha_objetivo asc";
         cargarTablaObjetivos(sql);
     }
      
     public void mostrarTodosLosObjetivosAdmin(){
          String sql = "select fecha_objetivo, objetivo, usuario_creador, importancia, "
-                 + "visibilidad, fecha_registro, status from objetivos";
+                 + "visibilidad, fecha_registro, status from objetivos order by "
+                 + "fecha_objetivo asc";
         cargarTablaObjetivos(sql);
     }
      
     public void mostrarTodosLosObjetivosEnProgreso(){
          String sql = "select fecha_objetivo, objetivo, usuario_creador, importancia, "
                  + "visibilidad, fecha_registro, status from objetivos where "
-                 + "status = 'En progreso'";
+                 + "status = 'En progreso' order by fecha_objetivo asc";
         cargarTablaObjetivos(sql);
     }
     
@@ -419,6 +421,7 @@ public class Objetivos extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         textIDMensaje = new javax.swing.JTextField();
         textUsuarioElegidoMensaje = new javax.swing.JTextField();
+        jButtonInfo4 = new javax.swing.JButton();
         jPanelProximos = new javax.swing.JPanel();
         jPanelMensaje1 = new javax.swing.JPanel();
         jLabelObjetivoRec1 = new javax.swing.JLabel();
@@ -670,7 +673,7 @@ public class Objetivos extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Mensajes ");
-        jPanelMensajes.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
+        jPanelMensajes.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
 
         jButtonBuscarMensaje.setBackground(new java.awt.Color(102, 102, 102));
         jButtonBuscarMensaje.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -681,7 +684,7 @@ public class Objetivos extends javax.swing.JFrame {
                 jButtonBuscarMensajeActionPerformed(evt);
             }
         });
-        jPanelMensajes.add(jButtonBuscarMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 120, -1));
+        jPanelMensajes.add(jButtonBuscarMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 120, -1));
 
         org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder4 = new org.jdesktop.swingx.border.DropShadowBorder();
         jPanelMensaje3.setBorder(dropShadowBorder4);
@@ -720,16 +723,16 @@ public class Objetivos extends javax.swing.JFrame {
         jLabelObjetivoAsociado.setForeground(new java.awt.Color(102, 102, 102));
         jPanelMensaje3.add(jLabelObjetivoAsociado, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
 
-        jPanelMensajes.add(jPanelMensaje3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 710, 170));
+        jPanelMensajes.add(jPanelMensaje3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 710, 170));
 
         textBusqueda.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         textBusqueda.setForeground(new java.awt.Color(102, 102, 102));
-        jPanelMensajes.add(textBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 120, -1));
+        jPanelMensajes.add(textBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 120, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Mensaje recuperado");
-        jPanelMensajes.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
+        jPanelMensajes.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
 
         jButtonCrearMensaje.setBackground(new java.awt.Color(102, 102, 102));
         jButtonCrearMensaje.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -740,7 +743,7 @@ public class Objetivos extends javax.swing.JFrame {
                 jButtonCrearMensajeActionPerformed(evt);
             }
         });
-        jPanelMensajes.add(jButtonCrearMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 600, 120, -1));
+        jPanelMensajes.add(jButtonCrearMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 120, -1));
 
         jTableMensajes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -755,7 +758,7 @@ public class Objetivos extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(jTableMensajes);
 
-        jPanelMensajes.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 1170, 270));
+        jPanelMensajes.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 1170, 270));
 
         org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder5 = new org.jdesktop.swingx.border.DropShadowBorder();
         jPanelMensaje4.setBorder(dropShadowBorder5);
@@ -822,7 +825,21 @@ public class Objetivos extends javax.swing.JFrame {
         textUsuarioElegidoMensaje.setForeground(new java.awt.Color(102, 102, 102));
         jPanelMensaje4.add(textUsuarioElegidoMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 190, 140, -1));
 
-        jPanelMensajes.add(jPanelMensaje4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 560, 1030, 240));
+        jButtonInfo4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/signo4.png"))); // NOI18N
+        jButtonInfo4.setBorder(null);
+        jButtonInfo4.setBorderPainted(false);
+        jButtonInfo4.setContentAreaFilled(false);
+        jButtonInfo4.setFocusPainted(false);
+        jButtonInfo4.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/signo5.png"))); // NOI18N
+        jButtonInfo4.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/signo5.png"))); // NOI18N
+        jButtonInfo4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInfo4ActionPerformed(evt);
+            }
+        });
+        jPanelMensaje4.add(jButtonInfo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 70, 20, 30));
+
+        jPanelMensajes.add(jPanelMensaje4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 520, 1030, 240));
 
         getContentPane().add(jPanelMensajes, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 1250, 880));
 
@@ -1205,7 +1222,17 @@ public class Objetivos extends javax.swing.JFrame {
         mensajesObjetivosImpl.obtenerMensajeBuscado(busquedaMensaje, jLabelFechaMensaje, 
                 jLabelObjetivoAsociado, jLabelTituloMensaje, textMensaje, jLabelUsuario);
         
+        cargarTablaMensajes(fechaActual);
+        pasarCamposDeLaTablaMensajesAFields();    
+        
     }//GEN-LAST:event_jButtonBuscarMensajeActionPerformed
+
+    private void jButtonInfo4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInfo4ActionPerformed
+        
+        InformacionIDMensajeObjetivo IDMensajeObjetivo = new InformacionIDMensajeObjetivo();
+        IDMensajeObjetivo.setVisible(true);
+        
+    }//GEN-LAST:event_jButtonInfo4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1260,6 +1287,7 @@ public class Objetivos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCrearMensaje;
     private javax.swing.JButton jButtonEstablecer;
     private javax.swing.JButton jButtonInfo;
+    private javax.swing.JButton jButtonInfo4;
     private javax.swing.JButton jButtonMensajes;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JButton jButtonUltimos;
@@ -1351,9 +1379,10 @@ public class Objetivos extends javax.swing.JFrame {
 
         DefaultTableModel modelo = new DefaultTableModel();
 
-        String sql = "select fecha_publicacion, objetivo_asociado, titulo, contenido, "
-                + "usuario_emisor, visibilidad from mensajes_objetivos order by "
-                + "fecha_publicacion asc";
+        String sql = "select fecha_publicacion, hora_registro, objetivo_asociado, "
+                + "titulo, contenido, usuario_emisor, visibilidad from mensajes_objetivos "
+                + "where visibilidad = '" + rol + "' or visibilidad = '" + usuario + "' "
+                + "or visibilidad = 'Todos' order by fecha_publicacion asc";
 
         try {
             conec = cn.Conexion();
@@ -1364,6 +1393,7 @@ public class Objetivos extends javax.swing.JFrame {
             jScrollPane3.setViewportView(jTableMensajes);
 
             modelo.addColumn("Fecha de publicación");
+            modelo.addColumn("Hora de publicación");
             modelo.addColumn("Objetivo asociado");
             modelo.addColumn("Título");
             modelo.addColumn("Contenido");
@@ -1371,8 +1401,8 @@ public class Objetivos extends javax.swing.JFrame {
             modelo.addColumn("Visibilidad");
 
             while (rs.next()) {
-                Object[] fila = new Object[6];
-                for (int i = 0; i < 6; i++) {
+                Object[] fila = new Object[7];
+                for (int i = 0; i < 7; i++) {
                     fila[i] = rs.getObject(i + 1);
                 }
                 modelo.addRow(fila);

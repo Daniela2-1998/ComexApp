@@ -1,6 +1,7 @@
 package Daniela.ComexApp.Entity;
 
 import java.sql.Date;
+import java.sql.Time;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -37,9 +38,12 @@ public class MensajesObjetivos {
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date fecha_registro;
-    
 
-   
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private Time hora_registro;
+    
+    @NotNull
+    private Boolean visto;
     
     
     
@@ -99,12 +103,28 @@ public class MensajesObjetivos {
         this.fecha_registro = fecha_registro;
     }
 
+    public Time getHora_registro() {
+        return hora_registro;
+    }
+
+    public void setHora_registro(Time hora_registro) {
+        this.hora_registro = hora_registro;
+    }
+
+    public Boolean getVisto() {
+        return visto;
+    }
+
+    public void setVisto(Boolean visto) {
+        this.visto = visto;
+    }
+
   
     
     public MensajesObjetivos() {
     }
 
-    public MensajesObjetivos(Integer id, String titulo, String contenido, String usuario_emisor, String objetivo_asociado, String visibilidad, Date fecha_registro) {
+    public MensajesObjetivos(Integer id, String titulo, String contenido, String usuario_emisor, String objetivo_asociado, String visibilidad, Date fecha_registro, Time hora_registro, Boolean visto) {
         this.id = id;
         this.titulo = titulo;
         this.contenido = contenido;
@@ -112,7 +132,8 @@ public class MensajesObjetivos {
         this.objetivo_asociado = objetivo_asociado;
         this.visibilidad = visibilidad;
         this.fecha_registro = fecha_registro;
+        this.hora_registro = hora_registro;
+        this.visto = visto;
     }
-
 
 }
