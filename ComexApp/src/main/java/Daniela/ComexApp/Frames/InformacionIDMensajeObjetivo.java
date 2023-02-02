@@ -48,7 +48,7 @@ public class InformacionIDMensajeObjetivo extends javax.swing.JFrame {
 
     public void cargarTablaIDs(){
     
-        String sql = "select id_mensaje_objetivo from mensajes_objetivos";
+        String sql = "select id_mensaje_objetivo from mensajes_objetivos order by id_mensaje_objetivo asc";
           
         DefaultTableModel modelo = new DefaultTableModel();
         

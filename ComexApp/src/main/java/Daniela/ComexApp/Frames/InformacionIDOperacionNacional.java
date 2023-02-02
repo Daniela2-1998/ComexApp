@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class InformacionIDOperacionNacional extends javax.swing.JFrame {
 
     /**
-     * Creates new form InformacionID
+     * Creates new form InformacionIDOperacionNacional
      */
     public InformacionIDOperacionNacional() {
         initComponents();
@@ -49,7 +49,7 @@ public class InformacionIDOperacionNacional extends javax.swing.JFrame {
 
     public void cargarTablaIDs(){
     
-        String sql = "select id_ventalocal from ventalocal";
+        String sql = "select id_ventalocal from ventalocal order by id_ventalocal asc";
           
         DefaultTableModel modelo = new DefaultTableModel();
         

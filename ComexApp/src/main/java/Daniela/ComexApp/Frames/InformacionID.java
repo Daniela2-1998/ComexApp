@@ -47,7 +47,7 @@ public class InformacionID extends javax.swing.JFrame {
     
       public void cargarTablaIDs(){
 
-        String sql = "select id_usuarios from usuarios";
+        String sql = "select id_usuarios from usuarios order by id_usuarios asc";
           
         DefaultTableModel modelo = new DefaultTableModel();
         

@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class InformacionIDImportadores extends javax.swing.JFrame {
 
     /**
-     * Creates new form InformacionID
+     * Creates new form InformacionIDImportadores
      */
     public InformacionIDImportadores() {
         initComponents();
@@ -49,7 +49,7 @@ public class InformacionIDImportadores extends javax.swing.JFrame {
 
     public void cargarTablaIDs(){
     
-        String sql = "select id_importador from importadores";
+        String sql = "select id_importador from importadores order by id_importador asc";
           
         DefaultTableModel modelo = new DefaultTableModel();
         

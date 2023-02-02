@@ -49,7 +49,7 @@ public class InformacionIDInformePersonalizado extends javax.swing.JFrame {
 
     public void cargarTablaIDs(){
     
-        String sql = "select id_informe_pers from informes_personalizados";
+        String sql = "select id_informe_pers from informes_personalizados order by id_informe_pers asc";
           
         DefaultTableModel modelo = new DefaultTableModel();
         
