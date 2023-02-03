@@ -102,7 +102,8 @@ public class GestionDeStock extends javax.swing.JFrame {
      public void mostrarTodosLosDatos(){
          String sql = "select id_producto, codigo_producto, nombre_producto, "
                  + "tipo_producto, detalle, cuidados_requeridos, cantidad, "
-                 + "precio_unitario, pais_origen, status from stock";
+                 + "precio_unitario, pais_origen, status from stock order by "
+                 + "id_producto asc";
         cargarTablaStock(sql);
     }
     

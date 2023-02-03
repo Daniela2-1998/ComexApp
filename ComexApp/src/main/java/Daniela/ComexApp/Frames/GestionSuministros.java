@@ -47,9 +47,11 @@ public class GestionSuministros extends javax.swing.JFrame {
         jPanelTablaReabastecimiento.setVisible(false);
         jPanelTablaFechas.setVisible(false);
         
-        mostrarTodosLosDatosSuministros();
-        pasarCamposDeLasTablasAFields();
+        ReabastecimientoService reabastecimientoService = new ReabastecimientoService();
+        reabastecimientoService.cambiarStatusCuandoIngresaProducto();
         
+        mostrarTodosLosDatosSuministros();
+        pasarCamposDeLasTablasAFields();    
     }
     
     // icono
@@ -106,7 +108,8 @@ public class GestionSuministros extends javax.swing.JFrame {
    
      public void mostrarTodosLosDatosSuministros(){
          String sql = "select id_pedido, producto, tipo_producto, detalle, "
-                 + "cuidados_requeridos, cantidad, status from reabastecimiento";
+                 + "cuidados_requeridos, cantidad, status from reabastecimiento "
+                 + "order by fecha_ingreso asc";
         cargarTablaSuministros(sql);
     }
 
@@ -154,7 +157,7 @@ public class GestionSuministros extends javax.swing.JFrame {
         try{
             conec = cn.Conexion();
             pst = conec.prepareStatement("select pais_origen, precio_unitario, "
-                    + "precio_total, descuento, fecha_operacion, fecha_llegada "
+                    + "precio_total, descuento, fecha_registro, fecha_ingreso "
                     + "from reabastecimiento where producto = '" + producto + "'");
             rs = pst.executeQuery();
             
@@ -164,22 +167,9 @@ public class GestionSuministros extends javax.swing.JFrame {
                     textPrecioUnitario.setText(rs.getString("precio_unitario"));
                     textPrecioTotal.setText(rs.getString("precio_total"));
                     textDescuento.setText(rs.getString("descuento"));
-                    
-                    String fechaOperacion = rs.getString("fecha_operacion");
-                    Date fechaRegistro = Date.valueOf(fechaOperacion);
                    
-                    
-                   // jDateChooserRegistro.setDate(fechaRegistro);
-                    
-                    String fechaLlegada = rs.getString("fecha_llegada");
-                    Date fechaRecibo = Date.valueOf(fechaLlegada);
-                   // jDateChooserRecibo.setDate(fechaRecibo);
-        
-                    jDateChooserRegistro.setDateFormatString(fechaOperacion + fechaRegistro);
-                    jDateChooserRecibo.setDateFormatString(fechaLlegada);
-           
-                   // jDateChooserRegistro.setDate(Date.valueOf(rs.getString("fecha_operacion")));
-                   //jDateChooserRecibo.setDate(Date.valueOf(rs.getString("fecha_llegada")));
+                    textFechaRegistro.setText(String.valueOf(rs.getDate("fecha_registro")));
+                    textFechaRecibo.setText(String.valueOf(rs.getDate("fecha_ingreso")));
             }
             conec.close();
         }catch(SQLException e){
@@ -239,7 +229,8 @@ public class GestionSuministros extends javax.swing.JFrame {
    
      public void mostrarTodosLosDatosReabastecimiento(){
          String sql = "select producto, descuento, precio_unitario, precio_total, "
-                 + "pais_origen, cantidad, status from reabastecimiento";
+                 + "pais_origen, cantidad, status from reabastecimiento order by "
+                 + "fecha_ingreso asc";
         cargarTablaReabastecimiento(sql);
     }
     
@@ -287,8 +278,8 @@ public class GestionSuministros extends javax.swing.JFrame {
 
    
      public void mostrarTodosLosDatosFechas(){
-         String sql = "select producto, cantidad, fecha_operacion, fecha_llegada, "
-                 + "status from reabastecimiento";
+         String sql = "select producto, cantidad, fecha_registro, fecha_ingreso, "
+                 + "status from reabastecimiento order by fecha_ingreso asc";
         cargarTablaFechas(sql);
     }
   
@@ -310,8 +301,8 @@ public class GestionSuministros extends javax.swing.JFrame {
          textDescuento.setText("");
          textDestino.setText("");
          cmbStatus.setSelectedIndex(0);
-         jDateChooserRegistro.setDateFormatString("01/01/2020");
-         jDateChooserRecibo.setDateFormatString("01/01/2020");
+         textFechaRegistro.setText("");
+         textFechaRecibo.setText("");
      }
      
   
@@ -406,13 +397,14 @@ public class GestionSuministros extends javax.swing.JFrame {
         jLabelFechaRegistro = new javax.swing.JLabel();
         jButtonModificar = new javax.swing.JButton();
         jButtonVolver2 = new javax.swing.JButton();
-        jDateChooserRegistro = new com.toedter.calendar.JDateChooser();
         jLabelFechaRecibo = new javax.swing.JLabel();
-        jDateChooserRecibo = new com.toedter.calendar.JDateChooser();
         jLabelDescuento = new javax.swing.JLabel();
         textDescuento = new javax.swing.JTextField();
         jLabelDestino = new javax.swing.JLabel();
         textDestino = new javax.swing.JTextField();
+        textFechaRegistro = new javax.swing.JTextField();
+        textFechaRecibo = new javax.swing.JTextField();
+        jButtonModificarFecha = new javax.swing.JButton();
         jPanelTablaSuministros = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableSuministros = new javax.swing.JTable();
@@ -693,7 +685,7 @@ public class GestionSuministros extends javax.swing.JFrame {
                 jButtonModificarActionPerformed(evt);
             }
         });
-        jPanelCampos.add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, -1, -1));
+        jPanelCampos.add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 310, -1, -1));
 
         jButtonVolver2.setBackground(new java.awt.Color(0, 0, 153));
         jButtonVolver2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -704,14 +696,12 @@ public class GestionSuministros extends javax.swing.JFrame {
                 jButtonVolver2ActionPerformed(evt);
             }
         });
-        jPanelCampos.add(jButtonVolver2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 330, -1, -1));
-        jPanelCampos.add(jDateChooserRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 120, 30));
+        jPanelCampos.add(jButtonVolver2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 350, -1, -1));
 
         jLabelFechaRecibo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelFechaRecibo.setForeground(new java.awt.Color(0, 0, 153));
         jLabelFechaRecibo.setText("Fecha recibo:");
         jPanelCampos.add(jLabelFechaRecibo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, -1, -1));
-        jPanelCampos.add(jDateChooserRecibo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, 120, 30));
 
         jLabelDescuento.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelDescuento.setForeground(new java.awt.Color(0, 0, 153));
@@ -732,6 +722,29 @@ public class GestionSuministros extends javax.swing.JFrame {
         textDestino.setForeground(new java.awt.Color(0, 0, 153));
         textDestino.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelCampos.add(textDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 220, 110, 30));
+
+        textFechaRegistro.setEditable(false);
+        textFechaRegistro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textFechaRegistro.setForeground(new java.awt.Color(0, 0, 153));
+        textFechaRegistro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanelCampos.add(textFechaRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 110, 30));
+
+        textFechaRecibo.setEditable(false);
+        textFechaRecibo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textFechaRecibo.setForeground(new java.awt.Color(0, 0, 153));
+        textFechaRecibo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanelCampos.add(textFechaRecibo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, 110, 30));
+
+        jButtonModificarFecha.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonModificarFecha.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonModificarFecha.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarFecha.setText("Modificar fecha");
+        jButtonModificarFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarFechaActionPerformed(evt);
+            }
+        });
+        jPanelCampos.add(jButtonModificarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 270, -1, 30));
 
         jPanel1.add(jPanelCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, 720, 400));
 
@@ -844,17 +857,26 @@ public class GestionSuministros extends javax.swing.JFrame {
     private void jToggleButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonFiltrarActionPerformed
 
         String busqueda = textBuscar.getText().trim();
-        String sql;
+        String sqlSuministros, sqlReabastecimiento, sqlFechas;
 
         if(!textBuscar.equals("")){
         
             try{
 
-            sql = "select * from reabastecimiento where producto = '" + busqueda + "'"; 
+            sqlSuministros = "select id_pedido, producto, tipo_producto, detalle, "
+                 + "cuidados_requeridos, cantidad, status from reabastecimiento "
+                    + "where producto = '" + busqueda + "'"; 
             
-            cargarTablaSuministros(sql);
-            cargarTablaReabastecimiento(sql);
-            cargarTablaFechas(sql);
+            sqlReabastecimiento = "select producto, descuento, precio_unitario, precio_total, "
+                 + "pais_origen, cantidad, status from reabastecimiento where "
+                    + "producto = '" + busqueda + "'";
+            
+            sqlFechas = "select producto, cantidad, fecha_registro, fecha_ingreso, "
+                 + "status from reabastecimiento where producto = '" + busqueda + "'";
+            
+            cargarTablaSuministros(sqlSuministros);
+            cargarTablaReabastecimiento(sqlReabastecimiento);
+            cargarTablaFechas(sqlFechas);
 
             }catch(Exception e){
                 System.err.println("Error al buscar por filtros" + e);
@@ -875,8 +897,7 @@ public class GestionSuministros extends javax.swing.JFrame {
 
        String cuidadosMod, detalleMod, paisOrigenMod, precioUnitarioMod,
                precioTotalMod, cantidadMod, tipoProductoMod, productoMod, 
-               fechaRegistroMod, fechaReciboMod, descuentoMod, destinoMod, 
-               statusMod = null, producto;
+               descuentoMod, destinoMod, statusMod = null, producto;
 
         int IDMod, statusNivel;
         
@@ -911,15 +932,11 @@ public class GestionSuministros extends javax.swing.JFrame {
             } else if (statusNivel == 6) {
                 statusMod = "SReservado";
             }
-            
-            fechaRegistroMod = jDateChooserRegistro.getDate().toString();
-            fechaReciboMod = jDateChooserRecibo.getDate().toString();
 
             reabastecimientoService.modificarSuministros(IDMod, cantidadMod, 
                     precioTotalMod, cuidadosMod, detalleMod, paisOrigenMod, 
                     precioUnitarioMod, statusMod, tipoProductoMod, 
-                    fechaRegistroMod, fechaReciboMod, descuentoMod, destinoMod,
-                    productoMod, producto);
+                    descuentoMod, destinoMod, productoMod, producto);
 
         }catch(Exception e){
             System.err.println("Fallo al modificar datos " + e);
@@ -990,6 +1007,13 @@ public class GestionSuministros extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonInfoActionPerformed
 
+    private void jButtonModificarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarFechaActionPerformed
+       
+        ModificarFechaStockYSumi modificarFechasSumi = new ModificarFechaStockYSumi();
+        modificarFechasSumi.setVisible(true);
+        
+    }//GEN-LAST:event_jButtonModificarFechaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1034,11 +1058,10 @@ public class GestionSuministros extends javax.swing.JFrame {
     private javax.swing.JButton jButtonInfo;
     private javax.swing.JButton jButtonLimpiarBusqueda;
     private javax.swing.JButton jButtonModificar;
+    private javax.swing.JButton jButtonModificarFecha;
     private javax.swing.JButton jButtonReabastecimiento;
     private javax.swing.JButton jButtonSuministros;
     private javax.swing.JButton jButtonVolver2;
-    private com.toedter.calendar.JDateChooser jDateChooserRecibo;
-    private com.toedter.calendar.JDateChooser jDateChooserRegistro;
     private javax.swing.JLabel jLabelBusqueda;
     private javax.swing.JLabel jLabelCantidad;
     private javax.swing.JLabel jLabelCuidados;
@@ -1078,6 +1101,8 @@ public class GestionSuministros extends javax.swing.JFrame {
     private javax.swing.JTextField textDescuento;
     private javax.swing.JTextField textDestino;
     private javax.swing.JTextArea textDetalle;
+    private javax.swing.JTextField textFechaRecibo;
+    private javax.swing.JTextField textFechaRegistro;
     private javax.swing.JTextField textID;
     private javax.swing.JTextField textPaisOrigen;
     private javax.swing.JTextField textPrecioTotal;

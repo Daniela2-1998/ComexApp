@@ -90,7 +90,7 @@ public class ListaExportadores extends javax.swing.JFrame {
    
      public void mostrarTodosLosDatos(){
          String sql = "select id_exportador, empleado, empresa, mail, "
-            + "numero_contacto, pais, status from exportadores";
+            + "numero_contacto, pais, status from exportadores order by id_exportador";
         cargarTablaExportadores(sql);
     }
     

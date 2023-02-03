@@ -108,7 +108,7 @@ public class Aereo extends javax.swing.JFrame {
    
      public void mostrarTodosLosDatos(){
          String sql = "select id_aereo, empleado, aerolinea, mail, "
-            + "numero_contacto from aereo";
+            + "numero_contacto from aereo order by id_aereo asc";
         cargarTablaAereo(sql);
     }
      
@@ -116,7 +116,7 @@ public class Aereo extends javax.swing.JFrame {
 
         DefaultTableModel modelo = new DefaultTableModel();
       
-        String sql = "select aerolinea, requisitos from aereo";
+        String sql = "select aerolinea, requisitos from aereo order by aerolinea asc";
         
         try{
             conec = cn.Conexion();

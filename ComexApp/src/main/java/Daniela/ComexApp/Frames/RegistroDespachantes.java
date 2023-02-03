@@ -113,7 +113,7 @@ public class RegistroDespachantes extends javax.swing.JFrame {
    
      public void mostrarTodosLosDatos(){
          String sql = "select id_despachantes, empleado, empresa, mail, "
-            + "numero_contacto, pais, status from despachantes";
+            + "numero_contacto, pais, status from despachantes order by id_despachantes asc";
         cargarTablaDespachantes(sql);
     }
     
@@ -164,7 +164,7 @@ public class RegistroDespachantes extends javax.swing.JFrame {
     
     public void mostrarTodosLosDatosDespachantes(){
          String sql = "select empleado, empresa, mail, " + "numero_contacto, "
-                 + "status from despachantes";
+                 + "status from despachantes order by empresa asc";
         cargarTablaDatos(sql);
       }
         

@@ -112,7 +112,8 @@ public class AgendaContactosPersonal extends javax.swing.JFrame {
     }
    
      public void mostrarTodosLosDatosContacto(){
-         String sql = "select empresa, nombre, mail, numero_contacto from agenda_personal";
+         String sql = "select empresa, nombre, mail, numero_contacto from agenda_personal "
+                 + "order by id_agenda asc";
         cargarTablaContactos(sql);
     }
 
@@ -150,7 +151,8 @@ public class AgendaContactosPersonal extends javax.swing.JFrame {
     }
    
      public void mostrarTodosLosDatosProducto(){
-         String sql = "select id_agenda, productos, nombre, status from agenda_personal";
+         String sql = "select id_agenda, productos, nombre, status from agenda_personal "
+                 + "order by id_agenda asc";
         cargarTablaProducto(sql);
     }
 

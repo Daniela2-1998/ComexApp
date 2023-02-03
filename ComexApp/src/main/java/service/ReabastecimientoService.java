@@ -9,6 +9,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.time.LocalDate;
 import java.util.Calendar;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -36,11 +38,11 @@ public class ReabastecimientoService implements ReabastecimientoImpl {
     JTextField textTipoProducto = new JTextField();
     JTextField textProducto = new JTextField();
     JTextField textDescuento = new JTextField();
+    JTextField textFechaRegistro = new JTextField();
+    JTextField textFechaRecibo  = new JTextField();
+    
     
     JTextField textBuscar = new JTextField();
-    
-    JDateChooser jDateChooserRegistro = new JDateChooser();
-    JDateChooser jDateChooserRecibo = new JDateChooser();
 
     JTextArea textCuidados = new JTextArea();
     JTextArea textDetalle = new JTextArea();
@@ -56,7 +58,7 @@ public class ReabastecimientoService implements ReabastecimientoImpl {
      public boolean ingresoSuministrosReabastecimiento(int ID, String cuidados,
             String detalle, String paisOrigen, String precioUnitario, String precioTotal,
             String cantidad, String tipoProducto, String producto, 
-            String fechaRegistro, String fechaRecibo){
+            Date fechaRegistro, Date fechaRecibo){
         
         Boolean recepcion;
         int avanzar = 0;
@@ -107,8 +109,8 @@ public class ReabastecimientoService implements ReabastecimientoImpl {
                 pst.setString(10, status);
                 pst.setString(11, tipoProducto);
                 pst.setString(12, cuidados);
-                pst.setString(13, fechaRecibo);
-                pst.setString(14, fechaRegistro);
+                pst.setDate(13, fechaRecibo);
+                pst.setDate(14, fechaRegistro);
 
                 
                 pst.executeUpdate();
@@ -135,7 +137,7 @@ public class ReabastecimientoService implements ReabastecimientoImpl {
         try{
             conec = cn.Conexion();
             pst = conec.prepareStatement("select pais_origen, precio_unitario, "
-                    + "precio_total, descuento, fecha_operacion, fecha_llegada "
+                    + "precio_total, descuento, fecha_registro, fecha_ingreso "
                     + "from reabastecimiento where producto = '" + producto + "'");
             rs = pst.executeQuery();
             
@@ -146,13 +148,13 @@ public class ReabastecimientoService implements ReabastecimientoImpl {
                     textPrecioTotal.setText(rs.getString("precio_total"));
                     textDescuento.setText(rs.getString("descuento"));
                     
-                    String fechaOperacion = rs.getString("fecha_operacion");
-                    Date fechaRegistro = Date.valueOf(fechaOperacion);
-                    jDateChooserRegistro.setDate(fechaRegistro);
                     
-                    String fechaLlegada = rs.getString("fecha_llegada");
-                    Date fechaRecibo = Date.valueOf(fechaLlegada);
-                    jDateChooserRecibo.setDate(fechaRecibo);
+                    Date registro = rs.getDate("fecha_operacion");
+                    textFechaRegistro.setText(String.valueOf(registro));
+                    
+                    Date llegada = rs.getDate("fecha_llegada");
+                    textFechaRegistro.setText(String.valueOf(llegada));
+
             }
             conec.close();
         }catch(SQLException e){
@@ -164,16 +166,14 @@ public class ReabastecimientoService implements ReabastecimientoImpl {
      public void modificarSuministros(int IDMod, String cantidadMod, String precioTotalMod, 
             String cuidadosMod, String detalleMod, String paisOrigenMod, 
             String precioUnitarioMod, String statusMod, String tipoProductoMod, 
-            String fechaRegistroMod, String fechaReciboMod, String descuentoMod,
-            String destinoMod, String productoMod, String producto){
+            String descuentoMod, String destinoMod, String productoMod, String producto){
         
         int alternativaMensaje;
 
         String sql = "update reabastecimiento set cantidad=?, descuento=?, "
                 + "destino=?, precio_total=?, producto=?, detalle=?, "
                 + "pais_origen=?, precio_unitario=?, status=?, tipo_producto=?, "
-                + "cuidados_requeridos=?, fecha_llegada=?, fecha_operacion=? where "
-                + "producto = '" + producto + "'";
+                + "cuidados_requeridos=? where producto = '" + producto + "'";
 
         try {
             conec = cn.Conexion();
@@ -194,9 +194,7 @@ public class ReabastecimientoService implements ReabastecimientoImpl {
                 pst.setString(9, statusMod);
                 pst.setString(10, tipoProductoMod);
                 pst.setString(11, cuidadosMod);
-                pst.setString(12, fechaReciboMod);
-                pst.setString(13, fechaRegistroMod);
-                
+
                 pst.executeUpdate();
                 conec.close();
                 JOptionPane.showMessageDialog(null, "Modificación éxitosa");
@@ -211,6 +209,60 @@ public class ReabastecimientoService implements ReabastecimientoImpl {
                     + "modificar datos" + e);
         }
     }
+    
+    
+    public void modificarFechaIngreso(int ID, String producto, Date fechaIngresoMod){
+        
+        int alternativaMensaje;
+
+        String sql = "update reabastecimiento set fecha_ingreso=? where producto = '" 
+                + producto + "' and id_pedido = '" + ID +"'";
+
+        try {
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+
+            alternativaMensaje = JOptionPane.showConfirmDialog(null, "¿Quieres modificar los datos?");
+
+            if (alternativaMensaje == 0) {
+
+                pst.setDate(1, fechaIngresoMod);
+                pst.executeUpdate();
+                conec.close();
+                JOptionPane.showMessageDialog(null, "Modificación éxitosa");
+
+            } else {
+                conec.close();
+                JOptionPane.showMessageDialog(null, "No se modificaron los datos");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("No se pudo conectar con la base de datos para "
+                    + "modificar datos" + e);
+        }
+    }
+     
+    public void cambiarStatusCuandoIngresaProducto(){
+        
+        Date fechaActual = Date.valueOf(LocalDate.now());
+        
+        String sql = "update reabastecimiento set status=? where fecha_ingreso <= '" 
+                + fechaActual + "'";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+
+            pst.setString(1, "Disponible");
+            pst.executeUpdate();
+            conec.close();
+            
+         }catch(SQLException e){
+            System.err.println("No se puede realizar el cambio de status. " + e);
+        }
+        
+    }
+    
     
     
      public boolean eliminarSuministros(String producto, int id){

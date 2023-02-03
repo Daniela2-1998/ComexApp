@@ -89,7 +89,7 @@ public class ListaNotas extends javax.swing.JFrame {
    
      public void mostrarTodosLosDatosContacto(){
          String sql = "select id_nota, titulo, contenido, fecha, status, usuario "
-                 + "from notas where usuario = '" + usuario + "'";
+                 + "from notas where usuario = '" + usuario + "' order by id_nota";
         cargarTablaNotas(sql);
     }
 

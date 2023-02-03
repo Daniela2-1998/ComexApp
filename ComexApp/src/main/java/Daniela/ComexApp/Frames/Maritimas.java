@@ -108,7 +108,7 @@ public class Maritimas extends javax.swing.JFrame {
    
      public void mostrarTodosLosDatos(){
          String sql = "select id_maritima, empleado, empresa, mail, "
-            + "numero_contacto from maritimas";
+            + "numero_contacto from maritimas order by id_maritima asc";
         cargarTablaMaritimas(sql);
     }
      
@@ -116,7 +116,7 @@ public class Maritimas extends javax.swing.JFrame {
 
         DefaultTableModel modelo = new DefaultTableModel();
       
-        String sql = "select empresa, requisitos_aviso from maritimas";
+        String sql = "select empresa, requisitos_aviso from maritimas order by empresa asc";
         
         try{
             conec = cn.Conexion();
@@ -486,6 +486,7 @@ public class Maritimas extends javax.swing.JFrame {
 
         setTitle("Informacíón completa de " + maritimaABuscar + " - Sistema ComexApp");
         jLabelTitulo.setText("Información completa de " + maritimaABuscar + "");
+        
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed

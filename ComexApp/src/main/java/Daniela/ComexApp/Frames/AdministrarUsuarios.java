@@ -95,7 +95,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     
     public void mostrarTodosLosDatos(){
         String sql = "select id_usuarios, usuario, nombre, apellido, rol, mail, "
-                + "telefono, status from usuarios";
+                + "telefono, status from usuarios order by id_usuarios asc";
         cargarTablaUsuarios(sql);
     }
     
@@ -646,7 +646,7 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
             
             String sql = "select id_usuarios, usuario, nombre, apellido, rol, mail, "
                 + "telefono, status from usuarios where usuario = '" + busqueda 
-                + "' or nombre = '" + busqueda + "'";
+                + "' or nombre = '" + busqueda + "' order by id_usuarios asc";
             
            cargarTablaUsuarios(sql);
         } 

@@ -3,7 +3,10 @@ package Daniela.ComexApp.Frames;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
 import java.util.Calendar;
+import org.jfree.data.time.Day;
 import service.ReabastecimientoService;
 import service.StockImpl;
 
@@ -22,7 +25,7 @@ public class IngresarNuevoReabastecimiento extends javax.swing.JFrame {
     public IngresarNuevoReabastecimiento() {
         initComponents();
         
-        setSize(750, 420);
+        setSize(950, 420);
         setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -52,8 +55,9 @@ public class IngresarNuevoReabastecimiento extends javax.swing.JFrame {
         textTipoProducto.setText("");
         textProducto.setText("");
         textCantidad.setText("");
-        jDateChooserRegistro.setDateFormatString("01/01/2020");
-        jDateChooserRecibo.setDateFormatString("01/01/2020");
+        jDayChooser.setDay(0);
+        jMonthChooser.setMonth(0);
+        jYearChooser.setYear(0);
     }
 
     /**
@@ -87,12 +91,12 @@ public class IngresarNuevoReabastecimiento extends javax.swing.JFrame {
         textPaisOrigen = new javax.swing.JTextField();
         jLabelPrecio1 = new javax.swing.JLabel();
         textPrecioTotal = new javax.swing.JTextField();
-        jLabelFechaRegistro = new javax.swing.JLabel();
-        jDateChooserRegistro = new com.toedter.calendar.JDateChooser();
         jLabelFechaRecibo = new javax.swing.JLabel();
-        jDateChooserRecibo = new com.toedter.calendar.JDateChooser();
         jLabelCantidad = new javax.swing.JLabel();
         textCantidad = new javax.swing.JTextField();
+        jDayChooser = new com.toedter.calendar.JDayChooser();
+        jMonthChooser = new com.toedter.calendar.JMonthChooser();
+        jYearChooser = new com.toedter.calendar.JYearChooser();
         jButtonAtras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -157,7 +161,7 @@ public class IngresarNuevoReabastecimiento extends javax.swing.JFrame {
         textDetalle.setWrapStyleWord(true);
         jScrollPane1.setViewportView(textDetalle);
 
-        jPanelRegistro.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 180, 150));
+        jPanelRegistro.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 120, 150));
 
         jLabelCuidados.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelCuidados.setForeground(new java.awt.Color(0, 0, 153));
@@ -175,7 +179,7 @@ public class IngresarNuevoReabastecimiento extends javax.swing.JFrame {
         textCuidados.setWrapStyleWord(true);
         jScrollPane2.setViewportView(textCuidados);
 
-        jPanelRegistro.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 160, 150));
+        jPanelRegistro.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 140, 90));
 
         jLabelProducto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelProducto.setForeground(new java.awt.Color(0, 0, 153));
@@ -215,7 +219,7 @@ public class IngresarNuevoReabastecimiento extends javax.swing.JFrame {
         textPaisOrigen.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textPaisOrigen.setForeground(new java.awt.Color(0, 0, 153));
         textPaisOrigen.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanelRegistro.add(textPaisOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 110, 30));
+        jPanelRegistro.add(textPaisOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 120, 30));
 
         jLabelPrecio1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelPrecio1.setForeground(new java.awt.Color(0, 0, 153));
@@ -227,29 +231,28 @@ public class IngresarNuevoReabastecimiento extends javax.swing.JFrame {
         textPrecioTotal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelRegistro.add(textPrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 110, 30));
 
-        jLabelFechaRegistro.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabelFechaRegistro.setForeground(new java.awt.Color(0, 0, 153));
-        jLabelFechaRegistro.setText("Fecha registro:");
-        jPanelRegistro.add(jLabelFechaRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, -1, -1));
-        jPanelRegistro.add(jDateChooserRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 120, 30));
-
         jLabelFechaRecibo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelFechaRecibo.setForeground(new java.awt.Color(0, 0, 153));
         jLabelFechaRecibo.setText("Fecha recibo:");
-        jPanelRegistro.add(jLabelFechaRecibo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, -1, -1));
-        jPanelRegistro.add(jDateChooserRecibo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, 120, 30));
+        jPanelRegistro.add(jLabelFechaRecibo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, -1, -1));
 
         jLabelCantidad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelCantidad.setForeground(new java.awt.Color(0, 0, 153));
         jLabelCantidad.setText("Cantidad:");
-        jPanelRegistro.add(jLabelCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 130, 110, -1));
+        jPanelRegistro.add(jLabelCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 110, -1));
 
         textCantidad.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textCantidad.setForeground(new java.awt.Color(0, 0, 153));
         textCantidad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanelRegistro.add(textCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, 120, 30));
+        jPanelRegistro.add(textCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 120, 30));
+        jPanelRegistro.add(jDayChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 360, 140));
 
-        jPanel1.add(jPanelRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 680, 290));
+        jMonthChooser.setDayChooser(jDayChooser);
+        jMonthChooser.setYearChooser(jYearChooser);
+        jPanelRegistro.add(jMonthChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 180, -1, -1));
+        jPanelRegistro.add(jYearChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 210, -1, -1));
+
+        jPanel1.add(jPanelRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 880, 290));
 
         jButtonAtras.setBackground(new java.awt.Color(0, 0, 153));
         jButtonAtras.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -267,7 +270,7 @@ public class IngresarNuevoReabastecimiento extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,9 +283,11 @@ public class IngresarNuevoReabastecimiento extends javax.swing.JFrame {
     private void jButtonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngresarActionPerformed
 
         String cuidados, detalle, paisOrigen, precioUnitario, precioTotal,
-                tipoProducto, producto, cantidad, fechaRegistro, fechaRecibo;
+                tipoProducto, producto, cantidad, fechaRecibo;
         
-        int ID;
+        int ID, dia, mes, año;
+        Date fechaLlegada, fechaRegistro;
+        
         
         Boolean recepcionFuncion;
         
@@ -295,12 +300,18 @@ public class IngresarNuevoReabastecimiento extends javax.swing.JFrame {
         cantidad = textCantidad.getText().trim();
         tipoProducto = textTipoProducto.getText().trim();
         producto = textProducto.getText().trim();
-        fechaRegistro = jDateChooserRegistro.getDate().toString();
-        fechaRecibo = jDateChooserRecibo.getDate().toString();
+        
+        dia = jDayChooser.getDay();
+        mes = jMonthChooser.getMonth() + 1;
+        año = jYearChooser.getYear();
+        
+        fechaRecibo = año + "-" + mes + "-" + dia; 
+        fechaLlegada = Date.valueOf(fechaRecibo);
+        fechaRegistro = Date.valueOf(LocalDate.now());
         
         recepcionFuncion = reabastecimientoService.ingresoSuministrosReabastecimiento
         (ID, cuidados, detalle, paisOrigen, precioUnitario, precioTotal, 
-                cantidad, tipoProducto, producto, fechaRegistro, fechaRecibo);
+                cantidad, tipoProducto, producto, fechaRegistro, fechaLlegada);
 
          if(recepcionFuncion.equals(true)){
            LimpiarCampos();
@@ -363,23 +374,23 @@ public class IngresarNuevoReabastecimiento extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAtras;
     private javax.swing.JButton jButtonInfo;
     private javax.swing.JButton jButtonIngresar;
-    private com.toedter.calendar.JDateChooser jDateChooserRecibo;
-    private com.toedter.calendar.JDateChooser jDateChooserRegistro;
+    private com.toedter.calendar.JDayChooser jDayChooser;
     private javax.swing.JLabel jLabelCantidad;
     private javax.swing.JLabel jLabelCuidados;
     private javax.swing.JLabel jLabelDetalle;
     private javax.swing.JLabel jLabelFechaRecibo;
-    private javax.swing.JLabel jLabelFechaRegistro;
     private javax.swing.JLabel jLabelID;
     private javax.swing.JLabel jLabelPaisOrigen;
     private javax.swing.JLabel jLabelPrecio;
     private javax.swing.JLabel jLabelPrecio1;
     private javax.swing.JLabel jLabelProducto;
     private javax.swing.JLabel jLabelTipo;
+    private com.toedter.calendar.JMonthChooser jMonthChooser;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelRegistro;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private com.toedter.calendar.JYearChooser jYearChooser;
     private javax.swing.JTextField textCantidad;
     private javax.swing.JTextArea textCuidados;
     private javax.swing.JTextArea textDetalle;
