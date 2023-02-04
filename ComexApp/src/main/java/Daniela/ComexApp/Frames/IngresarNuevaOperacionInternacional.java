@@ -3,8 +3,9 @@ package Daniela.ComexApp.Frames;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Calendar;
-import service.OperacionesInternacionalesService;
+import service.OperacionesInternacionalesImpl;
 
 
 /**
@@ -20,7 +21,7 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
     public IngresarNuevaOperacionInternacional() {
         initComponents();
         
-        setSize(750, 460);
+        setSize(990, 460);
         setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -38,18 +39,16 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
         return retValue;   
     }
     
-    OperacionesInternacionalesService operacionesService = new OperacionesInternacionalesService();
+    OperacionesInternacionalesImpl operacionesService = new OperacionesInternacionalesImpl();
 
     public void LimpiarCampos(){
         textID.setText("");
         textContenedores.setText("");
         textCodigo.setText("");
-        jDateChooserRegistro.setDateFormatString("01/01/2020");
         textNumeroEmbarque.setText("");
         textProductos.setText("");
         cmbTipoOperacion.setSelectedIndex(0);
         textCantidad.setText("");
-        jDateChooserRecibo.setDateFormatString("01/01/2020");
         cmbStatus1.setSelectedIndex(0);
         textComprador.setText("");
         textPrecioTotal.setText("");
@@ -88,10 +87,7 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
         textPaisOrigen = new javax.swing.JTextField();
         jLabelPrecio1 = new javax.swing.JLabel();
         textPrecioTotal = new javax.swing.JTextField();
-        jLabelFechaRegistro = new javax.swing.JLabel();
-        jDateChooserRegistro = new com.toedter.calendar.JDateChooser();
         jLabelFechaRecibo = new javax.swing.JLabel();
-        jDateChooserRecibo = new com.toedter.calendar.JDateChooser();
         jLabelCantidad = new javax.swing.JLabel();
         textCantidad = new javax.swing.JTextField();
         jLabelNumero = new javax.swing.JLabel();
@@ -106,6 +102,9 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
         textVendedor = new javax.swing.JTextField();
         jLabelNombreBuque = new javax.swing.JLabel();
         textBuque = new javax.swing.JTextField();
+        jDayChooser = new com.toedter.calendar.JDayChooser();
+        jMonthChooser = new com.toedter.calendar.JMonthChooser();
+        jYearChooser = new com.toedter.calendar.JYearChooser();
         jButtonAtras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -171,7 +170,7 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
         textDetalle.setWrapStyleWord(true);
         jScrollPane1.setViewportView(textDetalle);
 
-        jPanelRegistro.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 180, 80));
+        jPanelRegistro.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 150, 80));
 
         jLabelProductos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelProductos.setForeground(new java.awt.Color(0, 0, 153));
@@ -215,12 +214,12 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
         jLabelPaisOrigen.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelPaisOrigen.setForeground(new java.awt.Color(0, 0, 153));
         jLabelPaisOrigen.setText("País de orígen:");
-        jPanelRegistro.add(jLabelPaisOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, -1, -1));
+        jPanelRegistro.add(jLabelPaisOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, -1, -1));
 
         textPaisOrigen.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textPaisOrigen.setForeground(new java.awt.Color(0, 0, 153));
         textPaisOrigen.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanelRegistro.add(textPaisOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 110, 30));
+        jPanelRegistro.add(textPaisOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 260, 110, 30));
 
         jLabelPrecio1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelPrecio1.setForeground(new java.awt.Color(0, 0, 153));
@@ -232,17 +231,10 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
         textPrecioTotal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelRegistro.add(textPrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, 110, 30));
 
-        jLabelFechaRegistro.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabelFechaRegistro.setForeground(new java.awt.Color(0, 0, 153));
-        jLabelFechaRegistro.setText("Fecha registro:");
-        jPanelRegistro.add(jLabelFechaRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, -1, -1));
-        jPanelRegistro.add(jDateChooserRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, 120, 30));
-
         jLabelFechaRecibo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelFechaRecibo.setForeground(new java.awt.Color(0, 0, 153));
         jLabelFechaRecibo.setText("Fecha arribo:");
-        jPanelRegistro.add(jLabelFechaRecibo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, -1, -1));
-        jPanelRegistro.add(jDateChooserRecibo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, 120, 30));
+        jPanelRegistro.add(jLabelFechaRecibo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, -1, -1));
 
         jLabelCantidad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelCantidad.setForeground(new java.awt.Color(0, 0, 153));
@@ -267,7 +259,7 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
         jLabelStatus.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelStatus.setForeground(new java.awt.Color(0, 0, 153));
         jLabelStatus.setText("Status:");
-        jPanelRegistro.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, -1, -1));
+        jPanelRegistro.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 230, -1, -1));
 
         cmbStatus1.setForeground(new java.awt.Color(0, 0, 153));
         cmbStatus1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activa", "En transito", "Pendiente de cierre", "Completada", "Suspendida", "Inactiva" }));
@@ -277,7 +269,7 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
                 cmbStatus1ActionPerformed(evt);
             }
         });
-        jPanelRegistro.add(cmbStatus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, 120, 40));
+        jPanelRegistro.add(cmbStatus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 250, 120, 40));
 
         jLabelTipoOperacion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelTipoOperacion.setForeground(new java.awt.Color(0, 0, 153));
@@ -324,7 +316,17 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
         textBuque.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelRegistro.add(textBuque, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 160, 30));
 
-        jPanel1.add(jPanelRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 680, 330));
+        jDayChooser.setAlwaysFireDayProperty(true);
+        jPanelRegistro.add(jDayChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, 360, 140));
+
+        jMonthChooser.setDayChooser(jDayChooser);
+        jMonthChooser.setYearChooser(jYearChooser);
+        jPanelRegistro.add(jMonthChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 170, -1, -1));
+
+        jYearChooser.setDayChooser(null);
+        jPanelRegistro.add(jYearChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 170, -1, -1));
+
+        jPanel1.add(jPanelRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 930, 330));
 
         jButtonAtras.setBackground(new java.awt.Color(0, 0, 153));
         jButtonAtras.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -342,11 +344,11 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
         );
 
         pack();
@@ -354,24 +356,23 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
 
     private void jButtonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngresarActionPerformed
 
-        String codigo, fechaOperacion, numeroEmbarque, producto,
-            tipoOperacion = null, cantidadProducto, fechaETA, status = null, comprador, 
-                precioTotal, vendedor, detalles, paisOrigen, nombreBuque;
+        String codigo, numeroEmbarque, producto, tipoOperacion = null, cantidadProducto, 
+                status = null, comprador, precioTotal, vendedor, detalles, 
+                paisOrigen, nombreBuque, fechaRecibo;
         
         int statusNivel = 0, tipoOperacionNivel = 0, ID, cantidadContenedor;
-        
+        Date fechaRegistro, fechaArribo;
+        int dia, mes, año;
         
         Boolean recepcionFuncion;
         
         ID = Integer.parseInt(textID.getText().trim());
         cantidadContenedor = Integer.parseInt(textContenedores.getText().trim());
         codigo = textCodigo.getText().trim();
-        fechaOperacion = jDateChooserRegistro.getDate().toString();
         numeroEmbarque = textNumeroEmbarque.getText().trim();
         producto = textProductos.getText().trim();
         tipoOperacionNivel = cmbTipoOperacion.getSelectedIndex() + 1;
         cantidadProducto = textCantidad.getText().trim();
-        fechaETA = jDateChooserRecibo.getDate().toString();
         statusNivel = cmbStatus1.getSelectedIndex() + 1;
         comprador = textComprador.getText().trim();
         precioTotal = textPrecioTotal.getText().trim();
@@ -380,6 +381,14 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
         paisOrigen = textPaisOrigen.getText().trim();
         nombreBuque = textBuque.getText().trim();
    
+        dia = jDayChooser.getDay();
+        mes = jMonthChooser.getMonth() + 1;
+        año = jYearChooser.getYear();
+        
+        fechaRecibo = año + "-" + mes + "-" + dia; 
+        fechaArribo = Date.valueOf(fechaRecibo);
+        fechaRegistro = Date.valueOf(LocalDate.now());
+        
         if(statusNivel == 1){
            status = "Activa";
         } else if (statusNivel == 2){
@@ -406,9 +415,9 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
         }
        
         recepcionFuncion = operacionesService.ingresoOperacionInternacional(ID, 
-                cantidadContenedor, codigo, numeroEmbarque, producto, tipoOperacion, 
-                cantidadProducto, status, comprador, precioTotal, vendedor, detalles, 
-                paisOrigen, nombreBuque, fechaOperacion, fechaETA);
+                cantidadContenedor, codigo, numeroEmbarque, producto, 
+                tipoOperacion, cantidadProducto, status, comprador, precioTotal, 
+                vendedor, detalles, paisOrigen, nombreBuque, fechaRegistro, fechaArribo);
 
          if(recepcionFuncion.equals(true)){
            LimpiarCampos();
@@ -481,15 +490,13 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAtras;
     private javax.swing.JButton jButtonInfo;
     private javax.swing.JButton jButtonIngresar;
-    private com.toedter.calendar.JDateChooser jDateChooserRecibo;
-    private com.toedter.calendar.JDateChooser jDateChooserRegistro;
+    private com.toedter.calendar.JDayChooser jDayChooser;
     private javax.swing.JLabel jLabelCantidad;
     private javax.swing.JLabel jLabelCodigo;
     private javax.swing.JLabel jLabelComprador;
     private javax.swing.JLabel jLabelContenedores;
     private javax.swing.JLabel jLabelDetalle;
     private javax.swing.JLabel jLabelFechaRecibo;
-    private javax.swing.JLabel jLabelFechaRegistro;
     private javax.swing.JLabel jLabelID;
     private javax.swing.JLabel jLabelNombreBuque;
     private javax.swing.JLabel jLabelNumero;
@@ -499,10 +506,12 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelStatus;
     private javax.swing.JLabel jLabelTipoOperacion;
     private javax.swing.JLabel jLabelVendedor;
+    private com.toedter.calendar.JMonthChooser jMonthChooser;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelRegistro;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private com.toedter.calendar.JYearChooser jYearChooser;
     private javax.swing.JTextField textBuque;
     private javax.swing.JTextField textCantidad;
     private javax.swing.JTextField textCodigo;

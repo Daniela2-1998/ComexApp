@@ -7,9 +7,7 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.util.Calendar;
 import org.jfree.data.time.Day;
-import service.ReabastecimientoService;
-import service.StockImpl;
-
+import service.ReabastecimientoImpl;
 
 
 /**
@@ -43,7 +41,7 @@ public class IngresarNuevoReabastecimiento extends javax.swing.JFrame {
         return retValue;   
     }
     
-    ReabastecimientoService reabastecimientoService = new ReabastecimientoService();
+    ReabastecimientoImpl reabastecimientoService = new ReabastecimientoImpl();
 
     public void LimpiarCampos(){
         textID.setText("");

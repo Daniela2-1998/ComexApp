@@ -2,7 +2,7 @@ package Daniela.ComexApp.Frames;
 
 import java.awt.Image;
 import java.awt.Toolkit;
-import service.OperacionesInternacionalesService;
+import service.OperacionesInternacionalesImpl;
 import service.OperacionesNacionalesService;
 
 
@@ -38,7 +38,7 @@ public class EliminarOperacion extends javax.swing.JFrame {
         return retValue;   
     }
     
-    OperacionesInternacionalesService operacionesService = new OperacionesInternacionalesService();
+    OperacionesInternacionalesImpl operacionesService = new OperacionesInternacionalesImpl();
     OperacionesNacionalesService ventaLocalService  = new OperacionesNacionalesService();
     
         String producto;

@@ -12,10 +12,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import service.OperacionesInternacionalesService;
+import service.OperacionesInternacionalesImpl;
 
 /**
  *
@@ -44,6 +45,8 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
         jLabelSubtitulo.setText(nombreCompleto + " aquí puedes gestionar las operaciones \n\n"
                 + " internacionales registradas");
         
+        operacionesInternacionalesService.cambiarStatusCuandoIngresaProducto();
+        
         jPanelTablaOperaciones.setVisible(true);
         jPanelTablaDetalles.setVisible(false);
         jPanelTablaFechas.setVisible(false);
@@ -67,9 +70,14 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
     PreparedStatement pst;
     ResultSet rs;
 
-    OperacionesInternacionalesService operacionesInternacionalesService =
-            new OperacionesInternacionalesService();
+    OperacionesInternacionalesImpl operacionesInternacionalesService =
+            new OperacionesInternacionalesImpl();
 
+    LocalDate fechaActual = LocalDate.now();
+    LocalDate fechaDiasPlus = fechaActual.plusDays(5);
+    
+    Date fechaInicio = Date.valueOf(fechaActual);
+    Date fechaFin = Date.valueOf(fechaDiasPlus);
     
     public void cargarTablaOperaciones(String sql){
 
@@ -108,13 +116,30 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
         }
     }
    
-     public void mostrarTodosLosDatosOperaciones(){
+    public void mostrarTodosLosDatosOperaciones(){
          String sql = "select id_operaciones, producto, cantidad_producto, precio_total, "
                  + "tipo_operacion, comprador, vendedor, status from operaciones";
         cargarTablaOperaciones(sql);
     }
+    
+     public void mostrarOperacionesActivas(){
+         String sql = "select id_operaciones, producto, cantidad_producto, precio_total, "
+                 + "tipo_operacion, comprador, vendedor, status from operaciones "
+                 + "where status = 'Activa' or status = 'En transito' order by "
+                 + "fecha_arribo asc";
+        cargarTablaOperaciones(sql);
+    }
 
-     
+
+    public void mostrarProximasOperaciones(){
+         String sql = "select id_operaciones, producto, cantidad_producto, precio_total, "
+                 + "tipo_operacion, comprador, vendedor, status from operaciones where "
+                 + "fecha_arribo between '" + fechaActual + "' and '" + fechaDiasPlus 
+                 + "' order by fecha_arribo asc";
+        cargarTablaOperaciones(sql);
+    }
+    
+    
      public void pasarCamposDeLasTablasAFields(){
     
         jTableOperaciones.addMouseListener(new MouseAdapter() {
@@ -157,7 +182,7 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
             conec = cn.Conexion();
             pst = conec.prepareStatement("select cantidad_contenedores, "
                     + "codigo_contenedores, numero_embarque, detalles, pais_origen,"
-                    + "nombre_buque, fecha_operacion, operaciones.fecha_ETA from operaciones "
+                    + "nombre_buque, fecha_registro, fecha_arribo from operaciones "
                     + "where producto = '" + producto + "'");
             rs = pst.executeQuery();
             
@@ -169,8 +194,8 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
                     textDetalle.setText(rs.getString("detalles"));
                     textPaisOrigen.setText(rs.getString("pais_origen"));
                     textBuque.setText(rs.getString("nombre_buque"));
-                    jDateChooserRegistro.setDateFormatString("fecha_operacion");
-                    jDateChooserRecibo.setDateFormatString("operaciones.fecha_ETA");
+                    textFechaRegistro.setText(rs.getDate("fecha_registro").toString());
+                    textFechaArribo.setText(rs.getDate("fecha_arribo").toString());
 
             }
             conec.close();
@@ -268,12 +293,29 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
     }
 
    
-     public void mostrarTodosLosDatosFechas(){
+    public void mostrarTodosLosDatosFechas(){
          String sql = "select producto, numero_embarque, nombre_buque, "
-                 + "fecha_operacion, fecha_eta, status from operaciones";
+                 + "fecha_registro, fecha_arribo, status from operaciones order by "
+                 + "fecha_arribo asc";
+        cargarTablaFechas(sql);
+    }
+    
+    public void mostrarFechasActivas(){
+         String sql = "select producto, numero_embarque, nombre_buque, "
+                 + "fecha_registro, fecha_arribo, status from operaciones where "
+                 + "status = 'Activa' or status = 'En transito' order by "
+                 + "fecha_arribo asc";
         cargarTablaFechas(sql);
     }
   
+     public void mostrarProximasFechas(){
+         String sql = "select producto, numero_embarque, nombre_buque, "
+                 + "fecha_registro, fecha_arribo, status from operaciones where "
+                 + "fecha_arribo between '" + fechaActual + "' and '" + 
+                 fechaDiasPlus + "' order by fecha_arribo asc";
+        cargarTablaFechas(sql);
+    }
+    
      public void cargarTablaContacto(String sql){
 
         DefaultTableModel modelo = new DefaultTableModel();
@@ -306,11 +348,12 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
     }
 
    
-     public void mostrarTodosLosDatosContacto(){
+    public void mostrarTodosLosDatosContacto(){
          String sql = "select id_operaciones, comprador, vendedor from operaciones";
-         //String sql = "select nombre_despachante from operaciones_despachante";
          cargarTablaContacto(sql);
     }
+     
+    
      
      
     
@@ -332,8 +375,6 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
          textVendedor.setText("");
          cmbTipoOperacion.setSelectedIndex(0);
          cmbStatus1.setSelectedIndex(0);
-         jDateChooserRegistro.setDateFormatString("01/01/2020");
-         jDateChooserRecibo.setDateFormatString("01/01/2020");
      }
      
 
@@ -359,6 +400,8 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
         textBuscar = new javax.swing.JTextField();
         jButtonLimpiarBusqueda = new javax.swing.JButton();
         cmbCategoria = new javax.swing.JComboBox<>();
+        jButtonProximos = new javax.swing.JButton();
+        jButtonOcultar = new javax.swing.JButton();
         jPanelCampos = new javax.swing.JPanel();
         jLabelID = new javax.swing.JLabel();
         textID = new javax.swing.JTextField();
@@ -392,11 +435,12 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
         jLabelPrecio1 = new javax.swing.JLabel();
         textPrecioTotal = new javax.swing.JTextField();
         jLabelFechaRegistro = new javax.swing.JLabel();
-        jDateChooserRegistro = new com.toedter.calendar.JDateChooser();
         jLabelFechaRecibo = new javax.swing.JLabel();
-        jDateChooserRecibo = new com.toedter.calendar.JDateChooser();
         jLabelStatus = new javax.swing.JLabel();
         cmbStatus1 = new javax.swing.JComboBox<>();
+        textFechaRegistro = new javax.swing.JTextField();
+        textFechaArribo = new javax.swing.JTextField();
+        jButtonModificarFecha = new javax.swing.JButton();
         jPanelTablaOperaciones = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableOperaciones = new javax.swing.JTable();
@@ -516,7 +560,29 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
         });
         jPanelBusqueda.add(cmbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 150, 40));
 
-        jPanel1.add(jPanelBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 260, 760, 160));
+        jButtonProximos.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonProximos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonProximos.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonProximos.setText("Próximos arribos");
+        jButtonProximos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonProximosActionPerformed(evt);
+            }
+        });
+        jPanelBusqueda.add(jButtonProximos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 190, 20));
+
+        jButtonOcultar.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonOcultar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonOcultar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonOcultar.setText("Ocultar completas");
+        jButtonOcultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOcultarActionPerformed(evt);
+            }
+        });
+        jPanelBusqueda.add(jButtonOcultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 190, 20));
+
+        jPanel1.add(jPanelBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 260, 770, 160));
 
         jPanelCampos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -711,13 +777,11 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
         jLabelFechaRegistro.setForeground(new java.awt.Color(0, 0, 153));
         jLabelFechaRegistro.setText("Fecha registro:");
         jPanelCampos.add(jLabelFechaRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, -1, -1));
-        jPanelCampos.add(jDateChooserRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, 120, 30));
 
         jLabelFechaRecibo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelFechaRecibo.setForeground(new java.awt.Color(0, 0, 153));
         jLabelFechaRecibo.setText("Fecha arribo:");
         jPanelCampos.add(jLabelFechaRecibo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, -1, -1));
-        jPanelCampos.add(jDateChooserRecibo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, 120, 30));
 
         jLabelStatus.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelStatus.setForeground(new java.awt.Color(0, 0, 153));
@@ -733,6 +797,29 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
             }
         });
         jPanelCampos.add(cmbStatus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, 120, 40));
+
+        textFechaRegistro.setEditable(false);
+        textFechaRegistro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textFechaRegistro.setForeground(new java.awt.Color(0, 0, 153));
+        textFechaRegistro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanelCampos.add(textFechaRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, 110, 30));
+
+        textFechaArribo.setEditable(false);
+        textFechaArribo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textFechaArribo.setForeground(new java.awt.Color(0, 0, 153));
+        textFechaArribo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanelCampos.add(textFechaArribo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, 110, 30));
+
+        jButtonModificarFecha.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonModificarFecha.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonModificarFecha.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarFecha.setText("Modificar fecha");
+        jButtonModificarFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarFechaActionPerformed(evt);
+            }
+        });
+        jPanelCampos.add(jButtonModificarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, -1, 30));
 
         jPanel1.add(jPanelCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, 720, 400));
 
@@ -1028,8 +1115,8 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
 
-        String codigoMod, fechaOperacionMod, numeroEmbarqueMod, productoMod,
-            tipoOperacionMod = null, cantidadProductoMod, fechaETAMod, statusMod = null, 
+        String codigoMod, numeroEmbarqueMod, productoMod,
+            tipoOperacionMod = null, cantidadProductoMod, statusMod = null, 
             compradorMod, precioTotalMod, vendedorMod, detallesMod, paisOrigenMod, 
                 nombreBuqueMod, producto;
         
@@ -1041,8 +1128,6 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
                 
             IDMod = Integer.parseInt(textID.getText().trim());
             codigoMod = textCodigo.getText().trim();
-            fechaOperacionMod = jDateChooserRegistro.getDate().toString();
-            fechaETAMod = jDateChooserRecibo.getDate().toString();
             numeroEmbarqueMod = textNumero.getText().trim();
             productoMod = textProductos.getText().trim();
             cantidadProductoMod = textCantidadProducto.getText().trim();
@@ -1084,11 +1169,11 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
             
             
 
-            operacionesInternacionalesService.modificarOperacionInternacional
-        (IDMod, cantidadContenedorMod, codigoMod, fechaOperacionMod, numeroEmbarqueMod, 
-                productoMod, tipoOperacionMod, cantidadProductoMod, fechaETAMod, 
-                statusMod, compradorMod, precioTotalMod, vendedorMod, detallesMod, 
-                paisOrigenMod, nombreBuqueMod, producto);
+            operacionesInternacionalesService.modificarOperacionInternacional(IDMod, 
+                    cantidadContenedorMod, codigoMod, numeroEmbarqueMod, productoMod, 
+                    tipoOperacionMod, cantidadProductoMod, statusMod, 
+                    compradorMod, precioTotalMod, vendedorMod, detallesMod, 
+                    paisOrigenMod, nombreBuqueMod, producto);
 
         }catch(Exception e){
             System.err.println("Fallo al modificar datos " + e);
@@ -1174,6 +1259,27 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbCategoriaActionPerformed
 
+    private void jButtonModificarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarFechaActionPerformed
+
+        ModificarFechaStockYSumi modificarFechasOpInt = new ModificarFechaStockYSumi();
+        modificarFechasOpInt.setVisible(true);
+
+    }//GEN-LAST:event_jButtonModificarFechaActionPerformed
+
+    private void jButtonProximosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProximosActionPerformed
+        
+        mostrarProximasOperaciones();
+        mostrarProximasFechas();
+        
+    }//GEN-LAST:event_jButtonProximosActionPerformed
+
+    private void jButtonOcultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOcultarActionPerformed
+
+        mostrarOperacionesActivas();
+        mostrarFechasActivas();
+        
+    }//GEN-LAST:event_jButtonOcultarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1222,10 +1328,11 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
     private javax.swing.JButton jButtonInfo;
     private javax.swing.JButton jButtonLimpiarBusqueda;
     private javax.swing.JButton jButtonModificar;
+    private javax.swing.JButton jButtonModificarFecha;
+    private javax.swing.JButton jButtonOcultar;
     private javax.swing.JButton jButtonOperaciones;
+    private javax.swing.JButton jButtonProximos;
     private javax.swing.JButton jButtonVolver2;
-    private com.toedter.calendar.JDateChooser jDateChooserRecibo;
-    private com.toedter.calendar.JDateChooser jDateChooserRegistro;
     private javax.swing.JLabel jLabelCantidad1;
     private javax.swing.JLabel jLabelCodigo;
     private javax.swing.JLabel jLabelComprador;
@@ -1270,6 +1377,8 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
     private javax.swing.JTextField textComprador;
     private javax.swing.JTextField textContenedores;
     private javax.swing.JTextArea textDetalle;
+    private javax.swing.JTextField textFechaArribo;
+    private javax.swing.JTextField textFechaRegistro;
     private javax.swing.JTextField textID;
     private javax.swing.JTextField textNumero;
     private javax.swing.JTextField textPaisOrigen;

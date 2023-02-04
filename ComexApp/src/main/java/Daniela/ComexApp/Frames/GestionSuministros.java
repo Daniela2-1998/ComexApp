@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import service.ReabastecimientoService;
+import service.ReabastecimientoImpl;
 import service.StockImpl;
 
 /**
@@ -47,7 +47,7 @@ public class GestionSuministros extends javax.swing.JFrame {
         jPanelTablaReabastecimiento.setVisible(false);
         jPanelTablaFechas.setVisible(false);
         
-        ReabastecimientoService reabastecimientoService = new ReabastecimientoService();
+        ReabastecimientoImpl reabastecimientoService = new ReabastecimientoImpl();
         reabastecimientoService.cambiarStatusCuandoIngresaProducto();
         
         mostrarTodosLosDatosSuministros();
@@ -68,7 +68,7 @@ public class GestionSuministros extends javax.swing.JFrame {
     ResultSet rs;
 
     StockImpl stockService = new StockImpl();
-    ReabastecimientoService reabastecimientoService = new ReabastecimientoService();
+    ReabastecimientoImpl reabastecimientoService = new ReabastecimientoImpl();
     
     
     public void cargarTablaSuministros(String sql){

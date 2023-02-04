@@ -2,7 +2,7 @@ package Daniela.ComexApp.Frames;
 
 import java.awt.Image;
 import java.awt.Toolkit;
-import service.ReabastecimientoService;
+import service.ReabastecimientoImpl;
 
 /**
  *
@@ -36,7 +36,7 @@ public class EliminarSuministro extends javax.swing.JFrame {
         return retValue;   
     }
     
-    ReabastecimientoService reabastecimientoService = new ReabastecimientoService();
+    ReabastecimientoImpl reabastecimientoService = new ReabastecimientoImpl();
 
     public void LimpiarCampos(){
         textID.setText("");

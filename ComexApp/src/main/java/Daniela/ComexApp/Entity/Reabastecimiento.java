@@ -1,5 +1,6 @@
 package Daniela.ComexApp.Entity;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -59,11 +60,11 @@ public class Reabastecimiento {
     
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private String fecha_operacion;
+    private Date fecha_registro;
     
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private String fecha_llegada;
+    private Date fecha_ingreso;
 
  
     
@@ -117,20 +118,20 @@ public class Reabastecimiento {
         this.destino = destino;
     }
 
-    public String getFecha_operacion() {
-        return fecha_operacion;
+    public Date getFecha_registro() {
+        return fecha_registro;
     }
 
-    public void setFecha_operacion(String fecha_operacion) {
-        this.fecha_operacion = fecha_operacion;
+    public void setFecha_registro(Date fecha_registro) {
+        this.fecha_registro = fecha_registro;
     }
 
-    public String getFecha_llegada() {
-        return fecha_llegada;
+    public Date getFecha_ingreso() {
+        return fecha_ingreso;
     }
 
-    public void setFecha_llegada(String fecha_llegada) {
-        this.fecha_llegada = fecha_llegada;
+    public void setFecha_ingreso(Date fecha_ingreso) {
+        this.fecha_ingreso = fecha_ingreso;
     }
 
     public String getPaisOrigen() {
@@ -188,7 +189,7 @@ public class Reabastecimiento {
     public Reabastecimiento() {
     }
 
-    public Reabastecimiento(Integer id, String producto, String cantidad, String precioTotal, String descuento, String destino, String paisOrigen, String detalle, String cuidados_requeridos, String tipo_producto, String precio_unitario, String status, String fecha_operacion, String fecha_llegada) {
+    public Reabastecimiento(Integer id, String producto, String cantidad, String precioTotal, String descuento, String destino, String paisOrigen, String detalle, String cuidados_requeridos, String tipo_producto, String precio_unitario, String status, Date fecha_registro, Date fecha_ingreso) {
         this.id = id;
         this.producto = producto;
         this.cantidad = cantidad;
@@ -201,11 +202,10 @@ public class Reabastecimiento {
         this.tipo_producto = tipo_producto;
         this.precio_unitario = precio_unitario;
         this.status = status;
-        this.fecha_operacion = fecha_operacion;
-        this.fecha_llegada = fecha_llegada;
+        this.fecha_registro = fecha_registro;
+        this.fecha_ingreso = fecha_ingreso;
     }
 
 
-  
 
 }

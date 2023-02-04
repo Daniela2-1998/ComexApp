@@ -1,5 +1,6 @@
 package Daniela.ComexApp.Entity;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.*;
@@ -28,11 +29,11 @@ public class OperacionesInternacionales {
     
     @NotNull
     @DateTimeFormat(iso = ISO.DATE)
-    private String fecha_operacion;
+    private Date fecha_registro;
     
     @NotNull
     @DateTimeFormat(iso = ISO.DATE)
-    private String fecha_ETA;
+    private Date fecha_arribo;
 
     @NotEmpty
     private String producto;
@@ -89,13 +90,22 @@ public class OperacionesInternacionales {
         this.tipo_operacion = tipo_operacion;
     }
 
-    public String getFecha_operacion() {
-        return fecha_operacion;
+    public Date getFecha_registro() {
+        return fecha_registro;
     }
 
-    public void setFecha_operacion(String fecha_operacion) {
-        this.fecha_operacion = fecha_operacion;
+    public void setFecha_registro(Date fecha_registro) {
+        this.fecha_registro = fecha_registro;
     }
+
+    public Date getFecha_arribo() {
+        return fecha_arribo;
+    }
+
+    public void setFecha_arribo(Date fecha_arribo) {
+        this.fecha_arribo = fecha_arribo;
+    }
+
 
     public String getProducto() {
         return producto;
@@ -135,14 +145,6 @@ public class OperacionesInternacionales {
 
     public void setCantidadProducto(String cantidadProducto) {
         this.cantidadProducto = cantidadProducto;
-    }
-
-    public String getFecha_ETA() {
-        return fecha_ETA;
-    }
-
-    public void setFecha_ETA(String fecha_ETA) {
-        this.fecha_ETA = fecha_ETA;
     }
 
     public String getStatus() {
@@ -210,15 +212,11 @@ public class OperacionesInternacionales {
     public OperacionesInternacionales() {
     }
 
-    public OperacionesInternacionales(Integer id, String tipo_operacion, String fecha_operacion, 
-            String fecha_ETA, String producto, String detalles, String cantidadProducto,
-            String precioTotal, String comprador, String vendedor, String paisOrigen,
-            String codigo_contenedores, Integer cantidad_contenedores, String numero_embarque, 
-            String nombreBuque, String status) {
+    public OperacionesInternacionales(Integer id, String tipo_operacion, Date fecha_registro, Date fecha_arribo, String producto, String detalles, String cantidadProducto, String precioTotal, String comprador, String vendedor, String paisOrigen, String codigo_contenedores, Integer cantidad_contenedores, String numero_embarque, String nombreBuque, String status) {
         this.id = id;
         this.tipo_operacion = tipo_operacion;
-        this.fecha_operacion = fecha_operacion;
-        this.fecha_ETA = fecha_ETA;
+        this.fecha_registro = fecha_registro;
+        this.fecha_arribo = fecha_arribo;
         this.producto = producto;
         this.detalles = detalles;
         this.cantidadProducto = cantidadProducto;
@@ -232,8 +230,6 @@ public class OperacionesInternacionales {
         this.nombreBuque = nombreBuque;
         this.status = status;
     }
-
-
 
     
 }

@@ -3,15 +3,8 @@ package Daniela.ComexApp.Frames;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.util.Calendar;
-import javax.swing.JOptionPane;
-import org.jfree.data.time.Day;
-import service.ReabastecimientoService;
-import service.StockImpl;
-
-
+import service.OperacionesInternacionalesImpl;
+import service.ReabastecimientoImpl;
 
 /**
  *
@@ -49,7 +42,8 @@ public class ModificarFechaStockYSumi extends javax.swing.JFrame {
         return retValue;   
     }
     
-    ReabastecimientoService reabastecimientoService = new ReabastecimientoService();
+    ReabastecimientoImpl reabastecimientoService = new ReabastecimientoImpl();
+    OperacionesInternacionalesImpl opsIntService = new OperacionesInternacionalesImpl();
 
     public void LimpiarCampos(){
         textProducto.setText("");
@@ -78,6 +72,8 @@ public class ModificarFechaStockYSumi extends javax.swing.JFrame {
         jLabelID = new javax.swing.JLabel();
         textID = new javax.swing.JTextField();
         jButtonModificarIngresoSuministros = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jButtonModificarIngresoInter = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(getLogo());
@@ -120,19 +116,36 @@ public class ModificarFechaStockYSumi extends javax.swing.JFrame {
         textID.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelRegistro.add(textID, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 70, 30));
 
-        jPanel1.add(jPanelRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 710, 290));
+        jPanel1.add(jPanelRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 710, 290));
 
         jButtonModificarIngresoSuministros.setBackground(new java.awt.Color(0, 0, 153));
         jButtonModificarIngresoSuministros.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonModificarIngresoSuministros.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonModificarIngresoSuministros.setText("Modificar fecha de ingreso de suministros");
+        jButtonModificarIngresoSuministros.setText("Suministros");
         jButtonModificarIngresoSuministros.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         jButtonModificarIngresoSuministros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonModificarIngresoSuministrosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonModificarIngresoSuministros, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 335, -1, 40));
+        jPanel1.add(jButtonModificarIngresoSuministros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 240, 40));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel1.setText("Seleccione sección a aplicar modificación:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, -1, -1));
+
+        jButtonModificarIngresoInter.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonModificarIngresoInter.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonModificarIngresoInter.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarIngresoInter.setText("Operación internacional");
+        jButtonModificarIngresoInter.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        jButtonModificarIngresoInter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarIngresoInterActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonModificarIngresoInter, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, 240, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,6 +180,26 @@ public class ModificarFechaStockYSumi extends javax.swing.JFrame {
         reabastecimientoService.modificarFechaIngreso(ID, producto, fechaLlegada);
         
     }//GEN-LAST:event_jButtonModificarIngresoSuministrosActionPerformed
+
+    private void jButtonModificarIngresoInterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarIngresoInterActionPerformed
+        
+        String producto, fechaRecibo;
+        int ID, dia, mes, año;
+        Date fechaLlegada;
+        
+        producto = textProducto.getText().trim();
+        ID = Integer.parseInt(textID.getText().trim());
+        
+        dia = jDayChooser.getDay();
+        mes = jMonthChooser.getMonth() + 1;
+        año = jYearChooser.getYear();
+        
+        fechaRecibo = año + "-" + mes + "-" + dia; 
+        fechaLlegada = Date.valueOf(fechaRecibo);
+        
+        opsIntService.modificarFechaIngreso(ID, producto, fechaLlegada);
+        
+    }//GEN-LAST:event_jButtonModificarIngresoInterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,8 +240,10 @@ public class ModificarFechaStockYSumi extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonModificarIngresoInter;
     private javax.swing.JButton jButtonModificarIngresoSuministros;
     private com.toedter.calendar.JDayChooser jDayChooser;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelFechaRecibo;
     private javax.swing.JLabel jLabelID;
     private javax.swing.JLabel jLabelProducto;
