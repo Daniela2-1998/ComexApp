@@ -92,7 +92,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="40" y="20" width="930" height="330"/>
+              <AbsoluteConstraints x="40" y="20" width="920" height="330"/>
             </Constraint>
           </Constraints>
 
@@ -708,9 +708,6 @@
             <Component class="com.toedter.calendar.JDayChooser" name="jDayChooser">
               <Properties>
                 <Property name="alwaysFireDayProperty" type="boolean" value="true"/>
-                <Property name="calendar" type="java.util.Calendar" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="default"/>
-                </Property>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

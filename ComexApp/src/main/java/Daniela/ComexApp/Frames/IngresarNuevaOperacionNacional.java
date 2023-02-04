@@ -3,10 +3,9 @@ package Daniela.ComexApp.Frames;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Calendar;
-import service.OperacionesNacionalesService;
-
-
+import service.OperacionesNacionalesImpl;
 
 /**
  *
@@ -21,7 +20,7 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
     public IngresarNuevaOperacionNacional() {
         initComponents();
         
-        setSize(750, 460);
+        setSize(990, 460);
         setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -39,7 +38,7 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
         return retValue;   
     }
     
-    OperacionesNacionalesService ventaLocalService = new  OperacionesNacionalesService();
+    OperacionesNacionalesImpl ventaLocalService = new  OperacionesNacionalesImpl();
 
     public void LimpiarCampos(){
         textID.setText("");
@@ -55,8 +54,6 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
         textVendedor.setText("");
         cmbStatus1.setSelectedIndex(0);
         cmbTipoOperacion.setSelectedIndex(0);
-        jDateChooserRegistro.setDateFormatString("01/01/2020");
-        jDateChooserRecibo.setDateFormatString("01/01/2020");
     }
 
     /**
@@ -85,10 +82,7 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
         textEmpresa = new javax.swing.JTextField();
         jLabelPrecio1 = new javax.swing.JLabel();
         textPrecioTotal = new javax.swing.JTextField();
-        jLabelFechaRegistro = new javax.swing.JLabel();
-        jDateChooserRegistro = new com.toedter.calendar.JDateChooser();
         jLabelFechaRecibo = new javax.swing.JLabel();
-        jDateChooserRecibo = new com.toedter.calendar.JDateChooser();
         jLabelCantidad = new javax.swing.JLabel();
         textNumero = new javax.swing.JTextField();
         jLabelEmpleado = new javax.swing.JLabel();
@@ -103,6 +97,9 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
         textCantidadProducto = new javax.swing.JTextField();
         jLabelTipoOperacion = new javax.swing.JLabel();
         cmbTipoOperacion = new javax.swing.JComboBox<>();
+        jDayChooser = new com.toedter.calendar.JDayChooser();
+        jMonthChooser = new com.toedter.calendar.JMonthChooser();
+        jYearChooser = new com.toedter.calendar.JYearChooser();
         jButtonAtras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -192,12 +189,12 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
         jLabelEmpresa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelEmpresa.setForeground(new java.awt.Color(0, 0, 153));
         jLabelEmpresa.setText("Empresa:");
-        jPanelRegistro.add(jLabelEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, -1, -1));
+        jPanelRegistro.add(jLabelEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, -1, -1));
 
         textEmpresa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textEmpresa.setForeground(new java.awt.Color(0, 0, 153));
         textEmpresa.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanelRegistro.add(textEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 110, 30));
+        jPanelRegistro.add(textEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 110, 30));
 
         jLabelPrecio1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelPrecio1.setForeground(new java.awt.Color(0, 0, 153));
@@ -209,17 +206,10 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
         textPrecioTotal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelRegistro.add(textPrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 110, 30));
 
-        jLabelFechaRegistro.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabelFechaRegistro.setForeground(new java.awt.Color(0, 0, 153));
-        jLabelFechaRegistro.setText("Fecha registro:");
-        jPanelRegistro.add(jLabelFechaRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, -1, -1));
-        jPanelRegistro.add(jDateChooserRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, 120, 30));
-
         jLabelFechaRecibo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelFechaRecibo.setForeground(new java.awt.Color(0, 0, 153));
         jLabelFechaRecibo.setText("Fecha arribo:");
-        jPanelRegistro.add(jLabelFechaRecibo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, -1, -1));
-        jPanelRegistro.add(jDateChooserRecibo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, 120, 30));
+        jPanelRegistro.add(jLabelFechaRecibo, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, -1, -1));
 
         jLabelCantidad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelCantidad.setForeground(new java.awt.Color(0, 0, 153));
@@ -244,7 +234,7 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
         jLabelStatus.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelStatus.setForeground(new java.awt.Color(0, 0, 153));
         jLabelStatus.setText("Status:");
-        jPanelRegistro.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 210, -1, -1));
+        jPanelRegistro.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 240, -1, -1));
 
         cmbStatus1.setForeground(new java.awt.Color(0, 0, 153));
         cmbStatus1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activa", "En transito", "Pendiente de cierre", "Completada", "Suspendida", "Inactiva" }));
@@ -254,7 +244,7 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
                 cmbStatus1ActionPerformed(evt);
             }
         });
-        jPanelRegistro.add(cmbStatus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 120, 40));
+        jPanelRegistro.add(cmbStatus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 260, 120, 40));
 
         jLabelCantidadProducto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelCantidadProducto.setForeground(new java.awt.Color(0, 0, 153));
@@ -289,7 +279,7 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
         jLabelTipoOperacion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelTipoOperacion.setForeground(new java.awt.Color(0, 0, 153));
         jLabelTipoOperacion.setText("Tipo de operación:");
-        jPanelRegistro.add(jLabelTipoOperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, -1, -1));
+        jPanelRegistro.add(jLabelTipoOperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 240, -1, -1));
 
         cmbTipoOperacion.setForeground(new java.awt.Color(0, 0, 153));
         cmbTipoOperacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Compra", "Venta" }));
@@ -299,9 +289,19 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
                 cmbTipoOperacionActionPerformed(evt);
             }
         });
-        jPanelRegistro.add(cmbTipoOperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, 150, 40));
+        jPanelRegistro.add(cmbTipoOperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 260, 150, 40));
 
-        jPanel1.add(jPanelRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 680, 330));
+        jDayChooser.setAlwaysFireDayProperty(true);
+        jPanelRegistro.add(jDayChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, 360, 140));
+
+        jMonthChooser.setDayChooser(jDayChooser);
+        jMonthChooser.setYearChooser(jYearChooser);
+        jPanelRegistro.add(jMonthChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 180, -1, -1));
+
+        jYearChooser.setDayChooser(null);
+        jPanelRegistro.add(jYearChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 180, -1, -1));
+
+        jPanel1.add(jPanelRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 940, 330));
 
         jButtonAtras.setBackground(new java.awt.Color(0, 0, 153));
         jButtonAtras.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -319,7 +319,7 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 990, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,10 +332,12 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
     private void jButtonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngresarActionPerformed
 
         String CUIT, empleado, empresa, mail, numeroContacto, productos,
-            cantidadProductos, comprador, fechaETA, fechaOperacion, 
-            precioTotal, vendedor, tipoOperacion = null, status = null;
+            cantidadProductos, comprador, precioTotal, vendedor, 
+                tipoOperacion = null, status = null, fechaRecibo;
                     
         int statusNivel = 0, ID, tipoOperacionNivel = 0;
+        Date fechaRegistro, fechaArribo;
+        int dia, mes, año;
         
         Boolean recepcionFuncion;
         
@@ -352,8 +354,14 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
         vendedor = textVendedor.getText().trim();
         statusNivel = cmbStatus1.getSelectedIndex() + 1;
         tipoOperacionNivel = cmbTipoOperacion.getSelectedIndex() + 1;
-        fechaOperacion = jDateChooserRegistro.getDate().toString();
-        fechaETA = jDateChooserRecibo.getDate().toString();
+        
+        dia = jDayChooser.getDay();
+        mes = jMonthChooser.getMonth() + 1;
+        año = jYearChooser.getYear();
+        
+        fechaRecibo = año + "-" + mes + "-" + dia; 
+        fechaArribo = Date.valueOf(fechaRecibo);
+        fechaRegistro = Date.valueOf(LocalDate.now());
 
    
         if(statusNivel == 1){
@@ -377,10 +385,10 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
            tipoOperacion = "Venta";
         } 
         
-        recepcionFuncion = ventaLocalService.ingresoOperacionNacional(ID, CUIT,
+        recepcionFuncion = ventaLocalService.ingresoOperacionNacional(ID, CUIT, 
                 empleado, empresa, mail, numeroContacto, productos, cantidadProductos, 
-                comprador, fechaETA, fechaOperacion, precioTotal, vendedor, 
-                status, tipoOperacion);
+                comprador, precioTotal, vendedor, status, tipoOperacion, 
+                fechaRegistro, fechaArribo);
 
          if(recepcionFuncion.equals(true)){
            LimpiarCampos();
@@ -459,8 +467,7 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAtras;
     private javax.swing.JButton jButtonInfo;
     private javax.swing.JButton jButtonIngresar;
-    private com.toedter.calendar.JDateChooser jDateChooserRecibo;
-    private com.toedter.calendar.JDateChooser jDateChooserRegistro;
+    private com.toedter.calendar.JDayChooser jDayChooser;
     private javax.swing.JLabel jLabelCUIT;
     private javax.swing.JLabel jLabelCantidad;
     private javax.swing.JLabel jLabelCantidadProducto;
@@ -468,7 +475,6 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelEmpleado;
     private javax.swing.JLabel jLabelEmpresa;
     private javax.swing.JLabel jLabelFechaRecibo;
-    private javax.swing.JLabel jLabelFechaRegistro;
     private javax.swing.JLabel jLabelID;
     private javax.swing.JLabel jLabelMail;
     private javax.swing.JLabel jLabelPrecio1;
@@ -476,9 +482,11 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelStatus;
     private javax.swing.JLabel jLabelTipoOperacion;
     private javax.swing.JLabel jLabelVendedor;
+    private com.toedter.calendar.JMonthChooser jMonthChooser;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelRegistro;
     private javax.swing.JScrollPane jScrollPane2;
+    private com.toedter.calendar.JYearChooser jYearChooser;
     private javax.swing.JTextField textCUIT;
     private javax.swing.JTextField textCantidadProducto;
     private javax.swing.JTextField textComprador;

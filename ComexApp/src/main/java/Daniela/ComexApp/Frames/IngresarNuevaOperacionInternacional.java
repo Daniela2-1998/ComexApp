@@ -326,7 +326,7 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
         jYearChooser.setDayChooser(null);
         jPanelRegistro.add(jYearChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 170, -1, -1));
 
-        jPanel1.add(jPanelRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 930, 330));
+        jPanel1.add(jPanelRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 920, 330));
 
         jButtonAtras.setBackground(new java.awt.Color(0, 0, 153));
         jButtonAtras.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N

@@ -118,7 +118,8 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
    
     public void mostrarTodosLosDatosOperaciones(){
          String sql = "select id_operaciones, producto, cantidad_producto, precio_total, "
-                 + "tipo_operacion, comprador, vendedor, status from operaciones";
+                 + "tipo_operacion, comprador, vendedor, status from operaciones "
+                 + "order by id_operaciones";
         cargarTablaOperaciones(sql);
     }
     
@@ -250,7 +251,8 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
    
      public void mostrarTodosLosDatosDetalles(){
          String sql = "select producto, numero_embarque, nombre_buque, codigo_contenedores, "
-                 + "cantidad_contenedores, tipo_operacion, pais_origen, status from operaciones";
+                 + "cantidad_contenedores, tipo_operacion, pais_origen, status "
+                 + "from operaciones order by id_operaciones";
         cargarTablaDetalles(sql);
     }
     

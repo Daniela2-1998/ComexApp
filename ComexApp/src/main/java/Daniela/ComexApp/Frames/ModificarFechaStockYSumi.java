@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Date;
 import service.OperacionesInternacionalesImpl;
+import service.OperacionesNacionalesImpl;
 import service.ReabastecimientoImpl;
 
 /**
@@ -44,7 +45,8 @@ public class ModificarFechaStockYSumi extends javax.swing.JFrame {
     
     ReabastecimientoImpl reabastecimientoService = new ReabastecimientoImpl();
     OperacionesInternacionalesImpl opsIntService = new OperacionesInternacionalesImpl();
-
+    OperacionesNacionalesImpl opsNacService = new OperacionesNacionalesImpl();
+    
     public void LimpiarCampos(){
         textProducto.setText("");
         jDayChooser.setDay(0);
@@ -74,6 +76,7 @@ public class ModificarFechaStockYSumi extends javax.swing.JFrame {
         jButtonModificarIngresoSuministros = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButtonModificarIngresoInter = new javax.swing.JButton();
+        jButtonModificarIngresoNac = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(getLogo());
@@ -147,11 +150,23 @@ public class ModificarFechaStockYSumi extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonModificarIngresoInter, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, 240, 40));
 
+        jButtonModificarIngresoNac.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonModificarIngresoNac.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonModificarIngresoNac.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonModificarIngresoNac.setText("Operación nacional");
+        jButtonModificarIngresoNac.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        jButtonModificarIngresoNac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarIngresoNacActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonModificarIngresoNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, 240, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,6 +216,26 @@ public class ModificarFechaStockYSumi extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonModificarIngresoInterActionPerformed
 
+    private void jButtonModificarIngresoNacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarIngresoNacActionPerformed
+        
+        String producto, fechaRecibo;
+        int ID, dia, mes, año;
+        Date fechaLlegada;
+        
+        producto = textProducto.getText().trim();
+        ID = Integer.parseInt(textID.getText().trim());
+        
+        dia = jDayChooser.getDay();
+        mes = jMonthChooser.getMonth() + 1;
+        año = jYearChooser.getYear();
+        
+        fechaRecibo = año + "-" + mes + "-" + dia; 
+        fechaLlegada = Date.valueOf(fechaRecibo);
+        
+        opsNacService.modificarFechaIngreso(ID, producto, fechaLlegada);
+        
+    }//GEN-LAST:event_jButtonModificarIngresoNacActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -241,6 +276,7 @@ public class ModificarFechaStockYSumi extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonModificarIngresoInter;
+    private javax.swing.JButton jButtonModificarIngresoNac;
     private javax.swing.JButton jButtonModificarIngresoSuministros;
     private com.toedter.calendar.JDayChooser jDayChooser;
     private javax.swing.JLabel jLabel1;

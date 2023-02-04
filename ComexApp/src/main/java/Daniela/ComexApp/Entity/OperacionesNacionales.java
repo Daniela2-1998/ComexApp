@@ -1,5 +1,6 @@
 package Daniela.ComexApp.Entity;
 
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -47,11 +48,11 @@ public class OperacionesNacionales {
     
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private String fecha_operacion;
+    private Date fecha_registro;
     
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private String fecha_ETA;
+    private Date fecha_arribo;
     
     @NotEmpty
     private String cantidadProducto;
@@ -122,21 +123,22 @@ public class OperacionesNacionales {
         this.productos_pedidos = productos_pedidos;
     }
 
-    public String getFecha_operacion() {
-        return fecha_operacion;
+    public Date getFecha_registro() {
+        return fecha_registro;
     }
 
-    public void setFecha_operacion(String fecha_operacion) {
-        this.fecha_operacion = fecha_operacion;
+    public void setFecha_registro(Date fecha_registro) {
+        this.fecha_registro = fecha_registro;
     }
 
-    public String getFecha_ETA() {
-        return fecha_ETA;
+    public Date getFecha_arribo() {
+        return fecha_arribo;
     }
 
-    public void setFecha_ETA(String fecha_ETA) {
-        this.fecha_ETA = fecha_ETA;
+    public void setFecha_arribo(Date fecha_arribo) {
+        this.fecha_arribo = fecha_arribo;
     }
+
 
     public String getCantidadProducto() {
         return cantidadProducto;
@@ -192,10 +194,7 @@ public class OperacionesNacionales {
     public OperacionesNacionales() {
     }
 
-    public OperacionesNacionales(Integer id, String empresa, String empleado, 
-            String CUIT, String mail, String numero_contacto, String productos_pedidos,
-            String status, String tipo_operacion, String fecha_operacion, String fecha_ETA, 
-            String cantidadProducto, String precioTotal, String comprador, String vendedor) {
+    public OperacionesNacionales(Integer id, String empresa, String empleado, String CUIT, String mail, String numero_contacto, String productos_pedidos, String status, String tipo_operacion, Date fecha_registro, Date fecha_arribo, String cantidadProducto, String precioTotal, String comprador, String vendedor) {
         this.id = id;
         this.empresa = empresa;
         this.empleado = empleado;
@@ -205,14 +204,13 @@ public class OperacionesNacionales {
         this.productos_pedidos = productos_pedidos;
         this.status = status;
         this.tipo_operacion = tipo_operacion;
-        this.fecha_operacion = fecha_operacion;
-        this.fecha_ETA = fecha_ETA;
+        this.fecha_registro = fecha_registro;
+        this.fecha_arribo = fecha_arribo;
         this.cantidadProducto = cantidadProducto;
         this.precioTotal = precioTotal;
         this.comprador = comprador;
         this.vendedor = vendedor;
     }
 
-  
 
 }
