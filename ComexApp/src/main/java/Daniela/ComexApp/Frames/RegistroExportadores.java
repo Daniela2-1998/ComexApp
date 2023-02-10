@@ -3,8 +3,8 @@ package Daniela.ComexApp.Frames;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
-import service.ExportadoresService;
-import service.ImportadoresService;
+import service.ExportadoresImpl;
+import service.ImportadoresImpl;
 import service.UsuariosImpl;
 
 /**
@@ -39,7 +39,7 @@ public class RegistroExportadores extends javax.swing.JFrame {
         return retValue;   
     }
 
-    ExportadoresService exportadoresService = new ExportadoresService();
+    ExportadoresImpl exportadoresService = new ExportadoresImpl();
     
     
     public void LimpiarCamposRegistroExportadores(){

@@ -53,7 +53,7 @@ public class EliminarSuministro extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButtonIngresar = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
         jPanelRegistro = new javax.swing.JPanel();
         jLabelTitulo = new javax.swing.JLabel();
         jLabelCodigo = new javax.swing.JLabel();
@@ -70,17 +70,17 @@ public class EliminarSuministro extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(520, 320));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButtonIngresar.setBackground(new java.awt.Color(0, 0, 153));
-        jButtonIngresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonIngresar.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonIngresar.setText("Eliminar producto del sistema");
-        jButtonIngresar.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        jButtonIngresar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEliminar.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonEliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonEliminar.setText("Eliminar producto del sistema");
+        jButtonEliminar.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonIngresarActionPerformed(evt);
+                jButtonEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
+        jPanel1.add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
 
         jPanelRegistro.setBackground(new java.awt.Color(204, 204, 204));
         jPanelRegistro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -142,7 +142,7 @@ public class EliminarSuministro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngresarActionPerformed
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
 
         String producto;
         int ID;
@@ -152,7 +152,7 @@ public class EliminarSuministro extends javax.swing.JFrame {
         
         reabastecimientoService.eliminarSuministros(producto, ID);
       
-    }//GEN-LAST:event_jButtonIngresarActionPerformed
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void jButtonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtrasActionPerformed
 
@@ -200,7 +200,7 @@ public class EliminarSuministro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAtras;
-    private javax.swing.JButton jButtonIngresar;
+    private javax.swing.JButton jButtonEliminar;
     private javax.swing.JLabel jLabelCodigo;
     private javax.swing.JLabel jLabelProducto;
     private javax.swing.JLabel jLabelTitulo;

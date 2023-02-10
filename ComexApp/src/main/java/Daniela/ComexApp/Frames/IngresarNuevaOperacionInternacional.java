@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Calendar;
+import service.OperacionInternacionalParticipantesImpl;
 import service.OperacionesInternacionalesImpl;
 
 
@@ -40,6 +41,7 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
     }
     
     OperacionesInternacionalesImpl operacionesService = new OperacionesInternacionalesImpl();
+    OperacionInternacionalParticipantesImpl participantes = new OperacionInternacionalParticipantesImpl();
 
     public void LimpiarCampos(){
         textID.setText("");
@@ -418,6 +420,8 @@ public class IngresarNuevaOperacionInternacional extends javax.swing.JFrame {
                 cantidadContenedor, codigo, numeroEmbarque, producto, 
                 tipoOperacion, cantidadProducto, status, comprador, precioTotal, 
                 vendedor, detalles, paisOrigen, nombreBuque, fechaRegistro, fechaArribo);
+        
+        participantes.ingresarConexionesOpInt(ID, codigo);
 
          if(recepcionFuncion.equals(true)){
            LimpiarCampos();

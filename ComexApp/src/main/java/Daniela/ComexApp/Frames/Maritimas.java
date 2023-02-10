@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import service.AgendaPersonalImpl;
-import service.MaritimasService;
+import service.MaritimasImpl;
 import service.UsuariosImpl;
 
 /**
@@ -51,7 +51,7 @@ public class Maritimas extends javax.swing.JFrame {
     }
     
     AgendaPersonalImpl agendaPersonalService = new AgendaPersonalImpl();
-    MaritimasService maritimasService = new MaritimasService();
+    MaritimasImpl maritimasService = new MaritimasImpl();
     
      // conexión
     Conexion cn = new Conexion();

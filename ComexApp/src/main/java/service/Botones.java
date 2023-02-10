@@ -8,18 +8,24 @@ import javax.swing.JOptionPane;
  */
 public class Botones implements BotonesImpl{
 
+    Boolean aprobado;
+    
     @Override
-    public void botonSalirSistema() {
+    public Boolean botonSalirSistema() {
+       
+        Boolean aprobado = null;
         String botones[] = {"Cerrar", "Cancelar"};
         
-        int eleccion = JOptionPane.showOptionDialog(null, "Estás por salir del sistema, ¿deseas hacerlo?", "Salir del sistema", 0, 0, null, botones, this);
+        int eleccion = JOptionPane.showOptionDialog(null, "Estás por salir del "
+                + "sistema, ¿deseas hacerlo?", "Salir del sistema", 0, 0, null, 
+                botones, this);
        
         if(eleccion == JOptionPane.YES_OPTION){
-            System.exit(0);
+            aprobado = true;
         } else if(eleccion == JOptionPane.NO_OPTION){
-            System.out.println("Se canceló el cierre, continuarás en el sistema");
-            JOptionPane.showMessageDialog(null, "Se canceló el cierre, continuarás en el sistema");
+            aprobado = false;
         }
+        return aprobado;
     }
 
     @Override

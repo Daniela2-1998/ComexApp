@@ -2,6 +2,7 @@ package Daniela.ComexApp.Frames;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import service.ContenedoresImpl;
 
 /**
  *
@@ -36,7 +37,10 @@ public class Operaciones extends javax.swing.JFrame {
         return retValue;   
     }
     
-
+    ContenedoresImpl contenedoresImpl = new ContenedoresImpl();
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,6 +61,10 @@ public class Operaciones extends javax.swing.JFrame {
         jMenuItemGestion1 = new javax.swing.JMenuItem();
         jMenuItemIngreso1 = new javax.swing.JMenuItem();
         jMenuItemDarDeBaja1 = new javax.swing.JMenuItem();
+        jMenuCont = new javax.swing.JMenu();
+        jMenuItemGestionC = new javax.swing.JMenuItem();
+        jMenuItemIngresoC = new javax.swing.JMenuItem();
+        jMenuItemDarDeBajaC = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -171,6 +179,43 @@ public class Operaciones extends javax.swing.JFrame {
 
         jMenuBar.add(jMenuNac);
 
+        jMenuCont.setBackground(new java.awt.Color(204, 204, 204));
+        jMenuCont.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/contenedor1.png"))); // NOI18N
+        jMenuCont.setText("Contenedores");
+        jMenuCont.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        jMenuItemGestionC.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItemGestionC.setForeground(new java.awt.Color(0, 0, 153));
+        jMenuItemGestionC.setText("Gestionar contenedores");
+        jMenuItemGestionC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemGestionCActionPerformed(evt);
+            }
+        });
+        jMenuCont.add(jMenuItemGestionC);
+
+        jMenuItemIngresoC.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItemIngresoC.setForeground(new java.awt.Color(0, 0, 153));
+        jMenuItemIngresoC.setText("Ingresar nuevo contenedor al sistema");
+        jMenuItemIngresoC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemIngresoCActionPerformed(evt);
+            }
+        });
+        jMenuCont.add(jMenuItemIngresoC);
+
+        jMenuItemDarDeBajaC.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItemDarDeBajaC.setForeground(new java.awt.Color(0, 0, 153));
+        jMenuItemDarDeBajaC.setText("Eliminar contenedor del sistema");
+        jMenuItemDarDeBajaC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDarDeBajaCActionPerformed(evt);
+            }
+        });
+        jMenuCont.add(jMenuItemDarDeBajaC);
+
+        jMenuBar.add(jMenuCont);
+
         setJMenuBar(jMenuBar);
 
         pack();
@@ -228,6 +273,29 @@ public class Operaciones extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItemDarDeBaja1ActionPerformed
 
+    private void jMenuItemGestionCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGestionCActionPerformed
+        
+        GestionDeContenedores gestionContenedores = new GestionDeContenedores();
+        gestionContenedores.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jMenuItemGestionCActionPerformed
+
+    private void jMenuItemIngresoCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemIngresoCActionPerformed
+        
+        IngresarContenedor ingresarContenedor = new IngresarContenedor();
+        ingresarContenedor.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jMenuItemIngresoCActionPerformed
+
+    private void jMenuItemDarDeBajaCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDarDeBajaCActionPerformed
+
+        EliminarContenedor eliminarContenedor = new EliminarContenedor();
+        eliminarContenedor.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItemDarDeBajaCActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -267,13 +335,17 @@ public class Operaciones extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonVolver2;
     private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JMenu jMenuCont;
     private javax.swing.JMenu jMenuInt;
     private javax.swing.JMenuItem jMenuItemDarDeBaja;
     private javax.swing.JMenuItem jMenuItemDarDeBaja1;
+    private javax.swing.JMenuItem jMenuItemDarDeBajaC;
     private javax.swing.JMenuItem jMenuItemGestion;
     private javax.swing.JMenuItem jMenuItemGestion1;
+    private javax.swing.JMenuItem jMenuItemGestionC;
     private javax.swing.JMenuItem jMenuItemIngreso;
     private javax.swing.JMenuItem jMenuItemIngreso1;
+    private javax.swing.JMenuItem jMenuItemIngresoC;
     private javax.swing.JMenu jMenuNac;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

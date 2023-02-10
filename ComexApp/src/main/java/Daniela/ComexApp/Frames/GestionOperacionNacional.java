@@ -46,6 +46,7 @@ public class GestionOperacionNacional extends javax.swing.JFrame {
                 + " nacionales registradas");
         
         operacionesNacionalesService.cambiarStatusCuandoIngresaProducto();
+        operacionesNacionalesService.notificacionOperacionesDelDia();
         
         jPanelTablaOperaciones.setVisible(true);
         jPanelTablaDetalles.setVisible(false);

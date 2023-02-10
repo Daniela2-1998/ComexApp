@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import service.AgendaPersonalImpl;
-import service.DespachantesService;
+import service.DespachantesImpl;
 import service.UsuariosImpl;
 
 /**
@@ -61,7 +61,7 @@ public class RegistroDespachantes extends javax.swing.JFrame {
     PreparedStatement pst;
     ResultSet rs;
     
-    DespachantesService despachantesService = new DespachantesService();
+    DespachantesImpl despachantesService = new DespachantesImpl();
     AgendaPersonalImpl agendaPersonalService = new AgendaPersonalImpl(); 
     
     public void LimpiarCamposRegistroDespachantes(){

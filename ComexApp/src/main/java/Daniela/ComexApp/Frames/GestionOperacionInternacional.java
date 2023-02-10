@@ -46,6 +46,7 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
                 + " internacionales registradas");
         
         operacionesInternacionalesService.cambiarStatusCuandoIngresaProducto();
+        operacionesInternacionalesService.notificacionOperacionesDelDia();
         
         jPanelTablaOperaciones.setVisible(true);
         jPanelTablaDetalles.setVisible(false);
@@ -443,6 +444,7 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
         textFechaRegistro = new javax.swing.JTextField();
         textFechaArribo = new javax.swing.JTextField();
         jButtonModificarFecha = new javax.swing.JButton();
+        jButtonAsociar = new javax.swing.JButton();
         jPanelTablaOperaciones = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableOperaciones = new javax.swing.JTable();
@@ -822,6 +824,16 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
             }
         });
         jPanelCampos.add(jButtonModificarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, -1, 30));
+
+        jButtonAsociar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonAsociar.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonAsociar.setText("Asociar operación");
+        jButtonAsociar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAsociarActionPerformed(evt);
+            }
+        });
+        jPanelCampos.add(jButtonAsociar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 377, -1, 20));
 
         jPanel1.add(jPanelCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, 720, 400));
 
@@ -1282,6 +1294,13 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonOcultarActionPerformed
 
+    private void jButtonAsociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsociarActionPerformed
+        
+        AsociarOperacionInternacional asociarOperacion = new AsociarOperacionInternacional();
+        asociarOperacion.setVisible(true);
+        
+    }//GEN-LAST:event_jButtonAsociarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1324,6 +1343,7 @@ public class GestionOperacionInternacional extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbCategoria;
     private javax.swing.JComboBox<String> cmbStatus1;
     private javax.swing.JComboBox<String> cmbTipoOperacion;
+    private javax.swing.JButton jButtonAsociar;
     private javax.swing.JButton jButtonContacto;
     private javax.swing.JButton jButtonDetalles;
     private javax.swing.JButton jButtonFechas;

@@ -10,8 +10,8 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import service.AgendaPersonalImpl;
-import service.ImportadoresService;
-import service.InicioSesionService;
+import service.ImportadoresImpl;
+import service.InicioSesionImp;
 import service.UsuariosImpl;
 
 /**
@@ -48,9 +48,10 @@ public class InformacionImportador extends javax.swing.JFrame {
         return retValue;   
     }
     
-    ImportadoresService importadoresService = new ImportadoresService();
+    ImportadoresImpl importadoresService = new ImportadoresImpl();
     AgendaPersonalImpl agendaPersonalService = new AgendaPersonalImpl();
    
+    
     public void LimpiarCampos(){
         textEmpresa.setText("");
         textCUIT.setText("");

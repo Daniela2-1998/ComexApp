@@ -4,11 +4,6 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-import java.sql.SQLException;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -16,7 +11,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.KeyEvent;
 import service.Botones;
-import service.InicioSesionService;
+import service.InicioSesionImp;
 
 /**
  *
@@ -59,7 +54,7 @@ public class InicioSesion extends javax.swing.JFrame {
     
     
     public void ingresarAlSistemaBotonYMouse(){
-        InicioSesionService inicioSesionService = new service.InicioSesionService();
+        InicioSesionImp inicioSesionService = new service.InicioSesionImp();
         Boolean validez;
         
         validez = inicioSesionService.inicioDeSesion(textUsuario, textContraseña);
@@ -99,6 +94,16 @@ public class InicioSesion extends javax.swing.JFrame {
         textContraseña.setBackground(Color.white);
     }
 
+    public void cierreAplicacion(){
+        Boolean aprobarCierre = botones.botonSalirSistema();
+        
+        if(aprobarCierre.equals(true)){
+            System.exit(0);
+        } else if(aprobarCierre.equals(false)){
+            JOptionPane.showMessageDialog(null, "Se canceló el cierre de la aplicación "
+                    + "ComexApp", "Cierre cancelado", 0);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,8 +129,10 @@ public class InicioSesion extends javax.swing.JFrame {
         jButtonCrearCuenta = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
         jXBusyLabelCargaInicio = new org.jdesktop.swingx.JXBusyLabel();
+        jButtonRecuperoUsuario = new javax.swing.JButton();
+        jButtonRecuperoContraseña = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setIconImage(getLogo());
         setIconImages(getIconImages());
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -177,7 +184,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabelContraseña.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabelContraseña.setForeground(new java.awt.Color(255, 255, 255));
         jLabelContraseña.setText("Contraseña:");
-        jPanelAzul.add(jLabelContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 170, 40));
+        jPanelAzul.add(jLabelContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 90, 40));
 
         textContraseña.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textContraseña.setForeground(new java.awt.Color(0, 0, 153));
@@ -235,6 +242,28 @@ public class InicioSesion extends javax.swing.JFrame {
         jXBusyLabelCargaInicio.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jPanelAzul.add(jXBusyLabelCargaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 200, -1));
 
+        jButtonRecuperoUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonRecuperoUsuario.setText("Olvide mi usuario");
+        jButtonRecuperoUsuario.setBorderPainted(false);
+        jButtonRecuperoUsuario.setContentAreaFilled(false);
+        jButtonRecuperoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRecuperoUsuarioActionPerformed(evt);
+            }
+        });
+        jPanelAzul.add(jButtonRecuperoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, -1, 10));
+
+        jButtonRecuperoContraseña.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonRecuperoContraseña.setText("Olvide mi contraseña");
+        jButtonRecuperoContraseña.setBorderPainted(false);
+        jButtonRecuperoContraseña.setContentAreaFilled(false);
+        jButtonRecuperoContraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRecuperoContraseñaActionPerformed(evt);
+            }
+        });
+        jPanelAzul.add(jButtonRecuperoContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, -1, 20));
+
         getContentPane().add(jPanelAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 313, 550, 340));
 
         pack();
@@ -267,7 +296,7 @@ public class InicioSesion extends javax.swing.JFrame {
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         
-        botones.botonSalirSistema();
+        cierreAplicacion();
         
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
@@ -277,9 +306,25 @@ public class InicioSesion extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
        
-        botones.botonSalirSistema();
+        cierreAplicacion();
         
     }//GEN-LAST:event_formWindowClosing
+
+    private void jButtonRecuperoContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRecuperoContraseñaActionPerformed
+        
+        TengoUsuario tengoUsuario = new TengoUsuario();
+        tengoUsuario.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButtonRecuperoContraseñaActionPerformed
+
+    private void jButtonRecuperoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRecuperoUsuarioActionPerformed
+        
+        TengoContraseña tengoContraseña = new TengoContraseña();
+        tengoContraseña.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButtonRecuperoUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -319,6 +364,8 @@ public class InicioSesion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCrearCuenta;
     private javax.swing.JButton jButtonIngresar;
+    private javax.swing.JButton jButtonRecuperoContraseña;
+    private javax.swing.JButton jButtonRecuperoUsuario;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JLabel jLabelContraseña;
     private javax.swing.JLabel jLabelInicio;

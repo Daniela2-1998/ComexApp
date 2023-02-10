@@ -107,6 +107,14 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         mostrarTodosLosDatos();
     }
     
+    public void LimpiarCampos(){
+        textUsuario.setText("");
+        textNombre.setText("");
+        textApellido.setText("");
+        textMail.setText("");
+        textTel.setText("");
+    }
+    
      // método para poner los datos de la tabla en los textfields.
      public void pasarCamposDeLaTablaAFields(){
     
@@ -129,7 +137,6 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
             }
         });
     }
-    
   
      
     
@@ -654,7 +661,8 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jButtonEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminar2ActionPerformed
-      
+
+        LimpiarCampos();
         LimpiarFiltroBusqueda();
        
     }//GEN-LAST:event_jButtonEliminar2ActionPerformed

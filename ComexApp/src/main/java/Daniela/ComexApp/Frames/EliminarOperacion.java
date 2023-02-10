@@ -60,7 +60,7 @@ public class EliminarOperacion extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButtonIngresarNac = new javax.swing.JButton();
+        jButtonEliminarNac = new javax.swing.JButton();
         jPanelRegistro = new javax.swing.JPanel();
         jLabelTitulo = new javax.swing.JLabel();
         jLabelCodigo = new javax.swing.JLabel();
@@ -68,7 +68,7 @@ public class EliminarOperacion extends javax.swing.JFrame {
         jLabelProducto = new javax.swing.JLabel();
         textProducto = new javax.swing.JTextField();
         jButtonAtras = new javax.swing.JButton();
-        jButtonIngresarInt = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -78,17 +78,17 @@ public class EliminarOperacion extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(520, 320));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButtonIngresarNac.setBackground(new java.awt.Color(0, 0, 153));
-        jButtonIngresarNac.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonIngresarNac.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonIngresarNac.setText("Eliminar operación nacional ");
-        jButtonIngresarNac.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        jButtonIngresarNac.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEliminarNac.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonEliminarNac.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonEliminarNac.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonEliminarNac.setText("Eliminar operación nacional ");
+        jButtonEliminarNac.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        jButtonEliminarNac.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonIngresarNacActionPerformed(evt);
+                jButtonEliminarNacActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonIngresarNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
+        jPanel1.add(jButtonEliminarNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
 
         jPanelRegistro.setBackground(new java.awt.Color(204, 204, 204));
         jPanelRegistro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -132,17 +132,17 @@ public class EliminarOperacion extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, -1, -1));
 
-        jButtonIngresarInt.setBackground(new java.awt.Color(0, 0, 153));
-        jButtonIngresarInt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonIngresarInt.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonIngresarInt.setText("Eliminar operación internacional ");
-        jButtonIngresarInt.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        jButtonIngresarInt.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEliminar.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonEliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonEliminar.setText("Eliminar operación internacional ");
+        jButtonEliminar.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonIngresarIntActionPerformed(evt);
+                jButtonEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonIngresarInt, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
+        jPanel1.add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -162,14 +162,14 @@ public class EliminarOperacion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonIngresarNacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngresarNacActionPerformed
+    private void jButtonEliminarNacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarNacActionPerformed
 
         producto = textProducto.getText().trim();
         ID = Integer.parseInt(textID.getText().trim()); 
         
         operacionesService.eliminarOperacion(producto, ID);
       
-    }//GEN-LAST:event_jButtonIngresarNacActionPerformed
+    }//GEN-LAST:event_jButtonEliminarNacActionPerformed
 
     private void jButtonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtrasActionPerformed
         
@@ -177,14 +177,14 @@ public class EliminarOperacion extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonAtrasActionPerformed
 
-    private void jButtonIngresarIntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngresarIntActionPerformed
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
       
         producto = textProducto.getText().trim();
         ID = Integer.parseInt(textID.getText().trim()); 
         
         ventaLocalService.eliminarOperacion(producto, ID);
       
-    }//GEN-LAST:event_jButtonIngresarIntActionPerformed
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,8 +230,8 @@ public class EliminarOperacion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAtras;
-    private javax.swing.JButton jButtonIngresarInt;
-    private javax.swing.JButton jButtonIngresarNac;
+    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonEliminarNac;
     private javax.swing.JLabel jLabelCodigo;
     private javax.swing.JLabel jLabelProducto;
     private javax.swing.JLabel jLabelTitulo;

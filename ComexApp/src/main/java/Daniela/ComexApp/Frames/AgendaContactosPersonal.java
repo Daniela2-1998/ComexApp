@@ -12,8 +12,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import service.AgendaPersonalImpl;
-import service.ImportadoresService;
-import service.InicioSesionService;
+import service.ImportadoresImpl;
+import service.InicioSesionImp;
 import service.UsuariosImpl;
 
 /**

@@ -3,7 +3,8 @@ package Daniela.ComexApp.Frames;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
-import service.InicioSesionService;
+import service.ColorPaginaPrincipalImpl;
+import service.InicioSesionImp;
 import service.MensajesDeObjetivosImpl;
 import service.UsuariosImpl;
 
@@ -37,6 +38,18 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         setTitle("Página principal - " + usuario + " - sistema ComexApp");
         
         mensajesDeObjetivosImpl.verificarMensajesSinVer(usuario, rol);
+        
+        if(rol.equals("Administrador")){
+            Boolean estanSolicitandoAcceso = usuariosService.solicitarAccesoAlSistema(usuario);
+        }
+        
+        String colorElegido = colorPagina.recuperarColorElegido(usuario);
+        if(colorElegido.equals("Defecto")){
+            cambiarAColorDefecto();
+        } else if (colorElegido.equals("Invertido")){
+            cambiarAColorInvertido();
+        }
+        
     }
     
         // icono
@@ -45,10 +58,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         return retValue;   
     }
 
-    InicioSesionService usuariosServicio = new InicioSesionService();
+    InicioSesionImp usuariosServicio = new InicioSesionImp();
     InicioSesion inicioSesion = new InicioSesion();
     UsuariosImpl usuariosService = new UsuariosImpl();
     MensajesDeObjetivosImpl mensajesDeObjetivosImpl = new MensajesDeObjetivosImpl();
+    ColorPaginaPrincipalImpl colorPagina = new ColorPaginaPrincipalImpl();
    
     
     public void visibilidadAdministrador(){
@@ -58,6 +72,75 @@ public class PaginaPrincipal extends javax.swing.JFrame {
             jMenuAdministrar.setVisible(false);
         } 
     }
+    
+    public void cambiarAColorDefecto(){
+        
+        jPanel3.setBackground(new java.awt.Color(0, 0, 153));
+        jLabelTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTitulo1.setForeground(new java.awt.Color(255, 255, 255));
+        
+        jButtonImportadores.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonImportadores.setForeground(new java.awt.Color(255, 255, 255));
+        
+        jButtonExportadores.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonExportadores.setForeground(new java.awt.Color(255, 255, 255));
+        
+        jButtonDespachantes.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonDespachantes.setForeground(new java.awt.Color(255, 255, 255));
+        
+        jButtonMaritimas.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonMaritimas.setForeground(new java.awt.Color(255, 255, 255));
+        
+        jButtonAereo.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonAereo.setForeground(new java.awt.Color(255, 255, 255));
+        
+        jButtonStock.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonStock.setForeground(new java.awt.Color(255, 255, 255));
+        
+        jButtonOperaciones.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonOperaciones.setForeground(new java.awt.Color(255, 255, 255));
+        
+        jButtonImportadores.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonImportadores.setForeground(new java.awt.Color(255, 255, 255));
+        
+        jButtonCerrarSesion.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonCerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+    }
+    
+    public void cambiarAColorInvertido(){
+        
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelTitulo.setForeground(new java.awt.Color(0, 0, 153));
+        jLabelTitulo1.setForeground(new java.awt.Color(0, 0, 153));
+        
+        jButtonImportadores.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonImportadores.setForeground(new java.awt.Color(0, 0, 153));
+        
+        jButtonExportadores.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonExportadores.setForeground(new java.awt.Color(0, 0, 153));
+        
+        jButtonDespachantes.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonDespachantes.setForeground(new java.awt.Color(0, 0, 153));
+        
+        jButtonMaritimas.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonMaritimas.setForeground(new java.awt.Color(0, 0, 153));
+        
+        jButtonAereo.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonAereo.setForeground(new java.awt.Color(0, 0, 153));
+        
+        jButtonStock.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonStock.setForeground(new java.awt.Color(0, 0, 153));
+        
+        jButtonOperaciones.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonOperaciones.setForeground(new java.awt.Color(0, 0, 153));
+        
+        jButtonImportadores.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonImportadores.setForeground(new java.awt.Color(0, 0, 153));
+        
+        jButtonCerrarSesion.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonCerrarSesion.setForeground(new java.awt.Color(0, 0, 153));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,11 +150,12 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroupColor = new javax.swing.ButtonGroup();
         jPanel3 = new javax.swing.JPanel();
         jLabelTitulo = new javax.swing.JLabel();
         jButtonImportadores = new javax.swing.JButton();
         jButtonExportadores = new javax.swing.JButton();
-        jButtonIDespachantes = new javax.swing.JButton();
+        jButtonDespachantes = new javax.swing.JButton();
         jButtonMaritimas = new javax.swing.JButton();
         jButtonOperaciones = new javax.swing.JButton();
         jButtonStock = new javax.swing.JButton();
@@ -86,11 +170,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jMenuItemRecupero = new javax.swing.JMenuItem();
         jMenuItemAgendar = new javax.swing.JMenuItem();
         jMenuItemNotas = new javax.swing.JMenuItem();
-        jMenuItemCalendario = new javax.swing.JMenuItem();
         jMenuItemObjetivos = new javax.swing.JMenuItem();
         jMenuPreferencias = new javax.swing.JMenu();
         jMenuItemFondo = new javax.swing.JMenuItem();
-        jMenuItemColores = new javax.swing.JMenuItem();
+        jRadioButtonMenuItemDefecto = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItemInvertidos = new javax.swing.JRadioButtonMenuItem();
         jMenuInformes = new javax.swing.JMenu();
         jMenuItemCrearInforme = new javax.swing.JMenuItem();
         jMenuAdministrar = new javax.swing.JMenu();
@@ -133,15 +217,15 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         });
         jPanel3.add(jButtonExportadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 210, 50));
 
-        jButtonIDespachantes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonIDespachantes.setForeground(new java.awt.Color(0, 0, 153));
-        jButtonIDespachantes.setText("Despachantes");
-        jButtonIDespachantes.addActionListener(new java.awt.event.ActionListener() {
+        jButtonDespachantes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonDespachantes.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonDespachantes.setText("Despachantes");
+        jButtonDespachantes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonIDespachantesActionPerformed(evt);
+                jButtonDespachantesActionPerformed(evt);
             }
         });
-        jPanel3.add(jButtonIDespachantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 210, 50));
+        jPanel3.add(jButtonDespachantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 210, 50));
 
         jButtonMaritimas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonMaritimas.setForeground(new java.awt.Color(0, 0, 153));
@@ -258,15 +342,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         });
         jMenuInfo.add(jMenuItemNotas);
 
-        jMenuItemCalendario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItemCalendario.setText("Calendario");
-        jMenuItemCalendario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCalendarioActionPerformed(evt);
-            }
-        });
-        jMenuInfo.add(jMenuItemCalendario);
-
         jMenuItemObjetivos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItemObjetivos.setText("Objetivos ");
         jMenuItemObjetivos.addActionListener(new java.awt.event.ActionListener() {
@@ -290,14 +365,26 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         });
         jMenuPreferencias.add(jMenuItemFondo);
 
-        jMenuItemColores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItemColores.setText("Invertir colores");
-        jMenuItemColores.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroupColor.add(jRadioButtonMenuItemDefecto);
+        jRadioButtonMenuItemDefecto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jRadioButtonMenuItemDefecto.setSelected(true);
+        jRadioButtonMenuItemDefecto.setText("Colores por defecto");
+        jRadioButtonMenuItemDefecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemColoresActionPerformed(evt);
+                jRadioButtonMenuItemDefectoActionPerformed(evt);
             }
         });
-        jMenuPreferencias.add(jMenuItemColores);
+        jMenuPreferencias.add(jRadioButtonMenuItemDefecto);
+
+        buttonGroupColor.add(jRadioButtonMenuItemInvertidos);
+        jRadioButtonMenuItemInvertidos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jRadioButtonMenuItemInvertidos.setText("Colores invertidos");
+        jRadioButtonMenuItemInvertidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItemInvertidosActionPerformed(evt);
+            }
+        });
+        jMenuPreferencias.add(jRadioButtonMenuItemInvertidos);
 
         jMenuBar1.add(jMenuPreferencias);
 
@@ -368,12 +455,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonCerrarSesionActionPerformed
 
-    private void jMenuItemColoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemColoresActionPerformed
-        
-        Boolean defecto = true;
-        
-    }//GEN-LAST:event_jMenuItemColoresActionPerformed
-
     private void jMenuItemDatosUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDatosUsuariosActionPerformed
        
         AdministrarUsuarios administrarUsuarios = new AdministrarUsuarios();
@@ -406,10 +487,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
                 
     }//GEN-LAST:event_jMenuItemRecuperoActionPerformed
 
-    private void jMenuItemCalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCalendarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemCalendarioActionPerformed
-
     private void jButtonImportadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImportadoresActionPerformed
         
         Importadores importadores = new Importadores();
@@ -426,13 +503,13 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonExportadoresActionPerformed
 
-    private void jButtonIDespachantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIDespachantesActionPerformed
+    private void jButtonDespachantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDespachantesActionPerformed
       
         Despachantes despachantes = new Despachantes();
         despachantes.setVisible(true);
         this.dispose();
         
-    }//GEN-LAST:event_jButtonIDespachantesActionPerformed
+    }//GEN-LAST:event_jButtonDespachantesActionPerformed
 
     private void jButtonMaritimasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMaritimasActionPerformed
        
@@ -482,6 +559,20 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItemObjetivosActionPerformed
 
+    private void jRadioButtonMenuItemDefectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemDefectoActionPerformed
+        
+        cambiarAColorDefecto();
+        colorPagina.cambiarAColorDefecto(usuario);
+
+    }//GEN-LAST:event_jRadioButtonMenuItemDefectoActionPerformed
+
+    private void jRadioButtonMenuItemInvertidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemInvertidosActionPerformed
+    
+        cambiarAColorInvertido();
+        colorPagina.cambiarAColorInvertido(usuario);
+    
+    }//GEN-LAST:event_jRadioButtonMenuItemInvertidosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -518,10 +609,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroupColor;
     private javax.swing.JButton jButtonAereo;
     private javax.swing.JButton jButtonCerrarSesion;
+    private javax.swing.JButton jButtonDespachantes;
     private javax.swing.JButton jButtonExportadores;
-    private javax.swing.JButton jButtonIDespachantes;
     private javax.swing.JButton jButtonImportadores;
     private javax.swing.JButton jButtonMaritimas;
     private javax.swing.JButton jButtonOperaciones;
@@ -535,9 +627,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuInformes;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemAgendar;
-    private javax.swing.JMenuItem jMenuItemCalendario;
     private javax.swing.JMenuItem jMenuItemCambioContraseña;
-    private javax.swing.JMenuItem jMenuItemColores;
     private javax.swing.JMenuItem jMenuItemControl;
     private javax.swing.JMenuItem jMenuItemCrearInforme;
     private javax.swing.JMenuItem jMenuItemDatosUsuarios;
@@ -548,5 +638,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemRecupero;
     private javax.swing.JMenu jMenuPreferencias;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemDefecto;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemInvertidos;
     // End of variables declaration//GEN-END:variables
 }

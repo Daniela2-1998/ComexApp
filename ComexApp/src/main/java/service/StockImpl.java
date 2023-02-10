@@ -201,8 +201,29 @@ public class StockImpl implements StockService{
         }
     }
     
+    public int obtenerIDProducto(String codigo, String vendedor, String producto){
+        
+        int IDProducto = 0;
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement("select id_producto from stock where "
+                    + "nombre_producto = '" + producto + "' and codigo_producto = '" + 
+                    codigo + "' and vendedor = '" + vendedor + "'");
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                IDProducto = rs.getInt("id_producto");
+            }
+            
+        }catch(SQLException e){
+            System.err.print("No se puede obtener ID producto " + e);
+        }
+        return IDProducto;
+    }
     
-     public boolean eliminarProductoDeStock(String producto, int id){
+    
+    public boolean eliminarProductoDeStock(String producto, int id){
        
         String sql = "delete from stock where producto = '" + producto + "' "
                + "and id_producto = '" + id + "'";

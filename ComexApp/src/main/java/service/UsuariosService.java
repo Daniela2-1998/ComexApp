@@ -19,19 +19,25 @@ public interface UsuariosService{
   public void modificarAlgunosDatosDeUsuarios(String usuario, String nombreMod, 
              String apellidoMod, String mailMod, String telefonoMod);
   
-    public int obtenerIDUsuario(String usuario, String nombre);
+    public int obtenerIDUsuario(String usuario);
 
     public String obtenerNombre(String usuario);
 
     public String obtenerApellido(String usuario);
 
     public String obtenerNombreCompleto(String usuario);
+    
+    public String obtenerUsuario(String nombre, String contraseña);
 
     public void obtenerDatosDelUsuario(String UsuarioBuscado,
             JTextField textID, JTextField textUsuario, JTextField textContraseña,
             JTextField textNombre, JTextField textApellido, JTextField textMail,
             JTextField textTelefono, JComboBox cmbRol, JComboBox cmbStatus);
 
+    public void darUsuarioAcceso();
+    
+    public boolean solicitarAccesoAlSistema(String usuario);
+    
     public boolean eliminarUsuario(String usuario, int id);
 
 }

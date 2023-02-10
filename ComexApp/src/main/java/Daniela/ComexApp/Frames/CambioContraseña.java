@@ -4,7 +4,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Date;
 import java.util.Calendar;
-import service.InicioSesionService;
+import service.InicioSesionImp;
 
 
 /**
@@ -39,7 +39,7 @@ public class CambioContraseña extends javax.swing.JFrame {
         return retValue;   
     }
     
-    InicioSesionService inicioSesionService = new InicioSesionService();
+    InicioSesionImp inicioSesionService = new InicioSesionImp();
     
     
     public void LimpiarCampos(){

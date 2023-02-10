@@ -18,5 +18,7 @@ public interface StockService {
             String precioUnitarioMod, String statusMod, String tipoProductoMod, 
             String productoMod, String producto);
     
-     public boolean eliminarProductoDeStock(String producto, int id);
+    public int obtenerIDProducto(String codigo, String vendedor, String producto);
+    
+    public boolean eliminarProductoDeStock(String producto, int id);
 }

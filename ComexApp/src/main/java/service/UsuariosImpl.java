@@ -1,19 +1,14 @@
 package service;
 
-import Daniela.ComexApp.Controller.UsuariosController;
-import Daniela.ComexApp.Entity.Usuarios;
-import Daniela.ComexApp.Repository.UsuariosRepository;
+import Daniela.ComexApp.Frames.VerUsuario;
 import config.Conexion;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
-import java.util.ArrayList;
-import org.springframework.beans.factory.annotation.Autowired;
-
-
-import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -48,11 +43,13 @@ public class UsuariosImpl implements UsuariosService{
     ResultSet rs;
     int resultado;
     
-    Boolean eliminacionAprobada;
+    Boolean eliminacionAprobada, buscandoAcceso;
     
     String nombreCompleto;
     String nombre;
     String apellido;
+    String usuario;
+    String usuarioSolicitando;
     int ID;
     
     //                              METODOS   
@@ -134,10 +131,9 @@ public class UsuariosImpl implements UsuariosService{
      }
     }
      
-    public int obtenerIDUsuario (String usuario, String nombre){
+    public int obtenerIDUsuario (String usuario){
         
-        String sql = "select id_usuarios from usuarios where usuario = '" + usuario +
-                "' and nombre = '" + nombre + "'";
+        String sql = "select id_usuarios from usuarios where usuario = '" + usuario + "'";
           
         try{
             conec = cn.Conexion();
@@ -220,6 +216,28 @@ public class UsuariosImpl implements UsuariosService{
         return nombreCompleto;
     }
     
+    public String obtenerUsuario(String nombre, String contraseña){
+        
+        String usuario = null;
+        String sql = "select usuario from usuarios where nombre = '" + nombre + "' "
+                + " and contraseña = '" + contraseña + "'";
+         
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                usuario = rs.getString("usuario") ;
+            }
+           
+        }catch(SQLException e){
+            System.err.println("No es posible recuperar el usuario " + e);
+            JOptionPane.showMessageDialog(null, "No es posible obtener el usuario");
+        }
+        return usuario;
+    }
+    
     
     
     // método obtención datos del usuario
@@ -245,8 +263,15 @@ public class UsuariosImpl implements UsuariosService{
                 textApellido.setText(rs.getString("apellido"));
                 textMail.setText(rs.getString("mail"));
                 textTelefono.setText(rs.getString("telefono"));
-                cmbRol.setSelectedItem("rol");
-                cmbStatus.setSelectedItem("status");
+                String rol = rs.getString("rol");
+                String status = rs.getString("status");
+                
+                VerUsuario verUsuario = new VerUsuario();
+                int statusNivel = verUsuario.recuperarStatus(status);
+                int rolNivel = verUsuario.recuperarRol(rol);
+                
+                cmbRol.setSelectedIndex(rolNivel);
+                cmbStatus.setSelectedIndex(statusNivel);
             } else {
                 JOptionPane.showMessageDialog(null, "No es posible conseguir "
                         + "los datos del usuario solicitado");
@@ -261,6 +286,66 @@ public class UsuariosImpl implements UsuariosService{
                     + "usuario solicitado");
         }
     }
+    
+    public void darUsuarioAcceso(){
+        
+        Date diaRegistro = Date.valueOf(LocalDate.now());
+        Date diasExtra = Date.valueOf(LocalDate.now().plusDays(5));
+        
+        String sql = "update usuarios set status=? where status = 'Inactivo' and "
+                + "dia_registro between '" + diaRegistro + "' and '" + diasExtra + "'";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            
+            pst.setString(1, "Activo");
+            pst.executeUpdate();
+            conec.close();
+            
+        }catch(SQLException e){
+            System.err.println("No se puede cambiar el status " + e);
+        }
+    }
+    
+    public boolean solicitarAccesoAlSistema(String usuario){
+        
+        Boolean solicitandoAcceso = null;
+        
+        Date diaRegistro = Date.valueOf(LocalDate.now());
+        Date diasExtra = Date.valueOf(LocalDate.now().plusDays(5));
+        
+        String sql = "select usuario from usuarios where status = 'Inactivo' and "
+                + "dia_registro between '" + diaRegistro + "' and '" + diasExtra + "'";
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                String usuarioPidiendo = rs.getString("usuario");
+                solicitandoAcceso = true;
+                
+                if(!usuarioPidiendo.equals(null)){
+                    
+                    MensajesImpl mensajes = new MensajesImpl();
+                    mensajes.notificacionUsuariosSolicitandoAccesoAlSistema(usuario, 
+                            usuarioPidiendo);
+                    
+                } else if (usuarioPidiendo.equals(null)){
+                    System.err.println("No hay usuarios pidiendo acceso");
+                }
+                
+            } else {
+                solicitandoAcceso = false;
+            }
+        }catch(SQLException e){
+            System.err.println("No hay usuarios nuevos " + e);
+        }
+       
+        return solicitandoAcceso;
+    }
+    
 
     // método eliminar usuario
     public boolean eliminarUsuario(String usuario, int id) {

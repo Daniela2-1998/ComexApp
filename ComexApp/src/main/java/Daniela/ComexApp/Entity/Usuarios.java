@@ -1,7 +1,10 @@
 package Daniela.ComexApp.Entity;
 
+import java.sql.Date;
+import java.sql.Time;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -40,7 +43,8 @@ public class Usuarios {
     @NotBlank
     private String status;
    
-
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date dia_registro;
     
     
     public Integer getId() {
@@ -116,13 +120,21 @@ public class Usuarios {
         this.status = status;
     }
 
+    public Date getDia_registro() {
+        return dia_registro;
+    }
+
+    public void setDia_registro(Date dia_registro) {
+        this.dia_registro = dia_registro;
+    }
+
     
     
     
     public Usuarios() {
     }
 
-    public Usuarios(Integer id, String nombre, String apellido, String mail, String telefono, String rol, String usuario, String contraseña, String status) {
+    public Usuarios(Integer id, String nombre, String apellido, String mail, String telefono, String rol, String usuario, String contraseña, String status, Date dia_registro) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -132,7 +144,9 @@ public class Usuarios {
         this.usuario = usuario;
         this.contraseña = contraseña;
         this.status = status;
+        this.dia_registro = dia_registro;
     }
 
+ 
     
 }

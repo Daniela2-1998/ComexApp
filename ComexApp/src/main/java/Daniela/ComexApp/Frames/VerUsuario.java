@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import service.InicioSesionService;
+import service.InicioSesionImp;
 import service.UsuariosImpl;
 
 /**
@@ -43,7 +43,7 @@ public class VerUsuario extends javax.swing.JFrame {
         return retValue;   
     }
     
-    InicioSesionService inicioSesionService = new InicioSesionService();
+    InicioSesionImp inicioSesionService = new InicioSesionImp();
     RegistroUsuarios registroUsuarios = new RegistroUsuarios();
     UsuariosImpl usuariosService = new UsuariosImpl();
     AdministrarUsuarios administrarUsuarios = new AdministrarUsuarios();
@@ -75,6 +75,43 @@ public class VerUsuario extends javax.swing.JFrame {
      return usuarioBuscado;
     }
     
+    public int recuperarStatus(String status){
+        
+        int statusNivel = 0;
+        
+        if(status.equals("Activo")){
+            statusNivel = 0;
+        } else if(status.equals("Inactivo")){
+            statusNivel = 1;
+        } else if(status.equals("Suspendido")){
+            statusNivel = 2;
+        }
+        
+        return statusNivel;
+    }
+     
+     public int recuperarRol(String rol){
+        
+        int rolNivel = 0;
+        
+        if(rol.equals("Administrador")){
+            rolNivel = 0;
+        } else if(rol.equals("Importador")){
+            rolNivel = 1;
+        } else if(rol.equals("Exportador")){
+            rolNivel = 2;
+        } else if(rol.equals("Agente")){
+            rolNivel = 3;
+        } else if(rol.equals("Logistica")){
+            rolNivel = 4;
+        } else if(rol.equals("Marketing")){
+            rolNivel = 5;
+        }
+        
+        return rolNivel;
+    } 
+
+
    
     public void LimpiarCampos(){
         textUsuario.setText("");

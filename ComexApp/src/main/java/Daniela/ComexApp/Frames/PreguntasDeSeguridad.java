@@ -17,7 +17,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import service.NotasService;
-import service.PreguntasSeguridadService;
+import service.PreguntasSeguridadImpl;
 import service.UsuariosImpl;
 
 /**
@@ -39,6 +39,7 @@ public class PreguntasDeSeguridad extends javax.swing.JFrame {
         setResizable(false);
         
         PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
+        TengoUsuario tengoUsuario = new TengoUsuario();
         
         usuario = paginaPrincipal.usuario;
         nombreCompleto = usuariosService.obtenerNombreCompleto(usuario);
@@ -47,10 +48,17 @@ public class PreguntasDeSeguridad extends javax.swing.JFrame {
 
         setTitle("Preguntas de seguridad - " + usuario + " - sistema ComexApp");
         
+        String preguntaUno = preguntasSeguridadService.recuperarPreguntaUno(usuario, nombre);
+        String preguntaDos = preguntasSeguridadService.recuperarPreguntaDos(usuario, nombre);
+        String preguntaTres = preguntasSeguridadService.recuperarPreguntaTres(usuario, nombre);
         
-        preguntasSeguridadService.recuperarLasPreguntasDeSeguridadYSusRespuestas
-        (textPreguntaUno, textPreguntaDos, textPreguntaTres, cmbPreguntaUno, 
-                cmbPreguntaDos, cmbPreguntaTres, usuario, nombre);
+        int eleccionUno = tengoUsuario.numeroDePreguntaUnoADevolver(preguntaUno);
+        int eleccionDos = tengoUsuario.numeroDePreguntaDosADevolver(preguntaDos);
+        int eleccionTres = tengoUsuario.numeroDePreguntaTresADevolver(preguntaTres);
+        
+        cmbPreguntaUno.setSelectedIndex(eleccionUno);
+        cmbPreguntaDos.setSelectedIndex(eleccionDos);
+        cmbPreguntaTres.setSelectedIndex(eleccionTres);
     }
     
     // icono
@@ -60,7 +68,7 @@ public class PreguntasDeSeguridad extends javax.swing.JFrame {
     }
     
     UsuariosImpl usuariosService = new UsuariosImpl();
-    PreguntasSeguridadService preguntasSeguridadService = new PreguntasSeguridadService();
+    PreguntasSeguridadImpl preguntasSeguridadService = new PreguntasSeguridadImpl();
     
     public void LimpiarCampos(){
         textPreguntaUno.setText("");
@@ -189,7 +197,7 @@ public class PreguntasDeSeguridad extends javax.swing.JFrame {
         
         Boolean recepcion;
         
-        ID = usuariosService.obtenerIDUsuario(usuario, nombre);
+        ID = usuariosService.obtenerIDUsuario(usuario);
         preguntaUno = textPreguntaUno.getText().trim();
         preguntaDos = textPreguntaDos.getText().trim();
         preguntaTres = textPreguntaTres.getText().trim();

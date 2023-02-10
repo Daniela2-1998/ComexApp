@@ -232,6 +232,40 @@ public class OperacionesNacionalesImpl implements OperacionesNacionalesService{
         
     }
      
+    public void notificacionOperacionesDelDia(){ 
+
+        Date fechaActual = Date.valueOf(LocalDate.now());
+        int cantidadOperaciones = 0;
+        
+        String sql = "select count (productos_pedidos) from ventalocal where fecha_arribo = '" 
+                + fechaActual + "'";
+
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                cantidadOperaciones = rs.getInt(1);
+                
+                   
+                if (cantidadOperaciones > 0) {
+
+                    MensajesImpl mensajes = new MensajesImpl();
+                    mensajes.notificacionOperacionesNacionalesDelDia(cantidadOperaciones);
+
+                } else if (cantidadOperaciones <= 0) {
+                    System.err.println("No hay operaciones nacionales en el día de hoy.");
+                }
+            } else {
+                
+            }
+            conec.close();
+            
+        }catch(SQLException e){
+            System.err.println("No se puede obtener la cantidad disponible " + e);
+        }
+    }
 
     public boolean eliminarOperacion (String producto, int id){
        

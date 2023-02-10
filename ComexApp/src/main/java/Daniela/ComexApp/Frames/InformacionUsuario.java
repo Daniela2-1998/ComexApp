@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import service.PreguntasSeguridadService;
+import service.PreguntasSeguridadImpl;
 import service.UsuariosImpl;
 
 /**
@@ -45,7 +45,7 @@ public class InformacionUsuario extends javax.swing.JFrame {
         jLabelUsuario2.setText(rol);
         
         usuariosService.obtenerDatosDelUsuario(usuario, textID, textUsuario,
-                textContraseña, textNombre, textApellido, textMail, textApellido, 
+                textContraseña, textNombre, textApellido, textMail, textNumero, 
                 cmbRol, cmbStatus);
     }
       // icono
@@ -54,7 +54,7 @@ public class InformacionUsuario extends javax.swing.JFrame {
         return retValue;   
     }
     UsuariosImpl usuariosService = new UsuariosImpl();
-    PreguntasSeguridadService preguntasSeguridadService = new PreguntasSeguridadService();
+    PreguntasSeguridadImpl preguntasSeguridadService = new PreguntasSeguridadImpl();
     
     public void LimpiarCampos(){
         textUsuario.setText("");

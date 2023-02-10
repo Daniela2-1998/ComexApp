@@ -6,7 +6,7 @@ package service;
  */
 public interface BotonesImpl {
     
-    public void botonSalirSistema();
+    public Boolean botonSalirSistema();
     
     public void botonCerrarVentana();
 }

@@ -6,7 +6,8 @@ import Daniela.ComexApp.Repository.UsuariosRepository;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import service.InicioSesionService;
+import service.InicioSesionImp;
+import service.MensajesImpl;
 
 /**
  *
@@ -31,9 +32,9 @@ public class RegistroUsuarios extends javax.swing.JFrame {
     
     Usuarios usuarios = new Usuarios();
     UsuariosRepository usuariosRepository;
-    // UsuariosController usuariosController = new UsuariosController();
-    InicioSesionService inicioSesionService = new InicioSesionService();
-    
+    InicioSesionImp inicioSesionService = new InicioSesionImp();
+    MensajesImpl mensajesImpl = new MensajesImpl();
+
     
     public void LimpiarCamposRegistroUsuarios(){
         textID.setText("");
@@ -185,7 +186,7 @@ public class RegistroUsuarios extends javax.swing.JFrame {
         jLabelStatus.setText("Status:");
         getContentPane().add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 70, 50));
 
-        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo", "Suspendido" }));
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
         getContentPane().add(cmbStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, 120, 40));
 
         jButtonInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/signo4.png"))); // NOI18N
@@ -254,19 +255,23 @@ public class RegistroUsuarios extends javax.swing.JFrame {
            status = "Activo";
        } else if (statusNivel == 2){
            status = "Inactivo";
-       } else if (statusNivel == 3){
-           status = "Suspendido";
-       }
+       } 
+       
+       Boolean noExiste = inicioSesionService.verificarQueNoExistaUsuario(usuario);
+       
+        if (noExiste.equals(true)) {
+            recepcion = inicioSesionService.agregarUsuario(id, usuario, contraseña,
+                    nombre, apellido, rol, mail, telefono, status).toString();
+
+            if (!recepcion.isEmpty()) {
+                mensajesImpl.avisoEsperarConfirmacionDeAcceso(usuario);
+                LimpiarCamposRegistroUsuarios();
+            } else if (recepcion.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No es posible crear el usuario solicitado");
+            }
+        } 
      
-       recepcion = inicioSesionService.agregarUsuario(id, usuario, contraseña, 
-               nombre, apellido, rol, mail, telefono, status).toString();
       
-       if(!recepcion.isEmpty()){
-           JOptionPane.showMessageDialog(null, "Se creó correctamente el usuario de " + usuario);
-           LimpiarCamposRegistroUsuarios();
-       } else if (recepcion.isEmpty()){
-           JOptionPane.showMessageDialog(null, "No es posible crear el usuario solicitado");
-       }
 
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 

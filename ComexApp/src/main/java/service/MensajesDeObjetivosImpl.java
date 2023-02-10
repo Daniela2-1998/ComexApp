@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -154,7 +153,7 @@ public class MensajesDeObjetivosImpl {
                    
                 if (visto.equals(false)) {
 
-                    Mensajes mensajes = new Mensajes();
+                    MensajesImpl mensajes = new MensajesImpl();
                     mensajes.notificacionMensajesDeObjetivosSinVer(titulo, fechaPublicacion,
                             horaPublicacion);
 
