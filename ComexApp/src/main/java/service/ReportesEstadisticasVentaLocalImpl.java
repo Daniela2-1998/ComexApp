@@ -13,7 +13,7 @@ import javax.swing.JTextField;
  *
  * @author Daniela
  */
-public class ReportesEstadisticasVentaLocalImpl {
+public class ReportesEstadisticasVentaLocalImpl implements ReportesEstadisticasVentaLocalService{
     
     // conexión
     Conexion cn = new Conexion();

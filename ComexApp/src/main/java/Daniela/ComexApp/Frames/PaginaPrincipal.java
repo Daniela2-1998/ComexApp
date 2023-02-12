@@ -2,8 +2,8 @@ package Daniela.ComexApp.Frames;
 
 import java.awt.Image;
 import java.awt.Toolkit;
-import javax.swing.JOptionPane;
 import service.ColorPaginaPrincipalImpl;
+import service.FondoPaginaPrincipalImpl;
 import service.InicioSesionImp;
 import service.MensajesDeObjetivosImpl;
 import service.UsuariosImpl;
@@ -50,6 +50,17 @@ public class PaginaPrincipal extends javax.swing.JFrame {
             cambiarAColorInvertido();
         }
         
+        String fondoElegido = fondoPagina.recuperarFondoElegido(usuario);
+        
+        if(fondoElegido.equals("Defecto")){
+            cambiarFondoDefecto();
+        } else if (fondoElegido.equals("Fondo")){
+            cambiarFondo();
+        } else if (fondoElegido.equals("Fondo 3")){
+            cambiarFondo3();
+        } else if (fondoElegido.equals("Fondo 4")){
+            cambiarFondo4();
+        }
     }
     
         // icono
@@ -63,6 +74,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     UsuariosImpl usuariosService = new UsuariosImpl();
     MensajesDeObjetivosImpl mensajesDeObjetivosImpl = new MensajesDeObjetivosImpl();
     ColorPaginaPrincipalImpl colorPagina = new ColorPaginaPrincipalImpl();
+    FondoPaginaPrincipalImpl fondoPagina = new FondoPaginaPrincipalImpl();
    
     
     public void visibilidadAdministrador(){
@@ -78,41 +90,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(0, 0, 153));
         jLabelTitulo.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTitulo1.setForeground(new java.awt.Color(255, 255, 255));
-        
-        jButtonImportadores.setBackground(new java.awt.Color(0, 0, 153));
-        jButtonImportadores.setForeground(new java.awt.Color(255, 255, 255));
-        
-        jButtonExportadores.setBackground(new java.awt.Color(0, 0, 153));
-        jButtonExportadores.setForeground(new java.awt.Color(255, 255, 255));
-        
-        jButtonDespachantes.setBackground(new java.awt.Color(0, 0, 153));
-        jButtonDespachantes.setForeground(new java.awt.Color(255, 255, 255));
-        
-        jButtonMaritimas.setBackground(new java.awt.Color(0, 0, 153));
-        jButtonMaritimas.setForeground(new java.awt.Color(255, 255, 255));
-        
-        jButtonAereo.setBackground(new java.awt.Color(0, 0, 153));
-        jButtonAereo.setForeground(new java.awt.Color(255, 255, 255));
-        
-        jButtonStock.setBackground(new java.awt.Color(0, 0, 153));
-        jButtonStock.setForeground(new java.awt.Color(255, 255, 255));
-        
-        jButtonOperaciones.setBackground(new java.awt.Color(0, 0, 153));
-        jButtonOperaciones.setForeground(new java.awt.Color(255, 255, 255));
-        
-        jButtonImportadores.setBackground(new java.awt.Color(0, 0, 153));
-        jButtonImportadores.setForeground(new java.awt.Color(255, 255, 255));
-        
-        jButtonCerrarSesion.setBackground(new java.awt.Color(0, 0, 153));
-        jButtonCerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
-    }
-    
-    public void cambiarAColorInvertido(){
-        
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabelTitulo.setForeground(new java.awt.Color(0, 0, 153));
-        jLabelTitulo1.setForeground(new java.awt.Color(0, 0, 153));
-        
+ 
         jButtonImportadores.setBackground(new java.awt.Color(255, 255, 255));
         jButtonImportadores.setForeground(new java.awt.Color(0, 0, 153));
         
@@ -141,6 +119,64 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jButtonCerrarSesion.setForeground(new java.awt.Color(0, 0, 153));
     }
     
+    public void cambiarAColorInvertido(){
+        
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelTitulo.setForeground(new java.awt.Color(0, 0, 153));
+        jLabelTitulo1.setForeground(new java.awt.Color(0, 0, 153));
+        
+        jButtonImportadores.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonImportadores.setForeground(new java.awt.Color(255, 255, 255));
+        
+        jButtonExportadores.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonExportadores.setForeground(new java.awt.Color(255, 255, 255));
+        
+        jButtonDespachantes.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonDespachantes.setForeground(new java.awt.Color(255, 255, 255));
+        
+        jButtonMaritimas.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonMaritimas.setForeground(new java.awt.Color(255, 255, 255));
+        
+        jButtonAereo.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonAereo.setForeground(new java.awt.Color(255, 255, 255));
+        
+        jButtonStock.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonStock.setForeground(new java.awt.Color(255, 255, 255));
+        
+        jButtonOperaciones.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonOperaciones.setForeground(new java.awt.Color(255, 255, 255));
+        
+        jButtonImportadores.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonImportadores.setForeground(new java.awt.Color(255, 255, 255));
+        
+        jButtonCerrarSesion.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonCerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+       
+    }
+    
+    public void cambiarFondoDefecto(){
+        jLabelWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo3.jpg"))); // NOI18N
+        getContentPane().add(jLabelWallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(-21, -25, 1070, 860));
+    }
+    
+    public void cambiarFondo(){
+        jLabelWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondopantalla.jpg"))); // NOI18N
+        getContentPane().add(jLabelWallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(-21, -25, 1070, 860));
+    }
+    
+    public void cambiarFondo3(){
+        jLabelWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondopantalla3.jpg"))); // NOI18N
+        getContentPane().add(jLabelWallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(-21, -50, 1070, 860));
+    }
+    
+    public void cambiarFondo4(){
+        jLabelWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondopantalla4.jpg"))); // NOI18N
+        getContentPane().add(jLabelWallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(-21, -40, 1070, 860));
+    }
+    
+  
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -151,6 +187,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroupColor = new javax.swing.ButtonGroup();
+        buttonGroupFondo = new javax.swing.ButtonGroup();
         jPanel3 = new javax.swing.JPanel();
         jLabelTitulo = new javax.swing.JLabel();
         jButtonImportadores = new javax.swing.JButton();
@@ -172,9 +209,13 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jMenuItemNotas = new javax.swing.JMenuItem();
         jMenuItemObjetivos = new javax.swing.JMenuItem();
         jMenuPreferencias = new javax.swing.JMenu();
-        jMenuItemFondo = new javax.swing.JMenuItem();
         jRadioButtonMenuItemDefecto = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonMenuItemInvertidos = new javax.swing.JRadioButtonMenuItem();
+        jMenuCambiarFondo = new javax.swing.JMenu();
+        jRadioButtonMenuItemFondoDef = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItemFondo = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItemFondo3 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItemFondo4 = new javax.swing.JRadioButtonMenuItem();
         jMenuInformes = new javax.swing.JMenu();
         jMenuItemCrearInforme = new javax.swing.JMenuItem();
         jMenuAdministrar = new javax.swing.JMenu();
@@ -285,7 +326,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, -10, 390, 820));
 
         jLabelWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo3.jpg"))); // NOI18N
-        getContentPane().add(jLabelWallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(-21, -25, 1070, 860));
+        getContentPane().add(jLabelWallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -40, 1070, 860));
 
         jMenuBar1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         jMenuBar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -356,18 +397,8 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jMenuPreferencias.setText("Preferencias");
         jMenuPreferencias.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        jMenuItemFondo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItemFondo.setText("Cambiar fondo");
-        jMenuItemFondo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemFondoActionPerformed(evt);
-            }
-        });
-        jMenuPreferencias.add(jMenuItemFondo);
-
         buttonGroupColor.add(jRadioButtonMenuItemDefecto);
         jRadioButtonMenuItemDefecto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jRadioButtonMenuItemDefecto.setSelected(true);
         jRadioButtonMenuItemDefecto.setText("Colores por defecto");
         jRadioButtonMenuItemDefecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -385,6 +416,52 @@ public class PaginaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuPreferencias.add(jRadioButtonMenuItemInvertidos);
+
+        jMenuCambiarFondo.setText("Cambiar fondo");
+        jMenuCambiarFondo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        buttonGroupFondo.add(jRadioButtonMenuItemFondoDef);
+        jRadioButtonMenuItemFondoDef.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jRadioButtonMenuItemFondoDef.setSelected(true);
+        jRadioButtonMenuItemFondoDef.setText("Por defecto");
+        jRadioButtonMenuItemFondoDef.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItemFondoDefActionPerformed(evt);
+            }
+        });
+        jMenuCambiarFondo.add(jRadioButtonMenuItemFondoDef);
+
+        buttonGroupFondo.add(jRadioButtonMenuItemFondo);
+        jRadioButtonMenuItemFondo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jRadioButtonMenuItemFondo.setText("Fondo contenedores atardecer ");
+        jRadioButtonMenuItemFondo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItemFondoActionPerformed(evt);
+            }
+        });
+        jMenuCambiarFondo.add(jRadioButtonMenuItemFondo);
+
+        buttonGroupFondo.add(jRadioButtonMenuItemFondo3);
+        jRadioButtonMenuItemFondo3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jRadioButtonMenuItemFondo3.setText("Fondo marítima");
+        jRadioButtonMenuItemFondo3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItemFondo3ActionPerformed(evt);
+            }
+        });
+        jMenuCambiarFondo.add(jRadioButtonMenuItemFondo3);
+
+        buttonGroupFondo.add(jRadioButtonMenuItemFondo4);
+        jRadioButtonMenuItemFondo4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jRadioButtonMenuItemFondo4.setText("Fondo barco");
+        jRadioButtonMenuItemFondo4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItemFondo4ActionPerformed(evt);
+            }
+        });
+        jMenuCambiarFondo.add(jRadioButtonMenuItemFondo4);
+
+        jMenuPreferencias.add(jMenuCambiarFondo);
 
         jMenuBar1.add(jMenuPreferencias);
 
@@ -436,10 +513,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_jMenuItemInformacionActionPerformed
-
-    private void jMenuItemFondoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFondoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemFondoActionPerformed
 
     private void jMenuItemCambioContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCambioContraseñaActionPerformed
      
@@ -573,6 +646,34 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     
     }//GEN-LAST:event_jRadioButtonMenuItemInvertidosActionPerformed
 
+    private void jRadioButtonMenuItemFondoDefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemFondoDefActionPerformed
+       
+        cambiarFondoDefecto();
+        fondoPagina.cambiarAFondoDefecto(usuario);
+        
+    }//GEN-LAST:event_jRadioButtonMenuItemFondoDefActionPerformed
+
+    private void jRadioButtonMenuItemFondoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemFondoActionPerformed
+        
+        cambiarFondo();
+        fondoPagina.cambiarAFondo(usuario);
+        
+    }//GEN-LAST:event_jRadioButtonMenuItemFondoActionPerformed
+
+    private void jRadioButtonMenuItemFondo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemFondo3ActionPerformed
+        
+        cambiarFondo3();
+        fondoPagina.cambiarAFondo3(usuario);
+        
+    }//GEN-LAST:event_jRadioButtonMenuItemFondo3ActionPerformed
+
+    private void jRadioButtonMenuItemFondo4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemFondo4ActionPerformed
+       
+        cambiarFondo4();
+        fondoPagina.cambiarAFondo4(usuario);
+        
+    }//GEN-LAST:event_jRadioButtonMenuItemFondo4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -610,6 +711,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupColor;
+    private javax.swing.ButtonGroup buttonGroupFondo;
     private javax.swing.JButton jButtonAereo;
     private javax.swing.JButton jButtonCerrarSesion;
     private javax.swing.JButton jButtonDespachantes;
@@ -623,6 +725,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelWallpaper;
     private javax.swing.JMenu jMenuAdministrar;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuCambiarFondo;
     private javax.swing.JMenu jMenuInfo;
     private javax.swing.JMenu jMenuInformes;
     private javax.swing.JMenuItem jMenuItem2;
@@ -631,7 +734,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemControl;
     private javax.swing.JMenuItem jMenuItemCrearInforme;
     private javax.swing.JMenuItem jMenuItemDatosUsuarios;
-    private javax.swing.JMenuItem jMenuItemFondo;
     private javax.swing.JMenuItem jMenuItemInformacion;
     private javax.swing.JMenuItem jMenuItemNotas;
     private javax.swing.JMenuItem jMenuItemObjetivos;
@@ -639,6 +741,10 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuPreferencias;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemDefecto;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemFondo;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemFondo3;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemFondo4;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemFondoDef;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemInvertidos;
     // End of variables declaration//GEN-END:variables
 }

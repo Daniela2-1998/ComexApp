@@ -1,6 +1,5 @@
 package service;
 
-import Daniela.ComexApp.Frames.PaginaPrincipal;
 import java.awt.Font;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -16,16 +15,11 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import config.Conexion;
-import java.awt.Image;
-import java.sql.Date;
-import java.time.LocalDate;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -98,7 +92,7 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
             tablaOpIntBasica.addCell("Vendedor");
             tablaOpIntBasica.addCell("Precio total");
 
-            tablaOpIntBasica.setSpacingAfter(20);
+            tablaOpIntBasica.setSpacingAfter(40);
             
             PdfPTable tablaDescripcionProducto = new PdfPTable(5);
             tablaDescripcionProducto.addCell("ID");
@@ -107,23 +101,23 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
             tablaDescripcionProducto.addCell("País orígen");
             tablaDescripcionProducto.addCell("Status");
             
-            tablaDescripcionProducto.setSpacingAfter(20);
+            tablaDescripcionProducto.setSpacingAfter(40);
             
             PdfPTable tablaEmbarque = new PdfPTable(7);
-            tablaEmbarque.addCell("ID");
-            tablaEmbarque.addCell("Cantidad contenedores");
+            tablaEmbarque.addCell("Fecha arribo");
+            tablaEmbarque.addCell("Fecha registro");
             tablaEmbarque.addCell("Código contenedores");
+            tablaEmbarque.addCell("Cantidad contenedores");
             tablaEmbarque.addCell("N° de embarque");
             tablaEmbarque.addCell("Nombre buque");
-            tablaEmbarque.addCell("Fecha registro");
-            tablaEmbarque.addCell("Fecha ETA");
+            tablaEmbarque.addCell("ID");
             
            
             try {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_operaciones, producto, "
                         + "tipo_operacion, comprador, vendedor, precio_total "
-                        + "from operaciones");
+                        + "from operaciones order by fecha_arribo asc");
                 rs = pst.executeQuery();
                 
                             
@@ -148,7 +142,8 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
                 
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_operaciones, cantidad_producto, "
-                        + "detalles, pais_origen, status from operaciones"); 
+                        + "detalles, pais_origen, status from operaciones "
+                        + "order by fecha_arribo asc"); 
                 rs = pst.executeQuery(); 
         
                 if(rs.next()){
@@ -169,9 +164,10 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
             try{
                 
                 conec = cn.Conexion();
-                pst = conec.prepareStatement("select id_operaciones, cantidad_contenedores, "
-                        + "codigo_contenedores, numero_embarque, nombre_buque, "
-                        + "fecha_operacion, fecha_eta from operaciones"); 
+                pst = conec.prepareStatement("select fecha_arribo, fecha_registro, "
+                        + "codigo_contenedores, cantidad_contenedores, numero_embarque, "
+                        + "nombre_buque, id_operaciones from operaciones order "
+                        + "by fecha_arribo asc"); 
                 rs = pst.executeQuery(); 
         
                 if(rs.next()){
@@ -181,6 +177,8 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
                         tablaEmbarque.addCell(rs.getString(3));
                         tablaEmbarque.addCell(rs.getString(4));
                         tablaEmbarque.addCell(rs.getString(5));
+                        tablaEmbarque.addCell(rs.getString(6));
+                        tablaEmbarque.addCell(rs.getString(7));
 
                     } while (rs.next());
                     documento.add(tablaEmbarque);
@@ -205,7 +203,7 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
             tablaOpNac.addCell("Vendedor");
             tablaOpNac.addCell("Precio total");
 
-            tablaOpNac.setSpacingAfter(20);
+            tablaOpNac.setSpacingAfter(40);
             
             PdfPTable tablaDetallesOpNac = new PdfPTable(6);
             tablaDetallesOpNac.addCell("ID");
@@ -215,7 +213,7 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
             tablaDetallesOpNac.addCell("Número de contacto");
             tablaDetallesOpNac.addCell("Status");
 
-            tablaDetallesOpNac.setSpacingAfter(20);
+            tablaDetallesOpNac.setSpacingAfter(40);
             
             documento.add(parrafo2);
             
@@ -223,7 +221,7 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_ventalocal, productos_pedidos, "
                         + "cantidad_producto, comprador, vendedor, precio_total "
-                        + "from ventalocal");
+                        + "from ventalocal order by fecha_arribo asc");
                 rs = pst.executeQuery();
 
                 // completar información de la tabla
@@ -249,8 +247,8 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
             try{
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_ventalocal, tipo_operacion, "
-                        + "fecha_operacion, fecha_eta, numero_contacto, status "
-                        + "from ventalocal");
+                        + "fecha_registro, fecha_arribo, numero_contacto, status "
+                        + "from ventalocal order by fecha_arribo asc");
 
                 rs = pst.executeQuery();
                 
@@ -296,7 +294,7 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
       -------------------------------------------------------------------------
      */
     
-     public void pdfOperacionesInternacionales(String usuario, String nombreCompleto, 
+    public void pdfOperacionesInternacionales(String usuario, String nombreCompleto, 
              String dia, String mes, String año){
         Document documento = new Document();
 
@@ -340,7 +338,7 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
             tablaOpIntBasica.addCell("Vendedor");
             tablaOpIntBasica.addCell("Precio total");
 
-            tablaOpIntBasica.setSpacingAfter(20);
+            tablaOpIntBasica.setSpacingAfter(40);
             
             PdfPTable tablaDescripcionProducto = new PdfPTable(5);
             tablaDescripcionProducto.addCell("ID");
@@ -349,23 +347,23 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
             tablaDescripcionProducto.addCell("País orígen");
             tablaDescripcionProducto.addCell("Status");
             
-            tablaDescripcionProducto.setSpacingAfter(20);
+            tablaDescripcionProducto.setSpacingAfter(40);
             
             PdfPTable tablaEmbarque = new PdfPTable(7);
-            tablaEmbarque.addCell("ID");
-            tablaEmbarque.addCell("Cantidad contenedores");
+            tablaEmbarque.addCell("Fecha arribo");
+            tablaEmbarque.addCell("Fecha registro");
             tablaEmbarque.addCell("Código contenedores");
+            tablaEmbarque.addCell("Cantidad contenedores");
             tablaEmbarque.addCell("N° de embarque");
             tablaEmbarque.addCell("Nombre buque");
-            tablaEmbarque.addCell("Fecha registro");
-            tablaEmbarque.addCell("Fecha ETA");
+            tablaEmbarque.addCell("ID");
             
            
             try {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_operaciones, producto, "
                         + "tipo_operacion, comprador, vendedor, precio_total "
-                        + "from operaciones");
+                        + "from operaciones order by fecha_arribo asc");
                 rs = pst.executeQuery();
                 
                             
@@ -390,7 +388,8 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
                 
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_operaciones, cantidad_producto, "
-                        + "detalles, pais_origen, status from operaciones"); 
+                        + "detalles, pais_origen, status from operaciones "
+                        + "order by fecha_arribo asc"); 
                 rs = pst.executeQuery(); 
         
                 if(rs.next()){
@@ -411,9 +410,10 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
             try{
                 
                 conec = cn.Conexion();
-                pst = conec.prepareStatement("select id_operaciones, cantidad_contenedores, "
-                        + "codigo_contenedores, numero_embarque, nombre_buque, "
-                        + "fecha_operacion, fecha_eta from operaciones"); 
+                pst = conec.prepareStatement("select fecha_arribo, fecha_registro, "
+                        + "codigo_contenedores, cantidad_contenedores, numero_embarque, "
+                        + "nombre_buque, id_operaciones from operaciones order "
+                        + "by fecha_arribo asc"); 
                 rs = pst.executeQuery(); 
         
                 if(rs.next()){
@@ -423,6 +423,8 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
                         tablaEmbarque.addCell(rs.getString(3));
                         tablaEmbarque.addCell(rs.getString(4));
                         tablaEmbarque.addCell(rs.getString(5));
+                        tablaEmbarque.addCell(rs.getString(6));
+                        tablaEmbarque.addCell(rs.getString(7));
 
                     } while (rs.next());
                     documento.add(tablaEmbarque);
@@ -451,7 +453,7 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
       -------------------------------------------------------------------------
      */
      
-     public void pdfOperacionesNacionales(String usuario, String nombreCompleto, 
+    public void pdfOperacionesNacionales(String usuario, String nombreCompleto, 
              String dia, String mes, String año){
         Document documento = new Document();
 
@@ -459,7 +461,7 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
             //ruta donde se guardará PDF
             String ruta = System.getProperty("user.home");
             PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Downloads/" +
-                    usuario + "ListaSuministros" + dia + mes + año +".pdf"));
+                    usuario + "ListaOperacionesNacionales" + dia + mes + año +".pdf"));
  
             documento.open();
 
@@ -489,7 +491,7 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
             tablaOpNac.addCell("Vendedor");
             tablaOpNac.addCell("Precio total");
 
-            tablaOpNac.setSpacingAfter(20);
+            tablaOpNac.setSpacingAfter(40);
             
             PdfPTable tablaDetallesOpNac = new PdfPTable(6);
             tablaDetallesOpNac.addCell("ID");
@@ -499,7 +501,7 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
             tablaDetallesOpNac.addCell("Número de contacto");
             tablaDetallesOpNac.addCell("Status");
 
-            tablaDetallesOpNac.setSpacingAfter(20);
+            tablaDetallesOpNac.setSpacingAfter(40);
             
             documento.add(parrafo2);
             
@@ -507,7 +509,7 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_ventalocal, productos_pedidos, "
                         + "cantidad_producto, comprador, vendedor, precio_total "
-                        + "from ventalocal");
+                        + "from ventalocal order by fecha_arribo asc");
                 rs = pst.executeQuery();
 
                 // completar información de la tabla
@@ -533,8 +535,8 @@ public class PDFOperacionesImpl implements PDFOperacionesService {
             try{
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_ventalocal, tipo_operacion, "
-                        + "fecha_operacion, fecha_eta, numero_contacto, status "
-                        + "from ventalocal");
+                        + "fecha_registro, fecha_arribo, numero_contacto, status "
+                        + "from ventalocal order by fecha_arribo asc");
 
                 rs = pst.executeQuery();
                 

@@ -316,6 +316,9 @@ public class InicioSesionImp implements InicioSesionService{
                
                ColorPaginaPrincipalImpl colorPagina = new ColorPaginaPrincipalImpl();
                colorPagina.crearColor(usuario);
+               
+               FondoPaginaPrincipalImpl fondoPagina = new FondoPaginaPrincipalImpl();
+               fondoPagina.guardarFondo(usuario);
            }catch(SQLException e){
                JOptionPane.showMessageDialog(null, "No es posible registrar al usuario");
                System.err.println("No es posible registrar al usuario " + e);

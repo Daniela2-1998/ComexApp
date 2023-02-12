@@ -68,7 +68,7 @@ public class EliminarOperacion extends javax.swing.JFrame {
         jLabelProducto = new javax.swing.JLabel();
         textProducto = new javax.swing.JTextField();
         jButtonAtras = new javax.swing.JButton();
-        jButtonEliminar = new javax.swing.JButton();
+        jButtonEliminarInt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -132,17 +132,17 @@ public class EliminarOperacion extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, -1, -1));
 
-        jButtonEliminar.setBackground(new java.awt.Color(0, 0, 153));
-        jButtonEliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonEliminar.setText("Eliminar operación internacional ");
-        jButtonEliminar.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEliminarInt.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonEliminarInt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonEliminarInt.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonEliminarInt.setText("Eliminar operación internacional ");
+        jButtonEliminarInt.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        jButtonEliminarInt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEliminarActionPerformed(evt);
+                jButtonEliminarIntActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
+        jPanel1.add(jButtonEliminarInt, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,7 +167,7 @@ public class EliminarOperacion extends javax.swing.JFrame {
         producto = textProducto.getText().trim();
         ID = Integer.parseInt(textID.getText().trim()); 
         
-        operacionesService.eliminarOperacion(producto, ID);
+        ventaLocalService.eliminarOperacion(producto, ID);
       
     }//GEN-LAST:event_jButtonEliminarNacActionPerformed
 
@@ -177,14 +177,14 @@ public class EliminarOperacion extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonAtrasActionPerformed
 
-    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+    private void jButtonEliminarIntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarIntActionPerformed
       
         producto = textProducto.getText().trim();
         ID = Integer.parseInt(textID.getText().trim()); 
         
-        ventaLocalService.eliminarOperacion(producto, ID);
+        operacionesService.eliminarOperacion(producto, ID);
       
-    }//GEN-LAST:event_jButtonEliminarActionPerformed
+    }//GEN-LAST:event_jButtonEliminarIntActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,7 +230,7 @@ public class EliminarOperacion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAtras;
-    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonEliminarInt;
     private javax.swing.JButton jButtonEliminarNac;
     private javax.swing.JLabel jLabelCodigo;
     private javax.swing.JLabel jLabelProducto;

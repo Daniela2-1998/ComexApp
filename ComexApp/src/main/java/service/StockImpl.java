@@ -3,9 +3,11 @@ package service;
 import config.Conexion;
 import java.awt.Color;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -40,7 +42,9 @@ public class StockImpl implements StockService{
     
     JComboBox cmbStatus = new JComboBox();
     
-    int cantidadBase;
+    int cantidadBase, cantidadActualizada;
+    
+    String producto;
     
     Boolean recepcionFuncion, modificacionEstado, eliminacionAprobada;
     
@@ -61,7 +65,7 @@ public class StockImpl implements StockService{
         String reserva = " - ";
         String status = "Activo";
         String vendedor = " - ";
-       
+        Date ultimaActualizacion = Date.valueOf(LocalDate.now());
 
        if(producto.equals("")){
            textProducto.setBackground(Color.red);
@@ -90,7 +94,7 @@ public class StockImpl implements StockService{
        }
        
         
-        String sql = "insert into stock values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into stock values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         if(avanzar == 0){
             try{
@@ -110,6 +114,7 @@ public class StockImpl implements StockService{
                 pst.setString(11, tipoProducto);
                 pst.setString(12, vendedor);
                 pst.setString(13, producto);
+                pst.setDate(13, ultimaActualizacion);
 
                 
                 pst.executeUpdate();
@@ -131,6 +136,26 @@ public class StockImpl implements StockService{
     }
     
     
+    public String obtenerProducto(int ID){
+        
+        String producto = null;
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement("select nombre_producto from stock where "
+                    + "id_producto = '" + ID + "'");
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                 producto = rs.getString("nombre_producto");
+            }
+            
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "No se puede obtener el producto");
+        }
+        
+        return producto;
+    }
     
     
     public int obtenerCantidadDeBaseDeDatos(String producto){
@@ -152,8 +177,66 @@ public class StockImpl implements StockService{
         }
         return cantidadBase;
     }
-     
     
+    public int nuevaCantidadProductosOperacionInternacional(int cantidadProducto, 
+            String producto, int id){
+        
+        int cantidadActualizada = 0;
+        
+        int cantidadDeStock = obtenerCantidadDeBaseDeDatos(producto);
+        
+        OperacionesInternacionalesImpl opsint = new OperacionesInternacionalesImpl();       
+        String tipoOperacion = opsint.tipoOperacion(id);
+        
+        if(tipoOperacion.equals("Importación")){
+            cantidadActualizada = cantidadDeStock + cantidadProducto;
+        } else if(tipoOperacion.equals("Exportación")){
+            cantidadActualizada = cantidadDeStock - cantidadProducto;
+        }
+        
+        return cantidadActualizada;
+    }
+     
+    public void asociarCantidadesAOperacionInternacional(String producto, String vendedor, 
+            String codigo, int idOperacion){
+        
+        OperacionesInternacionalesImpl opsint = new OperacionesInternacionalesImpl();
+        Boolean hayIngreso = opsint.verificarIngresoProducto();
+        int cantidadProductoOp = opsint.obtenerCantidadDeProductos(idOperacion);
+
+        int cantidadActualizada = nuevaCantidadProductosOperacionInternacional(
+                cantidadProductoOp, producto, idOperacion);
+        
+        String cantidadNueva = String.valueOf(cantidadActualizada);
+        
+        Date ultimaActualizacion = Date.valueOf(LocalDate.now());
+
+        if (hayIngreso.equals(true)) {
+
+            try {
+                String sql = "update stock set cantidad=? where nombre_producto = '" 
+                + producto + "' and vendedor = '" + vendedor + "' and codigo_producto = '" 
+                + codigo + "' and ultima_actualizacion != '" + ultimaActualizacion + "'";
+             
+                conec = cn.Conexion();
+                pst = conec.prepareStatement(sql);
+
+                pst.setString(1, cantidadNueva);
+                pst.executeUpdate();
+                actualizacionDelProducto(producto, codigo, vendedor);
+                conec.close();
+
+            } catch (SQLException e) {
+                System.err.print("No se puede modificar las cantidades del stock " + e);
+            }
+
+        } else if (hayIngreso.equals(false)){
+            System.out.println("No hay ingresos de operaciones internacionales");
+        }
+    }
+    
+
+ 
     
     public void modificarStock(int IDMod, String cantidadMod, String codigoMod, 
             String cuidadosMod, String detalleMod, String paisOrigenMod, 
@@ -222,6 +305,27 @@ public class StockImpl implements StockService{
         return IDProducto;
     }
     
+    public void actualizacionDelProducto(String producto, String codigo, String vendedor){
+        
+        Date nuevaActualizacion = Date.valueOf(LocalDate.now());
+        String sql = "update stock set ultima_actualizacion=? where nombre_producto = '" 
+                + producto + "' and codigo_producto = '" + codigo + "' and "
+                + "vendedor = '" + vendedor + "'";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            
+            pst.setDate(1, nuevaActualizacion);
+            pst.executeUpdate();
+            
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "No podemos actualizar el producto "
+                    + "solicitado");
+            System.err.println("No se puede actualizar la lista del producto " + e);
+        }
+        
+    }
     
     public boolean eliminarProductoDeStock(String producto, int id){
        

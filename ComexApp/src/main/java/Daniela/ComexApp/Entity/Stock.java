@@ -1,5 +1,6 @@
 package Daniela.ComexApp.Entity;
 
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -62,6 +65,9 @@ public class Stock {
 
     @NotBlank
     private String status;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date ultima_actualizacion;
     
     @NotEmpty
     @ManyToMany(fetch = FetchType.LAZY)
@@ -183,6 +189,14 @@ public class Stock {
         this.nombreProducto = nombreProducto;
     }
 
+    public Date getUltima_actualizacion() {
+        return ultima_actualizacion;
+    }
+
+    public void setUltima_actualizacion(Date ultima_actualizacion) {
+        this.ultima_actualizacion = ultima_actualizacion;
+    }
+
     
     
     
@@ -190,7 +204,7 @@ public class Stock {
     public Stock() {
     }
 
-    public Stock(Integer id, String comprador, String vendedor, String nombreProducto, String paisOrigen, String codigoProducto, String detalle, String tipo_producto, String cuidados_requeridos, String reserva, String cantidad, String precio_unitario, String status, List<OperacionesInternacionales> operaciones) {
+    public Stock(Integer id, String comprador, String vendedor, String nombreProducto, String paisOrigen, String codigoProducto, String detalle, String tipo_producto, String cuidados_requeridos, String reserva, String cantidad, String precio_unitario, String status, Date ultima_actualizacion, List<OperacionesInternacionales> operaciones) {
         this.id = id;
         this.comprador = comprador;
         this.vendedor = vendedor;
@@ -204,10 +218,9 @@ public class Stock {
         this.cantidad = cantidad;
         this.precio_unitario = precio_unitario;
         this.status = status;
+        this.ultima_actualizacion = ultima_actualizacion;
         this.operaciones = operaciones;
     }
 
 
-
-    
 }

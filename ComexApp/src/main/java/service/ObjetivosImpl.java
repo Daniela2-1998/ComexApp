@@ -18,7 +18,7 @@ import javax.swing.JTextField;
  *
  * @author Daniela
  */
-public class ObjetivosImpl {
+public class ObjetivosImpl implements ObjetivosService{
     
     // fields
     JTextField textID = new JTextField();
@@ -107,10 +107,10 @@ public class ObjetivosImpl {
             if(rs.next()){
 
                 jLabelObjetivoRec1.setText(rs.getString("objetivo")); 
-                jLabelFechaPub1.setText(rs.getString("fecha_registro"));
+                jLabelFechaPub1.setText(String.valueOf(rs.getDate("fecha_creacion")));
                 textDetalles1.setText(rs.getString("descripcion"));
-                jLabelImportancia1.setText(rs.getString("importancia"));
-                jLabelFechaObj1.setText(rs.getString("fecha_fin"));
+                jLabelImportancia1.setText(("importancia"));
+                jLabelFechaObj1.setText(String.valueOf(rs.getDate("fecha_objetivo")));
                 jLabelID1.setText(rs.getString("id_objetivo"));
                 
             } else {

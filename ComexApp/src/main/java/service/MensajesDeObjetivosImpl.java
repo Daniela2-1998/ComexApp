@@ -19,7 +19,7 @@ import javax.swing.JTextField;
  *
  * @author Daniela
  */
-public class MensajesDeObjetivosImpl {
+public class MensajesDeObjetivosImpl implements MensajesDeObjetivosService{
     
     // fields
     JTextField textID = new JTextField();

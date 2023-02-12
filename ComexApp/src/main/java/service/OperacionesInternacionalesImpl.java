@@ -48,9 +48,10 @@ public class OperacionesInternacionalesImpl implements OperacionesInternacionale
     
     JComboBox cmbStatus = new JComboBox();
     
-    int cantidadBase;
+    int cantidadBase, cantidadProducto;
     
     Boolean recepcionFuncion, modificacionEstado, eliminacionAprobada;
+    Boolean ingresoProducto;
     
     
     
@@ -213,7 +214,7 @@ public class OperacionesInternacionalesImpl implements OperacionesInternacionale
          }
      }
     
-     public void detallesTablasExtraExportador(int IDOperacion, int IDExportador,
+    public void detallesTablasExtraExportador(int IDOperacion, int IDExportador,
             String nombreExportador){
 
          String sql = "insert into operaciones_expo values (?, ?, ?)";
@@ -240,7 +241,7 @@ public class OperacionesInternacionalesImpl implements OperacionesInternacionale
          }
      }
     
-     public void detallesTablasExtraMaritimas(int IDOperacion, int IDMaritima,
+    public void detallesTablasExtraMaritimas(int IDOperacion, int IDMaritima,
              String maritima){
 
          String sql = "insert into operaciones_maritimas values (?, ?, ?)";
@@ -405,6 +406,73 @@ public class OperacionesInternacionalesImpl implements OperacionesInternacionale
         }
         
     }
+   
+    public void recuperarStockQueSeActualizaHoy(){
+        
+        String producto, vendedor, codigo;
+        int ID;
+        
+        Date fechaActual = Date.valueOf(LocalDate.now());
+        String sql = "select producto, id_operaciones, vendedor from operaciones where fecha_arribo <= '" + 
+                fechaActual + "'";
+       
+
+            try {
+                conec = cn.Conexion();
+                pst = conec.prepareStatement(sql);
+                rs = pst.executeQuery();
+
+                if (rs.next()) {
+                    producto = rs.getString("producto");
+                    vendedor = rs.getString("vendedor");
+                    ID = rs.getInt("id_operaciones");
+                    
+                    Date ultimaAct = Date.valueOf(LocalDate.now());
+
+                    String sql1 = "select codigo_producto from stock where nombre_producto = '"
+                            + producto + "' and vendedor = '" + vendedor + "' and "
+                            + "ultima_actualizacion != '" + ultimaAct + "'";
+
+                    PreparedStatement pst1 = conec.prepareStatement(sql1);
+                    ResultSet rs1 = pst1.executeQuery();
+
+                    if (rs1.next()) {
+                        codigo = rs1.getString("codigo_producto");
+                        StockImpl stockImpl = new StockImpl();
+                        stockImpl.asociarCantidadesAOperacionInternacional(producto, vendedor, codigo, ID);
+                        stockImpl.actualizacionDelProducto(producto, codigo, vendedor);
+                    }
+                }
+
+            } catch (SQLException e) {
+                System.err.println("No se puede recuperar el stock de hoy " + e);
+            }
+    }
+    
+    
+    
+    public boolean verificarIngresoProducto(){
+        
+        Boolean ingresoProducto = null;
+        Date fechaActual = Date.valueOf(LocalDate.now());
+        String sql = "select producto from operaciones where fecha_arribo <= '" + 
+                fechaActual + "'";
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                ingresoProducto = true;
+            } else{
+                ingresoProducto = false;
+            }
+            conec.close();
+        }catch(SQLException e){
+            System.err.println("No hay ingresos nuevos " + e);
+        }
+        return ingresoProducto;
+    }
     
     public void notificacionOperacionesDelDia(){ 
 
@@ -441,7 +509,46 @@ public class OperacionesInternacionalesImpl implements OperacionesInternacionale
         }
     }
     
+    public int obtenerCantidadDeProductos(int id){
+        
+        int cantidadProducto = 0;
+        String sql = "select cantidad_producto from operaciones where id_operaciones = '" + id + "'";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                cantidadProducto = Integer.parseInt(rs.getString("cantidad_producto"));
+            }
+            conec.close();
+        }catch(SQLException e){
+            System.err.println("No se puede obtener la cantidad de productos " + e);
+        }
+        return cantidadProducto;
+    }
     
+    public String tipoOperacion(int id){
+        
+        String tipoOperacion = null;
+        String sql = "select tipo_operacion from operaciones where id_operaciones = '" + id + "'";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                tipoOperacion = rs.getString("tipo_operacion");
+            }
+            
+        }catch(SQLException e){
+            System.err.println("No se puede obtener el tipo de operacion " + e);
+        }
+        
+        return tipoOperacion;
+    }
     
     public boolean eliminarOperacion (String producto, int id){
        

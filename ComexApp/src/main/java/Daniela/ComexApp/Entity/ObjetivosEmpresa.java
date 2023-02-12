@@ -1,5 +1,6 @@
 package Daniela.ComexApp.Entity;
 
+import java.sql.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -38,11 +39,11 @@ public class ObjetivosEmpresa {
 
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private String fecha_registro;
+    private Date fecha_registro;
     
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private String fecha_fin;
+    private Date fecha_objetivo;
 
     
     
@@ -105,21 +106,23 @@ public class ObjetivosEmpresa {
         this.usuario_creador = usuario_creador;
     }
 
-    public String getFecha_registro() {
+    public Date getFecha_registro() {
         return fecha_registro;
     }
 
-    public void setFecha_registro(String fecha_registro) {
+    public void setFecha_registro(Date fecha_registro) {
         this.fecha_registro = fecha_registro;
     }
 
-    public String getFecha_fin() {
-        return fecha_fin;
+    public Date getFecha_objetivo() {
+        return fecha_objetivo;
     }
 
-    public void setFecha_fin(String fecha_fin) {
-        this.fecha_fin = fecha_fin;
+    public void setFecha_objetivo(Date fecha_objetivo) {
+        this.fecha_objetivo = fecha_objetivo;
     }
+
+
 
     
     
@@ -127,7 +130,7 @@ public class ObjetivosEmpresa {
     public ObjetivosEmpresa() {
     }
 
-    public ObjetivosEmpresa(Integer id, String objetivo, String descripcion, String importancia, String visibilidad, String status, String usuario_creador, String fecha_registro, String fecha_fin) {
+    public ObjetivosEmpresa(Integer id, String objetivo, String descripcion, String importancia, String visibilidad, String status, String usuario_creador, Date fecha_registro, Date fecha_objetivo) {
         this.id = id;
         this.objetivo = objetivo;
         this.descripcion = descripcion;
@@ -136,8 +139,9 @@ public class ObjetivosEmpresa {
         this.status = status;
         this.usuario_creador = usuario_creador;
         this.fecha_registro = fecha_registro;
-        this.fecha_fin = fecha_fin;
+        this.fecha_objetivo = fecha_objetivo;
     }
+
 
 
 }

@@ -40,7 +40,7 @@ public class OperacionInternacionalConexion {
     private int id_despachante;
     
     @NotBlank
-    private int status;
+    private String status;
 
     
     
@@ -100,21 +100,20 @@ public class OperacionInternacionalConexion {
         this.id_despachante = id_despachante;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
-    
-    
+
     
 
     public OperacionInternacionalConexion() {
     }
 
-    public OperacionInternacionalConexion(Integer id, int id_operacion, int id_producto, int id_contenedor, int id_transporte, int id_exportador, int id_despachante, int status) {
+    public OperacionInternacionalConexion(Integer id, int id_operacion, int id_producto, int id_contenedor, int id_transporte, int id_exportador, int id_despachante, String status) {
         this.id = id;
         this.id_operacion = id_operacion;
         this.id_producto = id_producto;

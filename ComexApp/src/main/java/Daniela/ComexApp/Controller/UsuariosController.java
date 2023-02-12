@@ -28,6 +28,8 @@ public class UsuariosController {
         return "usuarios";
     }
     
+   
+    
     @PostMapping
     public Usuarios save(String usuario, String contraseña, String nombre, String apellido, 
             String rol, String mail, String telefono, String status, int id){
@@ -45,7 +47,7 @@ public class UsuariosController {
         return usuariosRepository.save(usuarios);
     }
             
-            
+        
             
             
            

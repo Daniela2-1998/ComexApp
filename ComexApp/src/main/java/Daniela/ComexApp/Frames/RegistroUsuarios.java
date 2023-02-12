@@ -263,7 +263,8 @@ public class RegistroUsuarios extends javax.swing.JFrame {
             recepcion = inicioSesionService.agregarUsuario(id, usuario, contraseña,
                     nombre, apellido, rol, mail, telefono, status).toString();
 
-            if (!recepcion.isEmpty()) {
+            if (!recepcion.isEmpty() && !rol.equals("Administrador")) {
+                
                 mensajesImpl.avisoEsperarConfirmacionDeAcceso(usuario);
                 LimpiarCamposRegistroUsuarios();
             } else if (recepcion.isEmpty()) {

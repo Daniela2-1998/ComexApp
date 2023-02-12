@@ -3,24 +3,13 @@ package Daniela.ComexApp.Frames;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import static org.jdesktop.swingx.graphics.BlendComposite.Color;
-import service.NotasService;
+import service.NotasImpl;
 import service.UsuariosImpl;
 
 /**
@@ -148,7 +137,7 @@ public class StickyNotes extends javax.swing.JFrame {
         return retValue;   
     }
 
-    NotasService notasService = new NotasService(); 
+    NotasImpl notasService = new NotasImpl(); 
  
     
     public void LimpiarCampos(JTextPane textContenido, JTextField textID, 
@@ -626,6 +615,9 @@ public class StickyNotes extends javax.swing.JFrame {
         jRadioButton8 = new javax.swing.JRadioButton();
         jRadioButton9 = new javax.swing.JRadioButton();
         jCheckBoxActivo = new javax.swing.JCheckBox();
+        jButtonCambiar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        textNumero = new javax.swing.JTextField();
         jLabelWallpaper = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuNotas = new javax.swing.JMenu();
@@ -1459,20 +1451,20 @@ public class StickyNotes extends javax.swing.JFrame {
                 jButtonBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 660, 170, -1));
+        getContentPane().add(jButtonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 660, 170, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Buscar por titulo:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 640, 170, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 640, 170, -1));
 
         textBusqueda.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textBusqueda.setForeground(new java.awt.Color(0, 0, 153));
-        getContentPane().add(textBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 660, 150, 30));
+        getContentPane().add(textBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 660, 150, 30));
 
         cmbNota.setForeground(new java.awt.Color(0, 0, 153));
         cmbNota.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nota 1", "Nota 2", "Nota 3", "Nota 4", "Nota 5", "Nota 6", "Nota 7", "Nota 8" }));
-        getContentPane().add(cmbNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 660, 130, 30));
+        getContentPane().add(cmbNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 660, 130, 30));
 
         jPanelConfiguracion.setBackground(new java.awt.Color(255, 255, 204));
         jPanelConfiguracion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1613,6 +1605,24 @@ public class StickyNotes extends javax.swing.JFrame {
         jPanelConfiguracion.add(jCheckBoxActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 610, -1, -1));
 
         getContentPane().add(jPanelConfiguracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 0, 570, 770));
+
+        jButtonCambiar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonCambiar.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonCambiar.setText("Cambiar status de Nota");
+        jButtonCambiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCambiarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonCambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 710, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("N° nota:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 690, -1, -1));
+
+        textNumero.setForeground(new java.awt.Color(0, 0, 153));
+        getContentPane().add(textNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 710, 80, -1));
 
         jLabelWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo3.jpg"))); // NOI18N
         getContentPane().add(jLabelWallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -30, 1530, 800));
@@ -2529,6 +2539,15 @@ public class StickyNotes extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItemListaActionPerformed
 
+    private void jButtonCambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCambiarActionPerformed
+        
+        String titulo = textBusqueda.getText().trim();
+        int ID = Integer.parseInt(textNumero.getText().trim());
+        
+        notasService.cambiarStatusNota(usuario, titulo, ID);
+        
+    }//GEN-LAST:event_jButtonCambiarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2586,6 +2605,7 @@ public class StickyNotes extends javax.swing.JFrame {
     private javax.swing.JButton jButtonActualizar6;
     private javax.swing.JButton jButtonActualizar7;
     private javax.swing.JButton jButtonBuscar;
+    private javax.swing.JButton jButtonCambiar;
     private javax.swing.JButton jButtonConfiguracion;
     private javax.swing.JButton jButtonConfiguracion1;
     private javax.swing.JButton jButtonConfiguracion2;
@@ -2625,6 +2645,7 @@ public class StickyNotes extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBoxActivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelAviso1;
     private javax.swing.JLabel jLabelID1;
     private javax.swing.JLabel jLabelID2;
@@ -2696,5 +2717,6 @@ public class StickyNotes extends javax.swing.JFrame {
     private javax.swing.JTextField textNombre5;
     private javax.swing.JTextField textNombre6;
     private javax.swing.JTextField textNombre7;
+    private javax.swing.JTextField textNumero;
     // End of variables declaration//GEN-END:variables
 }

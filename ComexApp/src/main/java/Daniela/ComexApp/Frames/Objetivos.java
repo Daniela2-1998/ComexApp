@@ -60,7 +60,6 @@ public class Objetivos extends javax.swing.JFrame {
         VistaObjetivosSegunRol(rol);
         
         VistaProximosObjetivosSegunRol(rol);
-        llenadoPrimerObjetivoProximo();
         pasarCamposDeLaTablaProximosAFields();
         
         cargarTablaMensajes(fechaActual);
@@ -114,7 +113,7 @@ public class Objetivos extends javax.swing.JFrame {
 
         
         String sql = "select fecha_objetivo, objetivo, usuario_creador, importancia, "
-                + "visibilidad, fecha_registro, status from objetivos where "
+                + "visibilidad, fecha_creacion, status from objetivos where "
                 + "fecha_objetivo between '" + fechaActual + "' and '" + fechaDiasPlus + "' "
                 + " and visibilidad = '" + rol + "' order by fecha_objetivo asc";
 
@@ -141,7 +140,7 @@ public class Objetivos extends javax.swing.JFrame {
                 }
                modelo.addRow(fila);
             }
-            
+             llenadoPrimerObjetivoProximo();
             conec.close();
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, "Error al cargar los datos "
@@ -162,7 +161,7 @@ public class Objetivos extends javax.swing.JFrame {
 
         
         String sql = "select fecha_objetivo, objetivo, usuario_creador, importancia, "
-                + "visibilidad, fecha_registro, status from objetivos where "
+                + "visibilidad, fecha_creacion, status from objetivos where "
                 + "fecha_objetivo between '" + fechaActual + "' and '" + fechaDiasPlus + "' "
                 + "order by fecha_objetivo asc";
 
@@ -171,25 +170,31 @@ public class Objetivos extends javax.swing.JFrame {
             pst = conec.prepareStatement(sql);
             rs = pst.executeQuery();
             
-            jTableProximos = new JTable(modelo);
-            jScrollPane6.setViewportView(jTableProximos);
-            
-            modelo.addColumn("Fecha del objetivo");
-            modelo.addColumn("Objetivo");
-            modelo.addColumn("Creador");
-            modelo.addColumn("Importancia");
-            modelo.addColumn("Usuarios afectados");
-            modelo.addColumn("Fecha creación");
-            modelo.addColumn("Status");
-            
-            while(rs.next()){
-                Object[] fila = new Object[7];
-                for(int i = 0; i < 7; i++){
-                    fila[i] = rs.getObject(i + 1);
+            if (rs.next()) {
+
+                jTableProximos = new JTable(modelo);
+                jScrollPane6.setViewportView(jTableProximos);
+
+                modelo.addColumn("Fecha del objetivo");
+                modelo.addColumn("Objetivo");
+                modelo.addColumn("Creador");
+                modelo.addColumn("Importancia");
+                modelo.addColumn("Usuarios afectados");
+                modelo.addColumn("Fecha creación");
+                modelo.addColumn("Status");
+
+                while (rs.next()) {
+                    Object[] fila = new Object[7];
+                    for (int i = 0; i < 7; i++) {
+                        fila[i] = rs.getObject(i + 1);
+                    }
+                    modelo.addRow(fila);
                 }
-               modelo.addRow(fila);
+             
+            } else {
+                JOptionPane.showMessageDialog(null, "No hay objetivos disponibles "
+                        + "en los próximos 5 días");
             }
-            
             conec.close();
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, "Error al cargar los datos "
@@ -236,21 +241,21 @@ public class Objetivos extends javax.swing.JFrame {
    
     public void mostrarTodosLosObjetivosRol(){
         String sql = "select fecha_objetivo, objetivo, usuario_creador, importancia, "
-                + "visibilidad, fecha_registro, status from objetivos where "
+                + "visibilidad, fecha_creacion, status from objetivos where "
                 + "visibilidad = '" + rol + "' order by fecha_objetivo asc";
         cargarTablaObjetivos(sql);
     }
      
     public void mostrarTodosLosObjetivosAdmin(){
          String sql = "select fecha_objetivo, objetivo, usuario_creador, importancia, "
-                 + "visibilidad, fecha_registro, status from objetivos order by "
+                 + "visibilidad, fecha_creacion, status from objetivos order by "
                  + "fecha_objetivo asc";
         cargarTablaObjetivos(sql);
     }
      
     public void mostrarTodosLosObjetivosEnProgreso(){
          String sql = "select fecha_objetivo, objetivo, usuario_creador, importancia, "
-                 + "visibilidad, fecha_registro, status from objetivos where "
+                 + "visibilidad, fecha_creacion, status from objetivos where "
                  + "status = 'En progreso' order by fecha_objetivo asc";
         cargarTablaObjetivos(sql);
     }
@@ -258,7 +263,7 @@ public class Objetivos extends javax.swing.JFrame {
   
     public void mostrarTodosLosObjetivosProximos(){
          String sql = "select fecha_objetivo, objetivo, usuario_creador, importancia, "
-                 + "visibilidad, fecha_registro, status from objetivos where "
+                 + "visibilidad, fecha_creacion, status from objetivos where "
                  + "fecha_objetivo >= '" + fechaActual + "' order by fecha_objetivo asc";
         cargarTablaObjetivos(sql);
     }
@@ -309,7 +314,7 @@ public class Objetivos extends javax.swing.JFrame {
         jLabelFechaObj1.setText("Fecha objetivo: " + jTableProximos.getValueAt(1, 0).toString());
         jLabelObjetivoRec1.setText(jTableProximos.getValueAt(1, 1).toString());
         jLabelImportancia1.setText(jTableProximos.getValueAt(1, 3).toString());
-        jLabelFechaPub1.setText("Fecha de registro: " + jTableProximos.getValueAt(1, 5).toString());
+        jLabelFechaPub1.setText("Fecha de registro: " + jTableProximos.getValueAt(1, 4).toString());
         recuperarDatosFaltantesDelProximoMensaje(jLabelObjetivoRec1, jLabelFechaPub1, 
                 jLabelID1, textDetalles1);
     }
@@ -320,7 +325,6 @@ public class Objetivos extends javax.swing.JFrame {
             JLabel jLabelFechaPub, JLabel jLabelID, JTextArea textDetalles){
         
         String objetivo = jLabelObjetivoRec.getText().trim();
-        String fechaRegistro = jLabelFechaPub.getText().trim();
         
         String sql = "select id_objetivo, descripcion from objetivos where "
                 + "objetivo = '" + objetivo + "'";
@@ -365,8 +369,8 @@ public class Objetivos extends javax.swing.JFrame {
         textID = new javax.swing.JTextField();
         jLabelVisibilidad = new javax.swing.JLabel();
         cmbVisibilidad = new javax.swing.JComboBox<>();
-        textElegirUsuario = new javax.swing.JTextField();
         jButtonInfo = new javax.swing.JButton();
+        textUsuario = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jPanelContenido = new javax.swing.JPanel();
         jLabelDescripcion = new javax.swing.JLabel();
@@ -489,9 +493,6 @@ public class Objetivos extends javax.swing.JFrame {
         cmbVisibilidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Administrador", "Importador", "Exportador", "Agente", "Logistica", "Marketing", "Elegir un usuario" }));
         jPanelBase.add(cmbVisibilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 120, -1));
 
-        textElegirUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        jPanelBase.add(textElegirUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 120, -1));
-
         jButtonInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/signo4.png"))); // NOI18N
         jButtonInfo.setBorder(null);
         jButtonInfo.setBorderPainted(false);
@@ -505,6 +506,9 @@ public class Objetivos extends javax.swing.JFrame {
             }
         });
         jPanelBase.add(jButtonInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 50, -1));
+
+        textUsuario.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelBase.add(textUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 120, -1));
 
         jPanelCrear.add(jPanelBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 590, 130));
 
@@ -1071,8 +1075,7 @@ public class Objetivos extends javax.swing.JFrame {
         } else if(visibilidadNivel == 7){
             visibilidad = "Marketing";
         } else if(visibilidadNivel == 8){
-            textElegirUsuario.setVisible(true);
-            visibilidad = textElegirUsuario.getSelectedText().trim();
+            visibilidad = textUsuario.getSelectedText().trim();
         }
         
         
@@ -1087,7 +1090,6 @@ public class Objetivos extends javax.swing.JFrame {
     private void jButtonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearActionPerformed
         
        jPanelCrear.setVisible(true);
-       textElegirUsuario.setVisible(false);
        jPanelVer.setVisible(false);
        jPanelMensajes.setVisible(false);
        jPanelProximos.setVisible(false);
@@ -1364,7 +1366,6 @@ public class Objetivos extends javax.swing.JFrame {
     private javax.swing.JTextArea textDescripcion;
     private javax.swing.JTextArea textDetalles1;
     private javax.swing.JTextArea textDetalles2;
-    private javax.swing.JTextField textElegirUsuario;
     private javax.swing.JTextField textID;
     private javax.swing.JTextField textIDMensaje;
     private javax.swing.JTextArea textMensaje;
@@ -1372,6 +1373,7 @@ public class Objetivos extends javax.swing.JFrame {
     private javax.swing.JTextField textObjetivoAsociado;
     private javax.swing.JTextField textRol;
     private javax.swing.JTextField textTituloMensaje;
+    private javax.swing.JTextField textUsuario;
     private javax.swing.JTextField textUsuarioElegidoMensaje;
     // End of variables declaration//GEN-END:variables
 

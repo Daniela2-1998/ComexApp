@@ -2,10 +2,9 @@ package Daniela.ComexApp.Frames;
 
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.sql.Date;
-import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import service.PDFContactosImpl;
+import service.PDFContenedoresImpl;
 import service.PDFOperacionesImpl;
 import service.PDFProduccionImpl;
 import service.ReportesEstadisticasExportacionesImpl;
@@ -47,6 +46,7 @@ public class Informes extends javax.swing.JFrame {
     PDFContactosImpl pdfContactos = new PDFContactosImpl();
     PDFProduccionImpl pdfProduccion = new PDFProduccionImpl();
     PDFOperacionesImpl pdfOperaciones = new PDFOperacionesImpl();
+    PDFContenedoresImpl pdfContenedores = new PDFContenedoresImpl();
     
     
 
@@ -81,6 +81,8 @@ public class Informes extends javax.swing.JFrame {
         jMenuItemTodas = new javax.swing.JMenuItem();
         jMenuItemInternacionales = new javax.swing.JMenuItem();
         jMenuItemNacionales = new javax.swing.JMenuItem();
+        jMenuContenedores = new javax.swing.JMenu();
+        jMenuItemContTodos = new javax.swing.JMenuItem();
         jMenuInformePersonalizado = new javax.swing.JMenu();
         jMenuItemPers = new javax.swing.JMenuItem();
         jMenuReportesYEstadisticas = new javax.swing.JMenu();
@@ -90,10 +92,6 @@ public class Informes extends javax.swing.JFrame {
         jMenuEstadisticas = new javax.swing.JMenu();
         jMenuItemOpsInt = new javax.swing.JMenuItem();
         jMenuItemOpsNac = new javax.swing.JMenuItem();
-        jMenuDocumentos = new javax.swing.JMenu();
-        jMenuDocumentacion = new javax.swing.JMenu();
-        jMenuItemSubir = new javax.swing.JMenuItem();
-        jMenuItemBuscar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -272,6 +270,22 @@ public class Informes extends javax.swing.JFrame {
 
         jMenuInformes.add(jMenuOperaciones);
 
+        jMenuContenedores.setForeground(new java.awt.Color(0, 0, 153));
+        jMenuContenedores.setText("Contenedores");
+        jMenuContenedores.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        jMenuItemContTodos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItemContTodos.setForeground(new java.awt.Color(0, 0, 153));
+        jMenuItemContTodos.setText("Todos");
+        jMenuItemContTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemContTodosActionPerformed(evt);
+            }
+        });
+        jMenuContenedores.add(jMenuItemContTodos);
+
+        jMenuInformes.add(jMenuContenedores);
+
         jMenuInformePersonalizado.setForeground(new java.awt.Color(0, 0, 153));
         jMenuInformePersonalizado.setText("Informes personalizados");
         jMenuInformePersonalizado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -348,39 +362,6 @@ public class Informes extends javax.swing.JFrame {
         jMenuReportesYEstadisticas.add(jMenuEstadisticas);
 
         jMenuBar.add(jMenuReportesYEstadisticas);
-
-        jMenuDocumentos.setBackground(new java.awt.Color(204, 204, 204));
-        jMenuDocumentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/doc.png"))); // NOI18N
-        jMenuDocumentos.setText("Documentos");
-        jMenuDocumentos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
-        jMenuDocumentacion.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuDocumentacion.setText("Documentación");
-        jMenuDocumentacion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
-        jMenuItemSubir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItemSubir.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuItemSubir.setText("Subir");
-        jMenuItemSubir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemSubirActionPerformed(evt);
-            }
-        });
-        jMenuDocumentacion.add(jMenuItemSubir);
-
-        jMenuItemBuscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItemBuscar.setForeground(new java.awt.Color(0, 0, 153));
-        jMenuItemBuscar.setText("Buscar");
-        jMenuItemBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemBuscarActionPerformed(evt);
-            }
-        });
-        jMenuDocumentacion.add(jMenuItemBuscar);
-
-        jMenuDocumentos.add(jMenuDocumentacion);
-
-        jMenuBar.add(jMenuDocumentos);
 
         setJMenuBar(jMenuBar);
 
@@ -557,17 +538,15 @@ public class Informes extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItemPersActionPerformed
 
-    private void jMenuItemSubirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSubirActionPerformed
+    private void jMenuItemContTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContTodosActionPerformed
         
-        CargarDocumento cargarDoc = new CargarDocumento();
-        cargarDoc.setVisible(true);
-        this.dispose();
+        String dia = String.valueOf(jDayChooser.getDay());
+        String mes = String.valueOf(jMonthChooser.getMonth() + 1);
+        String año = String.valueOf(jYearChooser.getYear());
         
-    }//GEN-LAST:event_jMenuItemSubirActionPerformed
-
-    private void jMenuItemBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemBuscarActionPerformed
+        pdfContenedores.pdfContenedores(usuario, nombreCompleto, dia, mes, año);
+        
+    }//GEN-LAST:event_jMenuItemContTodosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -612,13 +591,12 @@ public class Informes extends javax.swing.JFrame {
     private com.toedter.calendar.JDayChooser jDayChooser;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuContactos;
-    private javax.swing.JMenu jMenuDocumentacion;
-    private javax.swing.JMenu jMenuDocumentos;
+    private javax.swing.JMenu jMenuContenedores;
     private javax.swing.JMenu jMenuEstadisticas;
     private javax.swing.JMenu jMenuInformePersonalizado;
     private javax.swing.JMenu jMenuInformes;
     private javax.swing.JMenuItem jMenuItemAgenda;
-    private javax.swing.JMenuItem jMenuItemBuscar;
+    private javax.swing.JMenuItem jMenuItemContTodos;
     private javax.swing.JMenuItem jMenuItemDespachantes;
     private javax.swing.JMenuItem jMenuItemExportadores;
     private javax.swing.JMenuItem jMenuItemExportadores1;
@@ -629,7 +607,6 @@ public class Informes extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemOpsNac;
     private javax.swing.JMenuItem jMenuItemPers;
     private javax.swing.JMenuItem jMenuItemStock;
-    private javax.swing.JMenuItem jMenuItemSubir;
     private javax.swing.JMenuItem jMenuItemSuministros;
     private javax.swing.JMenuItem jMenuItemTodas;
     private javax.swing.JMenuItem jMenuItemTodo;

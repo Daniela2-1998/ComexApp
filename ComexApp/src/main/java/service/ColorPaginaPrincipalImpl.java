@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -93,6 +94,25 @@ public class ColorPaginaPrincipalImpl implements ColorPaginaPrincipalService{
             System.err.println("No es posible cambiar a color invertido " + e);
         }
     }
+    
+   public void eliminarColor(String usuario, int id){
+       
+        String sql = "delete from colores_pagina_principal where usuario = '" + usuario + "' "
+               + "and id_colores = '" + id + "'";
+       
+       try{
+           conec = cn.Conexion();
+           pst = conec.prepareStatement(sql);
+
+           pst.executeUpdate();
+           conec.close();
+          
+       }catch(SQLException e){
+           System.err.println("No se pudo eliminar el registro solicitado " + e);
+       }
+    }
+ 
+    
     
 }
 

@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import service.OperacionesInternacionalesImpl;
 import service.StockImpl;
 
 /**
@@ -42,6 +43,9 @@ public class GestionDeStock extends javax.swing.JFrame {
         
         mostrarTodosLosDatos();
         pasarCamposDeLaTablaAFields();
+        
+        OperacionesInternacionalesImpl opsInt = new OperacionesInternacionalesImpl();
+        opsInt.recuperarStockQueSeActualizaHoy();
     }
     
     // icono

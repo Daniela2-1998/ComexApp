@@ -16,7 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import service.NotasService;
+import service.NotasImpl;
 import service.PreguntasSeguridadImpl;
 import service.UsuariosImpl;
 

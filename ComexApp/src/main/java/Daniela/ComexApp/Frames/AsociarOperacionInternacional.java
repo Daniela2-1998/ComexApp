@@ -1,7 +1,15 @@
 package Daniela.ComexApp.Frames;
 
+import config.Conexion;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import service.ContenedoresImpl;
 import service.DespachantesImpl;
 import service.ExportadoresImpl;
@@ -35,7 +43,12 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
         setTitle("Asociar operación internacional - " + usuario + " - sistema ComexApp");
         
         jPanelContenedor.setVisible(true);
-        
+        jPanelStock.setVisible(false);
+        jPanelParticipante.setVisible(false);
+        jPanelTransporte.setVisible(false);
+        jPanelVer.setVisible(false);
+
+        mostrarTodosLasAsociaciones();
     }
 
     // icono
@@ -51,7 +64,56 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
     ImportadoresImpl importadoresImpl = new ImportadoresImpl();
     OperacionInternacionalParticipantesImpl participantes = new OperacionInternacionalParticipantesImpl();
     
+    // conexión
+    Conexion cn = new Conexion();
+    Connection conec;
+    PreparedStatement pst;
+    ResultSet rs;
+
     
+    
+    public void cargarTablaAsociados(String sql){
+
+        DefaultTableModel modelo = new DefaultTableModel();
+      
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            jTableAsociaciones = new JTable(modelo);
+            jScrollPane1.setViewportView(jTableAsociaciones);
+            
+            modelo.addColumn("N° operación internacional");
+            modelo.addColumn("Contenedor");
+            modelo.addColumn("Despachante");
+            modelo.addColumn("Exportador");
+            modelo.addColumn("Producto");
+            modelo.addColumn("Transporte");
+            
+            while(rs.next()){
+                Object[] fila = new Object[6];
+                for(int i = 0; i < 6; i++){
+                    fila[i] = rs.getObject(i + 1);
+                }
+               modelo.addRow(fila);
+            }
+            
+            conec.close();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error al cargar tabla");
+            System.err.println("Error al cargar la tabla " + e);
+        }
+    }
+
+   
+     public void mostrarTodosLasAsociaciones(){
+         String sql = "select numero_opint, id_contenedor, id_despachante, id_exportador, "
+                 + "id_producto, id_transporte from participantes_opint order by numero_opint asc";
+        cargarTablaAsociados(sql);
+    }
+     
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,6 +123,9 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanelVer = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableAsociaciones = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButtonVolver = new javax.swing.JButton();
@@ -70,6 +135,7 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
         jButtonStock = new javax.swing.JButton();
         jButtonParticipante = new javax.swing.JButton();
         jButtonTransporte = new javax.swing.JButton();
+        jButtonVer = new javax.swing.JButton();
         jPanelContenedor = new javax.swing.JPanel();
         jButtonAsociarCont = new javax.swing.JButton();
         textCodigo = new javax.swing.JTextField();
@@ -110,6 +176,31 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
         setIconImage(getLogo());
         setIconImages(getIconImages());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanelVer.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelVer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTableAsociaciones.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTableAsociaciones.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTableAsociaciones.setEnabled(false);
+        jTableAsociaciones.setSelectionBackground(new java.awt.Color(0, 0, 153));
+        jTableAsociaciones.setSelectionForeground(new java.awt.Color(0, 0, 153));
+        jTableAsociaciones.setShowHorizontalLines(true);
+        jScrollPane1.setViewportView(jTableAsociaciones);
+
+        jPanelVer.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 30, 460, -1));
+
+        getContentPane().add(jPanelVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 490, 500));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -175,6 +266,16 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButtonTransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 170, 20));
+
+        jButtonVer.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonVer.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonVer.setText("Ver asociados");
+        jButtonVer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVerActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 170, 20));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 500));
 
@@ -368,82 +469,132 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
-        // TODO add your handling code here:
+        
+        this.dispose();
+        
     }//GEN-LAST:event_jButtonVolverActionPerformed
 
     private void jButtonContenedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonContenedorActionPerformed
-        // TODO add your handling code here:
+        
+        jPanelContenedor.setVisible(true);
+        jPanelStock.setVisible(false);
+        jPanelParticipante.setVisible(false);
+        jPanelTransporte.setVisible(false);
+        jPanelVer.setVisible(false);
+                
     }//GEN-LAST:event_jButtonContenedorActionPerformed
 
     private void jButtonStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStockActionPerformed
-        // TODO add your handling code here:
+        
+        jPanelContenedor.setVisible(false);
+        jPanelStock.setVisible(true);
+        jPanelParticipante.setVisible(false);
+        jPanelTransporte.setVisible(false);
+        jPanelVer.setVisible(false);
+        
     }//GEN-LAST:event_jButtonStockActionPerformed
 
     private void jButtonParticipanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonParticipanteActionPerformed
-        // TODO add your handling code here:
+        
+        jPanelContenedor.setVisible(false);
+        jPanelStock.setVisible(false);
+        jPanelParticipante.setVisible(true);
+        jPanelTransporte.setVisible(false);
+        jPanelVer.setVisible(false);
+        
     }//GEN-LAST:event_jButtonParticipanteActionPerformed
 
     private void jButtonTransporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTransporteActionPerformed
-        // TODO add your handling code here:
+        
+        jPanelContenedor.setVisible(false);
+        jPanelStock.setVisible(false);
+        jPanelParticipante.setVisible(false);
+        jPanelTransporte.setVisible(true);
+        jPanelVer.setVisible(false);
+        
     }//GEN-LAST:event_jButtonTransporteActionPerformed
 
     private void jButtonAsociarStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsociarStockActionPerformed
         
         String producto, vendedor, codigo;
+        int ID;
         
         producto = textProducto.getText().trim();
         vendedor = textVendedor.getText().trim();
         codigo = textCodigoProducto.getText().trim();
         
+        ID = Integer.parseInt(textID.getText().trim());
+        
         int IDProducto = stockImpl.obtenerIDProducto(codigo, vendedor, producto);
-        participantes.agregarIDProducto(IDProducto);
+        participantes.agregarIDProducto(IDProducto, ID);
+        stockImpl.asociarCantidadesAOperacionInternacional(producto, vendedor, codigo, ID);
         
     }//GEN-LAST:event_jButtonAsociarStockActionPerformed
 
     private void jButtonAsociarContActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsociarContActionPerformed
         
         String codigo = textCodigo.getText().trim();
+        int ID = Integer.parseInt(textID.getText().trim());
         
         int IDContenedor = contenedoresImpl.obtenerIDConCodigoDelContenedor(codigo);
-        participantes.agregarIDContenedor(IDContenedor);
+        participantes.agregarIDContenedor(IDContenedor, ID);
         
     }//GEN-LAST:event_jButtonAsociarContActionPerformed
 
     private void jButtonAsociarDespActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsociarDespActionPerformed
         
         String empresaDes, despachante;
+        int ID;
         
         empresaDes = textEmpresaDes.getText().trim();
         despachante = textDespachante.getText().trim();
         
+        ID = Integer.parseInt(textID.getText().trim());
+        
         int IDDespachante = despachantesImpl.obtenerIDDespachante(empresaDes, empresaDes);
-        participantes.agregarIDDespachante(IDDespachante);
+        participantes.agregarIDDespachante(IDDespachante, ID);
         
     }//GEN-LAST:event_jButtonAsociarDespActionPerformed
 
     private void jButtonAsociarExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsociarExpActionPerformed
        
         String empresaEx, exportador;
+        int ID;
         
         empresaEx = textEmpresaEx.getText().trim();
         exportador = textExportador.getText().trim();
         
+        ID = Integer.parseInt(textID.getText().trim());
+        
         int IDExportador = exportadoresImpl.obtenerIDExportador(empresaEx, empresaEx);
-        participantes.agregarIDExportador(IDExportador);
+        participantes.agregarIDExportador(IDExportador, ID);
         
     }//GEN-LAST:event_jButtonAsociarExpActionPerformed
 
     private void jButtonAsociarImpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsociarImpActionPerformed
         
         String empresaImp, importador;
+        int ID;
         
         empresaImp = textEmpresaIm.getText().trim();
         importador = textImportador.getText().trim();
         
+        ID = Integer.parseInt(textID.getText().trim());
+        
         int IDImportador = importadoresImpl.obtenerIDImportador(empresaImp, importador);
-        participantes.agregarIDImportador(IDImportador);
+        participantes.agregarIDImportador(IDImportador, ID);
         
     }//GEN-LAST:event_jButtonAsociarImpActionPerformed
+
+    private void jButtonVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerActionPerformed
+        
+        jPanelContenedor.setVisible(false);
+        jPanelStock.setVisible(false);
+        jPanelParticipante.setVisible(false);
+        jPanelTransporte.setVisible(false);
+        jPanelVer.setVisible(true);
+        
+    }//GEN-LAST:event_jButtonVerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -495,6 +646,7 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
     private javax.swing.JButton jButtonParticipante;
     private javax.swing.JButton jButtonStock;
     private javax.swing.JButton jButtonTransporte;
+    private javax.swing.JButton jButtonVer;
     private javax.swing.JButton jButtonVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -516,6 +668,9 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelParticipante;
     private javax.swing.JPanel jPanelStock;
     private javax.swing.JPanel jPanelTransporte;
+    private javax.swing.JPanel jPanelVer;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableAsociaciones;
     private javax.swing.JTextField textCodigo;
     private javax.swing.JTextField textCodigoProducto;
     private javax.swing.JTextField textDespachante;

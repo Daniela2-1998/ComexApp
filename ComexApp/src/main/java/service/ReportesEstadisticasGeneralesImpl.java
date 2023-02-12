@@ -10,7 +10,7 @@ import java.sql.SQLException;
  *
  * @author Daniela
  */
-public class ReportesEstadisticasGeneralesImpl {
+public class ReportesEstadisticasGeneralesImpl implements ReportesEstadisticasGeneralesService{
     
     // conexión
     Conexion cn = new Conexion();
@@ -44,7 +44,7 @@ public class ReportesEstadisticasGeneralesImpl {
     }
     
     
-     public int cantidadDeOperacionesNacionalesRegistradas(){   
+    public int cantidadDeOperacionesNacionalesRegistradas(){   
         
         String sql1 = "SELECT COUNT(*) FROM ventalocal";
         int cantidadTotal = 0;

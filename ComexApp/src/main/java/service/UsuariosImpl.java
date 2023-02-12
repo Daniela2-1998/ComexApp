@@ -369,6 +369,13 @@ public class UsuariosImpl implements UsuariosService{
                aprobado = true;
                JOptionPane.showMessageDialog(null, "Eliminación de registro "
                     + "éxitosa");
+               
+               FondoPaginaPrincipalImpl fondoPagina = new FondoPaginaPrincipalImpl();
+               fondoPagina.eliminarFondo(usuario, id);
+               
+               ColorPaginaPrincipalImpl colorPagina = new ColorPaginaPrincipalImpl();
+               colorPagina.eliminarColor(usuario, id);
+               
                conec.close();
                return aprobado;
            } else {

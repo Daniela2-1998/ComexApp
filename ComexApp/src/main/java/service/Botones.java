@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
  *
  * @author Daniela
  */
-public class Botones implements BotonesImpl{
+public class Botones implements BotonesService{
 
     Boolean aprobado;
     

@@ -4,7 +4,7 @@ package service;
  *
  * @author Daniela
  */
-public interface BotonesImpl {
+public interface BotonesService {
     
     public Boolean botonSalirSistema();
     

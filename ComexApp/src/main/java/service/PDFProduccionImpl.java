@@ -16,16 +16,11 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import config.Conexion;
-import java.awt.Image;
-import java.sql.Date;
-import java.time.LocalDate;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -99,7 +94,7 @@ public class PDFProduccionImpl implements PDFProduccionService {
             tablaStock.addCell("Detalles");
             tablaStock.addCell("Cuidados requeridos");
 
-            tablaStock.setSpacingAfter(20);
+            tablaStock.setSpacingAfter(40);
             
             PdfPTable tablaProductos = new PdfPTable(6);
             tablaProductos.addCell("ID");
@@ -109,7 +104,7 @@ public class PDFProduccionImpl implements PDFProduccionService {
             tablaProductos.addCell("Cantidad");
             tablaProductos.addCell("Status");
             
-            tablaProductos.setSpacingAfter(20);
+            tablaProductos.setSpacingAfter(40);
             
             PdfPTable tablaCompraVenta = new PdfPTable(5);
             tablaCompraVenta.addCell("ID");
@@ -121,7 +116,8 @@ public class PDFProduccionImpl implements PDFProduccionService {
             try {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_producto, nombre_producto, "
-                        + "tipo_producto, detalle, cuidados_requeridos from stock");
+                        + "tipo_producto, detalle, cuidados_requeridos from stock "
+                        + "order by id_producto asc");
                 rs = pst.executeQuery();
                 
                             
@@ -145,7 +141,8 @@ public class PDFProduccionImpl implements PDFProduccionService {
                 
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_producto, codigo_producto, "
-                        + "pais_origen, precio_unitario, cantidad, status from stock"); 
+                        + "pais_origen, precio_unitario, cantidad, status from stock "
+                        + "order by id_producto asc"); 
                 rs = pst.executeQuery(); 
         
                 if(rs.next()){
@@ -168,7 +165,8 @@ public class PDFProduccionImpl implements PDFProduccionService {
                 
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_producto, comprador, "
-                        + "vendedor, reserva, status from stock"); 
+                        + "vendedor, reserva, status from stock order by "
+                        + "id_producto asc"); 
                 rs = pst.executeQuery(); 
         
                 if(rs.next()){
@@ -201,7 +199,7 @@ public class PDFProduccionImpl implements PDFProduccionService {
             tablaReabastecimiento.addCell("Detalle del producto");
             tablaReabastecimiento.addCell("Cuidados requeridos");
 
-            tablaReabastecimiento.setSpacingAfter(20);
+            tablaReabastecimiento.setSpacingAfter(40);
             
             PdfPTable tablaSuministros = new PdfPTable(4);
             tablaSuministros.addCell("ID");
@@ -209,7 +207,7 @@ public class PDFProduccionImpl implements PDFProduccionService {
             tablaSuministros.addCell("Tipo de producto");
             tablaSuministros.addCell("País orígen");
 
-            tablaSuministros.setSpacingAfter(20);
+            tablaSuministros.setSpacingAfter(40);
             
             PdfPTable tablaPrecioFechas = new PdfPTable(6);
             tablaPrecioFechas.addCell("ID");
@@ -225,7 +223,8 @@ public class PDFProduccionImpl implements PDFProduccionService {
             try {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_pedido, producto, cantidad, "
-                        + "detalle, cuidados_requeridos from reabastecimiento");
+                        + "detalle, cuidados_requeridos from reabastecimiento order by "
+                        + "fecha_ingreso asc");
                 rs = pst.executeQuery();
 
                 // completar información de la tabla
@@ -250,7 +249,8 @@ public class PDFProduccionImpl implements PDFProduccionService {
             try{
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_pedido, destino, "
-                        + "tipo_producto, pais_origen from reabastecimiento");
+                        + "tipo_producto, pais_origen from reabastecimiento "
+                        + "order by fecha_ingreso asc");
 
                 rs = pst.executeQuery();
                 
@@ -274,8 +274,8 @@ public class PDFProduccionImpl implements PDFProduccionService {
              try{
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_pedido, precio_unitario, "
-                        + "precio_total, descuento, fecha_operacion, fecha_llegada "
-                        + "from reabastecimiento");
+                        + "precio_total, descuento, fecha_registro, fecha_ingreso "
+                        + "from reabastecimiento order by fecha_ingreso asc");
 
                 rs = pst.executeQuery();
                 
@@ -361,7 +361,7 @@ public class PDFProduccionImpl implements PDFProduccionService {
             tablaStock.addCell("Detalles");
             tablaStock.addCell("Cuidados requeridos");
 
-            tablaStock.setSpacingAfter(20);
+            tablaStock.setSpacingAfter(40);
             
             PdfPTable tablaProductos = new PdfPTable(6);
             tablaProductos.addCell("ID");
@@ -371,7 +371,7 @@ public class PDFProduccionImpl implements PDFProduccionService {
             tablaProductos.addCell("Cantidad");
             tablaProductos.addCell("Status");
             
-            tablaProductos.setSpacingAfter(20);
+            tablaProductos.setSpacingAfter(40);
             
             PdfPTable tablaCompraVenta = new PdfPTable(5);
             tablaCompraVenta.addCell("ID");
@@ -383,7 +383,8 @@ public class PDFProduccionImpl implements PDFProduccionService {
             try {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_producto, nombre_producto, "
-                        + "tipo_producto, detalle, cuidados_requeridos from stock");
+                        + "tipo_producto, detalle, cuidados_requeridos from stock "
+                        + "order by id_producto asc");
                 rs = pst.executeQuery();
                 
                             
@@ -405,7 +406,8 @@ public class PDFProduccionImpl implements PDFProduccionService {
                 
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_producto, codigo_producto, "
-                        + "pais_origen, precio_unitario, cantidad, status from stock"); 
+                        + "pais_origen, precio_unitario, cantidad, status from stock "
+                        + "order by id_producto asc"); 
                 rs = pst.executeQuery(); 
         
                 if(rs.next()){
@@ -428,7 +430,8 @@ public class PDFProduccionImpl implements PDFProduccionService {
                 
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_producto, comprador, "
-                        + "vendedor, reserva, status from stock"); 
+                        + "vendedor, reserva, status from stock order by "
+                        + "id_producto asc"); 
                 rs = pst.executeQuery(); 
         
                 if(rs.next()){
@@ -503,7 +506,7 @@ public class PDFProduccionImpl implements PDFProduccionService {
             tablaReabastecimiento.addCell("Detalle del producto");
             tablaReabastecimiento.addCell("Cuidados requeridos");
 
-            tablaReabastecimiento.setSpacingAfter(20);
+            tablaReabastecimiento.setSpacingAfter(40);
             
             PdfPTable tablaSuministros = new PdfPTable(4);
             tablaSuministros.addCell("ID");
@@ -511,7 +514,7 @@ public class PDFProduccionImpl implements PDFProduccionService {
             tablaSuministros.addCell("Tipo de producto");
             tablaSuministros.addCell("País orígen");
 
-            tablaSuministros.setSpacingAfter(20);
+            tablaSuministros.setSpacingAfter(40);
             
             PdfPTable tablaPrecioFechas = new PdfPTable(6);
             tablaPrecioFechas.addCell("ID");
@@ -530,7 +533,8 @@ public class PDFProduccionImpl implements PDFProduccionService {
             try {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_pedido, producto, cantidad, "
-                        + "detalle, cuidados_requeridos from reabastecimiento");
+                        + "detalle, cuidados_requeridos from reabastecimiento "
+                        + "order by fecha_ingreso asc");
                 rs = pst.executeQuery();
 
                 // completar información de la tabla
@@ -555,7 +559,8 @@ public class PDFProduccionImpl implements PDFProduccionService {
             try{
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_pedido, destino, "
-                        + "tipo_producto, pais_origen from reabastecimiento");
+                        + "tipo_producto, pais_origen from reabastecimiento "
+                        + "order by fecha_ingreso asc");
 
                 rs = pst.executeQuery();
                 
@@ -579,8 +584,8 @@ public class PDFProduccionImpl implements PDFProduccionService {
              try{
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_pedido, precio_unitario, "
-                        + "precio_total, descuento, fecha_operacion, fecha_llegada "
-                        + "from reabastecimiento");
+                        + "precio_total, descuento, fecha_registro, fecha_ingreso "
+                        + "from reabastecimiento order by fecha_ingreso asc");
 
                 rs = pst.executeQuery();
                 

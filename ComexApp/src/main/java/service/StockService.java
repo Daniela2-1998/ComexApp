@@ -13,12 +13,20 @@ public interface StockService {
     
     public int obtenerCantidadDeBaseDeDatos(String producto);
 
+    public int nuevaCantidadProductosOperacionInternacional(int cantidadProducto, 
+            String producto, int id);
+    
+    public void asociarCantidadesAOperacionInternacional(String producto, String vendedor, 
+            String codigo, int idOperacion);
+    
     public void modificarStock(int IDMod, String cantidadMod, String codigoMod, 
             String cuidadosMod, String detalleMod, String paisOrigenMod, 
             String precioUnitarioMod, String statusMod, String tipoProductoMod, 
             String productoMod, String producto);
     
     public int obtenerIDProducto(String codigo, String vendedor, String producto);
+    
+    public void actualizacionDelProducto(String producto, String codigo, String vendedor);
     
     public boolean eliminarProductoDeStock(String producto, int id);
 }

@@ -16,16 +16,11 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import config.Conexion;
-import java.awt.Image;
-import java.sql.Date;
-import java.time.LocalDate;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -101,7 +96,7 @@ public class PDFContactosImpl implements PDFContactosService {
             tablaExportadores.addCell("Pais");
             tablaExportadores.addCell("Status");
 
-            tablaExportadores.setSpacingAfter(20);
+            tablaExportadores.setSpacingAfter(40);
             
             PdfPTable tablaExportadores1 = new PdfPTable(3);
             tablaExportadores1.addCell("ID");
@@ -111,7 +106,7 @@ public class PDFContactosImpl implements PDFContactosService {
             try {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_exportador, empleado, "
-                        + "empresa, pais, status from exportadores");
+                        + "empresa, pais, status from exportadores order by id_exportador asc");
                 rs = pst.executeQuery();
                 
                             
@@ -136,7 +131,8 @@ public class PDFContactosImpl implements PDFContactosService {
                 
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_exportador, "
-                        + "mail, numero_contacto from exportadores"); 
+                        + "mail, numero_contacto from exportadores order "
+                        + "by id_exportador asc"); 
                 rs = pst.executeQuery(); 
         
                 if(rs.next()){
@@ -167,7 +163,7 @@ public class PDFContactosImpl implements PDFContactosService {
             tablaImportadores.addCell("Pais");
             tablaImportadores.addCell("Status");
 
-            tablaImportadores.setSpacingAfter(20);
+            tablaImportadores.setSpacingAfter(40);
             
             PdfPTable tablaImportadores1 = new PdfPTable(3);
             tablaImportadores1.addCell("ID");
@@ -179,7 +175,7 @@ public class PDFContactosImpl implements PDFContactosService {
             try {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_importador, empleado, empresa, "
-                        + "pais, status from importadores");
+                        + "pais, status from importadores order by id_importador asc");
                 rs = pst.executeQuery();
 
                 // completar información de la tabla
@@ -202,7 +198,8 @@ public class PDFContactosImpl implements PDFContactosService {
             try{
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_importador, "
-                        + "mail, numero_contacto from importadores");
+                        + "mail, numero_contacto from importadores order by "
+                        + "id_importador asc");
 
                 rs = pst.executeQuery();
                 
@@ -237,7 +234,7 @@ public class PDFContactosImpl implements PDFContactosService {
             tablaDespachantes.addCell("Pais");
             tablaDespachantes.addCell("Status");
 
-            tablaDespachantes.setSpacingAfter(20);
+            tablaDespachantes.setSpacingAfter(40);
             
             PdfPTable tablaDespachantes1 = new PdfPTable(3);
             tablaDespachantes1.addCell("ID");
@@ -249,7 +246,7 @@ public class PDFContactosImpl implements PDFContactosService {
             try {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_despachantes, empleado, empresa, "
-                        + "pais, status from despachantes");
+                        + "pais, status from despachantes order by id_despachantes asc");
                 
                 rs = pst.executeQuery();
              
@@ -274,7 +271,7 @@ public class PDFContactosImpl implements PDFContactosService {
              try {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_despachantes, "
-                        + "mail, numero_contacto from despachantes");
+                        + "mail, numero_contacto from despachantes order by id_despachantes asc");
                 rs = pst.executeQuery();
               
                 // completar información de la tabla
@@ -314,7 +311,8 @@ public class PDFContactosImpl implements PDFContactosService {
             try {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_maritima, empleado,"
-                        + " empresa, mail, numero_contacto from maritimas");
+                        + " empresa, mail, numero_contacto from maritimas "
+                        + "order by id_maritima asc");
                rs = pst.executeQuery();
 
              
@@ -355,7 +353,7 @@ public class PDFContactosImpl implements PDFContactosService {
             try {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_aereo, empleado, aerolinea, mail, "
-            + "numero_contacto from aereo");
+            + "numero_contacto from aereo order by id_aereo asc");
                rs = pst.executeQuery();
 
              
@@ -441,7 +439,7 @@ public class PDFContactosImpl implements PDFContactosService {
             tablaExportadores.addCell("Pais");
             tablaExportadores.addCell("Status");
 
-            tablaExportadores.setSpacingAfter(20);
+            tablaExportadores.setSpacingAfter(40);
             
             PdfPTable tablaExportadores1 = new PdfPTable(3);
             tablaExportadores1.addCell("ID");
@@ -451,7 +449,7 @@ public class PDFContactosImpl implements PDFContactosService {
             try {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_exportador, empleado, "
-                        + "empresa, pais, status from exportadores");
+                        + "empresa, pais, status from exportadores order by id_exportador asc");
                 rs = pst.executeQuery();
                 
                             
@@ -476,7 +474,7 @@ public class PDFContactosImpl implements PDFContactosService {
                 
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_exportador, "
-                        + "mail, numero_contacto from exportadores"); 
+                        + "mail, numero_contacto from exportadores order by id_exportador asc"); 
                 rs = pst.executeQuery(); 
         
                 if(rs.next()){
@@ -555,7 +553,7 @@ public class PDFContactosImpl implements PDFContactosService {
             tablaImportadores.addCell("Pais");
             tablaImportadores.addCell("Status");
 
-            tablaImportadores.setSpacingAfter(20);
+            tablaImportadores.setSpacingAfter(40);
             
             PdfPTable tablaImportadores1 = new PdfPTable(3);
             tablaImportadores1.addCell("ID");
@@ -567,7 +565,7 @@ public class PDFContactosImpl implements PDFContactosService {
             try {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_importador, empleado, empresa, "
-                        + "pais, status from importadores");
+                        + "pais, status from importadores order by id_importador asc");
                 rs = pst.executeQuery();
 
                 // completar información de la tabla
@@ -590,7 +588,7 @@ public class PDFContactosImpl implements PDFContactosService {
             try{
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_importador, "
-                        + "mail, numero_contacto from importadores");
+                        + "mail, numero_contacto from importadores order by id_importador asc");
 
                 rs = pst.executeQuery();
                 
@@ -667,7 +665,7 @@ public class PDFContactosImpl implements PDFContactosService {
             tablaDespachantes.addCell("Pais");
             tablaDespachantes.addCell("Status");
 
-            tablaDespachantes.setSpacingAfter(20);
+            tablaDespachantes.setSpacingAfter(40);
             
             PdfPTable tablaDespachantes1 = new PdfPTable(3);
             tablaDespachantes1.addCell("ID");
@@ -683,7 +681,7 @@ public class PDFContactosImpl implements PDFContactosService {
             try {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_despachantes, empleado, empresa, "
-                        + "pais, status from despachantes");
+                        + "pais, status from despachantes order by id_despachantes asc");
                 
                 rs = pst.executeQuery();
              
@@ -708,7 +706,7 @@ public class PDFContactosImpl implements PDFContactosService {
              try {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_despachantes, "
-                        + "mail, numero_contacto from despachantes");
+                        + "mail, numero_contacto from despachantes order by id_despachantes asc");
                 rs = pst.executeQuery();
               
                 // completar información de la tabla
@@ -790,7 +788,8 @@ public class PDFContactosImpl implements PDFContactosService {
             try {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_maritima, empleado,"
-                        + " empresa, mail, numero_contacto from maritimas");
+                        + " empresa, mail, numero_contacto from maritimas order "
+                        + "by id_maritima asc");
                rs = pst.executeQuery();
 
              
@@ -831,7 +830,7 @@ public class PDFContactosImpl implements PDFContactosService {
             try {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_aereo, empleado, aerolinea, mail, "
-            + "numero_contacto from aereo");
+            + "numero_contacto from aereo order by id_aereo asc");
                rs = pst.executeQuery();
 
              
@@ -919,7 +918,7 @@ public class PDFContactosImpl implements PDFContactosService {
                 conec = cn.Conexion();
                 pst = conec.prepareStatement("select id_agenda, nombre, empresa, "
                         + "cargo, mail, numero_contacto from agenda_personal where "
-                        + "usuario_registrador = '" + usuario + "'");
+                        + "usuario_registrador = '" + usuario + "' order by id_agenda asc");
                rs = pst.executeQuery();
 
              

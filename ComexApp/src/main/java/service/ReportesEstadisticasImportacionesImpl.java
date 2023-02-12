@@ -10,7 +10,7 @@ import java.sql.SQLException;
  *
  * @author Daniela
  */
-public class ReportesEstadisticasImportacionesImpl {
+public class ReportesEstadisticasImportacionesImpl implements ReportesEstadisticasImportacionesService{
     
     // conexión
     Conexion cn = new Conexion();
