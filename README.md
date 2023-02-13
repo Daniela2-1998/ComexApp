@@ -46,4 +46,7 @@ El proyecto cuenta con un sistema de inicio de sesión con diferencia según el 
 
 Estamos trabajando en crear funciones específicas para poder brindas un mejor provecho a la diferenciación por roles.
 
+Debajo te presentamos las funciones que podrás realizar como usuario de ComexApp:
+
+* 
 
