@@ -1,7 +1,5 @@
 package service;
 
-import Daniela.ComexApp.Repository.*;
-import com.toedter.calendar.JDateChooser;
 import config.Conexion;
 import java.awt.Color;
 import java.sql.Connection;
@@ -9,9 +7,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.time.LocalDate;
-import java.util.Calendar;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;

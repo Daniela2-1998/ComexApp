@@ -28,7 +28,7 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-                <!-- https://mvnrepository.com/artifact/jgraph/jgraph -->
+           
 
                 <dependency>
 			<groupId>org.springframework.boot</groupId>
