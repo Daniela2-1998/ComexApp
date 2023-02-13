@@ -64,8 +64,12 @@ Debajo te presentamos las funciones que podrás realizar como usuario de ComexAp
 - `Creación de reportes y estadísticas`: de momento informan la cantidad de operaciones nacionales, internacionales, totales, los productos más comprados y vendidos, y los principales compradores y vendedores.
 - `Establecimiento de objetivos y mensajes`: es posible crear objetivos colocando fecha del objetivo, nivel de importancia, sector o persona a la que está destinado, título y detalles del objetivo. Además, pueden escribirse mensajes relacionados a estos objetivos para ir notificando su avance, dudas, consultas, inconvenientes o imposibilidades de cumplimiento. Ambas partes se pueden visualizar y ver en los espacios correspondientes. Es posible filtrar para ver según solicitud. Al entrar a la sección de objetivos, se notificará en caso de tener un nuevo mensaje u objetivo disponible.
 - `Sticky notes`: el usuario podrá elegir un espacio para crear una nota con su N°, título, contenido y elegir el color y fuente que más les guste pudiendo mantener estos datos una vez cerrada la sesión. Todas las notas seguirán disponibles en la base de datos y se podrán recuperar o eliminar según desee el usuario. Cabe destacar, que se trata de una sección privada, por lo que sólo el propio usuario podrá ver sus notas.
+
+
+#### :hammer: Comodidades para el usuario y su seguridad:
 - `Preguntas de seguridad`: establecimiento y visualización de 3 preguntas de seguridad privadas por usuario.
 - `Recupero de usuario o contraseña`: recuperando y completando correctamente la información solicitada y contestando correctamente las preguntas de seguridad recuperadas.
 - `Cambio de contraseña`: mediante la contraseña anterior y confirmación de la nueva.
 - `Modificar información de usuario`: cada usuario podrá modificar toda su información de usuario.
 - `Elección de colores y fondo para página principal`: cada usuario podrá elegir los colores y/o fondo de página principal pudiendo recuperarlos una vez cerrada la sesión.
+
