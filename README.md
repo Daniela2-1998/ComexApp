@@ -5,9 +5,11 @@
 <p align="left">
    <img src="https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green">
    <img src="https://img.shields.io/badge/ÚLTIMA VERSIÓN-%20 1.0-red">
+   <img src="https://img.shields.io/badge/PROYECTO-%20 SOFTWARE-white">
    <img src="https://img.shields.io/badge/LENGUAJE-%20 JAVA-blue">
    <img src="https://img.shields.io/badge/BBD-%20 POSTGRESQL-violet">
    <img src="https://img.shields.io/badge/IDE-%20 NETBEANS-orange">
+   <img src="https://img.shields.io/badge/ÁREA-%20 COMERCIO INTERNACIONAL-purple">
  </p>
 
    
