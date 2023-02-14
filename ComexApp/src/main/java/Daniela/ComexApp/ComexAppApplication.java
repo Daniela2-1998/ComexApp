@@ -7,20 +7,22 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class ComexAppApplication /* implements CommandLineRunner */{
+public class ComexAppApplication {
 
         InicioSesion inicioSesion = new InicioSesion();
 
 	public static void main(String[] args) {
 		
-		SpringApplication.run(ComexAppApplication.class, args);
+		SpringApplication.run(InicioSesion.class, args);
+                InicioSesion inicioSesion = new InicioSesion();
+                
            
 	}
-/*
-	@Override
+
+	
 	public void run(String... args) throws Exception {
 		inicioSesion.setVisible(true);
 	}
-*/
+
        
 }
