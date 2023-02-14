@@ -52,7 +52,7 @@ Estamos trabajando en crear funciones específicas para poder brindas un mejor p
 
 Debajo te presentamos las funciones que podrás realizar como usuario de ComexApp:
 
-#### :hammer: Funciones:
+#### :hammer: Funciones base:
 - `Administración de usuarios`: el administrador puede ver y modificar la información relativa a los usuarios inscriptos en el sistema, con excepción de las contraseñas para dar mayor seguridad a los mismos usuarios.
 - `Almacenar información de contactos`: contactos como importadores, exportadores, despachantes de aduana o agentes de logística internacional (marítima o aerolínea) pueden ser registrados, modificados o eliminados del sistema. El objetivo principal de esta función es poder almacenar, en único lugar, toda la información relevante a un contacto y tener acceso a ellas de forma rápida y fácil. 
 - `Agenda personal`: también permite el almacenamiento de información esencial de los contactos de la empresa, pero esta función permite registrar esta información de forma privada para que sólo tenga acceso a ella el usuario que realizó el registro del contacto. Es sumamente útil para aquellas empresas en las que varios empleados se contactan con diferentes empleados de otra empresa; o bien, para gerentes que se comunican con otros gerentes y desean mantener esta información en privado.
@@ -73,3 +73,39 @@ Debajo te presentamos las funciones que podrás realizar como usuario de ComexAp
 - `Modificar información de usuario`: cada usuario podrá modificar toda su información de usuario.
 - `Elección de colores y fondo para página principal`: cada usuario podrá elegir los colores y/o fondo de página principal pudiendo recuperarlos una vez cerrada la sesión.
 
+## Versiones del sistema:
+Actualmente, sólo existe la versión 1.0 que fue lanzada durante el mes de febrero de 2023. De todas formas, se está trabajando en una nueva versión para poder brindar un servicio más amplio para los usuarios de la aplicación.  
+
+## Características agregadas en cada versión:
+La versión 1.0 es la versión base, y como tal, incluye las funciones mencionadas anteriormente en la parte de funciones. 
+
+Una vez que se produzcan nuevos lanzamientos, se irán agregando en esta parte del archivo.
+
+#### :hammer: Funciones desarrollándose:
+El objetivo de ComexApp es brindar un servicio de cálidad que permita que los interesados en el comercio internacional, nacional o en producción, puedan realizar la mayor cantidad de funciones posibles en un mismo lugar para una mayor organización, visibilidad, control y para facilitar y agilizar procesos.
+
+##### Lista de funciones:
+- [ ] Envío de mails ante creación de usuario (dando nombre de usuario, nombre y contraseña + notificación de espera para acceder al sistema), una vez obtenido el ingreso al sistema o ante rechazo de creación de usuario, notificación ante cambio de contraseña, envio de mails a contactos para dar información de su operación asociada con todos los detalles necesarios. 
+
+- [ ] WhatsApp asociado para envío de mensajes para usuarios u contactos.
+
+- [ ] Relojes. Cuenta regresiva y contar el tiempo que lleván las funciones.
+
+- [ ] Cálculo de costing y pricing.
+
+- [ ] Cálculo de costos de producción y demás gastos.
+
+- [ ] Otras.
+
+
+## Acceso al proyecto:
+Para abrir el proyecto es necesario tener instalado java en la computadora y descargas los archivos de este mismo repositorio para contar con todo el proyecto y su base de datos con todas las tablas. Incluso, el propio proyecto cuenta con JPA para que automáticamente se generen las tablas debiendo crear únicamente la base de datos con el nombre del proyecto tal cúal encontrarás en el properties.
+
+Una vez clonado el proyecto, selecciona la clase "InicioSesión" para poder correr el proyecto y comenzar a utilizarlo.
+
+## Tecnologías utilizadas:
+- `JAVA`
+- 'Maven'
+- 'Netbeans'
+- `Spring boot`
+- 'PostGreSQL'
