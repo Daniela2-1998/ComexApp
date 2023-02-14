@@ -208,6 +208,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jMenuItemAgendar = new javax.swing.JMenuItem();
         jMenuItemNotas = new javax.swing.JMenuItem();
         jMenuItemObjetivos = new javax.swing.JMenuItem();
+        jMenuItemTiempos = new javax.swing.JMenuItem();
         jMenuPreferencias = new javax.swing.JMenu();
         jRadioButtonMenuItemDefecto = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonMenuItemInvertidos = new javax.swing.JRadioButtonMenuItem();
@@ -220,13 +221,10 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jMenuItemCrearInforme = new javax.swing.JMenuItem();
         jMenuAdministrar = new javax.swing.JMenu();
         jMenuItemDatosUsuarios = new javax.swing.JMenuItem();
-        jMenuItemControl = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
         setIconImages(getIconImages());
-        setPreferredSize(new java.awt.Dimension(1300, 867));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 153));
@@ -392,6 +390,15 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         });
         jMenuInfo.add(jMenuItemObjetivos);
 
+        jMenuItemTiempos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemTiempos.setText("Medición de tiempos");
+        jMenuItemTiempos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemTiemposActionPerformed(evt);
+            }
+        });
+        jMenuInfo.add(jMenuItemTiempos);
+
         jMenuBar1.add(jMenuInfo);
 
         jMenuPreferencias.setText("Preferencias");
@@ -490,14 +497,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuAdministrar.add(jMenuItemDatosUsuarios);
-
-        jMenuItemControl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItemControl.setText("Controlar funcionamiento de áreas");
-        jMenuAdministrar.add(jMenuItemControl);
-
-        jMenuItem2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItem2.setText("Ver sección especial de administrador");
-        jMenuAdministrar.add(jMenuItem2);
 
         jMenuBar1.add(jMenuAdministrar);
 
@@ -674,6 +673,10 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jRadioButtonMenuItemFondo4ActionPerformed
 
+    private void jMenuItemTiemposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTiemposActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemTiemposActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -728,16 +731,15 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuCambiarFondo;
     private javax.swing.JMenu jMenuInfo;
     private javax.swing.JMenu jMenuInformes;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemAgendar;
     private javax.swing.JMenuItem jMenuItemCambioContraseña;
-    private javax.swing.JMenuItem jMenuItemControl;
     private javax.swing.JMenuItem jMenuItemCrearInforme;
     private javax.swing.JMenuItem jMenuItemDatosUsuarios;
     private javax.swing.JMenuItem jMenuItemInformacion;
     private javax.swing.JMenuItem jMenuItemNotas;
     private javax.swing.JMenuItem jMenuItemObjetivos;
     private javax.swing.JMenuItem jMenuItemRecupero;
+    private javax.swing.JMenuItem jMenuItemTiempos;
     private javax.swing.JMenu jMenuPreferencias;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemDefecto;
