@@ -34,15 +34,13 @@ public class MensajesObjetivos {
     
     @NotBlank
     private String visibilidad;
-
-    @NotNull
+    
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date fecha_registro;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private Time hora_registro;
-    
-    @NotNull
+
     private Boolean visto;
     
     

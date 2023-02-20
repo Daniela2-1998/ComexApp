@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>Daniela</groupId>
 	<artifactId>ComexApp</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>ComexApp</name>
 	<description>Aplicación para Omax S.A</description>
 	<properties>
@@ -86,6 +86,28 @@
              <version>1.0.19</version>
          </dependency>
 
+
+
+         <!-- https://mvnrepository.com/artifact/mail.jar/mail.jar -->
+
+         <!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
+         <dependency>
+             <groupId>javax.mail</groupId>
+             <artifactId>javax.mail-api</artifactId>
+             <version>1.6.2</version>
+         </dependency>
+	 <dependency>
+	  <groupId>org.apache.geronimo.javamail</groupId>
+	  <artifactId>geronimo-javamail_1.4_mail</artifactId>
+	  <version>1.8.3</version>
+	  <type>jar</type>
+	 </dependency>
+         
+         <dependency>
+             <groupId>com.sun.mail</groupId>
+             <artifactId>javax.mail</artifactId>
+             <version>1.6.2</version>
+         </dependency>
          
 	</dependencies>
 

@@ -205,7 +205,9 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jMenuItemInformacion = new javax.swing.JMenuItem();
         jMenuItemCambioContraseña = new javax.swing.JMenuItem();
         jMenuItemRecupero = new javax.swing.JMenuItem();
+        jMenuPreferencias1 = new javax.swing.JMenu();
         jMenuItemAgendar = new javax.swing.JMenuItem();
+        jMenuItemEnvio = new javax.swing.JMenuItem();
         jMenuItemNotas = new javax.swing.JMenuItem();
         jMenuItemObjetivos = new javax.swing.JMenuItem();
         jMenuItemTiempos = new javax.swing.JMenuItem();
@@ -363,6 +365,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         });
         jMenuInfo.add(jMenuItemRecupero);
 
+        jMenuBar1.add(jMenuInfo);
+
+        jMenuPreferencias1.setText("Funciones extra");
+        jMenuPreferencias1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
         jMenuItemAgendar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItemAgendar.setText("Agendar contactos personales");
         jMenuItemAgendar.addActionListener(new java.awt.event.ActionListener() {
@@ -370,7 +377,16 @@ public class PaginaPrincipal extends javax.swing.JFrame {
                 jMenuItemAgendarActionPerformed(evt);
             }
         });
-        jMenuInfo.add(jMenuItemAgendar);
+        jMenuPreferencias1.add(jMenuItemAgendar);
+
+        jMenuItemEnvio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemEnvio.setText("Envio de mails");
+        jMenuItemEnvio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEnvioActionPerformed(evt);
+            }
+        });
+        jMenuPreferencias1.add(jMenuItemEnvio);
 
         jMenuItemNotas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItemNotas.setText("Tomar notas");
@@ -379,7 +395,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
                 jMenuItemNotasActionPerformed(evt);
             }
         });
-        jMenuInfo.add(jMenuItemNotas);
+        jMenuPreferencias1.add(jMenuItemNotas);
 
         jMenuItemObjetivos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItemObjetivos.setText("Objetivos ");
@@ -388,7 +404,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
                 jMenuItemObjetivosActionPerformed(evt);
             }
         });
-        jMenuInfo.add(jMenuItemObjetivos);
+        jMenuPreferencias1.add(jMenuItemObjetivos);
 
         jMenuItemTiempos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItemTiempos.setText("Medición de tiempos");
@@ -397,9 +413,9 @@ public class PaginaPrincipal extends javax.swing.JFrame {
                 jMenuItemTiemposActionPerformed(evt);
             }
         });
-        jMenuInfo.add(jMenuItemTiempos);
+        jMenuPreferencias1.add(jMenuItemTiempos);
 
-        jMenuBar1.add(jMenuInfo);
+        jMenuBar1.add(jMenuPreferencias1);
 
         jMenuPreferencias.setText("Preferencias");
         jMenuPreferencias.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -429,7 +445,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
         buttonGroupFondo.add(jRadioButtonMenuItemFondoDef);
         jRadioButtonMenuItemFondoDef.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jRadioButtonMenuItemFondoDef.setSelected(true);
         jRadioButtonMenuItemFondoDef.setText("Por defecto");
         jRadioButtonMenuItemFondoDef.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -674,8 +689,20 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonMenuItemFondo4ActionPerformed
 
     private void jMenuItemTiemposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTiemposActionPerformed
-        // TODO add your handling code here:
+        
+        Tiempos tiempos = new Tiempos();
+        tiempos.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_jMenuItemTiemposActionPerformed
+
+    private void jMenuItemEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEnvioActionPerformed
+        
+        EnvioMail envioMail = new EnvioMail();
+        envioMail.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jMenuItemEnvioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -735,12 +762,14 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemCambioContraseña;
     private javax.swing.JMenuItem jMenuItemCrearInforme;
     private javax.swing.JMenuItem jMenuItemDatosUsuarios;
+    private javax.swing.JMenuItem jMenuItemEnvio;
     private javax.swing.JMenuItem jMenuItemInformacion;
     private javax.swing.JMenuItem jMenuItemNotas;
     private javax.swing.JMenuItem jMenuItemObjetivos;
     private javax.swing.JMenuItem jMenuItemRecupero;
     private javax.swing.JMenuItem jMenuItemTiempos;
     private javax.swing.JMenu jMenuPreferencias;
+    private javax.swing.JMenu jMenuPreferencias1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemDefecto;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemFondo;

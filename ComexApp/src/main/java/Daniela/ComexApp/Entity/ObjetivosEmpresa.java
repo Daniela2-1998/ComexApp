@@ -37,11 +37,10 @@ public class ObjetivosEmpresa {
     @NotBlank
     private String usuario_creador;
 
-    @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date fecha_registro;
     
-    @NotNull
+    
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date fecha_objetivo;
 
