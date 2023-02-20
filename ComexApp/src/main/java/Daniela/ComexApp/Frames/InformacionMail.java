@@ -50,8 +50,16 @@ public class InformacionMail extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         jButtonVolver2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textDescripcion = new javax.swing.JTextArea();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -70,7 +78,24 @@ public class InformacionMail extends javax.swing.JFrame {
                 jButtonVolver2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonVolver2, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 346, 94, -1));
+        jPanel1.add(jButtonVolver2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, 94, -1));
+
+        jScrollPane1.setBackground(new java.awt.Color(204, 204, 204));
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setHorizontalScrollBar(null);
+
+        textDescripcion.setEditable(false);
+        textDescripcion.setColumns(5);
+        textDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        textDescripcion.setForeground(new java.awt.Color(0, 0, 153));
+        textDescripcion.setLineWrap(true);
+        textDescripcion.setRows(5);
+        textDescripcion.setTabSize(5);
+        textDescripcion.setText("La contraseña que te solicitamos es una contraseña aleatoria generada por tu cuenta de Google para que podamos acceder a tu mail y enviar mensajes por vos.\nEstá contraseña, la generas entrando a tu cuenta, en la parte de seguridad eligiendo la opción de validación en dos pasos y lúego, en la opción de abajo, eliges para generar una contraseña de aplicación. Allí podrás colocarle el nombre de \"ComexApp\" o el que desees siempre y cuando sepas que es la contraseña que utilizarás desde este programa.\n\nNosotros no podemos ni utilizaremos esta información para acceder a tu cuenta de Google y utilizar tus datos u obtener cualquier tipo de información relacionada con tus mails, contactos o tarjetas asociadas a esta cuenta. \n\nNuesto único motivo en pedir este acceso es el de poder enviar mails por vos a los contactos que desees.\n\n                                                                                           Atentamente, equipo de ComexApp.");
+        textDescripcion.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(textDescripcion);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 650, 320));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 880));
 
@@ -126,5 +151,9 @@ public class InformacionMail extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonVolver2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea textDescripcion;
     // End of variables declaration//GEN-END:variables
 }

@@ -25,7 +25,11 @@ import javax.mail.util.ByteArrayDataSource;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import javax.swing.JEditorPane;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 /**
  *
  * @author Daniela
@@ -84,7 +88,8 @@ public class EnvioMailImpl {
 	
 	public void enviarEmailAnexo(boolean envioHtml, String usuarioMail, String contraseña, 
                 String listaDestinatarios, String nombreRemitente, String asunto, 
-                String textoMail, FileInputStream adjunto, String nombreAdjunto)  throws Exception{
+                String textoMail, String nombreAdjunto, String espacio1, 
+            String espacio2)  throws Exception{
 		// Olhe as configurações smtp do seu email
 		
 			Properties properties = new Properties();
@@ -126,7 +131,7 @@ public class EnvioMailImpl {
 	        List<FileInputStream> arquivos = new ArrayList<FileInputStream>();
 	        
 	        //pode vir do banco de dados etc
-	        arquivos.add(adjunto);
+	        arquivos.add(PDFArmado(nombreAdjunto, espacio1, espacio2));
                 
                 
 	        /* LISTA DE EJEMPLOS
@@ -148,7 +153,7 @@ public class EnvioMailImpl {
 	        MimeBodyPart anexoEmail = new MimeBodyPart();
 	        
 	        //onde é passado  o simulador de pdf você passa o seu aquivo gravado  no banco de dados ou qlq outro local
-	        anexoEmail.setDataHandler(new DataHandler(new ByteArrayDataSource(adjunto,"application/pdf"))); //aqui pode mudar pra doc text pdf de acordo com o arquivo que fosse enviar
+	        anexoEmail.setDataHandler(new DataHandler(new ByteArrayDataSource(PDFArmado(nombreAdjunto, espacio1, espacio2),"application/pdf"))); //aqui pode mudar pra doc text pdf de acordo com o arquivo que fosse enviar
 	        anexoEmail.setFileName(nombreAdjunto + ".pdf");
 	      
 	        multipart.addBodyPart(anexoEmail);
@@ -182,4 +187,19 @@ public class EnvioMailImpl {
     }
 
     
+    private FileInputStream PDFArmado(String nombreAdjunto, String espacio1, 
+            String espacio2) throws Exception {
+    	 
+        Document document  = new Document();
+    	File file = new File(nombreAdjunto);
+    	file.createNewFile();
+    	PdfWriter.getInstance(document, new FileOutputStream(file));
+    	document.open();
+    	document.add(new Paragraph(espacio1));
+        document.add(new Paragraph("\n\n"));
+        document.add(new Paragraph(espacio2));
+    	document.close();
+    	
+    	return new FileInputStream(file);
+    }
 }

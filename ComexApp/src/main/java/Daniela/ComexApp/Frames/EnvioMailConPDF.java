@@ -2,13 +2,8 @@ package Daniela.ComexApp.Frames;
 
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JEditorPane;
-import javax.swing.JFileChooser;
 import service.EnvioMailImpl;
 import service.MailImpl;
 
@@ -16,16 +11,16 @@ import service.MailImpl;
  *
  * @author Daniela
  */
-public class EnvioMailConAdjunto extends javax.swing.JFrame {
+public class EnvioMailConPDF extends javax.swing.JFrame {
 
      String usuario = "", rol = "", nombreCompleto = "";
     /**
-     * Creates new form EnvioMail
+     * Creates new form EnvioMailConPDF
      */
-    public EnvioMailConAdjunto() {
+    public EnvioMailConPDF() {
         initComponents();
         
-        setSize(830, 550);
+        setSize(1300, 550);
         setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -49,13 +44,6 @@ public class EnvioMailConAdjunto extends javax.swing.JFrame {
     MailImpl mail = new MailImpl();
     EnvioMailImpl envioMail = new EnvioMailImpl();
     
-    
-    
-        
-        
-        
-        
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,27 +55,31 @@ public class EnvioMailConAdjunto extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jButtonVolver2 = new javax.swing.JButton();
-        jButtonAdjunto = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        textMailOrigen = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        textMailOrigen = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         textMailDestino = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         textContraseña = new javax.swing.JTextField();
-        jButtonEnvio = new javax.swing.JButton();
+        jButtonInfo = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         textAsunto = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        textNombre = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         textMensaje = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jEditorPane1 = new javax.swing.JEditorPane();
+        jButtonEnvio = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        textNombre = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        textEspacio1 = new javax.swing.JTextArea();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        textEspacio2 = new javax.swing.JTextArea();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         textNombreAdjunto = new javax.swing.JTextField();
-        jLabelArchivo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -100,37 +92,26 @@ public class EnvioMailConAdjunto extends javax.swing.JFrame {
         jButtonVolver2.setBackground(new java.awt.Color(0, 0, 153));
         jButtonVolver2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonVolver2.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonVolver2.setText("Volver");
+        jButtonVolver2.setText("Volver a página principal");
         jButtonVolver2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVolver2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonVolver2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 450, 94, -1));
-
-        jButtonAdjunto.setBackground(new java.awt.Color(0, 0, 153));
-        jButtonAdjunto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButtonAdjunto.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonAdjunto.setText("Elegir adjunto");
-        jButtonAdjunto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAdjuntoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonAdjunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 390, -1, -1));
+        jPanel1.add(jButtonVolver2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 450, 260, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
         jLabel1.setText("Envio de mail");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
-        textMailOrigen.setForeground(new java.awt.Color(0, 0, 153));
-        jPanel1.add(textMailOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 160, -1));
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 153));
         jLabel2.setText("Mail de orígen:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, -1));
+
+        textMailOrigen.setForeground(new java.awt.Color(0, 0, 153));
+        jPanel1.add(textMailOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 160, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 153));
@@ -148,16 +129,15 @@ public class EnvioMailConAdjunto extends javax.swing.JFrame {
         textContraseña.setForeground(new java.awt.Color(0, 0, 153));
         jPanel1.add(textContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 160, -1));
 
-        jButtonEnvio.setBackground(new java.awt.Color(0, 0, 153));
-        jButtonEnvio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonEnvio.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonEnvio.setText("Enviar mail");
-        jButtonEnvio.addActionListener(new java.awt.event.ActionListener() {
+        jButtonInfo.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonInfo.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/preg.png"))); // NOI18N
+        jButtonInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEnvioActionPerformed(evt);
+                jButtonInfoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonEnvio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 230, -1));
+        jPanel1.add(jButtonInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, 60, 40));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 153));
@@ -166,14 +146,6 @@ public class EnvioMailConAdjunto extends javax.swing.JFrame {
 
         textAsunto.setForeground(new java.awt.Color(0, 0, 153));
         jPanel1.add(textAsunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 160, -1));
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel7.setText("Nombre remitente:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 100, -1, 20));
-
-        textNombre.setForeground(new java.awt.Color(0, 0, 153));
-        jPanel1.add(textNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 120, 130, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 153));
@@ -193,28 +165,79 @@ public class EnvioMailConAdjunto extends javax.swing.JFrame {
         textMensaje.setWrapStyleWord(true);
         jScrollPane1.setViewportView(textMensaje);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 400, 180));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, 400, 180));
 
-        jScrollPane2.setBorder(null);
-        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        jScrollPane2.setOpaque(false);
+        jButtonEnvio.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonEnvio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonEnvio.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonEnvio.setText("Enviar mail");
+        jButtonEnvio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEnvioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonEnvio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 230, -1));
 
-        jEditorPane1.setEditable(false);
-        jScrollPane2.setViewportView(jEditorPane1);
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel7.setText("Nombre remitente:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 100, -1, 20));
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 220, 0));
+        textNombre.setForeground(new java.awt.Color(0, 0, 153));
+        jPanel1.add(textNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 120, 130, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel8.setText("Nombre del archivo adjunto:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, -1, 20));
+        jLabel8.setText("PDF espacio 1:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 20, -1, 20));
+
+        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane2.setHorizontalScrollBar(null);
+
+        textEspacio1.setColumns(5);
+        textEspacio1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        textEspacio1.setForeground(new java.awt.Color(0, 0, 153));
+        textEspacio1.setLineWrap(true);
+        textEspacio1.setRows(5);
+        textEspacio1.setTabSize(5);
+        textEspacio1.setWrapStyleWord(true);
+        jScrollPane2.setViewportView(textEspacio1);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 40, 400, 180));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel9.setText("PDF espacio 2:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 230, -1, 20));
+
+        jScrollPane3.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane3.setHorizontalScrollBar(null);
+
+        textEspacio2.setColumns(5);
+        textEspacio2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        textEspacio2.setForeground(new java.awt.Color(0, 0, 153));
+        textEspacio2.setLineWrap(true);
+        textEspacio2.setRows(5);
+        textEspacio2.setTabSize(5);
+        textEspacio2.setWrapStyleWord(true);
+        jScrollPane3.setViewportView(textEspacio2);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 250, 400, 180));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel10.setText("En estos espacios podrás escribir o copiar y pegar lo que necesites");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 440, -1, 20));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel11.setText("Nombre del PDF:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 340, -1, 20));
 
         textNombreAdjunto.setForeground(new java.awt.Color(0, 0, 153));
-        jPanel1.add(textNombreAdjunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, 160, -1));
-
-        jLabelArchivo.setForeground(new java.awt.Color(0, 0, 153));
-        jPanel1.add(jLabelArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 220, -1));
+        jPanel1.add(textNombreAdjunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, 160, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 880));
 
@@ -229,86 +252,45 @@ public class EnvioMailConAdjunto extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonVolver2ActionPerformed
 
-    private void jButtonAdjuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdjuntoActionPerformed
-                
-        String correoOrigen, correoDestino, asunto, mensaje, contraseña, 
-                nombreRemitente, nombreAdjunto;
-        Boolean envioHTML;
-        File archivoElegido;
-        
-        correoOrigen = textMailOrigen.getText().trim();
-        correoDestino = textMailDestino.getText().trim();
-        asunto = textAsunto.getText().trim();
-        mensaje = textMensaje.getText().trim();
-        contraseña = textContraseña.getText().trim();
-        nombreRemitente = textNombre.getText().trim();
-        nombreAdjunto = textNombreAdjunto.getText().trim();
-        
-        JEditorPane jEditorPane1 = new JEditorPane();
-        JFileChooser jFileChooser1 = new JFileChooser(); //Creamos un nuevo objeto JFileChooser
-        int seleccion = jFileChooser1.showOpenDialog(this.jEditorPane1); //Abrimos el JFileChooser y guardamos el resultado en seleccion
-        
-        if (seleccion != JFileChooser.CANCEL_OPTION) {
+    private void jButtonInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInfoActionPerformed
 
-           archivoElegido = jFileChooser1.getSelectedFile();
-
-        if ((archivoElegido== null) || (archivoElegido.getName().equals(""))) {
-            jLabelArchivo.setText("...");
-        } else {
-            jLabelArchivo.setText(archivoElegido.getAbsolutePath());
-        }
-    }
+        InformacionMail infoMail = new InformacionMail();
+        infoMail.setVisible(true);
         
-        if (seleccion == JFileChooser.APPROVE_OPTION){ //Si el usuario ha pulsado la opción Aceptar
-            archivoElegido = jFileChooser1.getSelectedFile(); //Guardamos en la variable fichero el archivo seleccionado
-            try {        
-                FileInputStream aSubir = new FileInputStream(archivoElegido);
-            
-        if(!correoOrigen.equals(null) && !correoDestino.equals(null) && !asunto.equals(null)
-            && !mensaje.equals(null) && !contraseña.equals(null) && !nombreRemitente.equals(null)
-                && !archivoElegido.equals(null)){
-            envioHTML = true;
-        } else {
-            envioHTML = false;
-        }
-        
-            try {
-                envioMail.enviarEmailAnexo(envioHTML, correoOrigen, contraseña, 
-                        correoDestino, nombreRemitente, asunto, mensaje, aSubir, nombreAdjunto);
-            } catch (Exception e) {
-                System.err.print("No pudimos mandar tu mail " + e);
-            }
-
-            
-            } catch (FileNotFoundException e) {
-                System.err.print("No es posible enviar el mail con adjunto " + e);
-            }
-  
-        }
-    }//GEN-LAST:event_jButtonAdjuntoActionPerformed
+    }//GEN-LAST:event_jButtonInfoActionPerformed
 
     private void jButtonEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnvioActionPerformed
-
-        String correoOrigen, correoDestino, asunto, mensaje, contraseña, nombreRemitente;
+        
+        String correoOrigen, correoDestino, asunto, mensaje, contraseña, 
+                nombreRemitente, espacio1, espacio2, nombreAdjunto;
         Boolean envioHTML;
-
+        
         correoOrigen = textMailOrigen.getText().trim();
         correoDestino = textMailDestino.getText().trim();
         asunto = textAsunto.getText().trim();
         mensaje = textMensaje.getText().trim();
         contraseña = textContraseña.getText().trim();
         nombreRemitente = textNombre.getText().trim();
-
+        espacio1 = textEspacio1.getText().trim();
+        espacio2 = textEspacio2.getText().trim();
+        nombreAdjunto = textNombreAdjunto.getText().trim();
+        
         if(!correoOrigen.equals(null) && !correoDestino.equals(null) && !asunto.equals(null)
-            && !mensaje.equals(null) && !contraseña.equals(null) && !nombreRemitente.equals(null)){
+                && !mensaje.equals(null) && !contraseña.equals(null) && !nombreRemitente.equals(null)){
             envioHTML = true;
         } else {
             envioHTML = false;
         }
-
-        mail.envioDeMensajes(correoOrigen, correoDestino, asunto, mensaje, contraseña);
-        envioMail.enviarEmail(envioHTML, correoOrigen, contraseña, correoDestino, nombreRemitente, asunto, mensaje);
-
+        
+        
+         try {
+             //mail.envioDeMensajes(correoOrigen, correoDestino, asunto, mensaje, contraseña);
+             envioMail.enviarEmailAnexo(envioHTML, correoOrigen, contraseña, correoDestino,
+                     nombreRemitente, asunto, mensaje, nombreAdjunto, espacio1, espacio2);
+         } catch (Exception e) {
+             System.err.print("Error al enviar mail con adjunto " + e);
+         }
+        
     }//GEN-LAST:event_jButtonEnvioActionPerformed
 
     /**
@@ -328,13 +310,13 @@ public class EnvioMailConAdjunto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EnvioMailConAdjunto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EnvioMailConPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EnvioMailConAdjunto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EnvioMailConPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EnvioMailConAdjunto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EnvioMailConPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EnvioMailConAdjunto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EnvioMailConPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -348,17 +330,18 @@ public class EnvioMailConAdjunto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EnvioMailConAdjunto().setVisible(true);
+                new EnvioMailConPDF().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAdjunto;
     private javax.swing.JButton jButtonEnvio;
+    private javax.swing.JButton jButtonInfo;
     private javax.swing.JButton jButtonVolver2;
-    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -366,12 +349,15 @@ public class EnvioMailConAdjunto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabelArchivo;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField textAsunto;
     private javax.swing.JTextField textContraseña;
+    private javax.swing.JTextArea textEspacio1;
+    private javax.swing.JTextArea textEspacio2;
     private javax.swing.JTextField textMailDestino;
     private javax.swing.JTextField textMailOrigen;
     private javax.swing.JTextArea textMensaje;

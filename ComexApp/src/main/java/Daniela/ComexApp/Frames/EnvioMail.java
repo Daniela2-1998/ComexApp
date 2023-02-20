@@ -69,7 +69,7 @@ public class EnvioMail extends javax.swing.JFrame {
         jButtonEnvio = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         textNombre = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonPDF = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -88,7 +88,7 @@ public class EnvioMail extends javax.swing.JFrame {
                 jButtonVolver2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonVolver2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 430, 94, -1));
+        jPanel1.add(jButtonVolver2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, 94, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
@@ -176,13 +176,16 @@ public class EnvioMail extends javax.swing.JFrame {
         textNombre.setForeground(new java.awt.Color(0, 0, 153));
         jPanel1.add(textNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 120, 130, -1));
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonPDF.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonPDF.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonPDF.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonPDF.setText("Enviar mail con PDF personalizado adjunto");
+        jButtonPDF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonPDFActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, -1, -1));
+        jPanel1.add(jButtonPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 390, 400, 20));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 880));
 
@@ -229,13 +232,13 @@ public class EnvioMail extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonEnvioActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
- 
-        EnvioMailConAdjunto adjunto = new EnvioMailConAdjunto();
-        adjunto.setVisible(true);
+    private void jButtonPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPDFActionPerformed
+        
+        EnvioMailConPDF mailPDF = new EnvioMailConPDF();
+        mailPDF.setVisible(true);
         this.dispose();
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonPDFActionPerformed
 
     /**
      * @param args the command line arguments
@@ -276,9 +279,9 @@ public class EnvioMail extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonEnvio;
     private javax.swing.JButton jButtonInfo;
+    private javax.swing.JButton jButtonPDF;
     private javax.swing.JButton jButtonVolver2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

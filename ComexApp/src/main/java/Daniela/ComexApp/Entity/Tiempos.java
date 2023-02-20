@@ -22,12 +22,20 @@ public class Tiempos {
 
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date dia;
+    private Date diaActual;
     
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-    private Time tiempo;
+    private Time tiempoActual;
 
+    @NotNull
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date diaObjetivo;
+    
+    @NotNull
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private Time tiempoObjetivo;
+    
     @NotBlank
     private String detalle;
     
