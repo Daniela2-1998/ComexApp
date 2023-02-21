@@ -7,13 +7,18 @@ import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import service.TiemposImpl;
 import service.UsuariosImpl;
 
 
@@ -39,6 +44,11 @@ public class AdministrarUsuarios extends javax.swing.JFrame {
         
         mostrarTodosLosDatos();
         pasarCamposDeLaTablaAFields();
+        
+        Date diaActual = Date.valueOf(LocalDate.now());
+        Time horaActual = Time.valueOf(LocalTime.now());
+        TiemposImpl tiemposImpl = new TiemposImpl();        
+        tiemposImpl.verificarCuentasRegresivasCumplidas(diaActual, horaActual);
     }
     
         // icono

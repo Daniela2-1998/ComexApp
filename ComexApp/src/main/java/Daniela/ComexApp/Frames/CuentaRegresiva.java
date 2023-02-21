@@ -1,16 +1,13 @@
 package Daniela.ComexApp.Frames;
 
-import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.text.View;
 import service.TiemposImpl;
 
 /**
@@ -36,7 +33,12 @@ public class CuentaRegresiva extends javax.swing.JFrame {
         usuario = paginaPrincipal.usuario;
         nombreCompleto = paginaPrincipal.nombreCompleto;
         
-        setTitle("Cuenta regresiva - " + usuario + " - sistema ComexApp");   
+        setTitle("Cuenta regresiva - " + usuario + " - sistema ComexApp"); 
+        
+        Date diaActual = Date.valueOf(LocalDate.now());
+        Time horaActual = Time.valueOf(LocalTime.now());
+                
+        tiemposImpl.verificarCuentasRegresivasCumplidas(diaActual, horaActual);
     }
 
     // icono
@@ -68,6 +70,8 @@ public class CuentaRegresiva extends javax.swing.JFrame {
         textMinutos = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         textSegundos = new javax.swing.JTextField();
+        textDetalle = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -134,6 +138,14 @@ public class CuentaRegresiva extends javax.swing.JFrame {
         textSegundos.setForeground(new java.awt.Color(0, 0, 153));
         jPanel1.add(textSegundos, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, 80, -1));
 
+        textDetalle.setForeground(new java.awt.Color(0, 0, 153));
+        jPanel1.add(textDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 340, 160, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel5.setText("Detalle:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 320, -1, 20));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 880));
 
         pack();
@@ -148,20 +160,23 @@ public class CuentaRegresiva extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVolver2ActionPerformed
 
     private void jButtonIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarActionPerformed
-        
+
+        String detalle = textDetalle.getText().trim();
+        String tipo = "Cuenta regresiva";        
         int horas, minutos, segundos;
         
         horas = Integer.parseInt(textHoras.getText().trim());
         minutos = Integer.parseInt(textMinutos.getText().trim());
         segundos = Integer.parseInt(textSegundos.getText().trim());
         
-         try {
+        tiemposImpl.guardarTiempo(horas, minutos, segundos, tipo, detalle);
+        try {
              tiemposImpl.aplicarCuentaAtras(jLabelTiempo, horas, minutos, segundos);
          } catch (InterruptedException ex) {
              System.err.print("No se puede obtener " + ex);
              Logger.getLogger(CuentaRegresiva.class.getName()).log(Level.SEVERE, null, ex);
          }
-    
+ 
     }//GEN-LAST:event_jButtonIniciarActionPerformed
 
     /**
@@ -213,8 +228,10 @@ public class CuentaRegresiva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelTiempo;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField textDetalle;
     private javax.swing.JTextField textHoras;
     private javax.swing.JTextField textMinutos;
     private javax.swing.JTextField textSegundos;

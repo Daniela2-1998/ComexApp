@@ -98,4 +98,13 @@ public class MensajesImpl implements MensajesService {
         }
     }
     
+    public void notificacionTiempoCuentaRegresivaCumplida(String detalle, Date 
+            diaObjetivo, Time horaObjetiva){
+        
+        String botones[] = {"Aceptar", "Cerrar"};
+        
+        JOptionPane.showOptionDialog(null, "El tiempo de tu cuenta "
+                + "regresiva llegó a 0.", "Cuenta regresiva en 0", 0, 0, null, botones, this);
+    }
+    
 }

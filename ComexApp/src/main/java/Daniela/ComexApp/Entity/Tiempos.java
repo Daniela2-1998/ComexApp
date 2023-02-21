@@ -53,22 +53,6 @@ public class Tiempos {
         this.id = id;
     }
 
-    public Date getDia() {
-        return dia;
-    }
-
-    public void setDia(Date dia) {
-        this.dia = dia;
-    }
-
-    public Time getTiempo() {
-        return tiempo;
-    }
-
-    public void setTiempo(Time tiempo) {
-        this.tiempo = tiempo;
-    }
-
     public String getDetalle() {
         return detalle;
     }
@@ -84,6 +68,38 @@ public class Tiempos {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    public Date getDiaActual() {
+        return diaActual;
+    }
+
+    public void setDiaActual(Date diaActual) {
+        this.diaActual = diaActual;
+    }
+
+    public Time getTiempoActual() {
+        return tiempoActual;
+    }
+
+    public void setTiempoActual(Time tiempoActual) {
+        this.tiempoActual = tiempoActual;
+    }
+
+    public Date getDiaObjetivo() {
+        return diaObjetivo;
+    }
+
+    public void setDiaObjetivo(Date diaObjetivo) {
+        this.diaObjetivo = diaObjetivo;
+    }
+
+    public Time getTiempoObjetivo() {
+        return tiempoObjetivo;
+    }
+
+    public void setTiempoObjetivo(Time tiempoObjetivo) {
+        this.tiempoObjetivo = tiempoObjetivo;
+    }
     
     
     
@@ -91,10 +107,12 @@ public class Tiempos {
     public Tiempos() {
     }
 
-    public Tiempos(Integer id, Date dia, Time tiempo, String detalle, String tipo) {
+    public Tiempos(Integer id, Date diaActual, Time tiempoActual, Date diaObjetivo, Time tiempoObjetivo, String detalle, String tipo) {
         this.id = id;
-        this.dia = dia;
-        this.tiempo = tiempo;
+        this.diaActual = diaActual;
+        this.tiempoActual = tiempoActual;
+        this.diaObjetivo = diaObjetivo;
+        this.tiempoObjetivo = tiempoObjetivo;
         this.detalle = detalle;
         this.tipo = tipo;
     }

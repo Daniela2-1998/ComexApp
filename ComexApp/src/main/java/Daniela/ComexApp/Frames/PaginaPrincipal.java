@@ -2,10 +2,15 @@ package Daniela.ComexApp.Frames;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import service.ColorPaginaPrincipalImpl;
 import service.FondoPaginaPrincipalImpl;
 import service.InicioSesionImp;
 import service.MensajesDeObjetivosImpl;
+import service.TiemposImpl;
 import service.UsuariosImpl;
 
 /**
@@ -38,6 +43,12 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         setTitle("Página principal - " + usuario + " - sistema ComexApp");
         
         mensajesDeObjetivosImpl.verificarMensajesSinVer(usuario, rol);
+        Date diaActual = Date.valueOf(LocalDate.now());
+        Time horaActual = Time.valueOf(LocalTime.now());
+        TiemposImpl tiemposImpl = new TiemposImpl();        
+        tiemposImpl.verificarCuentasRegresivasCumplidas(diaActual, horaActual);
+        
+        
         
         if(rol.equals("Administrador")){
             Boolean estanSolicitandoAcceso = usuariosService.solicitarAccesoAlSistema(usuario);
