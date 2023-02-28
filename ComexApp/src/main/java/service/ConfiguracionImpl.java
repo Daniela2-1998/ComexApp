@@ -1,20 +1,18 @@
 package service;
 
 import config.Conexion;
-import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
  *
  * @author Daniela
  */
-public class ConfiguracionImpl{
+public class ConfiguracionImpl implements ConfiguracionService{
   
     // fields
     JTextField textEmpresa = new JTextField();
@@ -62,7 +60,7 @@ public class ConfiguracionImpl{
             }
     }
     
-     public void modificarConfiguracion(String empresaMod, String adminPrincipalMod, 
+    public void modificarConfiguracion(String empresaMod, String adminPrincipalMod, 
             String adminSecundarioMod, String adminExtraMod){
         
         int alternativaMensaje;
