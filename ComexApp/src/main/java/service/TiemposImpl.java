@@ -27,27 +27,28 @@ public class TiemposImpl {
     Boolean existeID, hay;
     int maximoID;
     
-    
-    
+
     public void aplicarCuentaAtras(JLabel jLabelTiempo, int horas, int minutos, 
             int segundos) throws InterruptedException{
         
         while(!(horas == 0 && minutos == 0 && segundos == 0)){
+            
+            jLabelTiempo.setText("Te avisaremos al cumplir el tiempo");
+            
+            if (horas < 10 && minutos < 10 && segundos < 10) {
+                System.out.println("0" + horas + ":" + "0" + minutos + ":" + "0" + segundos);
+            } else if (horas < 10 && minutos < 10 && segundos > 10) {
+                System.out.println("0" + horas + ":" + "0" + minutos + ":" + segundos);
+            } else if (horas < 10 && minutos > 10 && segundos < 10) {
+                System.out.println("0" + horas + ":" + minutos + ":" + "0" + segundos);
+            } else if (horas < 10 && minutos > 10 && segundos > 10) {
+                System.out.println("0" + horas + ":" + minutos + ":" + segundos);
+            } else if (horas > 10 && minutos > 10 && segundos > 10) {
+                System.out.println(horas + ":" + minutos + ":" + segundos);
+            } else if (horas > 10 && minutos < 10 && segundos < 10) {
+                System.out.println(horas + ":" + "0" + minutos + ":" + "0" + segundos);
+            }
 
-                if(horas < 10 && minutos < 10 && segundos < 10){
-                    System.out.println("0" + horas + ":" + "0" + minutos + ":" + "0" + segundos);
-                } else if (horas < 10 && minutos < 10 && segundos > 10){
-                    System.out.println("0" + horas + ":" + "0" + minutos + ":" + segundos);
-                } else if (horas < 10 && minutos > 10 && segundos < 10){
-                    System.out.println("0" + horas + ":" + minutos + ":" + "0" + segundos);
-                } else if (horas < 10 && minutos > 10 && segundos > 10){
-                    System.out.println("0" + horas + ":" + minutos + ":" + segundos);
-                } else if (horas > 10 && minutos > 10 && segundos > 10){
-                    System.out.println(horas + ":" + minutos + ":" + segundos);
-                } else if (horas > 10 && minutos < 10 && segundos < 10){
-                    System.out.println(horas + ":" + "0" + minutos + ":" + "0" + segundos);
-                }
- 
             if (segundos == 0) {
 
                 if (minutos == 0) {
@@ -71,7 +72,7 @@ public class TiemposImpl {
     }
     
     
-    public void guardarTiempo(int horas, int minutos, int segundos, String tipo, 
+    public void guardarTiempoCuenta(int horas, int minutos, int segundos, String tipo, 
             String detalle){
         
         Date diaActual = Date.valueOf(LocalDate.now());
@@ -82,7 +83,7 @@ public class TiemposImpl {
         int IDFinal = 0;
         
         if(yaExiste.equals(true)){
-            IDFinal = ID+ 1;
+            IDFinal = ID + 1;
             verSiExisteID(IDFinal);
         } else if (yaExiste.equals(false)){
             IDFinal = ID;
@@ -145,6 +146,88 @@ public class TiemposImpl {
             
         }catch(SQLException e){
            System.err.print("No podemos guardar tu tiempo en la base de datos " + e);
+        }
+    }
+    
+    
+    public void guardarTiempoCron(String tipo, String detalle){
+        
+        Date diaActual = Date.valueOf(LocalDate.now());
+        Date diaObjetivo = diaActual;
+        
+        Time horaActual = Time.valueOf(LocalTime.now());
+        Time horaObjetivo = Time.valueOf(LocalTime.now());
+        
+        int ID = recuperarMaximoID() + 1;
+        Boolean yaExiste = verSiExisteID(ID);
+        int IDFinal = 0;
+        
+        if(yaExiste.equals(true)){
+            IDFinal = ID+ 1;
+            verSiExisteID(IDFinal);
+        } else if (yaExiste.equals(false)){
+            IDFinal = ID;
+        }
+            
+        String sql = "insert into tiempos values(?, ?, ?, ?, ?, ?, ?)";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            
+            pst.setInt(1, IDFinal);
+            pst.setString(2, detalle);
+            pst.setString(3, tipo);            
+            pst.setDate(4, diaActual);
+            pst.setDate(5, diaObjetivo);
+            pst.setTime(6, horaActual);
+            pst.setTime(7, horaObjetivo);
+            pst.executeUpdate();
+            conec.close();
+            
+        }catch(SQLException e){
+           System.err.print("No podemos guardar tu tiempo en la base de datos " + e);
+        }
+    }
+    
+    
+    public void obtenerTiempoDePausadoOFin(String asunto){
+        
+        Time horaObjetivo = Time.valueOf(LocalTime.now());
+        
+        String sql = "update tiempos set tiempo_objetivo=? where detalle = '" + asunto + "' "
+                + "and tipo = 'Cronómetro'";
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            
+            pst.setTime(1, horaObjetivo);
+            pst.executeUpdate();
+            conec.close();
+        }catch(SQLException e){
+            System.err.println("No podemos cargar tiempo objetivo en la base " + e);
+        }
+    }
+    
+    public void calcularTiempoPasado(String asunto){
+        
+        String sql = "select tiempo_actual, tiempo_objetivo from tiempos where d"
+                + "etalle = '" + asunto + "' "
+                + "and tipo = 'Cronómetro'";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                Time tiempoBase = rs.getTime("tiempo_actual");
+                Time tiempoFinal = rs.getTime("tiempo_objetivo");
+                
+                Time tiempoCron = Time.valueOf(tiempoFinal.compareTo(tiempoBase));
+            }
+        }catch(SQLException e){
+            System.err.print("No se puede cálcular el tiempo transcurrido " + e);
         }
     }
     

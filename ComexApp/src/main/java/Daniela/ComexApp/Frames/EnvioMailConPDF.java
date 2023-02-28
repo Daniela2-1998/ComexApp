@@ -2,10 +2,18 @@ package Daniela.ComexApp.Frames;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import service.EnvioMailImpl;
 import service.MailImpl;
+import service.PDFContactosImpl;
+import service.PDFContenedoresImpl;
+import service.PDFOperacionesImpl;
+import service.PDFProduccionImpl;
 
 /**
  *
@@ -44,6 +52,11 @@ public class EnvioMailConPDF extends javax.swing.JFrame {
     MailImpl mail = new MailImpl();
     EnvioMailImpl envioMail = new EnvioMailImpl();
     
+    PDFContactosImpl pdfContactos = new PDFContactosImpl();
+    PDFProduccionImpl pdfProduccion = new PDFProduccionImpl();
+    PDFOperacionesImpl pdfOperaciones = new PDFOperacionesImpl();
+    PDFContenedoresImpl pdfContenedores = new PDFContenedoresImpl();
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -80,6 +93,8 @@ public class EnvioMailConPDF extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         textNombreAdjunto = new javax.swing.JTextField();
+        jButtonAdjuntar = new javax.swing.JButton();
+        cmbPDF = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -98,7 +113,7 @@ public class EnvioMailConPDF extends javax.swing.JFrame {
                 jButtonVolver2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonVolver2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 450, 260, -1));
+        jPanel1.add(jButtonVolver2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 260, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
@@ -239,6 +254,26 @@ public class EnvioMailConPDF extends javax.swing.JFrame {
         textNombreAdjunto.setForeground(new java.awt.Color(0, 0, 153));
         jPanel1.add(textNombreAdjunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, 160, -1));
 
+        jButtonAdjuntar.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonAdjuntar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonAdjuntar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonAdjuntar.setText("Adjuntar PDF");
+        jButtonAdjuntar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdjuntarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonAdjuntar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 390, 160, 25));
+
+        cmbPDF.setForeground(new java.awt.Color(0, 0, 153));
+        cmbPDF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Contactos", "Operaciones", "Producción", "Contenedores" }));
+        cmbPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbPDFActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmbPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 390, 130, 25));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 880));
 
         pack();
@@ -293,6 +328,37 @@ public class EnvioMailConPDF extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonEnvioActionPerformed
 
+    private void jButtonAdjuntarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdjuntarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAdjuntarActionPerformed
+
+    private void cmbPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPDFActionPerformed
+        
+        int eleccion = cmbPDF.getSelectedIndex() + 1;
+        
+        if(eleccion != 1){
+            
+            int diaN = LocalDate.now().getDayOfMonth();
+            Month mesN = LocalDate.now().getMonth();
+            int añoN = LocalDate.now().getYear();
+
+            String dia = String.valueOf(diaN);
+            String mes = String.valueOf(mesN);
+            String año = String.valueOf(añoN);
+            
+            if(eleccion == 2){
+                pdfContactos.pdfTodosLosContactos(usuario, nombreCompleto, dia, mes, año);
+            } else if (eleccion == 3){
+                pdfOperaciones.pdfTodasLasOperaciones(usuario, nombreCompleto, dia, mes, año);
+            } else if (eleccion == 4){
+                pdfProduccion.pdfTodoDeProduccion(usuario, nombreCompleto, dia, mes, año);
+            } else if (eleccion == 5){
+                pdfContenedores.pdfContenedores(usuario, nombreCompleto, dia, mes, año);
+            }
+            
+        } 
+    }//GEN-LAST:event_cmbPDFActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -336,6 +402,8 @@ public class EnvioMailConPDF extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbPDF;
+    private javax.swing.JButton jButtonAdjuntar;
     private javax.swing.JButton jButtonEnvio;
     private javax.swing.JButton jButtonInfo;
     private javax.swing.JButton jButtonVolver2;

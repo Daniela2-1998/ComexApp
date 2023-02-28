@@ -234,6 +234,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jMenuItemCrearInforme = new javax.swing.JMenuItem();
         jMenuAdministrar = new javax.swing.JMenu();
         jMenuItemDatosUsuarios = new javax.swing.JMenuItem();
+        jMenuItemConfiguracion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -524,6 +525,15 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         });
         jMenuAdministrar.add(jMenuItemDatosUsuarios);
 
+        jMenuItemConfiguracion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemConfiguracion.setText("Establecer configuración del sistema");
+        jMenuItemConfiguracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConfiguracionActionPerformed(evt);
+            }
+        });
+        jMenuAdministrar.add(jMenuItemConfiguracion);
+
         jMenuBar1.add(jMenuAdministrar);
 
         setJMenuBar(jMenuBar1);
@@ -715,6 +725,13 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItemEnvioActionPerformed
 
+    private void jMenuItemConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConfiguracionActionPerformed
+
+        ConfiguracionSistema config = new ConfiguracionSistema();
+        config.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItemConfiguracionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -771,6 +788,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuInformes;
     private javax.swing.JMenuItem jMenuItemAgendar;
     private javax.swing.JMenuItem jMenuItemCambioContraseña;
+    private javax.swing.JMenuItem jMenuItemConfiguracion;
     private javax.swing.JMenuItem jMenuItemCrearInforme;
     private javax.swing.JMenuItem jMenuItemDatosUsuarios;
     private javax.swing.JMenuItem jMenuItemEnvio;

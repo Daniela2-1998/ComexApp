@@ -75,6 +75,11 @@ public class Tiempos extends javax.swing.JFrame {
         jButtonCronometro.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonCronometro.setForeground(new java.awt.Color(0, 0, 153));
         jButtonCronometro.setText("Cronómetro");
+        jButtonCronometro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCronometroActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButtonCronometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 160, 170));
 
         jButtonCuentaRegresiva.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -109,9 +114,15 @@ public class Tiempos extends javax.swing.JFrame {
         
         CuentaRegresiva cuentaRegresiva = new CuentaRegresiva();
         cuentaRegresiva.setVisible(true);
-        this.dispose();
         
     }//GEN-LAST:event_jButtonCuentaRegresivaActionPerformed
+
+    private void jButtonCronometroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCronometroActionPerformed
+        
+        Cronometro cronometro = new Cronometro();
+        cronometro.setVisible(true);
+        
+    }//GEN-LAST:event_jButtonCronometroActionPerformed
 
     /**
      * @param args the command line arguments

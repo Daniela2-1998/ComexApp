@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Date;
 import java.sql.Time;
+import java.time.Clock;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.logging.Level;
@@ -14,13 +15,13 @@ import service.TiemposImpl;
  *
  * @author Daniela
  */
-public class CuentaRegresiva extends javax.swing.JFrame {
+public class Cronometro extends javax.swing.JFrame {
 
      String usuario = "", rol = "", nombreCompleto = "";
     /**
-     * Creates new form CuentaRegresiva
+     * Creates new form Cronometro
      */
-    public CuentaRegresiva() {
+    public Cronometro() {
         initComponents();
         
         setSize(700, 500);
@@ -33,12 +34,12 @@ public class CuentaRegresiva extends javax.swing.JFrame {
         usuario = paginaPrincipal.usuario;
         nombreCompleto = paginaPrincipal.nombreCompleto;
         
-        setTitle("Cuenta regresiva - " + usuario + " - sistema ComexApp"); 
+        setTitle("Cronometro - " + usuario + " - sistema ComexApp"); 
         
         Date diaActual = Date.valueOf(LocalDate.now());
         Time horaActual = Time.valueOf(LocalTime.now());
                 
-        tiemposImpl.verificarCuentasRegresivasCumplidas(diaActual, horaActual);
+   
     }
 
     // icono
@@ -62,16 +63,11 @@ public class CuentaRegresiva extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButtonVolver2 = new javax.swing.JButton();
         jLabelTiempo = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jButtonIniciar = new javax.swing.JButton();
-        textHoras = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        textMinutos = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        textSegundos = new javax.swing.JTextField();
-        textDetalle = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        jButtonPausar = new javax.swing.JButton();
+        jButtonFinalizar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        textAsunto = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -90,7 +86,7 @@ public class CuentaRegresiva extends javax.swing.JFrame {
                 jButtonVolver2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonVolver2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 94, 30));
+        jPanel1.add(jButtonVolver2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, 94, 30));
 
         jLabelTiempo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabelTiempo.setForeground(new java.awt.Color(0, 0, 153));
@@ -98,53 +94,46 @@ public class CuentaRegresiva extends javax.swing.JFrame {
         jLabelTiempo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(jLabelTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 440, 120));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel1.setText("Coloca el tiempo deseado:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, -1, -1));
-
         jButtonIniciar.setBackground(new java.awt.Color(0, 0, 153));
         jButtonIniciar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonIniciar.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonIniciar.setText("Iniciar cuenta");
+        jButtonIniciar.setText("Iniciar cronómetro");
         jButtonIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonIniciarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 260, -1, -1));
+        jPanel1.add(jButtonIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, -1, -1));
 
-        textHoras.setForeground(new java.awt.Color(0, 0, 153));
-        jPanel1.add(textHoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 80, -1));
+        jButtonPausar.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonPausar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonPausar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonPausar.setText("Pausar cronómetro");
+        jButtonPausar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPausarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonPausar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel2.setText("Horas:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, -1, -1));
+        jButtonFinalizar.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonFinalizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonFinalizar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonFinalizar.setText("Finalizar cronómetro");
+        jButtonFinalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFinalizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 260, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel3.setText("Minutos:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel1.setText("Asunto del cronómetro:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 300, -1, -1));
 
-        textMinutos.setForeground(new java.awt.Color(0, 0, 153));
-        jPanel1.add(textMinutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 280, 80, -1));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel4.setText("Segundos:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, -1, 20));
-
-        textSegundos.setForeground(new java.awt.Color(0, 0, 153));
-        jPanel1.add(textSegundos, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, 80, -1));
-
-        textDetalle.setForeground(new java.awt.Color(0, 0, 153));
-        jPanel1.add(textDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 340, 160, -1));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel5.setText("Detalle:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 320, -1, 20));
+        textAsunto.setForeground(new java.awt.Color(0, 0, 153));
+        jPanel1.add(textAsunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, 160, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 880));
 
@@ -160,23 +149,29 @@ public class CuentaRegresiva extends javax.swing.JFrame {
 
     private void jButtonIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarActionPerformed
 
-        String detalle = textDetalle.getText().trim();
-        String tipo = "Cuenta regresiva";        
-        int horas, minutos, segundos;
+        String tipo = "Cronómetro";
+        String detalle = textAsunto.getText().trim();
         
-        horas = Integer.parseInt(textHoras.getText().trim());
-        minutos = Integer.parseInt(textMinutos.getText().trim());
-        segundos = Integer.parseInt(textSegundos.getText().trim());
-        
-        tiemposImpl.guardarTiempoCuenta(horas, minutos, segundos, tipo, detalle);
-        try {
-             tiemposImpl.aplicarCuentaAtras(jLabelTiempo, horas, minutos, segundos);
-         } catch (InterruptedException ex) {
-             System.err.print("No se puede obtener " + ex);
-             Logger.getLogger(CuentaRegresiva.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        tiemposImpl.guardarTiempoCron(tipo, detalle);
  
     }//GEN-LAST:event_jButtonIniciarActionPerformed
+
+    private void jButtonPausarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPausarActionPerformed
+        
+        String detalle = textAsunto.getText().trim();
+        
+        tiemposImpl.obtenerTiempoDePausadoOFin(detalle);
+        
+        
+    }//GEN-LAST:event_jButtonPausarActionPerformed
+
+    private void jButtonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarActionPerformed
+        
+        String detalle = textAsunto.getText().trim();
+        
+        tiemposImpl.obtenerTiempoDePausadoOFin(detalle);
+        
+    }//GEN-LAST:event_jButtonFinalizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,14 +190,22 @@ public class CuentaRegresiva extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CuentaRegresiva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cronometro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CuentaRegresiva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cronometro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CuentaRegresiva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cronometro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CuentaRegresiva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cronometro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -215,24 +218,19 @@ public class CuentaRegresiva extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CuentaRegresiva().setVisible(true);
+                new Cronometro().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonFinalizar;
     private javax.swing.JButton jButtonIniciar;
+    private javax.swing.JButton jButtonPausar;
     private javax.swing.JButton jButtonVolver2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelTiempo;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField textDetalle;
-    private javax.swing.JTextField textHoras;
-    private javax.swing.JTextField textMinutos;
-    private javax.swing.JTextField textSegundos;
+    private javax.swing.JTextField textAsunto;
     // End of variables declaration//GEN-END:variables
 }
