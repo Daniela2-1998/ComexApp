@@ -29,6 +29,8 @@ public interface UsuariosService{
     
     public String obtenerUsuario(String nombre, String contraseña);
 
+    public String obtenerMailUsuario(String usuario);
+    
     public void obtenerDatosDelUsuario(String UsuarioBuscado,
             JTextField textID, JTextField textUsuario, JTextField textContraseña,
             JTextField textNombre, JTextField textApellido, JTextField textMail,

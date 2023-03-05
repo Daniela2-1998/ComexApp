@@ -14,6 +14,8 @@ public interface ConfiguracionService {
     public void modificarConfiguracion(String empresaMod, String adminPrincipalMod, 
             String adminSecundarioMod, String adminExtraMod);
     
+    public String obtenerAdminPrincipal();
+    
     public void verSiHayConfiguracion(JTextField textAdminPrin, JTextField textAdminSec,
             JTextField textAdminRep, JTextField textEmpresa);
 }

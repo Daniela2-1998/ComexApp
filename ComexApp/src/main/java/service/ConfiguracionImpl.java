@@ -96,6 +96,27 @@ public class ConfiguracionImpl implements ConfiguracionService{
         }
     }
     
+    public String obtenerAdminPrincipal(){
+    
+        String adminPrincipal = "";
+        String sql = "select admin_princ from configuracion";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+               adminPrincipal = rs.getString("admin_princ");
+            } 
+            conec.close();
+            
+        }catch(SQLException e){
+            System.err.println(e);
+        }
+        return adminPrincipal;
+    }
+    
     public void verSiHayConfiguracion(JTextField textAdminPrin, JTextField textAdminSec,
             JTextField textAdminRep, JTextField textEmpresa){
 

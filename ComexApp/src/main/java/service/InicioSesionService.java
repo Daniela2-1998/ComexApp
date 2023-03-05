@@ -24,4 +24,6 @@ public interface InicioSesionService {
     
     public boolean verificarQueNoExistaUsuario(String usuario);
     
+    public boolean verificarQueExistaUsuarioAdmin(String usuario);
+    
 }

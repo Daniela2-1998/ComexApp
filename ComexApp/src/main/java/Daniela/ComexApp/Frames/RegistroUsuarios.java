@@ -6,8 +6,11 @@ import Daniela.ComexApp.Repository.UsuariosRepository;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import service.ConfiguracionImpl;
 import service.InicioSesionImp;
+import service.MailImpl;
 import service.MensajesImpl;
+import service.UsuariosImpl;
 
 /**
  *
@@ -32,9 +35,11 @@ public class RegistroUsuarios extends javax.swing.JFrame {
     
     Usuarios usuarios = new Usuarios();
     UsuariosRepository usuariosRepository;
+    UsuariosImpl usuariosImpl = new UsuariosImpl();
     InicioSesionImp inicioSesionService = new InicioSesionImp();
     MensajesImpl mensajesImpl = new MensajesImpl();
-
+    MailImpl mailImpl = new MailImpl();
+    ConfiguracionImpl configImpl = new ConfiguracionImpl();
     
     public void LimpiarCamposRegistroUsuarios(){
         textID.setText("");
@@ -46,6 +51,30 @@ public class RegistroUsuarios extends javax.swing.JFrame {
         textTelefono.setText("");
         cmbRol.setSelectedIndex(0);
         cmbStatus.setSelectedIndex(0);
+    }
+    
+    public void envioDeMailAAdmin(String usuario, String nombre, String apellido){
+        String adminPrincipal, mailAdmin, mailApp, mensaje, asunto, contraseña;
+        
+        adminPrincipal = configImpl.obtenerAdminPrincipal();
+        mailAdmin = usuariosImpl.obtenerMailUsuario(adminPrincipal);
+        
+        contraseña = "fahbuzfhzpsqnyqm";
+        mailApp = "comexappj@gmail.com";
+        
+        asunto = "Nuevo registro de usuario detectado";
+        mensaje = adminPrincipal + " hemos detectado un nuevo registro de usuario "
+                + "en el sistema ComexApp. \n\n A continuación te dejamos más "
+                + "detalles para que puedas saber de quién se trata:  \n\n "
+                + "-Usuario: " + usuario + " \n\n -Nombre completo: " + nombre 
+                + " " + apellido + "\n\nEntra en el sistema para aceptar su ingreso, "
+        + "o bien, entra en la sección de 'Administración de usuarios' para "
+                + "eliminar su cuenta. De todas formas, recuerda que " + usuario + 
+                " aún no tiene acceso al sistema ya que el usuario se encuentra "
+                + "inactivo hasta que le des permiso o decidas eliminarlo del "
+                + "sistema ComexApp.\n\n \n\n Atentamente, \n\n  equipo de ComexApp";
+        
+        mailImpl.envioDeMensajes(mailApp, mailAdmin, asunto, mensaje, contraseña);
     }
     
     /**
@@ -264,7 +293,7 @@ public class RegistroUsuarios extends javax.swing.JFrame {
                     nombre, apellido, rol, mail, telefono, status).toString();
 
             if (!recepcion.isEmpty() && !rol.equals("Administrador")) {
-                
+                envioDeMailAAdmin(usuario, nombre, apellido);
                 mensajesImpl.avisoEsperarConfirmacionDeAcceso(usuario);
                 LimpiarCamposRegistroUsuarios();
             } else if (recepcion.isEmpty()) {

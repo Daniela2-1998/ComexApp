@@ -2,14 +2,16 @@ package Daniela.ComexApp.Frames;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 import service.ConfiguracionImpl;
+import service.InicioSesionImp;
 /**
  *
  * @author Daniela
  */
 public class ConfiguracionSistema extends javax.swing.JFrame {
 
-     String usuario = "", rol = "", nombreCompleto = "";
+     String usuario = "", rol = "", nombreCompleto = "", adminPrincipal = "";
     /**
      * Creates new form ConfiguracionSistema
      */
@@ -39,7 +41,7 @@ public class ConfiguracionSistema extends javax.swing.JFrame {
     
 
     ConfiguracionImpl configuracion = new ConfiguracionImpl();
-    
+    InicioSesionImp inicioSesionImpl = new InicioSesionImp();
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -170,26 +172,46 @@ public class ConfiguracionSistema extends javax.swing.JFrame {
     private void jButtonAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAplicarActionPerformed
        
         String adminPrinc, adminSec, adminRep, empresa;
-        
+        Boolean existePrinc, existeSec, existeRep;
+     
         adminPrinc = textAdmin1.getText().trim();
         adminSec = textAdmin2.getText().trim();
         adminRep = textAdmin3.getText().trim();
         empresa = textEmpresa.getText().trim();
         
-        configuracion.aplicarConfiguracion(empresa, adminPrinc, adminSec, adminRep);
+        existePrinc = inicioSesionImpl.verificarQueExistaUsuarioAdmin(adminPrinc);
+        existeSec = inicioSesionImpl.verificarQueExistaUsuarioAdmin(adminSec);
+        existeRep = inicioSesionImpl.verificarQueExistaUsuarioAdmin(adminRep);
         
+        if(existePrinc.equals(true) && existeSec.equals(true) && existeRep.equals(true)){
+            configuracion.aplicarConfiguracion(empresa, adminPrinc, adminSec, adminRep);
+        } else {
+            JOptionPane.showMessageDialog(null, "Verifica que los usuarios existan "
+                    + "y sean administradores", "Información incorrecta", 2, null);
+        }
+  
     }//GEN-LAST:event_jButtonAplicarActionPerformed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
         
         String adminPrinc, adminSec, adminRep, empresa;
+        Boolean existePrinc, existeSec, existeRep;
         
         adminPrinc = textAdmin1.getText().trim();
         adminSec = textAdmin2.getText().trim();
         adminRep = textAdmin3.getText().trim();
         empresa = textEmpresa.getText().trim();
         
-        configuracion.modificarConfiguracion(empresa, adminPrinc, adminSec, adminRep);
+        existePrinc = inicioSesionImpl.verificarQueExistaUsuarioAdmin(adminPrinc);
+        existeSec = inicioSesionImpl.verificarQueExistaUsuarioAdmin(adminSec);
+        existeRep = inicioSesionImpl.verificarQueExistaUsuarioAdmin(adminRep);
+        
+        if(existePrinc.equals(true) && existeSec.equals(true) && existeRep.equals(true)){
+            configuracion.aplicarConfiguracion(empresa, adminPrinc, adminSec, adminRep);
+        } else {
+            JOptionPane.showMessageDialog(null, "Verifica que los usuarios existan "
+                    + "y sean administradores", "Información incorrecta", 2, null);
+        }
         
     }//GEN-LAST:event_jButtonModificarActionPerformed
 

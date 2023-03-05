@@ -50,6 +50,7 @@ public class UsuariosImpl implements UsuariosService{
     String apellido;
     String usuario;
     String usuarioSolicitando;
+    String mailUs;
     int ID;
     
     //                              METODOS   
@@ -238,7 +239,24 @@ public class UsuariosImpl implements UsuariosService{
         return usuario;
     }
     
-    
+    public String obtenerMailUsuario(String usuario){
+       
+        String mailUs = "";
+        String sql = "select mail from usuarios where usuario = '" + usuario + "'";
+        
+         try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                mailUs = rs.getString("mail");
+            }
+         }catch(SQLException e){
+             System.err.println("No podemos recuperar el mail " + e);
+         }
+        return mailUs;
+    }
     
     // método obtención datos del usuario
     public void obtenerDatosDelUsuario(String usuarioBuscado, 

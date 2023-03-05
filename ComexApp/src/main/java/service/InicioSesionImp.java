@@ -41,7 +41,7 @@ public class InicioSesionImp implements InicioSesionService{
     UsuariosRepository usuariosRepository;
     InicioSesion inicioses = new InicioSesion();
     
-    boolean validezInicio, noExiste;
+    boolean validezInicio, noExiste, existe;
     
     
     public static String usuario = "", contraseña = "", 
@@ -347,12 +347,31 @@ public class InicioSesionImp implements InicioSesionService{
             }
             conec.close();
         }catch(SQLException e){
-            System.err.println("No se puede realziar verificación " + e);
+            System.err.println("No se puede realizar verificación " + e);
         }
         return noExiste;
     }
    
-   
+    public boolean verificarQueExistaUsuarioAdmin(String usuario){
+    
+        Boolean existe = null;
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement("select usuario, rol from usuarios where "
+                    + "usuario = '" + usuario + "' and rol = 'Administrador'");
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                existe = true;
+            } else{
+                existe = false;
+            }
+            conec.close();
+        }catch(SQLException e){
+            System.err.println("No se puede realizar verificación " + e);
+        }
+        return existe;
+    }
    
    
    
