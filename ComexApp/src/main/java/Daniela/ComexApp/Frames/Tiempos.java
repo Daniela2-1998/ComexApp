@@ -51,7 +51,7 @@ public class Tiempos extends javax.swing.JFrame {
         jButtonVolver2 = new javax.swing.JButton();
         jButtonCronometro = new javax.swing.JButton();
         jButtonCuentaRegresiva = new javax.swing.JButton();
-        jButtonCuentaRegresiva1 = new javax.swing.JButton();
+        jButtonCuentaHora = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -92,10 +92,10 @@ public class Tiempos extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonCuentaRegresiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 160, 170));
 
-        jButtonCuentaRegresiva1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButtonCuentaRegresiva1.setForeground(new java.awt.Color(0, 0, 153));
-        jButtonCuentaRegresiva1.setText("Cuenta regresiva");
-        jPanel1.add(jButtonCuentaRegresiva1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, 160, 170));
+        jButtonCuentaHora.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonCuentaHora.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonCuentaHora.setText("Establecer hora");
+        jPanel1.add(jButtonCuentaHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, 160, 170));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 880));
 
@@ -164,8 +164,8 @@ public class Tiempos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCronometro;
+    private javax.swing.JButton jButtonCuentaHora;
     private javax.swing.JButton jButtonCuentaRegresiva;
-    private javax.swing.JButton jButtonCuentaRegresiva1;
     private javax.swing.JButton jButtonVolver2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

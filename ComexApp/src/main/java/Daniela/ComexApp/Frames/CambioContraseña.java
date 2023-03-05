@@ -2,9 +2,9 @@ package Daniela.ComexApp.Frames;
 
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.sql.Date;
-import java.util.Calendar;
 import service.InicioSesionImp;
+import service.MailImpl;
+import service.UsuariosImpl;
 
 
 /**
@@ -40,13 +40,36 @@ public class CambioContraseña extends javax.swing.JFrame {
     }
     
     InicioSesionImp inicioSesionService = new InicioSesionImp();
+    UsuariosImpl usuariosImpl = new UsuariosImpl();
+    MailImpl mailImpl = new MailImpl();
     
     
     public void LimpiarCampos(){
         textContraseña.setText("");
         textConfirmacion.setText("");
     }
-    
+   
+    public void envioDeMailAUsuario(String usuario, String contraseña){
+        String mail, contraseñaM, mailApp, asunto, mensaje;
+        contraseñaM = "fahbuzfhzpsqnyqm";
+        mailApp = "comexappj@gmail.com";
+        
+        mail = usuariosImpl.obtenerMailUsuario(usuario);
+        
+  
+        asunto = "Cambio de contraseña de usuario";
+        mensaje = usuario + " hemos detectado tu cambio de contraseña en el sistema "
+                + "ComexApp y es por eso que queremos enviarte un mail notificandote "
+                + "tu nueva contraseña para que no la olvides: " + contraseña + 
+                ".\n\nPor otro lado, si no has sido tú el que la modificó, te "
+                + "recomendamos que entres al sistema y solicites el cambio de tu "
+                + "contraseña para evitar que terceros puedan ingresar y operar por "
+                + "ti generando conflictos en las operaciones de la empresa y "
+                + "perjudicando el trabajo realizado durante todo este tiempo juntos. \n\n"
+                + "Muchas gracias por trabajar con nosotros,\n\n           equipo de ComexApp";
+        
+        mailImpl.envioDeMensajes(mailApp, mail, asunto, mensaje, contraseña);
+    }
     
 
     /**
@@ -163,6 +186,7 @@ public class CambioContraseña extends javax.swing.JFrame {
         
         inicioSesionService.cambioContraseña(contraseñaAnterior, contraseñaNueva, 
                 confirmacion, usuario);
+        envioDeMailAUsuario(usuario, contraseña);
         LimpiarCampos();
 
     }//GEN-LAST:event_jButtonCambiarActionPerformed

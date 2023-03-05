@@ -38,7 +38,10 @@ public class Cronometro extends javax.swing.JFrame {
         
         Date diaActual = Date.valueOf(LocalDate.now());
         Time horaActual = Time.valueOf(LocalTime.now());
-                
+    
+        jLabelTiempo.setText("00:00:000");
+        jLabelTiempo.setHorizontalAlignment(jLabelTiempo.CENTER );
+        jLabelTiempo.setOpaque(true);
    
     }
 
@@ -49,6 +52,70 @@ public class Cronometro extends javax.swing.JFrame {
     }
 
     TiemposImpl tiemposImpl = new TiemposImpl();
+    
+    Boolean cronometroActivo;
+    Boolean pausado;
+
+    
+    
+    public void establecerCron(Boolean cronometroActivo, Boolean pausado){
+        
+        Integer minutos = 0 , segundos = 0, milesimas = 0;
+        //min es minutos, seg es segundos y mil es milesimas de segundo
+        String min="", seg="", mil="";
+        try {
+            while(pausado.equals(true)){
+            //Mientras cronometroActivo sea verdadero entonces seguira
+            //aumentando el tiempo
+                while(cronometroActivo.equals(true)) {
+                    Thread.sleep(4);
+                    //Incrementamos 4 milesimas de segundo
+                    milesimas += 4;
+                    //Cuando llega a 1000 osea 1 segundo aumenta 1 segundo
+                    //y las milesimas de segundo de nuevo a 0
+                    if(milesimas == 1000) {
+                        milesimas = 0;
+                        segundos += 1;
+                        //Si los segundos llegan a 60 entonces aumenta 1 los minutos
+                        //y los segundos vuelven a 0
+                        if(segundos == 60)
+                        {
+                            segundos = 0;
+                            minutos++;
+                        }
+                    }
+
+                    //Esto solamente es estetica para que siempre este en formato
+                    //00:00:000
+                    if( minutos < 10 ) min = "0" + minutos;
+                    else min = minutos.toString();
+                    if( segundos < 10 ) seg = "0" + segundos;
+                    else seg = segundos.toString();
+
+                    if( milesimas < 10 ) mil = "00" + milesimas;
+                    else if( milesimas < 100 ) mil = "0" + milesimas;
+                    else mil = milesimas.toString();
+
+                    //Colocamos en la etiqueta la informacion
+                    jLabelTiempo.setText( min + ":" + seg + ":" + mil );
+                    /*while(pausar){
+                        tiempo.setText( min + ":" + seg + ":" + mil );
+                    }*/
+                }
+            jLabelTiempo.setText( min + ":" + seg + ":" + mil );
+            }
+        }catch(Exception e)
+        {System.out.println("Error " + e);
+        }
+        //Cuando se reincie se coloca nuevamente en 00:00:000
+        jLabelTiempo.setText("00:00:000");
+    }
+    
+
+
+    
+    
+    
     
 
     /**
@@ -68,6 +135,8 @@ public class Cronometro extends javax.swing.JFrame {
         jButtonFinalizar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         textAsunto = new javax.swing.JTextField();
+        jButtonReiniciar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -92,12 +161,12 @@ public class Cronometro extends javax.swing.JFrame {
         jLabelTiempo.setForeground(new java.awt.Color(0, 0, 153));
         jLabelTiempo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTiempo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabelTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 440, 120));
+        jPanel1.add(jLabelTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 440, 120));
 
         jButtonIniciar.setBackground(new java.awt.Color(0, 0, 153));
         jButtonIniciar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonIniciar.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonIniciar.setText("Iniciar cronómetro");
+        jButtonIniciar.setText("Iniciar ");
         jButtonIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonIniciarActionPerformed(evt);
@@ -108,24 +177,24 @@ public class Cronometro extends javax.swing.JFrame {
         jButtonPausar.setBackground(new java.awt.Color(0, 0, 153));
         jButtonPausar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonPausar.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonPausar.setText("Pausar cronómetro");
+        jButtonPausar.setText("Pausar");
         jButtonPausar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPausarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonPausar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, -1, -1));
+        jPanel1.add(jButtonPausar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, -1, -1));
 
         jButtonFinalizar.setBackground(new java.awt.Color(0, 0, 153));
         jButtonFinalizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonFinalizar.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonFinalizar.setText("Finalizar cronómetro");
+        jButtonFinalizar.setText("Finalizar");
         jButtonFinalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFinalizarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 260, -1, -1));
+        jPanel1.add(jButtonFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 260, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
@@ -134,6 +203,22 @@ public class Cronometro extends javax.swing.JFrame {
 
         textAsunto.setForeground(new java.awt.Color(0, 0, 153));
         jPanel1.add(textAsunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, 160, -1));
+
+        jButtonReiniciar.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonReiniciar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonReiniciar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonReiniciar.setText("Reiniciar");
+        jButtonReiniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReiniciarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonReiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel2.setText("Cronómetro");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 880));
 
@@ -152,6 +237,11 @@ public class Cronometro extends javax.swing.JFrame {
         String tipo = "Cronómetro";
         String detalle = textAsunto.getText().trim();
         
+        Boolean cronometroActivo = true;
+        Boolean pausado = true;
+          
+        
+        establecerCron(cronometroActivo, pausado);
         tiemposImpl.guardarTiempoCron(tipo, detalle);
  
     }//GEN-LAST:event_jButtonIniciarActionPerformed
@@ -160,18 +250,37 @@ public class Cronometro extends javax.swing.JFrame {
         
         String detalle = textAsunto.getText().trim();
         
+        Boolean cronometroActivo = true;
+        Boolean pausado = true;
+        
+        
+        establecerCron(cronometroActivo, pausado);
         tiemposImpl.obtenerTiempoDePausadoOFin(detalle);
-        
-        
+
     }//GEN-LAST:event_jButtonPausarActionPerformed
 
     private void jButtonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarActionPerformed
         
         String detalle = textAsunto.getText().trim();
         
+        Boolean cronometroActivo = false;
+        Boolean pausado = true;
+        
+        establecerCron(cronometroActivo, pausado);
         tiemposImpl.obtenerTiempoDePausadoOFin(detalle);
         
     }//GEN-LAST:event_jButtonFinalizarActionPerformed
+
+    private void jButtonReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReiniciarActionPerformed
+       
+        String detalle = textAsunto.getText().trim();
+        
+        Boolean cronometroActivo = false;
+        Boolean pausado = false;
+        
+        establecerCron(cronometroActivo, pausado);
+        
+    }//GEN-LAST:event_jButtonReiniciarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -227,8 +336,10 @@ public class Cronometro extends javax.swing.JFrame {
     private javax.swing.JButton jButtonFinalizar;
     private javax.swing.JButton jButtonIniciar;
     private javax.swing.JButton jButtonPausar;
+    private javax.swing.JButton jButtonReiniciar;
     private javax.swing.JButton jButtonVolver2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelTiempo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField textAsunto;
