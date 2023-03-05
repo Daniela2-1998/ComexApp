@@ -87,11 +87,13 @@ Una vez que se produzcan nuevos lanzamientos, se irán agregando en esta parte d
 El objetivo de ComexApp es brindar un servicio de cálidad que permita que los interesados en el comercio internacional, nacional o en producción, puedan realizar la mayor cantidad de funciones posibles en un mismo lugar para una mayor organización, visibilidad, control y para facilitar y agilizar procesos.
 
 ##### Lista de funciones:
-- [ ] Envío de mails ante creación de usuario (dando nombre de usuario, nombre y contraseña + notificación de espera para acceder al sistema), una vez obtenido el ingreso al sistema o ante rechazo de creación de usuario, notificación ante cambio de contraseña, envio de mails a contactos para dar información de su operación asociada con todos los detalles necesarios. 
+- [X] Envío de mails ante creación de usuario (dando nombre de usuario, nombre y contraseña + notificación de espera para acceder al sistema), una vez obtenido el ingreso al sistema o ante rechazo de creación de usuario, notificación ante cambio de contraseña, envio de mails a contactos para dar información de su operación asociada con todos los detalles necesarios. 
 
 - [ ] WhatsApp asociado para envío de mensajes para usuarios u contactos.
 
-- [ ] Relojes. Cuenta regresiva y contar el tiempo que lleván las funciones.
+- [X] Relojes. Cuenta regresiva y contar el tiempo que lleván las funciones.
+
+- [X] Permitir que los administradores configuren el sistema.
 
 - [ ] Cálculo de costing y pricing.
 
