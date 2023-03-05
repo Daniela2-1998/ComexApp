@@ -77,6 +77,39 @@ public class RegistroUsuarios extends javax.swing.JFrame {
         mailImpl.envioDeMensajes(mailApp, mailAdmin, asunto, mensaje, contraseña);
     }
     
+    public void envioDeMailAUsuario(String usuario, String nombre, String apellido, 
+            String contraseña, String rol, String mail){
+        String contraseñaM, mailApp, asunto, mensaje;
+        contraseñaM = "fahbuzfhzpsqnyqm";
+        mailApp = "comexappj@gmail.com";
+        
+        String info = "ComexApp es un software diseñado para empresas que se "
+                + "dediquen a la comercialización internacional y/o nacional. "
+                + "Surge con la idea de facilitar y agrupar la mayoría de las "
+                + "operaciones que realizan estas empresas, permitiendole realizar "
+                + "de forma más práctica y cómoda, tareas como: gestión de stock, "
+                + "gestión de pedidos de suministros, gestión de operaciones nacionales "
+                + "e internacionales, administración de usuarios, creación de usuarios, "
+                + "registro de participantes de la operación (importadores, exportadores, "
+                + "despachantes, transporte), control de contenedores, asociar operaciones "
+                + "con participantes/contenedores/productos, toma de notas personales, "
+                + "creación de una agenda personal, establecimiento y control del "
+                + "cumplimiento de objetivos, personalización de la pantalla principal, etc.";
+        
+        asunto = "Registro éxitoso en el sistema ComexApp";
+        mensaje = usuario + " tu registro en el sistema ComexApp fue éxitoso. "
+                + "Dependiendo de como esté configurada la aplicación, es probable "
+                + "que todavía tengas que esperar que el administrador designado "
+                + "confirme tu usuario para que puedas ingresar y utilizarlo para "
+                + "realizar tus operaciones normalmente. \n\n A continuación, "
+                + "te enviamos los datos de tu cuenta para que puedas ingresar:"
+                + "\n\nUsuario: " + usuario + "\n\nContraseña: " + contraseña + 
+                "\n\nNombre completo: " + nombre + " " + apellido + "\n\n" + info + 
+                "\n\n\n\nMuchas gracias por registrarte\n\n      equipo de ComexApp";
+        
+        mailImpl.envioDeMensajes(mailApp, mail, asunto, mensaje, contraseña);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -294,6 +327,7 @@ public class RegistroUsuarios extends javax.swing.JFrame {
 
             if (!recepcion.isEmpty() && !rol.equals("Administrador")) {
                 envioDeMailAAdmin(usuario, nombre, apellido);
+                envioDeMailAUsuario(usuario, nombre, apellido, contraseña, rol,  mail);
                 mensajesImpl.avisoEsperarConfirmacionDeAcceso(usuario);
                 LimpiarCamposRegistroUsuarios();
             } else if (recepcion.isEmpty()) {

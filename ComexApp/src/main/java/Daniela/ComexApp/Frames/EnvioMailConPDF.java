@@ -298,7 +298,7 @@ public class EnvioMailConPDF extends javax.swing.JFrame {
         
         String correoOrigen, correoDestino, asunto, mensaje, contraseña, 
                 nombreRemitente, espacio1, espacio2, nombreAdjunto;
-        Boolean envioHTML;
+        Boolean envioHTML, mailEnviado;
         
         correoOrigen = textMailOrigen.getText().trim();
         correoDestino = textMailDestino.getText().trim();
@@ -318,13 +318,18 @@ public class EnvioMailConPDF extends javax.swing.JFrame {
         }
         
         
-         try {
+        try {
              //mail.envioDeMensajes(correoOrigen, correoDestino, asunto, mensaje, contraseña);
-             envioMail.enviarEmailAnexo(envioHTML, correoOrigen, contraseña, correoDestino,
+            mailEnviado = envioMail.enviarEmailAnexo(envioHTML, correoOrigen, contraseña, correoDestino,
                      nombreRemitente, asunto, mensaje, nombreAdjunto, espacio1, espacio2);
-         } catch (Exception e) {
+             
+            if(mailEnviado.equals(true)){
+            JOptionPane.showMessageDialog(null, "Mensaje enviado", "Envio de mails", 0);
+           }
+             
+        } catch (Exception e) {
              System.err.print("Error al enviar mail con adjunto " + e);
-         }
+    }
         
     }//GEN-LAST:event_jButtonEnvioActionPerformed
 

@@ -37,62 +37,62 @@ import javax.swing.JPanel;
 public class EnvioMailImpl {
     
     private String userName = "comexappj@gmail.com";
-
+    Boolean enviado;
 	
-	public void enviarEmail(boolean envioHtml, String usuarioMail, String contraseña, 
+	public Boolean enviarEmail(boolean envioHtml, String usuarioMail, String contraseña, 
                 String listaDestinatarios, String nombreRemitente, String asunto, 
                 String textoMail) {
-	// Olhe as configurações smtp do seu email
-	try {
-		Properties properties = new Properties();
-		properties.put("mail.smtp.ssl.trust", "*"); // faz o projeto autenticar com segurança ssl
-		properties.put("mail.smtp.auth", "true"); // autorização
-		properties.put("mail.smtp.starttls", "true");// autenticação
-		properties.put("mail.smtp.host", "smtp.gmail.com");// servidor do gmail do Google
-		properties.put("mail.smtp.port", "465"); // porta do servidor
-		properties.put("mail.smtp.socketFactory.port", "465");// Expecifica a porta a ser conectada pelo socket
-		properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");// classe socket de conexão// ao SMTP
-			
-		//session do javamail depedencia colocada no pom.xml
-        Session session = Session.getInstance(properties, new Authenticator() {
-        	@Override
-        	protected PasswordAuthentication getPasswordAuthentication() {
-        		
-        		return new PasswordAuthentication(usuarioMail, contraseña);
-        	}
-		});
-        //array de adrees pode mandar pra varios email users , pra quem vai ser enviado aqui
-        Address[] toUser = InternetAddress.parse(listaDestinatarios); 
-		
-        Message message = new MimeMessage(session); //session do usuario que vai enviar os email
-        message.setFrom(new InternetAddress(usuarioMail, nombreRemitente)); //quem está enviando o email pode mudar o nome ao lado pra empresa ou algo que está enviando
-        message.setRecipients(Message.RecipientType.TO, toUser); //email de destino os array de email
-        message.setSubject(asunto); //assunto do email titulo qnd envia
-        
-        if (envioHtml) { //se enviar com html
-        	message.setContent(textoMail, "text/html; charset=utf-8");
-        }else {
-        message.setText(textoMail);//texto do envio do email
-        }
-        
-        Transport.send(message); //objeto de mensagem pra ser enviado
-        
-       
-        
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-        JOptionPane.showMessageDialog(null, "Mensaje enviado", "Envio de mails", 0);
+            Boolean enviado = null;
+            // Olhe as configurações smtp do seu email
+            try {
+                Properties properties = new Properties();
+                properties.put("mail.smtp.ssl.trust", "*"); // faz o projeto autenticar com segurança ssl
+                properties.put("mail.smtp.auth", "true"); // autorização
+                properties.put("mail.smtp.starttls", "true");// autenticação
+                properties.put("mail.smtp.host", "smtp.gmail.com");// servidor do gmail do Google
+                properties.put("mail.smtp.port", "465"); // porta do servidor
+                properties.put("mail.smtp.socketFactory.port", "465");// Expecifica a porta a ser conectada pelo socket
+                properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");// classe socket de conexão// ao SMTP
 
-}
-	
-	public void enviarEmailAnexo(boolean envioHtml, String usuarioMail, String contraseña, 
-                String listaDestinatarios, String nombreRemitente, String asunto, 
-                String textoMail, String nombreAdjunto, String espacio1, 
-            String espacio2)  throws Exception{
-		// Olhe as configurações smtp do seu email
-		
-			Properties properties = new Properties();
+                //session do javamail depedencia colocada no pom.xml
+                Session session = Session.getInstance(properties, new Authenticator() {
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+
+                        return new PasswordAuthentication(usuarioMail, contraseña);
+                    }
+                });
+                //array de adrees pode mandar pra varios email users , pra quem vai ser enviado aqui
+                Address[] toUser = InternetAddress.parse(listaDestinatarios);
+
+                Message message = new MimeMessage(session); //session do usuario que vai enviar os email
+                message.setFrom(new InternetAddress(usuarioMail, nombreRemitente)); //quem está enviando o email pode mudar o nome ao lado pra empresa ou algo que está enviando
+                message.setRecipients(Message.RecipientType.TO, toUser); //email de destino os array de email
+                message.setSubject(asunto); //assunto do email titulo qnd envia
+
+                if (envioHtml) { //se enviar com html
+                    message.setContent(textoMail, "text/html; charset=utf-8");
+                } else {
+                    message.setText(textoMail);//texto do envio do email
+                }
+
+                Transport.send(message); //objeto de mensagem pra ser enviado
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            enviado = true;
+            return enviado;
+    }
+
+    public boolean enviarEmailAnexo(boolean envioHtml, String usuarioMail, String contraseña,
+            String listaDestinatarios, String nombreRemitente, String asunto,
+            String textoMail, String nombreAdjunto, String espacio1,
+            String espacio2) throws Exception {
+        // Olhe as configurações smtp do seu email
+
+        Boolean enviado;
+        Properties properties = new Properties();
 			properties.put("mail.smtp.ssl.trust", "*"); // faz o projeto autenticar com segurança ssl
 			properties.put("mail.smtp.auth", "true"); // autorização
 			properties.put("mail.smtp.starttls", "true");// autenticação
@@ -164,8 +164,7 @@ public class EnvioMailImpl {
                message.setContent(multipart);
                
                 Transport.send(message); //objeto de mensagem pra ser enviado
-                JOptionPane.showMessageDialog(null, "Mensaje enviado", "Envio de mails", 0);
-
+                return enviado = true;
 	}	 	
 	
 	  

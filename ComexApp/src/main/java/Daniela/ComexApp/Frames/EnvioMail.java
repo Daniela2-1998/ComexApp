@@ -2,6 +2,7 @@ package Daniela.ComexApp.Frames;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 import service.EnvioMailImpl;
 import service.MailImpl;
 
@@ -210,7 +211,7 @@ public class EnvioMail extends javax.swing.JFrame {
     private void jButtonEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnvioActionPerformed
         
         String correoOrigen, correoDestino, asunto, mensaje, contraseña, nombreRemitente;
-        Boolean envioHTML;
+        Boolean envioHTML, mailEnviado;
         
         correoOrigen = textMailOrigen.getText().trim();
         correoDestino = textMailDestino.getText().trim();
@@ -228,7 +229,12 @@ public class EnvioMail extends javax.swing.JFrame {
         
         
         //mail.envioDeMensajes(correoOrigen, correoDestino, asunto, mensaje, contraseña);    
-        envioMail.enviarEmail(envioHTML, correoOrigen, contraseña, correoDestino, nombreRemitente, asunto, mensaje);
+        mailEnviado = envioMail.enviarEmail(envioHTML, correoOrigen, contraseña, 
+                correoDestino, nombreRemitente, asunto, mensaje);
+        
+        if(mailEnviado.equals(true)){
+            JOptionPane.showMessageDialog(null, "Mensaje enviado", "Envio de mails", 0);
+        }
         
     }//GEN-LAST:event_jButtonEnvioActionPerformed
 
