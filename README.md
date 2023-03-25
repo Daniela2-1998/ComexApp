@@ -109,7 +109,7 @@ Una vez clonado el proyecto, selecciona la clase "InicioSesión" para poder corr
 
 ## Tecnologías utilizadas:
 - `JAVA`
-- 'Maven'
-- 'Netbeans'
+- `Maven`
+- `Netbeans`
 - `Spring boot`
-- 'PostGreSQL'
+- `PostGreSQL`
