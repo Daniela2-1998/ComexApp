@@ -25,11 +25,6 @@ import javax.mail.util.ByteArrayDataSource;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
-import javax.swing.JEditorPane;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 /**
  *
  * @author Daniela
@@ -113,7 +108,7 @@ public class EnvioMailImpl {
 	        Address[] toUser = InternetAddress.parse(listaDestinatarios); 
 			
 	        Message message = new MimeMessage(session); //session do usuario que vai enviar os email
-	        message.setFrom(new InternetAddress(usuarioMail, nombreRemitente )); //quem está enviando o email pode mudar o nome ao lado pra empresa ou algo que está enviando
+	        message.setFrom(new InternetAddress(usuarioMail, nombreRemitente)); //quem está enviando o email pode mudar o nome ao lado pra empresa ou algo que está enviando
 	        message.setRecipients(Message.RecipientType.TO, toUser); //email de destino os array de email
 	        message.setSubject(asunto); //assunto do email titulo qnd envia
 	        
@@ -133,13 +128,6 @@ public class EnvioMailImpl {
 	        //pode vir do banco de dados etc
 	        arquivos.add(PDFArmado(nombreAdjunto, espacio1, espacio2));
                 
-                
-	        /* LISTA DE EJEMPLOS
-                arquivos.add(simuladorDePDF());//nota fiscal //certificado
-	        arquivos.add(simuladorDePDF());//documento texto
-	        arquivos.add(simuladorDePDF());//Imagem
-                */
-	        
 	        //juntando a parte 1 e dois corpo email e anexoemail
 	        Multipart multipart = new  MimeMultipart(); 
 	        multipart.addBodyPart(corpoEmail);
@@ -168,6 +156,80 @@ public class EnvioMailImpl {
 	}	 	
 	
 	  
+      public boolean enviarEmailExterno(boolean envioHtml, String usuarioMail, String contraseña,
+            String listaDestinatarios, String nombreRemitente, String asunto,
+            String textoMail, String nombreAdjunto, File PDFExterno) throws Exception {
+        // Olhe as configurações smtp do seu email
+
+        Boolean enviado;
+        Properties properties = new Properties();
+			properties.put("mail.smtp.ssl.trust", "*"); // faz o projeto autenticar com segurança ssl
+			properties.put("mail.smtp.auth", "true"); // autorização
+			properties.put("mail.smtp.starttls", "true");// autenticação
+			properties.put("mail.smtp.host", "smtp.gmail.com");// servidor do gmail do Google
+			properties.put("mail.smtp.port", "465"); // porta do servidor
+			properties.put("mail.smtp.socketFactory.port", "465");// Expecifica a porta a ser conectada pelo socket
+			properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");// classe socket de conexão// ao SMTP
+				
+			//session do javamail depedencia colocada no pom.xml
+	        Session session = Session.getInstance(properties, new Authenticator() {
+	        	@Override
+	        	protected PasswordAuthentication getPasswordAuthentication() {
+	        		
+	        		return new PasswordAuthentication(usuarioMail, contraseña);
+	        	}
+			});
+	        //array de adrees pode mandar pra varios email users , pra quem vai ser enviado aqui
+	        Address[] toUser = InternetAddress.parse(listaDestinatarios); 
+			
+	        Message message = new MimeMessage(session); //session do usuario que vai enviar os email
+	        message.setFrom(new InternetAddress(usuarioMail, nombreRemitente )); //quem está enviando o email pode mudar o nome ao lado pra empresa ou algo que está enviando
+	        message.setRecipients(Message.RecipientType.TO, toUser); //email de destino os array de email
+	        message.setSubject(asunto); //assunto do email titulo qnd envia
+	        
+	        
+	        //parte 1 do email que é texto e descrição do e-mail
+	        
+	        MimeBodyPart corpoEmail = new MimeBodyPart();
+
+	        if (envioHtml) { //se enviar com html
+	        	corpoEmail.setContent(textoMail, "text/html; charset=utf-8");
+	        }else {
+	        	corpoEmail.setText(textoMail);//texto do envio do email
+	        }
+	        
+	        List<FileInputStream> arquivos = new ArrayList<FileInputStream>();
+	        
+	        //pode vir do banco de dados etc
+	        arquivos.add(PDFExterno(nombreAdjunto, PDFExterno));
+	        
+	        //juntando a parte 1 e dois corpo email e anexoemail
+	        Multipart multipart = new  MimeMultipart(); 
+	        multipart.addBodyPart(corpoEmail);
+           
+            int index = 0;
+	        
+	        for (FileInputStream fileInputStream : arquivos) {
+	        	
+	        
+	        //parte 2 dos email que são os anexo em PDF
+	        MimeBodyPart anexoEmail = new MimeBodyPart();
+	        
+	        //onde é passado  o simulador de pdf você passa o seu aquivo gravado  no banco de dados ou qlq outro local
+	        anexoEmail.setDataHandler(new DataHandler(new ByteArrayDataSource(PDFExterno(nombreAdjunto, PDFExterno), "application/pdf"))); //aqui pode mudar pra doc text pdf de acordo com o arquivo que fosse enviar
+	        anexoEmail.setFileName(nombreAdjunto + ".pdf");
+	      
+	        multipart.addBodyPart(anexoEmail);
+	        
+	        index++;
+	        
+                }
+               message.setContent(multipart);
+               
+                Transport.send(message); //objeto de mensagem pra ser enviado
+                return enviado = true;
+	}	 	
+	
 	
 	 //esse método simula o pdf ou qualquer arquivo que possa ser enviado por anexo no email
     //pode pegar o aquivo no banco de dados tb ou uma pasta ,base64, byte[],  Stream de arquivo
@@ -201,4 +263,13 @@ public class EnvioMailImpl {
     	
     	return new FileInputStream(file);
     }
+    
+    
+    private FileInputStream PDFExterno(String nombreAdjunto, File PDFExterno) throws Exception {
+    	return new FileInputStream(PDFExterno);
+    }
+    
+    
+    
+
 }

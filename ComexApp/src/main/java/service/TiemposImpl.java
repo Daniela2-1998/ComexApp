@@ -26,6 +26,48 @@ public class TiemposImpl {
     Boolean existeID, hay;
     int maximoID;
     
+    public void guardarTiempoRecordatorio(int horas, int minutos, int segundos, Date dia, String detalle){
+        
+        Date diaActual = Date.valueOf(LocalDate.now());
+        Time horaActual = Time.valueOf(LocalTime.now());
+        
+        String tipo = "Recordatorio";
+        
+        int ID = recuperarMaximoID() + 1;
+        Boolean yaExiste = verSiExisteID(ID);
+        int IDFinal = 0;
+        
+        if(yaExiste.equals(true)){
+            IDFinal = ID + 1;
+            verSiExisteID(IDFinal);
+        } else if (yaExiste.equals(false)){
+            IDFinal = ID;
+        }
+
+        String tiempoObjetivos = horas + ":" + minutos + ":" + segundos;
+        Time tiempoObjetivo = Time.valueOf(tiempoObjetivos);
+        
+        
+        String sql = "insert into tiempos values(?, ?, ?, ?, ?, ?, ?)";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            
+            pst.setInt(1, IDFinal);
+            pst.setString(2, detalle);
+            pst.setString(3, tipo);            
+            pst.setDate(4, diaActual);
+            pst.setDate(5, dia);
+            pst.setTime(6, horaActual);
+            pst.setTime(7, tiempoObjetivo);
+            pst.executeUpdate();
+            conec.close();
+            
+        }catch(SQLException e){
+           System.err.print("No podemos guardar tu tiempo en la base de datos " + e);
+        }
+    }
 
     public void aplicarCuentaAtras(JLabel jLabelTiempo, int horas, int minutos, 
             int segundos) throws InterruptedException{

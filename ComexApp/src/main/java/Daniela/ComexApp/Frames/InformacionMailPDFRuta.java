@@ -2,19 +2,18 @@ package Daniela.ComexApp.Frames;
 
 import java.awt.Image;
 import java.awt.Toolkit;
-import service.ContenedoresImpl;
 
 /**
  *
  * @author Daniela
  */
-public class InformacionMail extends javax.swing.JFrame {
+public class InformacionMailPDFRuta extends javax.swing.JFrame {
 
      String usuario = "", rol = "", nombreCompleto = "";
     /**
-     * Creates new form StockProduccion
+     * Creates new form InformacionMailPDF
      */
-    public InformacionMail() {
+    public InformacionMailPDFRuta() {
         initComponents();
         
         setSize(700, 500);
@@ -27,7 +26,7 @@ public class InformacionMail extends javax.swing.JFrame {
         usuario = paginaPrincipal.usuario;
         nombreCompleto = paginaPrincipal.nombreCompleto;
         
-        setTitle("Menú de operaciones - " + usuario + " - sistema ComexApp");
+        setTitle("¿Cómo consigo la ruta de mi archivo? - " + usuario + " - sistema ComexApp");
         
     }
 
@@ -37,10 +36,7 @@ public class InformacionMail extends javax.swing.JFrame {
         return retValue;   
     }
     
-    ContenedoresImpl contenedoresImpl = new ContenedoresImpl();
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,6 +52,7 @@ public class InformacionMail extends javax.swing.JFrame {
         jButtonVolver2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         textDescripcion = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -91,11 +88,16 @@ public class InformacionMail extends javax.swing.JFrame {
         textDescripcion.setLineWrap(true);
         textDescripcion.setRows(5);
         textDescripcion.setTabSize(5);
-        textDescripcion.setText("La contraseña que te solicitamos es una contraseña aleatoria generada por tu cuenta de Google para que podamos acceder a tu mail y enviar mensajes por vos.\nEstá contraseña, la generas entrando a tu cuenta, en la parte de seguridad eligiendo la opción de validación en dos pasos y lúego, en la opción de abajo, eliges para generar una contraseña de aplicación. Allí podrás colocarle el nombre de \"ComexApp\" o el que desees siempre y cuando sepas que es la contraseña que utilizarás desde este programa.\n\nNosotros no podemos ni utilizaremos esta información para acceder a tu cuenta de Google y utilizar tus datos u obtener cualquier tipo de información relacionada con tus mails, contactos o tarjetas asociadas a esta cuenta. \n\nNuesto único motivo en pedir este acceso es el de poder enviar mails por vos a los contactos que desees.\n\n                                                                                           Atentamente, equipo de ComexApp.");
+        textDescripcion.setText("  Probablemente te asuste que te solicitemos la ruta de tu archivo para poder enviarlo por PDF, debido a que no sepas qué es o como conseguirla. Tranquilo, es muy fácil obtenerla.\nTe dejamos los pasos aquí abajo:\n                     \n                                  1. Abre documentos.\n                                  2. Busca el archivo PDF que desees enviar por mail.\n                                  3. Click derecho en el.\n                                  4. Elige la opción \"Copiar como ruta de acceso\".\n                                  5. Entras en ComexApp y eliges la opción de \"Archivo externo\".\n                                  6. En el espacio correspondiente pegas esa ruta.");
         textDescripcion.setWrapStyleWord(true);
         jScrollPane1.setViewportView(textDescripcion);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 650, 320));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 650, 260));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel1.setText("¿Cómo consigo la ruta de mi archivo?");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 880));
 
@@ -125,14 +127,26 @@ public class InformacionMail extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InformacionMail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformacionMailPDFRuta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InformacionMail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformacionMailPDFRuta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InformacionMail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformacionMailPDFRuta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InformacionMail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformacionMailPDFRuta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -141,13 +155,14 @@ public class InformacionMail extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InformacionMail().setVisible(true);
+                new InformacionMailPDFRuta().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonVolver2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

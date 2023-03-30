@@ -50,6 +50,7 @@ public class StockProduccion extends javax.swing.JFrame {
         jMenuItemGestion = new javax.swing.JMenuItem();
         jMenuItemIngreso = new javax.swing.JMenuItem();
         jMenuItemDarDeBaja = new javax.swing.JMenuItem();
+        jMenuItemBuscar = new javax.swing.JMenuItem();
         jMenuSuministros = new javax.swing.JMenu();
         jMenuItemGestion2 = new javax.swing.JMenuItem();
         jMenuItemIngreso2 = new javax.swing.JMenuItem();
@@ -129,6 +130,16 @@ public class StockProduccion extends javax.swing.JFrame {
             }
         });
         jMenuStock.add(jMenuItemDarDeBaja);
+
+        jMenuItemBuscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItemBuscar.setForeground(new java.awt.Color(0, 0, 153));
+        jMenuItemBuscar.setText("Buscar producto");
+        jMenuItemBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemBuscarActionPerformed(evt);
+            }
+        });
+        jMenuStock.add(jMenuItemBuscar);
 
         jMenuBar.add(jMenuStock);
 
@@ -243,6 +254,10 @@ public class StockProduccion extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItemClientesProveedoresActionPerformed
 
+    private void jMenuItemBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -281,6 +296,7 @@ public class StockProduccion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonVolver2;
     private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JMenuItem jMenuItemBuscar;
     private javax.swing.JMenuItem jMenuItemClientesProveedores;
     private javax.swing.JMenuItem jMenuItemDarDeBaja;
     private javax.swing.JMenuItem jMenuItemDarDeBaja2;
