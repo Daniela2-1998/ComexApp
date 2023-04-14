@@ -21,13 +21,13 @@ import service.StockImpl;
  *
  * @author Daniela
  */
-public class AsociarOperacionInternacional extends javax.swing.JFrame {
+public class CompradoresVendedoresNacionales extends javax.swing.JFrame {
 
      String usuario = "", rol = "", nombreCompleto = "";
     /**
-     * Creates new form AsociarOperacionInternacional
+     * Creates new form CompradoresVendedoresNacionales
      */
-    public AsociarOperacionInternacional() {
+    public CompradoresVendedoresNacionales() {
         initComponents();
         
         setSize(850, 500);
@@ -40,13 +40,12 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
         usuario = paginaPrincipal.usuario;
         nombreCompleto = paginaPrincipal.nombreCompleto;
         
-        setTitle("Asociar operación internacional - " + usuario + " - sistema ComexApp");
-        
-        jPanelContenedor.setVisible(true);
-        jPanelStock.setVisible(false);
-        jPanelParticipante.setVisible(false);
-        jPanelTransporte.setVisible(false);
-        jPanelVer.setVisible(false);
+        setTitle("Compradores y vendedores nacionales - " + usuario + " - sistema ComexApp");
+
+        jPanelRegistrar.setVisible(false);
+        jPanelModificar.setVisible(false);
+        jPanelEliminar.setVisible(false);
+        jPanelVer.setVisible(true);
 
         mostrarTodosLasAsociaciones();
     }
@@ -81,8 +80,8 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
             pst = conec.prepareStatement(sql);
             rs = pst.executeQuery();
             
-            jTableAsociaciones = new JTable(modelo);
-            jScrollPane1.setViewportView(jTableAsociaciones);
+            jTableCompradorVendedor = new JTable(modelo);
+            jScrollPane1.setViewportView(jTableCompradorVendedor);
             
             modelo.addColumn("N° operación internacional");
             modelo.addColumn("Contenedor");
@@ -129,22 +128,21 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
 
         jPanelVer = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableAsociaciones = new javax.swing.JTable();
+        jTableCompradorVendedor = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButtonVolver = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        textID = new javax.swing.JTextField();
-        jButtonContenedor = new javax.swing.JButton();
-        jButtonStock = new javax.swing.JButton();
-        jButtonParticipante = new javax.swing.JButton();
-        jButtonTransporte = new javax.swing.JButton();
+        jButtonRegistrar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
         jButtonVer = new javax.swing.JButton();
-        jPanelContenedor = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jPanelRegistrar = new javax.swing.JPanel();
         jButtonAsociarCont = new javax.swing.JButton();
         textCodigo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jPanelStock = new javax.swing.JPanel();
+        jPanelModificar = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jButtonAsociarStock = new javax.swing.JButton();
         textProducto = new javax.swing.JTextField();
@@ -153,7 +151,7 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
         textVendedor = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jPanelParticipante = new javax.swing.JPanel();
+        jPanelEliminar = new javax.swing.JPanel();
         textExportador = new javax.swing.JTextField();
         jButtonAsociarExp = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -171,10 +169,6 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
         textEmpresaIm = new javax.swing.JTextField();
         textEmpresaEx = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jPanelTransporte = new javax.swing.JPanel();
-        textProducto2 = new javax.swing.JTextField();
-        jButtonAsociarStock2 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -184,7 +178,7 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
         jPanelVer.setBackground(new java.awt.Color(255, 255, 255));
         jPanelVer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTableAsociaciones.setModel(new javax.swing.table.DefaultTableModel(
+        jTableCompradorVendedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -195,12 +189,12 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
-        jTableAsociaciones.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        jTableAsociaciones.setEnabled(false);
-        jTableAsociaciones.setSelectionBackground(new java.awt.Color(0, 0, 153));
-        jTableAsociaciones.setSelectionForeground(new java.awt.Color(0, 0, 153));
-        jTableAsociaciones.setShowHorizontalLines(true);
-        jScrollPane1.setViewportView(jTableAsociaciones);
+        jTableCompradorVendedor.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTableCompradorVendedor.setEnabled(false);
+        jTableCompradorVendedor.setSelectionBackground(new java.awt.Color(0, 0, 153));
+        jTableCompradorVendedor.setSelectionForeground(new java.awt.Color(0, 0, 153));
+        jTableCompradorVendedor.setShowHorizontalLines(true);
+        jScrollPane1.setViewportView(jTableCompradorVendedor);
 
         jPanelVer.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 30, 610, -1));
 
@@ -223,102 +217,89 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
         });
         jPanel2.add(jButtonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 110, -1));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 153));
-        jButton1.setText("ID Operación");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRegistrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonRegistrar.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonRegistrar.setText("Registrar");
+        jButtonRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonRegistrarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        jPanel2.add(jButtonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 170, 20));
 
-        textID.setForeground(new java.awt.Color(0, 0, 153));
-        jPanel2.add(textID, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 70, -1));
-
-        jButtonContenedor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonContenedor.setForeground(new java.awt.Color(0, 0, 153));
-        jButtonContenedor.setText("Contenedor");
-        jButtonContenedor.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonModificar.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonContenedorActionPerformed(evt);
+                jButtonModificarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 170, 20));
+        jPanel2.add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 170, 20));
 
-        jButtonStock.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonStock.setForeground(new java.awt.Color(0, 0, 153));
-        jButtonStock.setText("Stock");
-        jButtonStock.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonEliminar.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonStockActionPerformed(evt);
+                jButtonEliminarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 170, 20));
-
-        jButtonParticipante.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonParticipante.setForeground(new java.awt.Color(0, 0, 153));
-        jButtonParticipante.setText("Participante");
-        jButtonParticipante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonParticipanteActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButtonParticipante, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 170, 20));
-
-        jButtonTransporte.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonTransporte.setForeground(new java.awt.Color(0, 0, 153));
-        jButtonTransporte.setText("Transporte");
-        jButtonTransporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTransporteActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButtonTransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 170, 20));
+        jPanel2.add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 170, 20));
 
         jButtonVer.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonVer.setForeground(new java.awt.Color(0, 0, 153));
-        jButtonVer.setText("Ver asociados");
+        jButtonVer.setText("Visualizar");
         jButtonVer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVerActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 170, 20));
+        jPanel2.add(jButtonVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 170, 20));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Participantes");
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 140, 20));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("nacionales");
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 100, 20));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 500));
 
-        jPanelContenedor.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelContenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelRegistrar.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelRegistrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButtonAsociarCont.setBackground(new java.awt.Color(0, 0, 153));
         jButtonAsociarCont.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonAsociarCont.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonAsociarCont.setText("Asociar al contenedor");
+        jButtonAsociarCont.setText("Registrar");
         jButtonAsociarCont.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAsociarContActionPerformed(evt);
             }
         });
-        jPanelContenedor.add(jButtonAsociarCont, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, -1, 25));
+        jPanelRegistrar.add(jButtonAsociarCont, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, -1, 25));
 
         textCodigo.setForeground(new java.awt.Color(0, 0, 153));
-        jPanelContenedor.add(textCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 140, 150, -1));
+        jPanelRegistrar.add(textCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 140, 150, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
         jLabel1.setText("Código de contenedor:");
-        jPanelContenedor.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
+        jPanelRegistrar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
 
-        jPanel1.add(jPanelContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 490, 500));
+        jPanel1.add(jPanelRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 490, 500));
 
-        jPanelStock.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelStock.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelModificar.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelModificar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 153));
         jLabel2.setText("Producto:");
-        jPanelStock.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
+        jPanelModificar.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
 
         jButtonAsociarStock.setBackground(new java.awt.Color(0, 0, 153));
         jButtonAsociarStock.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -329,39 +310,39 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
                 jButtonAsociarStockActionPerformed(evt);
             }
         });
-        jPanelStock.add(jButtonAsociarStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, -1, 25));
+        jPanelModificar.add(jButtonAsociarStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, -1, 25));
 
         textProducto.setForeground(new java.awt.Color(0, 0, 153));
-        jPanelStock.add(textProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 150, -1));
+        jPanelModificar.add(textProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 150, -1));
 
         textCodigoProducto.setForeground(new java.awt.Color(0, 0, 153));
-        jPanelStock.add(textCodigoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 150, -1));
+        jPanelModificar.add(textCodigoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 150, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 153));
         jLabel9.setText("Código del producto:");
-        jPanelStock.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+        jPanelModificar.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
 
         textVendedor.setForeground(new java.awt.Color(0, 0, 153));
-        jPanelStock.add(textVendedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 150, -1));
+        jPanelModificar.add(textVendedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 150, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 153));
         jLabel10.setText("Vendedor:");
-        jPanelStock.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
+        jPanelModificar.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 153));
         jLabel11.setText("Es necesario completar todos estos datos para asociar al producto debido.");
-        jPanelStock.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
+        jPanelModificar.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
 
-        jPanel1.add(jPanelStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 490, 500));
+        jPanel1.add(jPanelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 490, 500));
 
-        jPanelParticipante.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelParticipante.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelEliminar.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelEliminar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         textExportador.setForeground(new java.awt.Color(0, 0, 153));
-        jPanelParticipante.add(textExportador, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 150, -1));
+        jPanelEliminar.add(textExportador, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 150, -1));
 
         jButtonAsociarExp.setBackground(new java.awt.Color(0, 0, 153));
         jButtonAsociarExp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -372,12 +353,12 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
                 jButtonAsociarExpActionPerformed(evt);
             }
         });
-        jPanelParticipante.add(jButtonAsociarExp, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 190, 25));
+        jPanelEliminar.add(jButtonAsociarExp, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 190, 25));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 153));
         jLabel3.setText("Exportador:");
-        jPanelParticipante.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
+        jPanelEliminar.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
 
         jButtonAsociarImp.setBackground(new java.awt.Color(0, 0, 153));
         jButtonAsociarImp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -388,15 +369,15 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
                 jButtonAsociarImpActionPerformed(evt);
             }
         });
-        jPanelParticipante.add(jButtonAsociarImp, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 190, 25));
+        jPanelEliminar.add(jButtonAsociarImp, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 190, 25));
 
         textImportador.setForeground(new java.awt.Color(0, 0, 153));
-        jPanelParticipante.add(textImportador, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 150, -1));
+        jPanelEliminar.add(textImportador, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 150, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 153));
         jLabel5.setText("Importador:");
-        jPanelParticipante.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
+        jPanelEliminar.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
 
         jButtonAsociarDesp.setBackground(new java.awt.Color(0, 0, 153));
         jButtonAsociarDesp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -407,70 +388,51 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
                 jButtonAsociarDespActionPerformed(evt);
             }
         });
-        jPanelParticipante.add(jButtonAsociarDesp, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, -1, 25));
+        jPanelEliminar.add(jButtonAsociarDesp, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, -1, 25));
 
         textEmpresaDes.setForeground(new java.awt.Color(0, 0, 153));
-        jPanelParticipante.add(textEmpresaDes, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 150, -1));
+        jPanelEliminar.add(textEmpresaDes, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 150, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 153));
         jLabel6.setText("Empresa despachante:");
-        jPanelParticipante.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
+        jPanelEliminar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 153));
         jLabel7.setText("Por favor, elige un participante ");
-        jPanelParticipante.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
+        jPanelEliminar.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 153));
         jLabel8.setText("de la operación internacional");
-        jPanelParticipante.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, -1, -1));
+        jPanelEliminar.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 153));
         jLabel12.setText("Despachante:");
-        jPanelParticipante.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
+        jPanelEliminar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
 
         textDespachante.setForeground(new java.awt.Color(0, 0, 153));
-        jPanelParticipante.add(textDespachante, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 150, -1));
+        jPanelEliminar.add(textDespachante, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 150, -1));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 0, 153));
         jLabel13.setText("Empresa importador:");
-        jPanelParticipante.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
+        jPanelEliminar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
 
         textEmpresaIm.setForeground(new java.awt.Color(0, 0, 153));
-        jPanelParticipante.add(textEmpresaIm, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 150, -1));
+        jPanelEliminar.add(textEmpresaIm, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 150, -1));
 
         textEmpresaEx.setForeground(new java.awt.Color(0, 0, 153));
-        jPanelParticipante.add(textEmpresaEx, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 150, -1));
+        jPanelEliminar.add(textEmpresaEx, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 150, -1));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 0, 153));
         jLabel14.setText("Empresa exportador:");
-        jPanelParticipante.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
+        jPanelEliminar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
 
-        jPanel1.add(jPanelParticipante, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 490, 500));
-
-        jPanelTransporte.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelTransporte.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        textProducto2.setForeground(new java.awt.Color(0, 0, 153));
-        jPanelTransporte.add(textProducto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 140, 150, -1));
-
-        jButtonAsociarStock2.setBackground(new java.awt.Color(0, 0, 153));
-        jButtonAsociarStock2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButtonAsociarStock2.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonAsociarStock2.setText("Asociar al stock");
-        jPanelTransporte.add(jButtonAsociarStock2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, -1, 25));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel4.setText("Producto:");
-        jPanelTransporte.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
-
-        jPanel1.add(jPanelTransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 490, 500));
+        jPanel1.add(jPanelEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 490, 500));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 880));
 
@@ -483,45 +445,41 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonVolverActionPerformed
 
-    private void jButtonContenedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonContenedorActionPerformed
+    private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
         
-        jPanelContenedor.setVisible(true);
-        jPanelStock.setVisible(false);
-        jPanelParticipante.setVisible(false);
-        jPanelTransporte.setVisible(false);
+        jPanelRegistrar.setVisible(true);
+        jPanelModificar.setVisible(false);
+        jPanelEliminar.setVisible(false);
         jPanelVer.setVisible(false);
                 
-    }//GEN-LAST:event_jButtonContenedorActionPerformed
+    }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
-    private void jButtonStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStockActionPerformed
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
         
-        jPanelContenedor.setVisible(false);
-        jPanelStock.setVisible(true);
-        jPanelParticipante.setVisible(false);
-        jPanelTransporte.setVisible(false);
+        jPanelRegistrar.setVisible(false);
+        jPanelModificar.setVisible(true);
+        jPanelEliminar.setVisible(false);
         jPanelVer.setVisible(false);
         
-    }//GEN-LAST:event_jButtonStockActionPerformed
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
-    private void jButtonParticipanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonParticipanteActionPerformed
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         
-        jPanelContenedor.setVisible(false);
-        jPanelStock.setVisible(false);
-        jPanelParticipante.setVisible(true);
-        jPanelTransporte.setVisible(false);
+        jPanelRegistrar.setVisible(false);
+        jPanelModificar.setVisible(false);
+        jPanelEliminar.setVisible(true);
         jPanelVer.setVisible(false);
         
-    }//GEN-LAST:event_jButtonParticipanteActionPerformed
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
 
-    private void jButtonTransporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTransporteActionPerformed
+    private void jButtonVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerActionPerformed
         
-        jPanelContenedor.setVisible(false);
-        jPanelStock.setVisible(false);
-        jPanelParticipante.setVisible(false);
-        jPanelTransporte.setVisible(true);
+        jPanelRegistrar.setVisible(false);
+        jPanelModificar.setVisible(false);
+        jPanelEliminar.setVisible(false);
         jPanelVer.setVisible(false);
         
-    }//GEN-LAST:event_jButtonTransporteActionPerformed
+    }//GEN-LAST:event_jButtonVerActionPerformed
 
     private void jButtonAsociarStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsociarStockActionPerformed
         
@@ -595,20 +553,6 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonAsociarImpActionPerformed
 
-    private void jButtonVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerActionPerformed
-        
-        jPanelContenedor.setVisible(false);
-        jPanelStock.setVisible(false);
-        jPanelParticipante.setVisible(false);
-        jPanelTransporte.setVisible(false);
-        jPanelVer.setVisible(true);
-        
-    }//GEN-LAST:event_jButtonVerActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -626,14 +570,18 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AsociarOperacionInternacional.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CompradoresVendedoresNacionales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AsociarOperacionInternacional.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CompradoresVendedoresNacionales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AsociarOperacionInternacional.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CompradoresVendedoresNacionales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AsociarOperacionInternacional.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CompradoresVendedoresNacionales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -642,23 +590,20 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AsociarOperacionInternacional().setVisible(true);
+                new CompradoresVendedoresNacionales().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAsociarCont;
     private javax.swing.JButton jButtonAsociarDesp;
     private javax.swing.JButton jButtonAsociarExp;
     private javax.swing.JButton jButtonAsociarImp;
     private javax.swing.JButton jButtonAsociarStock;
-    private javax.swing.JButton jButtonAsociarStock2;
-    private javax.swing.JButton jButtonContenedor;
-    private javax.swing.JButton jButtonParticipante;
-    private javax.swing.JButton jButtonStock;
-    private javax.swing.JButton jButtonTransporte;
+    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonModificar;
+    private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JButton jButtonVer;
     private javax.swing.JButton jButtonVolver;
     private javax.swing.JLabel jLabel1;
@@ -667,9 +612,10 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -677,13 +623,12 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanelContenedor;
-    private javax.swing.JPanel jPanelParticipante;
-    private javax.swing.JPanel jPanelStock;
-    private javax.swing.JPanel jPanelTransporte;
+    private javax.swing.JPanel jPanelEliminar;
+    private javax.swing.JPanel jPanelModificar;
+    private javax.swing.JPanel jPanelRegistrar;
     private javax.swing.JPanel jPanelVer;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableAsociaciones;
+    private javax.swing.JTable jTableCompradorVendedor;
     private javax.swing.JTextField textCodigo;
     private javax.swing.JTextField textCodigoProducto;
     private javax.swing.JTextField textDespachante;
@@ -691,10 +636,8 @@ public class AsociarOperacionInternacional extends javax.swing.JFrame {
     private javax.swing.JTextField textEmpresaEx;
     private javax.swing.JTextField textEmpresaIm;
     private javax.swing.JTextField textExportador;
-    private javax.swing.JTextField textID;
     private javax.swing.JTextField textImportador;
     private javax.swing.JTextField textProducto;
-    private javax.swing.JTextField textProducto2;
     private javax.swing.JTextField textVendedor;
     // End of variables declaration//GEN-END:variables
 }

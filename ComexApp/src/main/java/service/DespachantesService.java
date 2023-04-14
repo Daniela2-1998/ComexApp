@@ -26,6 +26,8 @@ public interface DespachantesService {
     
     public void obtenerNombreOIDDelDespachante(int ID, String nombreDespachante);
     
+    public String obtenerNombreDespachante(int ID);
+    
     public void obtenerDatosDeProductosDelDespachante(JTextField textDespachanteBuscado, 
             JTextField textDespachante, JTextArea textProductos1);
     

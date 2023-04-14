@@ -265,7 +265,8 @@ public class TiemposImpl {
                 Time tiempoBase = rs.getTime("tiempo_actual");
                 Time tiempoFinal = rs.getTime("tiempo_objetivo");
                 
-                Time tiempoCron = Time.valueOf(tiempoFinal.compareTo(tiempoBase));
+                Time comparacion = tiempoFinal.compareTo(tiempoBase);
+                Time tiempoCron = Time.valueOf(tiempoFinal);
             }
         }catch(SQLException e){
             System.err.print("No se puede cálcular el tiempo transcurrido " + e);

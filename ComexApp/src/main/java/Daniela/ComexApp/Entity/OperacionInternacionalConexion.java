@@ -21,25 +21,20 @@ public class OperacionInternacionalConexion {
     @Column(name = "numero_opint")
     private Integer id;
     
-    @NotBlank
     private int id_operacion;
     
-    @NotBlank
     private int id_producto;
     
-    @NotBlank
     private int id_contenedor; 
     
-    @NotBlank
     private int id_transporte;
     
-    @NotBlank
     private int id_exportador; 
-    
-    @NotBlank
+
+    private int id_importador; 
+
     private int id_despachante;
-    
-    @NotBlank
+
     private String status;
 
     
@@ -108,21 +103,31 @@ public class OperacionInternacionalConexion {
         this.status = status;
     }
 
+    public int getId_importador() {
+        return id_importador;
+    }
+
+    public void setId_importador(int id_importador) {
+        this.id_importador = id_importador;
+    }
+
     
 
     public OperacionInternacionalConexion() {
     }
 
-    public OperacionInternacionalConexion(Integer id, int id_operacion, int id_producto, int id_contenedor, int id_transporte, int id_exportador, int id_despachante, String status) {
+    public OperacionInternacionalConexion(Integer id, int id_operacion, int id_producto, int id_contenedor, int id_transporte, int id_exportador, int id_importador, int id_despachante, String status) {
         this.id = id;
         this.id_operacion = id_operacion;
         this.id_producto = id_producto;
         this.id_contenedor = id_contenedor;
         this.id_transporte = id_transporte;
         this.id_exportador = id_exportador;
+        this.id_importador = id_importador;
         this.id_despachante = id_despachante;
         this.status = status;
     }
+
     
 
     

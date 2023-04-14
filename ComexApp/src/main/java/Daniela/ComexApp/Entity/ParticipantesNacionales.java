@@ -13,22 +13,25 @@ import javax.validation.constraints.NotBlank;
  * @author Daniela
  */
 @Entity
-@Table(name = "despachantes")
-public class Despachantes {
+@Table(name = "participantes_nacionales")
+public class ParticipantesNacionales {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_despachantes")
+    @Column(name = "id_part_nac")
     private Integer id;
     
+    @NotBlank
+    private String nombre;
+
     @NotBlank
     private String empresa;
 
     @NotBlank
-    private String empleado;
-
-    @NotBlank
     private String pais;
+    
+    @NotBlank
+    private String tipo_operacion;
 
     @NotBlank
     private String mail;
@@ -41,6 +44,7 @@ public class Despachantes {
 
     @NotBlank
     private String status;
+
     
     
     public Integer getId() {
@@ -51,6 +55,14 @@ public class Despachantes {
         this.id = id;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public String getEmpresa() {
         return empresa;
     }
@@ -59,20 +71,20 @@ public class Despachantes {
         this.empresa = empresa;
     }
 
-    public String getEmpleado() {
-        return empleado;
-    }
-
-    public void setEmpleado(String empleado) {
-        this.empleado = empleado;
-    }
-
     public String getPais() {
         return pais;
     }
 
     public void setPais(String pais) {
         this.pais = pais;
+    }
+
+    public String getTipo_operacion() {
+        return tipo_operacion;
+    }
+
+    public void setTipo_operacion(String tipo_operacion) {
+        this.tipo_operacion = tipo_operacion;
     }
 
     public String getMail() {
@@ -106,21 +118,26 @@ public class Despachantes {
     public void setStatus(String status) {
         this.status = status;
     }
- 
+
     
-    public Despachantes() {
+    
+    public ParticipantesNacionales() {
     }
 
-    public Despachantes(Integer id, String empresa, String empleado, String pais, String mail, String numero_contacto, String productos_asociados, String status) {
+    public ParticipantesNacionales(Integer id, String nombre, String empresa, 
+            String pais, String tipo_operacion, String mail, String numero_contacto, 
+            String productos_asociados, String status) {
         this.id = id;
+        this.nombre = nombre;
         this.empresa = empresa;
-        this.empleado = empleado;
         this.pais = pais;
+        this.tipo_operacion = tipo_operacion;
         this.mail = mail;
         this.numero_contacto = numero_contacto;
         this.productos_asociados = productos_asociados;
         this.status = status;
     }
     
+  
     
 }

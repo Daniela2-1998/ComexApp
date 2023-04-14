@@ -61,6 +61,7 @@ public class Operaciones extends javax.swing.JFrame {
         jMenuItemGestion1 = new javax.swing.JMenuItem();
         jMenuItemIngreso1 = new javax.swing.JMenuItem();
         jMenuItemDarDeBaja1 = new javax.swing.JMenuItem();
+        jMenuItemCompradoresVendedores = new javax.swing.JMenuItem();
         jMenuCont = new javax.swing.JMenu();
         jMenuItemGestionC = new javax.swing.JMenuItem();
         jMenuItemIngresoC = new javax.swing.JMenuItem();
@@ -176,6 +177,16 @@ public class Operaciones extends javax.swing.JFrame {
             }
         });
         jMenuNac.add(jMenuItemDarDeBaja1);
+
+        jMenuItemCompradoresVendedores.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItemCompradoresVendedores.setForeground(new java.awt.Color(0, 0, 153));
+        jMenuItemCompradoresVendedores.setText("Compradores y vendedores");
+        jMenuItemCompradoresVendedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCompradoresVendedoresActionPerformed(evt);
+            }
+        });
+        jMenuNac.add(jMenuItemCompradoresVendedores);
 
         jMenuBar.add(jMenuNac);
 
@@ -296,6 +307,10 @@ public class Operaciones extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItemDarDeBajaCActionPerformed
 
+    private void jMenuItemCompradoresVendedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCompradoresVendedoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemCompradoresVendedoresActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -337,6 +352,7 @@ public class Operaciones extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuCont;
     private javax.swing.JMenu jMenuInt;
+    private javax.swing.JMenuItem jMenuItemCompradoresVendedores;
     private javax.swing.JMenuItem jMenuItemDarDeBaja;
     private javax.swing.JMenuItem jMenuItemDarDeBaja1;
     private javax.swing.JMenuItem jMenuItemDarDeBajaC;

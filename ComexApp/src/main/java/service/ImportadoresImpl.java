@@ -196,7 +196,7 @@ public class ImportadoresImpl implements ImportadoresService{
         
         try{
             conec = cn.Conexion();
-            pst = conec.prepareStatement("select id_importador from imexportadores "
+            pst = conec.prepareStatement("select id_importador from importadores "
                     + "where empresa = '" + empresa + "' and empleado = '" + empleado + "'");
             rs = pst.executeQuery();
             

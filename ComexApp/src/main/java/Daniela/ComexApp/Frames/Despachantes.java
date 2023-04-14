@@ -78,8 +78,8 @@ public class Despachantes extends javax.swing.JFrame {
     }
 
     public void aLista(){
-//        ListaDespachantes listaDespachantes = new ListaDespachantes();
-     //   listaDespachantes.setVisible(true);
+        RegistroDespachantes registroDespachantes = new RegistroDespachantes();
+        registroDespachantes.setVisible(true);
         this.dispose();
     }
 

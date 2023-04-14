@@ -1,5 +1,6 @@
 package Daniela.ComexApp.Entity;
 
+import java.sql.Time;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,12 +14,12 @@ import javax.validation.constraints.NotBlank;
  * @author Daniela
  */
 @Entity
-@Table(name = "despachantes")
-public class Despachantes {
+@Table(name = "empleados")
+public class Empleados {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_despachantes")
+    @Column(name = "id_empleado")
     private Integer id;
     
     @NotBlank
@@ -27,20 +28,24 @@ public class Despachantes {
     @NotBlank
     private String empleado;
 
-    @NotBlank
-    private String pais;
+    private String usuario;
 
     @NotBlank
-    private String mail;
-
+    private String area;
+    
     @NotBlank
-    private String numero_contacto;
-
+    private String cargo;
+    
     @NotBlank
-    private String productos_asociados;
+    private Time horario;
+    
+    @NotBlank
+    private Double sueldo;
 
     @NotBlank
     private String status;
+
+    
     
     
     public Integer getId() {
@@ -67,36 +72,44 @@ public class Despachantes {
         this.empleado = empleado;
     }
 
-    public String getPais() {
-        return pais;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setPais(String pais) {
-        this.pais = pais;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    public String getMail() {
-        return mail;
+    public String getArea() {
+        return area;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setArea(String area) {
+        this.area = area;
     }
 
-    public String getNumero_contacto() {
-        return numero_contacto;
+    public String getCargo() {
+        return cargo;
     }
 
-    public void setNumero_contacto(String numero_contacto) {
-        this.numero_contacto = numero_contacto;
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
     }
 
-    public String getProductos_asociados() {
-        return productos_asociados;
+    public Time getHorario() {
+        return horario;
     }
 
-    public void setProductos_asociados(String productos_asociados) {
-        this.productos_asociados = productos_asociados;
+    public void setHorario(Time horario) {
+        this.horario = horario;
+    }
+
+    public Double getSueldo() {
+        return sueldo;
+    }
+
+    public void setSueldo(Double sueldo) {
+        this.sueldo = sueldo;
     }
 
     public String getStatus() {
@@ -106,21 +119,26 @@ public class Despachantes {
     public void setStatus(String status) {
         this.status = status;
     }
- 
+
     
-    public Despachantes() {
+    
+    public Empleados() {
     }
 
-    public Despachantes(Integer id, String empresa, String empleado, String pais, String mail, String numero_contacto, String productos_asociados, String status) {
+    public Empleados(Integer id, String empresa, String empleado, String usuario, 
+            String area, String cargo, Time horario, Double sueldo, String status) {
         this.id = id;
         this.empresa = empresa;
         this.empleado = empleado;
-        this.pais = pais;
-        this.mail = mail;
-        this.numero_contacto = numero_contacto;
-        this.productos_asociados = productos_asociados;
+        this.usuario = usuario;
+        this.area = area;
+        this.cargo = cargo;
+        this.horario = horario;
+        this.sueldo = sueldo;
         this.status = status;
     }
+    
+    
     
     
 }

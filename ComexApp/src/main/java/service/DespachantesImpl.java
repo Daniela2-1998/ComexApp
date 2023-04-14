@@ -232,6 +232,34 @@ public class DespachantesImpl implements DespachantesService{
         
     }
         
+          
+    public String obtenerNombreDespachante(int ID){
+        
+        String empleado = null;
+        String sql = "select empleado from despachantes where id_despachantes ='" + ID + "'";
+     
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                    empleado = rs.getString("empleado");
+            } else {
+                System.err.println("No existen los datos");
+            }
+            
+        }catch(SQLException e){
+            System.err.println("No se puede obtener el nombre o id del despachante " + e);
+            JOptionPane.showMessageDialog(null, "No es posible obtener el nombre o id del despachante " + e);
+        }
+        return empleado;
+    }
+        
+    
+    
+    
+    
     public void obtenerDatosDeProductosDelDespachante(JTextField textDespachanteBuscado, 
             JTextField textDespachante, JTextArea textProductos1){
         

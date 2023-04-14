@@ -281,6 +281,11 @@ public class RegistroDespachantes extends javax.swing.JFrame {
         jButtonVolver.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonVolver.setForeground(new java.awt.Color(0, 0, 153));
         jButtonVolver.setText("Volver atrás");
+        jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVolverActionPerformed(evt);
+            }
+        });
         jPanelOpciones.add(jButtonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 720, 210, 50));
 
         jButtonRegistrar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -995,6 +1000,14 @@ public class RegistroDespachantes extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButtonAgendaPersonalActionPerformed
+
+    private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
+        
+        Despachantes despachantes = new Despachantes();
+        despachantes.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButtonVolverActionPerformed
 
     /**
      * @param args the command line arguments
