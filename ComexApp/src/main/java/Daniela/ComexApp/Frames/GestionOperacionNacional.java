@@ -394,6 +394,7 @@ public class GestionOperacionNacional extends javax.swing.JFrame {
         textRegistro = new javax.swing.JTextField();
         textRecibo = new javax.swing.JTextField();
         jButtonModificarFecha = new javax.swing.JButton();
+        jButtonAsociar = new javax.swing.JButton();
         jPanelTablaOperaciones = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableOperaciones = new javax.swing.JTable();
@@ -419,12 +420,12 @@ public class GestionOperacionNacional extends javax.swing.JFrame {
 
         jLabelTitulo.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabelTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelTitulo.setText("Operaciones internacionales");
-        jPanel1.add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 590, 60));
+        jLabelTitulo.setText("Operaciones nacionales");
+        jPanel1.add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 390, 60));
 
         jLabelSubtitulo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabelSubtitulo.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(jLabelSubtitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 770, 40));
+        jPanel1.add(jLabelSubtitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 790, 40));
 
         jButtonOperaciones.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonOperaciones.setForeground(new java.awt.Color(0, 0, 153));
@@ -745,6 +746,16 @@ public class GestionOperacionNacional extends javax.swing.JFrame {
             }
         });
         jPanelCampos.add(jButtonModificarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, -1, 30));
+
+        jButtonAsociar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonAsociar.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonAsociar.setText("Asociar operación");
+        jButtonAsociar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAsociarActionPerformed(evt);
+            }
+        });
+        jPanelCampos.add(jButtonAsociar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 377, -1, 20));
 
         jPanel1.add(jPanelCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, 720, 400));
 
@@ -1115,6 +1126,13 @@ public class GestionOperacionNacional extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonOcultarActionPerformed
 
+    private void jButtonAsociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsociarActionPerformed
+
+        AsociarOperacionNacional asociarOperacion = new AsociarOperacionNacional();
+        asociarOperacion.setVisible(true);
+
+    }//GEN-LAST:event_jButtonAsociarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1161,6 +1179,7 @@ public class GestionOperacionNacional extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbCategoria;
     private javax.swing.JComboBox<String> cmbStatus1;
     private javax.swing.JComboBox<String> cmbTipoOperacion;
+    private javax.swing.JButton jButtonAsociar;
     private javax.swing.JButton jButtonContacto;
     private javax.swing.JButton jButtonFechas;
     private javax.swing.JButton jButtonInfo;

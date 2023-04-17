@@ -46,7 +46,7 @@ public class StockImpl implements StockService{
     
     String producto;
     
-    Boolean recepcionFuncion, modificacionEstado, eliminacionAprobada;
+    Boolean recepcionFuncion, recepcionFuncion1, modificacionEstado, eliminacionAprobada;
     
     
     
@@ -114,7 +114,7 @@ public class StockImpl implements StockService{
                 pst.setString(11, tipoProducto);
                 pst.setString(12, vendedor);
                 pst.setString(13, producto);
-                pst.setDate(13, ultimaActualizacion);
+                pst.setDate(14, ultimaActualizacion);
 
                 
                 pst.executeUpdate();
@@ -135,7 +135,62 @@ public class StockImpl implements StockService{
         return recepcionFuncion;
     }
     
-    
+    public boolean ingresoNuevoProductoAStockBasico(String producto, 
+             String cantidad, String comprador, String vendedor){
+        
+        Boolean recepcion;
+
+        String codigo = " - ";
+        String detalle = " - ";
+        String paisOrigen = "Argentina";
+        String cuidados = " - ";
+        String precioUnitario = " - ";
+        String tipoProducto = " - ";
+        String reserva = " - ";
+        String status = "Activo";
+        Date ultimaActualizacion = Date.valueOf(LocalDate.now());
+        
+        String sql = "insert into stock (cantidad, codigo_producto, comprador, "
+                + "cuidados_requeridos, detalle, pais_origen, precio_unitario, "
+                + "reserva, status, tipo_producto, vendedor, nombre_producto, "
+                + "ultima_actualizacion) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            try{
+                conec = cn.Conexion();
+                pst = conec.prepareStatement(sql);
+                
+                pst.setString(1, cantidad);
+                pst.setString(2, codigo);
+                pst.setString(3, comprador);
+                pst.setString(4, cuidados);
+                pst.setString(5, detalle);
+                pst.setString(6, paisOrigen);
+                pst.setString(7, precioUnitario);
+                pst.setString(8, reserva);
+                pst.setString(9, status);
+                pst.setString(10, tipoProducto);
+                pst.setString(11, vendedor);
+                pst.setString(12, producto);
+                pst.setDate(13, ultimaActualizacion);
+
+                
+                pst.executeUpdate();
+                conec.close();
+                
+                JOptionPane.showMessageDialog(null, "Se añadió un nuevo producto (" + 
+                        producto + ") al stock del sistema ComexApp");
+                return recepcion = true;
+                
+            }catch(SQLException e){
+                JOptionPane.showMessageDialog(null, "No se puede añadir un nuevo "
+                        + "producto al sistema");
+                System.err.println("No se puede añadir un nuevo producto al sistema" + e);
+                return recepcion = false;
+            }
+
+    }
+     
+     
     public String obtenerProducto(int ID){
         
         String producto = null;
@@ -197,6 +252,25 @@ public class StockImpl implements StockService{
         return cantidadActualizada;
     }
      
+    public int nuevaCantidadProductosOperacionNacional(int cantidadProducto, 
+            String producto, int id){
+        
+        int cantidadActualizada = 0;
+        
+        int cantidadDeStock = obtenerCantidadDeBaseDeDatos(producto);
+        
+        OperacionNacionalParticipantesImpl opsnac = new OperacionNacionalParticipantesImpl();       
+        String tipoOperacion = opsnac.tipoOperacion(id);
+        
+        if(tipoOperacion.equals("Compra")){
+            cantidadActualizada = cantidadDeStock + cantidadProducto;
+        } else if(tipoOperacion.equals("Venta")){
+            cantidadActualizada = cantidadDeStock - cantidadProducto;
+        }
+        
+        return cantidadActualizada;
+    }
+    
     public void asociarCantidadesAOperacionInternacional(String producto, String vendedor, 
             String codigo, int idOperacion){
         
@@ -235,7 +309,43 @@ public class StockImpl implements StockService{
         }
     }
     
+    public void asociarCantidadesAOperacionNacional(String producto, String vendedor, 
+            String codigo, int idOperacion){
+        
+        OperacionNacionalParticipantesImpl opsnac = new OperacionNacionalParticipantesImpl();
+        Boolean hayIngreso = opsnac.verificarIngresoProducto();
+        int cantidadProductoOp = opsnac.obtenerCantidadDeProductos(idOperacion);
 
+        int cantidadActualizada = nuevaCantidadProductosOperacionInternacional(
+                cantidadProductoOp, producto, idOperacion);
+        
+        String cantidadNueva = String.valueOf(cantidadActualizada);
+        
+        Date ultimaActualizacion = Date.valueOf(LocalDate.now());
+
+        if (hayIngreso.equals(true)) {
+
+            try {
+                String sql = "update stock set cantidad=? where nombre_producto = '" 
+                + producto + "' and vendedor = '" + vendedor + "' and codigo_producto = '" 
+                + codigo + "' and ultima_actualizacion != '" + ultimaActualizacion + "'";
+             
+                conec = cn.Conexion();
+                pst = conec.prepareStatement(sql);
+
+                pst.setString(1, cantidadNueva);
+                pst.executeUpdate();
+                actualizacionDelProducto(producto, codigo, vendedor);
+                conec.close();
+
+            } catch (SQLException e) {
+                System.err.print("No se puede modificar las cantidades del stock " + e);
+            }
+
+        } else if (hayIngreso.equals(false)){
+            System.out.println("No hay ingresos de operaciones internacionales");
+        }
+    }
  
     
     public void modificarStock(int IDMod, String cantidadMod, String codigoMod, 

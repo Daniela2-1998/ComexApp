@@ -22,7 +22,9 @@ public interface OperacionesNacionalesService {
     
     public void modificarFechaIngreso(int ID, String producto, Date fechaIngresoMod);
     
-    public void cambiarStatusCuandoIngresaProducto();
+    public boolean cambiarStatusCuandoIngresaProducto();
+    
+    public void notificacionOperacionesDelDia();
     
     public boolean eliminarOperacion (String producto, int id);
 }

@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 /**
  *
@@ -36,6 +35,8 @@ public class OperacionInternacionalConexion {
     private int id_despachante;
 
     private String status;
+    
+    private boolean stockModificado;
 
     
     
@@ -111,12 +112,21 @@ public class OperacionInternacionalConexion {
         this.id_importador = id_importador;
     }
 
+    public boolean isStockModificado() {
+        return stockModificado;
+    }
+
+    public void setStockModificado(boolean stockModificado) {
+        this.stockModificado = stockModificado;
+    }
+
+    
     
 
     public OperacionInternacionalConexion() {
     }
 
-    public OperacionInternacionalConexion(Integer id, int id_operacion, int id_producto, int id_contenedor, int id_transporte, int id_exportador, int id_importador, int id_despachante, String status) {
+    public OperacionInternacionalConexion(Integer id, int id_operacion, int id_producto, int id_contenedor, int id_transporte, int id_exportador, int id_importador, int id_despachante, String status, boolean stockModificado) {
         this.id = id;
         this.id_operacion = id_operacion;
         this.id_producto = id_producto;
@@ -126,9 +136,7 @@ public class OperacionInternacionalConexion {
         this.id_importador = id_importador;
         this.id_despachante = id_despachante;
         this.status = status;
+        this.stockModificado = stockModificado;
     }
-
-    
-
     
 }

@@ -1,5 +1,6 @@
 package service;
 
+import Daniela.ComexApp.Entity.Stock;
 import com.toedter.calendar.JDateChooser;
 import config.Conexion;
 import java.awt.Color;
@@ -50,7 +51,7 @@ public class OperacionesNacionalesImpl implements OperacionesNacionalesService{
     
     int cantidadBase;
     
-    Boolean recepcionFuncion, modificacionEstado, eliminacionAprobada;
+    Boolean recepcionFuncion, modificacionEstado, eliminacionAprobada, ingresado;
     
     
     
@@ -211,10 +212,10 @@ public class OperacionesNacionalesImpl implements OperacionesNacionalesService{
         }
     }
      
-    public void cambiarStatusCuandoIngresaProducto(){
+    public boolean cambiarStatusCuandoIngresaProducto(){
         
         Date fechaActual = Date.valueOf(LocalDate.now());
-        
+            
         String sql = "update ventalocal set status=? where fecha_arribo <= '" 
                 + fechaActual + "'";
         
@@ -225,11 +226,12 @@ public class OperacionesNacionalesImpl implements OperacionesNacionalesService{
             pst.setString(1, "Completada");
             pst.executeUpdate();
             conec.close();
-            
+            return ingresado = true;
+ 
          }catch(SQLException e){
             System.err.println("No se puede realizar el cambio de status. " + e);
         }
-        
+        return ingresado;        
     }
      
     public void notificacionOperacionesDelDia(){ 

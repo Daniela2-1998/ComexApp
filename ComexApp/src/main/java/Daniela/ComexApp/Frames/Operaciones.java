@@ -308,9 +308,13 @@ public class Operaciones extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemDarDeBajaCActionPerformed
 
     private void jMenuItemCompradoresVendedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCompradoresVendedoresActionPerformed
-        // TODO add your handling code here:
+        
+        CompradoresVendedoresNacionales compVenNac = new CompradoresVendedoresNacionales();
+        compVenNac.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_jMenuItemCompradoresVendedoresActionPerformed
-
+ 
     /**
      * @param args the command line arguments
      */

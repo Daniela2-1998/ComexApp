@@ -222,6 +222,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jMenuItemNotas = new javax.swing.JMenuItem();
         jMenuItemObjetivos = new javax.swing.JMenuItem();
         jMenuItemTiempos = new javax.swing.JMenuItem();
+        jMenuItemNumero = new javax.swing.JMenuItem();
         jMenuPreferencias = new javax.swing.JMenu();
         jRadioButtonMenuItemDefecto = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonMenuItemInvertidos = new javax.swing.JRadioButtonMenuItem();
@@ -426,6 +427,15 @@ public class PaginaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuPreferencias1.add(jMenuItemTiempos);
+
+        jMenuItemNumero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemNumero.setText("Generar número random");
+        jMenuItemNumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemNumeroActionPerformed(evt);
+            }
+        });
+        jMenuPreferencias1.add(jMenuItemNumero);
 
         jMenuBar1.add(jMenuPreferencias1);
 
@@ -732,6 +742,14 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItemConfiguracionActionPerformed
 
+    private void jMenuItemNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNumeroActionPerformed
+        
+        GenerarNumeroRandom generarNumero = new GenerarNumeroRandom();
+        generarNumero.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jMenuItemNumeroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -794,6 +812,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemEnvio;
     private javax.swing.JMenuItem jMenuItemInformacion;
     private javax.swing.JMenuItem jMenuItemNotas;
+    private javax.swing.JMenuItem jMenuItemNumero;
     private javax.swing.JMenuItem jMenuItemObjetivos;
     private javax.swing.JMenuItem jMenuItemRecupero;
     private javax.swing.JMenuItem jMenuItemTiempos;

@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Calendar;
+import service.OperacionNacionalParticipantesImpl;
 import service.OperacionesNacionalesImpl;
 
 /**
@@ -390,7 +391,9 @@ public class IngresarNuevaOperacionNacional extends javax.swing.JFrame {
                 comprador, precioTotal, vendedor, status, tipoOperacion, 
                 fechaRegistro, fechaArribo);
 
-         if(recepcionFuncion.equals(true)){
+        if(recepcionFuncion.equals(true)){
+           OperacionNacionalParticipantesImpl opsNacPart = new OperacionNacionalParticipantesImpl();
+           opsNacPart.ingresarConexionesOpNac(ID, comprador, vendedor, status);
            LimpiarCampos();
         }
 
