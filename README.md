@@ -97,9 +97,9 @@ El objetivo de ComexApp es brindar un servicio de cálidad que permita que los i
 
 - [ ] Control y gestión de empleados (sólo administradores).
 
-- [ ] Registro de compradores y vendedores locales.
+- [X] Registro de compradores y vendedores locales.
 
-- [ ] Asociación operación nacional con comprador y vendedor.
+- [X] Asociación operación nacional con comprador y vendedor.
 
 - [ ] Cálculo de costing y pricing.
 
