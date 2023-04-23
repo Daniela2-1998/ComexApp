@@ -71,6 +71,7 @@ public class EnvioMail extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         textNombre = new javax.swing.JTextField();
         jButtonPDF = new javax.swing.JButton();
+        jButtonBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -188,6 +189,16 @@ public class EnvioMail extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 390, 400, 20));
 
+        jButtonBuscar.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 60, 40));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 880));
 
         pack();
@@ -246,6 +257,13 @@ public class EnvioMail extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonPDFActionPerformed
 
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+
+        BuscarMail buscarMail = new BuscarMail();
+        buscarMail.setVisible(true);
+
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -285,6 +303,7 @@ public class EnvioMail extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonEnvio;
     private javax.swing.JButton jButtonInfo;
     private javax.swing.JButton jButtonPDF;

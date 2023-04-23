@@ -22,6 +22,8 @@ public interface MaritimasService {
             JTextField textID, JTextField textmail, JTextField textEmpleado, 
             JTextField textEmpresa, JTextField textNumero, JTextArea textRequisitosAviso, 
             JTextArea textTipoTransporte);
+    
+    public String obtenerMailDeLaMaritima(String nombre);
      
     public boolean eliminarMaritima(String empleado, int id);
 }

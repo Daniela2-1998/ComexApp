@@ -33,6 +33,7 @@ public class AereoImpl implements AereoService{
     ResultSet rs;
     
     Boolean recepcionFuncion, modificacionEstado, eliminacionAprobada;
+    String mail;
     
     public boolean registroAereo(int ID, String mail, String empleado, 
             String empresa, String numeroContacto, String requisitos){
@@ -170,6 +171,34 @@ public class AereoImpl implements AereoService{
         
     }
      
+    public String obtenerMailDeAereo(String nombre){
+       
+        String sql = "select mail from aereo where empleado = '" + nombre + "'";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                mail = rs.getString("mail");
+            } else {
+                JOptionPane.showMessageDialog(null, "No es posible conseguir "
+                        + "los datos de la aerolínea solicitada");
+                System.err.println("No es posible conseguir los datos de la aerolínea "
+                        + "solicitada");
+            }
+            conec.close();
+            
+        }catch(SQLException e){
+            System.err.println("Error al obtener los datos de la aerolínea solicitada" + e);
+            JOptionPane.showMessageDialog(null, "No se pueden obtener los datos de la "
+                    + "aerolínea solicitada");
+        }
+        return mail;
+    }
+    
+    
     public boolean eliminarAereo(String empleado, int id){
        
         String sql = "delete from aereo where empleado = '" + empleado + "' "

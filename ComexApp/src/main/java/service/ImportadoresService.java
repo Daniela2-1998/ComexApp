@@ -25,5 +25,7 @@ public interface ImportadoresService {
     
     public int obtenerIDImportador(String empresa, String empleado);
     
+    public String obtenerMailDelImportador(String nombre);
+    
     public boolean eliminarImportador(String empleado, int id);
 }

@@ -24,6 +24,8 @@ public interface ExportadoresService {
             JTextField textPais, JTextArea textProductos, JComboBox cmbStatus);
      
     public int obtenerIDExportador(String empresa, String empleado);
+    
+    public String obtenerMailDelExportador(String nombre);
       
     public boolean eliminarExportador(String empleado, int id);
      

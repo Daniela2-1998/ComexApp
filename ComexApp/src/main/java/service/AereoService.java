@@ -20,5 +20,7 @@ public interface AereoService {
             JTextField textID, JTextField textMail, JTextField textEmpleado, 
             JTextField textEmpresa, JTextField textNumero, JTextArea textRequisitos);
     
+    public String obtenerMailDeAereo(String nombre);
+    
     public boolean eliminarAereo(String empleado, int id);
 }

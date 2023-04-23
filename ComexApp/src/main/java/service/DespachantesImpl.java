@@ -39,7 +39,7 @@ public class DespachantesImpl implements DespachantesService{
     ResultSet rs;
     
     Boolean recepcionFuncion, modificacionEstado, eliminacionAprobada;
-    
+    String mail;
     
     public boolean registroDeDespachante(int ID, String empleado, 
             String empresa, String mail, String numeroContacto, String pais,
@@ -311,6 +311,35 @@ public class DespachantesImpl implements DespachantesService{
         }
           return IDDespachante;      
     }
+    
+    
+    public String obtenerMailDelDespachante(String nombre){
+
+        String sql = "select mail from despachantes where empleado = '" + nombre + "'";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                mail = rs.getString("mail");
+            } else {
+                JOptionPane.showMessageDialog(null, "No es posible conseguir "
+                        + "los datos del despachante solicitado");
+                System.err.println("No es posible conseguir los datos del despachante "
+                        + "solicitado");
+            }
+            conec.close();
+            
+        }catch(SQLException e){
+            System.err.println("Error al obtener los datos del despachante solicitado" + e);
+            JOptionPane.showMessageDialog(null, "No se pueden obtener los datos del "
+                    + "despachante solicitado");
+        }
+        return mail;
+    }
+     
        
     public boolean eliminarDespachante(String empleado, int id){
        

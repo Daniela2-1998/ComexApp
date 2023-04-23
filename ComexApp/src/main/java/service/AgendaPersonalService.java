@@ -24,6 +24,8 @@ public interface AgendaPersonalService {
             JTextField textMail, JTextField textNumero, JTextField textPais, 
             JTextArea textProductos, JComboBox cmbStatus, JComboBox cmbCargo);
     
+    public String obtenerMailDelContactoPersonal(String nombre);
+    
     public boolean eliminarContactoPersonal(String nombre, int id);
     
     

@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -34,6 +33,7 @@ public class MaritimasImpl implements MaritimasService{
     ResultSet rs;
     
     Boolean recepcionFuncion, modificacionEstado, eliminacionAprobada;
+    String mail;
     
     public boolean registroDeMaritima(int ID, String mail, String empleado, 
             String empresa, String numeroContacto, String requisitosAviso, 
@@ -141,7 +141,7 @@ public class MaritimasImpl implements MaritimasService{
     }
     
     
-      public void obtenerDatosDeLaMaritima(JTextField textMaritimaBuscada, 
+    public void obtenerDatosDeLaMaritima(JTextField textMaritimaBuscada, 
             JTextField textID, JTextField textMail, JTextField textEmpleado, 
             JTextField textEmpresa, JTextField textNumero, JTextArea textRequisitosAviso, 
             JTextArea textTipoTransporte){
@@ -181,7 +181,35 @@ public class MaritimasImpl implements MaritimasService{
         
     }
      
-     public boolean eliminarMaritima(String empleado, int id){
+    public String obtenerMailDeLaMaritima(String nombre){
+        
+        String sql = "select mail from maritimas where empleado = '" + nombre + "'";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                mail = rs.getString("mail");
+            } else {
+                JOptionPane.showMessageDialog(null, "No es posible conseguir "
+                        + "los datos de la marítima solicitada");
+                System.err.println("No es posible conseguir los datos de la maritima "
+                        + "solicitada");
+            }
+            conec.close();
+            
+        }catch(SQLException e){
+            System.err.println("Error al obtener los datos de la maritima solicitado" + e);
+            JOptionPane.showMessageDialog(null, "No se pueden obtener los datos de la "
+                    + "marítima solicitada");
+        }
+        return mail;
+    }
+    
+    
+    public boolean eliminarMaritima(String empleado, int id){
        
         String sql = "delete from maritimas where empleado = '" + empleado + "' "
                + "and id_maritima = '" + id + "'";

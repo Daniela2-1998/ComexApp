@@ -39,7 +39,7 @@ public class AgendaPersonalImpl implements AgendaPersonalService{
     ResultSet rs;
     
     Boolean recepcionFuncion, modificacionEstado, eliminacionAprobada;
-    
+    String mail;
     
     
     
@@ -202,6 +202,33 @@ public class AgendaPersonalImpl implements AgendaPersonalService{
         
     }
      
+    public String obtenerMailDelContactoPersonal(String nombre){
+        
+        String sql = "select mail from agenda_personal where nombre = '" + nombre + "'";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                mail = rs.getString("mail");
+            } else {
+                JOptionPane.showMessageDialog(null, "No es posible conseguir "
+                        + "los datos del contacto solicitado");
+                System.err.println("No es posible conseguir los datos del contacto "
+                        + "solicitado");
+            }
+            conec.close();
+            
+        }catch(SQLException e){
+            System.err.println("Error al obtener los datos del contacto solicitado" + e);
+            JOptionPane.showMessageDialog(null, "No se pueden obtener los datos del "
+                    + "contacto solicitado");
+        }
+        return mail;
+    }
+    
     public boolean eliminarContactoPersonal(String nombre, int id){
        
         String sql = "delete from agenda_personal where nombre = '" + nombre + "' "

@@ -10,12 +10,13 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Daniela
  */
-public class TiemposImpl {
+public class TiemposImpl implements TiemposService{
     
     // conexión
     Conexion cn = new Conexion();
@@ -265,8 +266,22 @@ public class TiemposImpl {
                 Time tiempoBase = rs.getTime("tiempo_actual");
                 Time tiempoFinal = rs.getTime("tiempo_objetivo");
                 
-                Time comparacion = tiempoFinal.compareTo(tiempoBase);
-                Time tiempoCron = Time.valueOf(tiempoFinal);
+                int horasBase = tiempoBase.getHours();
+                int horasFinal = tiempoFinal.getHours();
+                
+                int minutosBase = tiempoBase.getMinutes();
+                int minutosFinal = tiempoFinal.getMinutes();
+                
+                int segundosBase = tiempoBase.getSeconds();
+                int segundosFinal = tiempoFinal.getSeconds();
+                
+                int horas = horasFinal - horasBase;
+                int minutos = minutosFinal - minutosBase;
+                int segundos = segundosFinal - segundosBase;
+
+            JOptionPane.showMessageDialog(null, horas + ":" + minutos + ":" + segundos);
+            } else {
+                System.out.println("No pudimos obtener los datos");
             }
         }catch(SQLException e){
             System.err.print("No se puede cálcular el tiempo transcurrido " + e);

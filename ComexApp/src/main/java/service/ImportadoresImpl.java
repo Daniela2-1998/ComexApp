@@ -34,6 +34,7 @@ public class ImportadoresImpl implements ImportadoresService{
     PreparedStatement pst;
     ResultSet rs;
     
+    String mail;
     Boolean recepcionFuncion, modificacionEstado, eliminacionAprobada;
     
     public boolean registroDeImportador(int ID, String cuit, String empleado, 
@@ -209,8 +210,33 @@ public class ImportadoresImpl implements ImportadoresService{
           return IDImportador;      
     }
     
-    
-    
+    public String obtenerMailDelImportador(String nombre){
+        
+        String sql = "select mail from importadores where empleado = '" + nombre + "'";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                mail = rs.getString("mail");
+            } else {
+                JOptionPane.showMessageDialog(null, "No es posible conseguir "
+                        + "los datos del importador solicitado");
+                System.err.println("No es posible conseguir los datos del importador "
+                        + "solicitado");
+            }
+            conec.close();
+      
+        } catch (SQLException e) {
+            System.err.println("Error al obtener los datos del importador solicitado" + e);
+            JOptionPane.showMessageDialog(null, "No se pueden obtener los datos del "
+                    + "importador solicitado");
+        }
+        return mail;
+    }
+
     public boolean eliminarImportador(String empleado, int id){
        
         String sql = "delete from importadores where empleado = '" + empleado + "' "

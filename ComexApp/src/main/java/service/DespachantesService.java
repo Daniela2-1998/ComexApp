@@ -33,5 +33,7 @@ public interface DespachantesService {
     
     public int obtenerIDDespachante(String empresa, String empleado);
     
+    public String obtenerMailDelDespachante(String nombre);
+    
     public boolean eliminarDespachante(String empleado, int id);
 }

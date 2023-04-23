@@ -35,6 +35,7 @@ public class ExportadoresImpl {
     ResultSet rs;
     
     Boolean recepcionFuncion, modificacionEstado, eliminacionAprobada;
+    String mail;
     
     public boolean registroDeExportador(int ID, String cuit, String empleado, 
             String empresa, String mail, String numeroContacto, String pais,
@@ -149,7 +150,7 @@ public class ExportadoresImpl {
     }
     
      
-     public void obtenerDatosDelExportador(JTextField textExportadorBuscado, 
+    public void obtenerDatosDelExportador(JTextField textExportadorBuscado, 
             JTextField textID, JTextField textCUIT, JTextField textEmpleado, 
             JTextField textEmpresa, JTextField textMail, JTextField textNumero, 
             JTextField textPais, JTextArea textProductos, JComboBox cmbStatus){
@@ -213,6 +214,33 @@ public class ExportadoresImpl {
           return IDExportador;      
     }
    
+    public String obtenerMailDelExportador(String nombre){
+        
+        String sql = "select mail from exportadores where empleado = '" + nombre + "'";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                mail = rs.getString("mail");
+            } else {
+                JOptionPane.showMessageDialog(null, "No es posible conseguir "
+                        + "los datos del exportador solicitado");
+                System.err.println("No es posible conseguir los datos del exportador "
+                        + "solicitado");
+            }
+            conec.close();
+            
+        }catch(SQLException e){
+            System.err.println("Error al obtener los datos del exportador solicitado" + e);
+            JOptionPane.showMessageDialog(null, "No se pueden obtener los datos del "
+                    + "exportador solicitado");
+        }
+        return mail;
+    }
+    
      
     public boolean eliminarExportador(String empleado, int id){
        

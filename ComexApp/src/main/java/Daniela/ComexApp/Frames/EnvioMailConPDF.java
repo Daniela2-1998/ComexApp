@@ -3,9 +3,6 @@ package Daniela.ComexApp.Frames;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.logging.Level;
@@ -132,6 +129,7 @@ public class EnvioMailConPDF extends javax.swing.JFrame {
         jRadioButtonSis = new javax.swing.JRadioButton();
         jRadioButtonEx = new javax.swing.JRadioButton();
         jButtonInfo1 = new javax.swing.JButton();
+        jButtonBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -330,6 +328,16 @@ public class EnvioMailConPDF extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonInfo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 400, 60, 40));
 
+        jButtonBuscar.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 60, 40));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 880));
 
         pack();
@@ -422,6 +430,13 @@ public class EnvioMailConPDF extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonInfo1ActionPerformed
 
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+        
+        BuscarMail buscarMail = new BuscarMail();
+        buscarMail.setVisible(true);
+        
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -491,6 +506,7 @@ public class EnvioMailConPDF extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupEleccion;
     private javax.swing.JComboBox<String> cmbPDF;
+    private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonEnvio;
     private javax.swing.JButton jButtonInfo;
     private javax.swing.JButton jButtonInfo1;
