@@ -16,6 +16,8 @@ public interface ConfiguracionService {
     
     public String obtenerAdminPrincipal();
     
+    public String obtenerNombreEmpresa();
+    
     public void verSiHayConfiguracion(JTextField textAdminPrin, JTextField textAdminSec,
             JTextField textAdminRep, JTextField textEmpresa);
 }

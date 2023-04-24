@@ -27,6 +27,7 @@ public class ConfiguracionImpl implements ConfiguracionService{
     ResultSet rs;
     
     Boolean recepcionFuncion, modificacionEstado, eliminacionAprobada;
+    String empresa;
     
     public boolean aplicarConfiguracion(String empresa, String adminPrincipal, 
             String adminSecundario, String adminExtra){
@@ -116,6 +117,27 @@ public class ConfiguracionImpl implements ConfiguracionService{
         }
         return adminPrincipal;
     }
+    
+    public String obtenerNombreEmpresa(){
+
+        String sql = "select empresa from configuracion";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+               empresa = rs.getString("empresa");
+            } 
+            conec.close();
+            
+        }catch(SQLException e){
+            System.err.println(e);
+        }
+        return empresa;
+    }
+    
     
     public void verSiHayConfiguracion(JTextField textAdminPrin, JTextField textAdminSec,
             JTextField textAdminRep, JTextField textEmpresa){

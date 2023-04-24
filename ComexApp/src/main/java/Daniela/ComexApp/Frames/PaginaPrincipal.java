@@ -236,6 +236,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jMenuAdministrar = new javax.swing.JMenu();
         jMenuItemDatosUsuarios = new javax.swing.JMenuItem();
         jMenuItemConfiguracion = new javax.swing.JMenuItem();
+        jMenuItemGestionarEmpleados = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getLogo());
@@ -544,6 +545,15 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         });
         jMenuAdministrar.add(jMenuItemConfiguracion);
 
+        jMenuItemGestionarEmpleados.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItemGestionarEmpleados.setText("Gestionar empleados");
+        jMenuItemGestionarEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemGestionarEmpleadosActionPerformed(evt);
+            }
+        });
+        jMenuAdministrar.add(jMenuItemGestionarEmpleados);
+
         jMenuBar1.add(jMenuAdministrar);
 
         setJMenuBar(jMenuBar1);
@@ -750,6 +760,14 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItemNumeroActionPerformed
 
+    private void jMenuItemGestionarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGestionarEmpleadosActionPerformed
+        
+        Empleados empleados = new Empleados();
+        empleados.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jMenuItemGestionarEmpleadosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -810,6 +828,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemCrearInforme;
     private javax.swing.JMenuItem jMenuItemDatosUsuarios;
     private javax.swing.JMenuItem jMenuItemEnvio;
+    private javax.swing.JMenuItem jMenuItemGestionarEmpleados;
     private javax.swing.JMenuItem jMenuItemInformacion;
     private javax.swing.JMenuItem jMenuItemNotas;
     private javax.swing.JMenuItem jMenuItemNumero;
