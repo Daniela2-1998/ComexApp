@@ -40,13 +40,6 @@ public class Costos {
     @NotBlank
     private String impuestos;
  
-    @NotEmpty
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "operaciones_costos",
-            joinColumns = @JoinColumn(name = "id_operaciones"))
-    List<OperacionesInternacionales> operaciones;
-
-    
     
     public Integer getId() {
         return id;
@@ -112,21 +105,13 @@ public class Costos {
         this.impuestos = impuestos;
     }
 
-    public List<OperacionesInternacionales> getOperaciones() {
-        return operaciones;
-    }
-
-    public void setOperaciones(List<OperacionesInternacionales> operaciones) {
-        this.operaciones = operaciones;
-    }
-
     
     
     
     public Costos() {
     }
 
-    public Costos(Integer id, String producto, String logistica_nacional, String logistica_internacional, String aduana, String otros, String tipo_operacion, String impuestos, List<OperacionesInternacionales> operaciones) {
+    public Costos(Integer id, String producto, String logistica_nacional, String logistica_internacional, String aduana, String otros, String tipo_operacion, String impuestos) {
         this.id = id;
         this.producto = producto;
         this.logistica_nacional = logistica_nacional;
@@ -135,7 +120,6 @@ public class Costos {
         this.otros = otros;
         this.tipo_operacion = tipo_operacion;
         this.impuestos = impuestos;
-        this.operaciones = operaciones;
     }
    
 }

@@ -210,6 +210,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jButtonAereo = new javax.swing.JButton();
         jButtonCerrarSesion = new javax.swing.JButton();
         jLabelTitulo1 = new javax.swing.JLabel();
+        jButtonFinanzas = new javax.swing.JButton();
         jLabelWallpaper = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuInfo = new javax.swing.JMenu();
@@ -336,6 +337,16 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jLabelTitulo1.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTitulo1.setText("Por favor, elige la opción que desees");
         jPanel3.add(jLabelTitulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 330, 30));
+
+        jButtonFinanzas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonFinanzas.setForeground(new java.awt.Color(0, 0, 153));
+        jButtonFinanzas.setText("Finanzas");
+        jButtonFinanzas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFinanzasActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButtonFinanzas, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 640, 210, 50));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, -10, 390, 820));
 
@@ -768,6 +779,14 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItemGestionarEmpleadosActionPerformed
 
+    private void jButtonFinanzasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinanzasActionPerformed
+       
+        Finanzas finanzas = new Finanzas();
+        finanzas.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButtonFinanzasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -810,6 +829,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCerrarSesion;
     private javax.swing.JButton jButtonDespachantes;
     private javax.swing.JButton jButtonExportadores;
+    private javax.swing.JButton jButtonFinanzas;
     private javax.swing.JButton jButtonImportadores;
     private javax.swing.JButton jButtonMaritimas;
     private javax.swing.JButton jButtonOperaciones;

@@ -160,7 +160,27 @@ public class Empleados extends javax.swing.JFrame {
         cargarTablaEmpleados(sql);
     }
 
-    
+    public int recuperarValorNumDelStatus(String status){
+        int statusNivel = 0;
+        
+        switch(status){
+            case "Activo":
+                statusNivel = 1;
+                break;
+            case "Inactivo":
+                statusNivel = 2;
+                break;    
+            case "Suspendido":
+                statusNivel = 3;
+                break;  
+            default:
+                statusNivel = 1; 
+        }
+        
+        return statusNivel;
+    }
+
+     
      
     /**
      * This method is called from within the constructor to initialize the form.
@@ -179,8 +199,11 @@ public class Empleados extends javax.swing.JFrame {
         jButtonEliminar = new javax.swing.JButton();
         jButtonRegistrar = new javax.swing.JButton();
         jButtonBuscar = new javax.swing.JButton();
-        textBuscar = new javax.swing.JTextField();
+        textBuscarN = new javax.swing.JTextField();
         jButtonLimpiar = new javax.swing.JButton();
+        jLabelEmpleado1 = new javax.swing.JLabel();
+        jLabelEmpleado2 = new javax.swing.JLabel();
+        textBuscarA = new javax.swing.JTextField();
         jPanelInfo = new javax.swing.JPanel();
         jLabelEmpresa = new javax.swing.JLabel();
         textEmpresa = new javax.swing.JTextField();
@@ -202,6 +225,8 @@ public class Empleados extends javax.swing.JFrame {
         textSueldo = new javax.swing.JTextField();
         jLabelUsuario = new javax.swing.JLabel();
         textUsuario = new javax.swing.JTextField();
+        jLabelEmpleado3 = new javax.swing.JLabel();
+        textHorarioSalida = new javax.swing.JTextField();
         jPanelLista = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableUsuarios = new javax.swing.JTable();
@@ -266,7 +291,7 @@ public class Empleados extends javax.swing.JFrame {
                 jButtonModificarActionPerformed(evt);
             }
         });
-        jPanelMenu.add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 220, -1));
+        jPanelMenu.add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 220, -1));
 
         jButtonEliminar.setBackground(new java.awt.Color(0, 0, 153));
         jButtonEliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -277,7 +302,7 @@ public class Empleados extends javax.swing.JFrame {
                 jButtonEliminarActionPerformed(evt);
             }
         });
-        jPanelMenu.add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 220, -1));
+        jPanelMenu.add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 220, -1));
 
         jButtonRegistrar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButtonRegistrar.setForeground(new java.awt.Color(0, 0, 153));
@@ -292,7 +317,7 @@ public class Empleados extends javax.swing.JFrame {
                 jButtonRegistrarActionPerformed(evt);
             }
         });
-        jPanelMenu.add(jButtonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 190, 140));
+        jPanelMenu.add(jButtonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 190, 140));
 
         jButtonBuscar.setBackground(new java.awt.Color(0, 0, 153));
         jButtonBuscar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -303,14 +328,14 @@ public class Empleados extends javax.swing.JFrame {
                 jButtonBuscarActionPerformed(evt);
             }
         });
-        jPanelMenu.add(jButtonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 217, -1));
+        jPanelMenu.add(jButtonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 217, -1));
 
-        textBuscar.addActionListener(new java.awt.event.ActionListener() {
+        textBuscarN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textBuscarActionPerformed(evt);
+                textBuscarNActionPerformed(evt);
             }
         });
-        jPanelMenu.add(textBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 217, 33));
+        jPanelMenu.add(textBuscarN, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 217, 30));
 
         jButtonLimpiar.setBackground(new java.awt.Color(0, 0, 153));
         jButtonLimpiar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -321,7 +346,24 @@ public class Empleados extends javax.swing.JFrame {
                 jButtonLimpiarActionPerformed(evt);
             }
         });
-        jPanelMenu.add(jButtonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 217, 20));
+        jPanelMenu.add(jButtonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 217, 20));
+
+        jLabelEmpleado1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelEmpleado1.setForeground(new java.awt.Color(0, 0, 153));
+        jLabelEmpleado1.setText("Nombre:");
+        jPanelMenu.add(jLabelEmpleado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+
+        jLabelEmpleado2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelEmpleado2.setForeground(new java.awt.Color(0, 0, 153));
+        jLabelEmpleado2.setText("Apellido:");
+        jPanelMenu.add(jLabelEmpleado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
+
+        textBuscarA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textBuscarAActionPerformed(evt);
+            }
+        });
+        jPanelMenu.add(textBuscarA, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 217, 30));
 
         getContentPane().add(jPanelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 750));
 
@@ -371,7 +413,7 @@ public class Empleados extends javax.swing.JFrame {
 
         jLabelHorario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelHorario.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelHorario.setText("Horario:");
+        jLabelHorario.setText("Horario entrada:");
         jPanelInfo.add(jLabelHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 63, -1, -1));
 
         textHorario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -421,22 +463,32 @@ public class Empleados extends javax.swing.JFrame {
         jLabelSueldo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelSueldo.setForeground(new java.awt.Color(255, 255, 255));
         jLabelSueldo.setText("Sueldo:");
-        jPanelInfo.add(jLabelSueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 126, -1, -1));
+        jPanelInfo.add(jLabelSueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 193, -1, -1));
 
         textSueldo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textSueldo.setForeground(new java.awt.Color(0, 0, 153));
         textSueldo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanelInfo.add(textSueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 152, 163, -1));
+        jPanelInfo.add(textSueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 219, 163, -1));
 
         jLabelUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelUsuario.setForeground(new java.awt.Color(255, 255, 255));
         jLabelUsuario.setText("Usuario:");
-        jPanelInfo.add(jLabelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 193, -1, -1));
+        jPanelInfo.add(jLabelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 255, -1, -1));
 
         textUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textUsuario.setForeground(new java.awt.Color(0, 0, 153));
         textUsuario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanelInfo.add(textUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 219, 163, -1));
+        jPanelInfo.add(textUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 281, 163, -1));
+
+        jLabelEmpleado3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelEmpleado3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelEmpleado3.setText("Horario salida:");
+        jPanelInfo.add(jLabelEmpleado3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 126, -1, -1));
+
+        textHorarioSalida.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textHorarioSalida.setForeground(new java.awt.Color(0, 0, 153));
+        textHorarioSalida.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanelInfo.add(textHorarioSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 152, 163, -1));
 
         getContentPane().add(jPanelInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 610, 660));
 
@@ -513,8 +565,8 @@ public class Empleados extends javax.swing.JFrame {
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
 
         String area, cargo, empleado, empresa, usuario, status = null;
-        Time horario;
-        Double sueldo;
+        Time horario, horarioSalida;
+        double sueldo;
         int statusNivel = 0;
         
         Boolean recepcion;
@@ -525,6 +577,7 @@ public class Empleados extends javax.swing.JFrame {
         cargo = textCargo.getText().trim();
         usuario = textUsuario.getText().trim();
         horario = Time.valueOf(textHorario.getText().trim());
+        horarioSalida = Time.valueOf(textHorarioSalida.getText().trim());
         sueldo = Double.parseDouble(textSueldo.getText().trim());
         statusNivel = cmbStatus.getSelectedIndex() + 1;
         
@@ -536,11 +589,17 @@ public class Empleados extends javax.swing.JFrame {
            status = "Suspendido";
         }
 
-        empleados.modificarEmpleado(area, cargo, empleado, empresa, 
-                horario, status, sueldo, usuario);
+        boolean empleadoYaAsociadoAntes = empleados.empleadoAsociadoANombre(usuario);
+        
+        if(empleadoYaAsociadoAntes == false){
+            empleados.modificarEmpleado(area, cargo, empleado, empresa, horario, 
+                    horarioSalida, status, sueldo, usuario);
+            LimpiarCampos();
+        }
 
         mostrarTodosLosDatosUsuario();
         mostrarTodosLosDatosEmpleados();
+        
         
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
@@ -568,7 +627,7 @@ public class Empleados extends javax.swing.JFrame {
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
 
         String area, cargo, empleado, empresa, usuario, status = null;
-        Time horario;
+        Time horario, horarioSalida;
         Double sueldo;
         int statusNivel = 0;
         
@@ -580,6 +639,7 @@ public class Empleados extends javax.swing.JFrame {
         cargo = textCargo.getText().trim();
         usuario = textUsuario.getText().trim();
         horario = Time.valueOf(textHorario.getText().trim());
+        horarioSalida = Time.valueOf(textHorarioSalida.getText().trim());
         sueldo = Double.parseDouble(textSueldo.getText().trim());
         statusNivel = cmbStatus.getSelectedIndex() + 1;
         
@@ -592,13 +652,15 @@ public class Empleados extends javax.swing.JFrame {
         }
 
         InicioSesionImp  inicioSesion = new InicioSesionImp ();
-        Boolean noExisteUsuario = inicioSesion.verificarQueNoExistaUsuario(usuario);
+        boolean noExisteUsuario = inicioSesion.verificarQueNoExistaUsuario(usuario);
         
-        if (noExisteUsuario.equals(false)) {
-            recepcion = empleados.registroEmpleado(area, cargo, empleado, empresa,
-                    horario, status, sueldo, usuario);
+        boolean empleadoYaAsociadoAntes = empleados.empleadoAsociadoANombre(usuario);
+        
+        if (noExisteUsuario == false && empleadoYaAsociadoAntes == false) {
+            recepcion = empleados.registroEmpleado(area, cargo, empleado, empresa, 
+                    horario, horarioSalida, status, sueldo, usuario);
 
-            if (recepcion.equals(true)) {
+            if (recepcion == true) {
                 LimpiarCampos();
             }
             
@@ -614,11 +676,14 @@ public class Empleados extends javax.swing.JFrame {
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
 
-       String empleadoABuscar = textBuscar.getText().trim();
+       String nombreABuscar = textBuscarN.getText().trim();
+       String apellidoABuscar = textBuscarA.getText().trim();
+       String empleadoABuscar = nombreABuscar + " " + apellidoABuscar;
        
        empleados.obtenerDatosDelEmpleado(empleadoABuscar, textID, textEmpleado, 
-            textEmpresa, textUsuario, textCargo, textArea, textHorario, 
-            textSueldo, cmbStatus);
+               textEmpresa, textUsuario, textCargo, textArea, textHorario, 
+               textHorarioSalida, textSueldo, cmbStatus);
+       
        String nombreAcortado = empleadoABuscar;
        
        System.out.println(nombreAcortado);
@@ -626,22 +691,23 @@ public class Empleados extends javax.swing.JFrame {
        setTitle("Informacíón completa de " + empleadoABuscar + " - Sistema ComexApp");
        jLabelTitulo.setText("Información completa de " + empleadoABuscar + "");
        
-       String sql1 = "select nombre, apellido, telefono, mail "
-                 + "from usuarios where nombre = '" + nombreAcortado +
-               "' order by id_usuarios asc";
-       String sql2 =  "select id_empleado, empleado, empresa, area, cargo, status "
+       
+       String sql1 =  "select id_empleado, empleado, empresa, area, cargo, status "
                  + "from empleados where empleado = '" + empleadoABuscar + "' or "
                + "empresa = '" + empleadoABuscar + "'order by id_empleado asc";
+       String sql2 = "select nombre, apellido, telefono, mail "
+                 + "from usuarios where nombre = '" + nombreABuscar + 
+               "' and apellido = '" + apellidoABuscar + "' order by id_usuarios asc";
        
-       cargarTablaEmpleados(sql2);
-       cargarTablaUsuarios(sql1);
+       cargarTablaEmpleados(sql1);
+       cargarTablaUsuarios(sql2);
        
   
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
-    private void textBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBuscarActionPerformed
+    private void textBuscarNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBuscarNActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textBuscarActionPerformed
+    }//GEN-LAST:event_textBuscarNActionPerformed
 
     private void jButtonInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInfoActionPerformed
 
@@ -671,6 +737,10 @@ public class Empleados extends javax.swing.JFrame {
         mostrarTodosLosDatosUsuario();
         
     }//GEN-LAST:event_jButtonLimpiarActionPerformed
+
+    private void textBuscarAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBuscarAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textBuscarAActionPerformed
 
     /**
      * @param args the command line arguments
@@ -726,6 +796,9 @@ public class Empleados extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelArea;
     private javax.swing.JLabel jLabelCargo;
     private javax.swing.JLabel jLabelEmpleado;
+    private javax.swing.JLabel jLabelEmpleado1;
+    private javax.swing.JLabel jLabelEmpleado2;
+    private javax.swing.JLabel jLabelEmpleado3;
     private javax.swing.JLabel jLabelEmpresa;
     private javax.swing.JLabel jLabelHorario;
     private javax.swing.JLabel jLabelID;
@@ -746,11 +819,13 @@ public class Empleados extends javax.swing.JFrame {
     private javax.swing.JTable jTableEmpleados;
     private javax.swing.JTable jTableUsuarios;
     private javax.swing.JTextField textArea;
-    private javax.swing.JTextField textBuscar;
+    private javax.swing.JTextField textBuscarA;
+    private javax.swing.JTextField textBuscarN;
     private javax.swing.JTextField textCargo;
     private javax.swing.JTextField textEmpleado;
     private javax.swing.JTextField textEmpresa;
     private javax.swing.JTextField textHorario;
+    private javax.swing.JTextField textHorarioSalida;
     private javax.swing.JTextField textID;
     private javax.swing.JTextField textSueldo;
     private javax.swing.JTextField textUsuario;

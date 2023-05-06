@@ -1,5 +1,6 @@
 package service;
 
+import Daniela.ComexApp.Frames.Empleados;
 import config.Conexion;
 import java.awt.Color;
 import java.sql.Connection;
@@ -18,15 +19,7 @@ import javax.swing.JTextField;
 public class EmpleadosImpl implements EmpleadosService{
    
     
-    // fields
-    JTextField textEmpresa = new JTextField();
-    JTextField textEmpleado = new JTextField();
-    JTextField textUsuario = new JTextField();
-    JTextField textArea = new JTextField();
-    JTextField textCargo = new JTextField();
-    JTextField textHorario = new JTextField();
-    JTextField textSueldo = new JTextField();
-    
+
     JComboBox cmbStatus = new JComboBox();
     
     // conexión
@@ -35,40 +28,20 @@ public class EmpleadosImpl implements EmpleadosService{
     PreparedStatement pst;
     ResultSet rs;
     
-    Boolean recepcionFuncion, modificacionEstado, eliminacionAprobada;
+    Boolean recepcionFuncion, modificacionEstado, eliminacionAprobada, usuarioAsociado;
     String mail;
     
+    
     public boolean registroEmpleado(String area, String cargo, String empleado, 
-            String empresa, Time horario, String status, Double sueldo, String usuario){
+            String empresa, Time horario, Time horarioSalida, String status, 
+            Double sueldo, String usuario){
         
         Boolean recepcion;
         int avanzar = 0;
 
-       if(empleado.equals("")){
-           textEmpleado.setBackground(Color.red);
-           avanzar++;
-       }
-       if(empresa.equals("")){
-           textEmpresa.setBackground(Color.red);
-           avanzar++;
-       }
-       if(area.equals("")){
-           textArea.setBackground(Color.red);
-           avanzar++;
-       }
-       if(cargo.equals("")){
-           textCargo.setBackground(Color.red);
-           avanzar++;
-       }
-       if(usuario.equals("")){
-           textUsuario.setBackground(Color.red);
-           avanzar++;
-       }
-        
         String sql = "insert into empleados (area, cargo, empleado, empresa, horario, "
-                + "status, sueldo, usuario) values (?, ?, ?, ?, ?, ?, ?, ?)";
+                + "status, sueldo, usuario, horario_salida) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
-        if(avanzar == 0){
             try{
                 conec = cn.Conexion();
                 pst = conec.prepareStatement(sql);
@@ -81,33 +54,34 @@ public class EmpleadosImpl implements EmpleadosService{
                 pst.setString(6, status);
                 pst.setDouble(7, sueldo);
                 pst.setString(8, usuario);
+                pst.setTime(9, horarioSalida);
 
                 pst.executeUpdate();
                 conec.close();
                 
                 JOptionPane.showMessageDialog(null, "Se añadió el empleado  " 
                         + empleado + " de la empresa" + empresa);
-                return recepcion = true;
+                recepcionFuncion = true;
                 
             }catch(SQLException e){
                 JOptionPane.showMessageDialog(null, "No se puede crear un "
                         + "empleado de " + empresa);
                 System.err.println("No es posible crear un empleado" + e);
-                return recepcion = false;
+                recepcionFuncion = false;
             }
             
-        }
         return recepcionFuncion;
     }
     
     public void modificarEmpleado(String area, String cargo, String empleado, 
-            String empresa, Time horario, String status, Double sueldo, String usuario){
+            String empresa, Time horario, Time horarioSalida, String status, 
+            Double sueldo, String usuario){
         
         int alternativaMensaje;
 
         String sql = "update empleados set area=?, cargo=?, empleado=?, empresa=?, "
-                + "horario=?, status=?, sueldo=?, usuario=? where empleado = '" 
-                + empleado + "'";
+                + "horario=?, status=?, sueldo=?, usuario=?, horario_salida=? "
+                + "where empleado = '" + empleado + "'";
 
         try {
             conec = cn.Conexion();
@@ -125,6 +99,7 @@ public class EmpleadosImpl implements EmpleadosService{
                 pst.setString(6, status);
                 pst.setDouble(7, sueldo);
                 pst.setString(8, usuario);
+                pst.setTime(9, horarioSalida);
                 
                 pst.executeUpdate();
                 conec.close();
@@ -145,10 +120,12 @@ public class EmpleadosImpl implements EmpleadosService{
     public void obtenerDatosDelEmpleado(String buscar, 
             JTextField textID, JTextField textEmpleado, JTextField textEmpresa, 
             JTextField textUsuario, JTextField textCargo, JTextField textArea,
-            JTextField textHorario, JTextField textSueldo, JComboBox cmbStatus){
+            JTextField textHorario, JTextField textHorarioSalida, 
+            JTextField textSueldo, JComboBox cmbStatus){
 
-        String sql = "select * from empleados where empleado = '" + buscar + "' or "
-                + "empresa = '" + buscar + "'";
+        String sql = "select id_empleado, area, cargo, empleado, empresa, horario, "
+                + "sueldo, usuario, horario_salida, status from empleados where "
+                + "empleado = '" + buscar + "'";
         
         try{
             conec = cn.Conexion();
@@ -162,10 +139,16 @@ public class EmpleadosImpl implements EmpleadosService{
                 textEmpleado.setText(rs.getString("empleado"));
                 textCargo.setText(rs.getString("cargo"));
                 textHorario.setText(rs.getTime("horario").toString());
+                textHorarioSalida.setText(rs.getTime("horario_salida").toString());
                 Double sueldo = rs.getDouble("sueldo");
                 String sueldoS = String.valueOf(sueldo);
                 textSueldo.setText(sueldoS);
                 textUsuario.setText(rs.getString("usuario"));
+                
+                String status = rs.getString("status");
+                Empleados empleadosF = new Empleados();
+                int statusNivel = empleadosF.recuperarValorNumDelStatus(status);
+                cmbStatus.setSelectedItem(statusNivel);
     
             } else {
                 JOptionPane.showMessageDialog(null, "No es posible conseguir "
@@ -181,7 +164,30 @@ public class EmpleadosImpl implements EmpleadosService{
         }
         
     }
-     
+
+    public boolean empleadoAsociadoANombre(String usuario){
+        
+        String sql = "select nombre from empleados where usuario = '" + usuario + "'";
+        
+        try{
+            conec = cn.Conexion();
+            pst = conec.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                usuarioAsociado = true;
+                JOptionPane.showMessageDialog(null, "Ya existe un empleado relacionado "
+                        + "con este usuario");
+            } else {
+                usuarioAsociado = false;
+            }
+            
+        }catch(SQLException e){
+            System.err.println("No se puede realizar la busqueda de asociación "
+                    + "de usuario con empleado");
+        }
+        return usuarioAsociado;
+    }
     
     public boolean eliminarEmpleado(String empleado, int id){
        
@@ -220,8 +226,7 @@ public class EmpleadosImpl implements EmpleadosService{
        return eliminacionAprobada;
     }
 
-    
-    
+   
     
     
 }

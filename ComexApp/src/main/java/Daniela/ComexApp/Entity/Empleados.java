@@ -40,6 +40,9 @@ public class Empleados {
     private Time horario;
     
     @NotBlank
+    private Time horario_salida;
+    
+    @NotBlank
     private Double sueldo;
 
     @NotBlank
@@ -120,13 +123,20 @@ public class Empleados {
         this.status = status;
     }
 
+    public Time getHorario_salida() {
+        return horario_salida;
+    }
+
+    public void setHorario_salida(Time horario_salida) {
+        this.horario_salida = horario_salida;
+    }
+
     
     
     public Empleados() {
     }
 
-    public Empleados(Integer id, String empresa, String empleado, String usuario, 
-            String area, String cargo, Time horario, Double sueldo, String status) {
+    public Empleados(Integer id, String empresa, String empleado, String usuario, String area, String cargo, Time horario, Time horario_salida, Double sueldo, String status) {
         this.id = id;
         this.empresa = empresa;
         this.empleado = empleado;
@@ -134,11 +144,9 @@ public class Empleados {
         this.area = area;
         this.cargo = cargo;
         this.horario = horario;
+        this.horario_salida = horario_salida;
         this.sueldo = sueldo;
         this.status = status;
     }
-    
-    
-    
-    
+ 
 }
