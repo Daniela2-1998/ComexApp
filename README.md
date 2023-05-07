@@ -95,7 +95,7 @@ El objetivo de ComexApp es brindar un servicio de cálidad que permita que los i
 
 - [X] Permitir que los administradores configuren el sistema.
 
-- [ ] Control y gestión de empleados (sólo administradores).
+- [X] Control y gestión de empleados (sólo administradores).
 
 - [X] Registro de compradores y vendedores locales.
 
@@ -104,6 +104,10 @@ El objetivo de ComexApp es brindar un servicio de cálidad que permita que los i
 - [ ] Cálculo de costing y pricing.
 
 - [ ] Cálculo de costos de producción y demás gastos.
+
+- [ ] Gestión de gastos.
+
+- [ ] Administración de agenda (horarios.
 
 - [ ] Otras.
 
